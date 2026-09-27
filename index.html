@@ -1,0 +1,1230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Starship Separators & Prompt Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #0f111a;
+      --bg-card: #181b28;
+      --bg-card-hover: #222638;
+      --bg-tertiary: #272c40;
+      --border-color: #2e344e;
+      --border-glow: #6366f140;
+      --text-main: #f3f4f6;
+      --text-muted: #9ca3af;
+      --accent-primary: #6366f1;
+      --accent-glow: #818cf8;
+      --accent-cyan: #06b6d4;
+      --accent-green: #10b981;
+      --accent-amber: #f59e0b;
+      --accent-pink: #ec4899;
+      --radius-sm: 6px;
+      --radius-md: 12px;
+      --radius-lg: 18px;
+      --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-code: 'JetBrains Mono', 'Fira Code', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: var(--font-ui);
+      line-height: 1.5;
+      min-height: 100vh;
+      padding: 24px;
+      background-image:
+        radial-gradient(circle at 15% 15%, rgba(99, 102, 241, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 85% 85%, rgba(6, 182, 212, 0.08) 0%, transparent 40%);
+      background-attachment: fixed;
+    }
+
+    header {
+      max-width: 1300px;
+      margin: 0 auto 24px auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .title-group {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .logo-icon {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-cyan));
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      box-shadow: 0 4px 20px rgba(99, 102, 241, 0.3);
+    }
+
+    h1 {
+      font-size: 24px;
+      font-weight: 700;
+      background: linear-gradient(90deg, #ffffff, #94a3b8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -0.5px;
+    }
+
+    .subtitle {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .header-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      color: var(--accent-cyan);
+      font-weight: 500;
+    }
+
+    .container {
+      max-width: 1300px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    @media (min-width: 1024px) {
+      .container {
+        grid-template-columns: 1fr 380px;
+      }
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+      backdrop-filter: blur(10px);
+    }
+
+    .card-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .card-title span {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Terminal Mockup */
+    .terminal-window {
+      background: #0d0e15;
+      border: 1px solid #1f2336;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+      margin-bottom: 24px;
+    }
+
+    .terminal-header {
+      background: #141724;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #1f2336;
+    }
+
+    .window-dots {
+      display: flex;
+      gap: 8px;
+    }
+
+    .dot {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+    }
+
+    .dot-red {
+      background: #ef4444;
+    }
+
+    .dot-yellow {
+      background: #f59e0b;
+    }
+
+    .dot-green {
+      background: #10b981;
+    }
+
+    .terminal-title {
+      font-family: var(--font-code);
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .terminal-body {
+      padding: 24px 20px;
+      min-height: 160px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      font-family: var(--font-code);
+      font-size: 16px;
+      line-height: 1.8;
+      overflow-x: auto;
+    }
+
+    :root {
+      --prompt-height: 34px;
+      --sep-scale: 1;
+    }
+
+    .prompt-preview-container {
+      display: inline-flex;
+      align-items: center;
+      white-space: nowrap;
+      padding: 4px 0;
+      border-radius: 4px;
+      transition: all 0.2s ease;
+      height: var(--prompt-height);
+    }
+
+    .prompt-segment {
+      display: inline-flex;
+      align-items: center;
+      height: var(--prompt-height);
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 1;
+    }
+
+    .segment-content {
+      padding: 0 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      height: 100%;
+      line-height: 1;
+    }
+
+    .separator-glyph {
+      font-size: var(--prompt-height);
+      height: var(--prompt-height);
+      line-height: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      user-select: none;
+      vertical-align: middle;
+      overflow: hidden;
+      transform: scaleY(var(--sep-scale));
+    }
+
+    .prompt-line-2 {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 6px;
+      color: #a9b1d6;
+    }
+
+    .char-symbol {
+      color: var(--accent-green);
+      font-weight: 700;
+      font-size: 18px;
+    }
+
+    .cursor-blink {
+      display: inline-block;
+      width: 9px;
+      height: 18px;
+      background-color: #7aa2f7;
+      animation: blink 1.06s steps(1) infinite;
+      vertical-align: middle;
+      margin-left: 2px;
+    }
+
+    @keyframes blink {
+      50% {
+        opacity: 0;
+      }
+    }
+
+    /* Controls Grid */
+    .controls-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .control-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    select,
+    input[type="text"],
+    input[type="number"] {
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 9px 12px;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-code);
+      font-size: 14px;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+
+    select:focus,
+    input:focus {
+      border-color: var(--accent-primary);
+      box-shadow: 0 0 0 2px var(--border-glow);
+    }
+
+    /* Preset Buttons Grid */
+    .preset-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+
+    .preset-btn {
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 10px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 500;
+      text-align: left;
+      transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .preset-btn:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--accent-primary);
+      transform: translateY(-1px);
+    }
+
+    .preset-btn.active {
+      background: rgba(99, 102, 241, 0.15);
+      border-color: var(--accent-primary);
+      box-shadow: 0 0 12px rgba(99, 102, 241, 0.2);
+    }
+
+    .preset-btn .preset-name {
+      font-weight: 600;
+    }
+
+    .preset-btn .preset-preview {
+      font-family: var(--font-code);
+      font-size: 12px;
+      color: var(--accent-cyan);
+    }
+
+    /* Glyphs Explorer Grid */
+    .glyphs-category {
+      margin-bottom: 20px;
+    }
+
+    .category-name {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--accent-primary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .glyphs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(65px, 1fr));
+      gap: 8px;
+    }
+
+    .glyph-card {
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 8px 4px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      position: relative;
+    }
+
+    .glyph-card:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--accent-cyan);
+      transform: translateY(-2px);
+    }
+
+    .glyph-symbol {
+      font-family: var(--font-code);
+      font-size: 20px;
+      color: var(--text-main);
+      line-height: 1;
+    }
+
+    .glyph-desc {
+      font-size: 9px;
+      color: var(--text-muted);
+      text-align: center;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
+    }
+
+    /* TOML Output Section */
+    .toml-box {
+      position: relative;
+    }
+
+    textarea.toml-editor {
+      width: 100%;
+      height: 380px;
+      background: #0d0e15;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      color: #a9b1d6;
+      font-family: var(--font-code);
+      font-size: 13px;
+      line-height: 1.6;
+      padding: 16px;
+      resize: vertical;
+      outline: none;
+      tab-size: 2;
+    }
+
+    textarea.toml-editor:focus {
+      border-color: var(--accent-primary);
+    }
+
+    .btn {
+      background: linear-gradient(135deg, var(--accent-primary), #4f46e5);
+      border: none;
+      color: white;
+      padding: 9px 16px;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.25);
+    }
+
+    .btn:hover {
+      opacity: 0.95;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(99, 102, 241, 0.35);
+    }
+
+    .btn-secondary {
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      box-shadow: none;
+    }
+
+    .btn-secondary:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--text-muted);
+    }
+
+    .actions-bar {
+      display: flex;
+      gap: 10px;
+      margin-top: 12px;
+      justify-content: flex-end;
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--accent-green);
+      color: #042f2e;
+      padding: 12px 20px;
+      border-radius: var(--radius-md);
+      font-weight: 600;
+      font-size: 14px;
+      box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      z-index: 1000;
+    }
+
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .checkbox-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .checkbox-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--text-main);
+      cursor: pointer;
+      text-transform: none;
+      letter-spacing: normal;
+    }
+
+    .checkbox-label input {
+      accent-color: var(--accent-primary);
+      width: 15px;
+      height: 15px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="title-group">
+      <div class="logo-icon">🚀</div>
+      <div>
+        <h1>Starship Separator & Prompt Studio</h1>
+        <div class="subtitle">Design creative Powerline & Nerd Font prompts for Starship shell</div>
+      </div>
+    </div>
+    <div class="header-badge">
+      <span>✨ 20+ Separator Glyphs</span>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <!-- Main Interactive Area -->
+    <main>
+
+      <!-- Terminal Live Preview -->
+      <div class="terminal-window">
+        <div class="terminal-header">
+          <div class="window-dots">
+            <div class="dot dot-red"></div>
+            <div class="dot dot-yellow"></div>
+            <div class="dot dot-green"></div>
+          </div>
+          <div class="terminal-title">zsh — starship prompt preview</div>
+          <div style="width: 50px;"></div>
+        </div>
+        <div class="terminal-body" id="terminalPreview">
+          <div class="prompt-preview-container" id="promptContainer">
+            <!-- Dynamically Rendered Segments -->
+          </div>
+          <div class="prompt-line-2">
+            <span class="char-symbol" id="charSymbol">❯</span>
+            <span id="demoCommand">git commit -m "feat: add starship prompt"</span>
+            <span class="cursor-blink"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Presets Gallery -->
+      <div class="card" style="margin-bottom: 24px;">
+        <div class="card-title">
+          <span>🎨 Creative Separator Presets</span>
+        </div>
+        <div class="preset-grid" id="presetsGrid">
+          <!-- Preset buttons rendered by JS -->
+        </div>
+      </div>
+
+      <!-- Separator Glyphs Explorer -->
+      <div class="card">
+        <div class="card-title">
+          <span>❖ Separator Glyphs Library</span>
+          <span style="font-size: 12px; font-weight: normal; color: var(--text-muted);">Click any glyph to insert as
+            separator</span>
+        </div>
+        <div id="glyphsContainer">
+          <!-- Glyph categories rendered by JS -->
+        </div>
+      </div>
+
+    </main>
+
+    <!-- Sidebar Customizer & Code Output -->
+    <aside>
+
+      <!-- Customizer Controls -->
+      <div class="card" style="margin-bottom: 24px;">
+        <div class="card-title">
+          <span>⚙️ Customizer</span>
+        </div>
+
+        <div class="controls-grid" style="grid-template-columns: 1fr;">
+          <div class="control-group">
+            <label for="leftCapSelect">Left Cap Symbol (Start)</label>
+            <select id="leftCapSelect" onchange="updateCustomizer()"></select>
+          </div>
+
+          <div class="control-group">
+            <label for="sepSelect">Middle Separator (Between)</label>
+            <select id="sepSelect" onchange="updateCustomizer()"></select>
+          </div>
+
+          <div class="control-group">
+            <label for="rightCapSelect">Right Cap Symbol (End)</label>
+            <select id="rightCapSelect" onchange="updateCustomizer()"></select>
+          </div>
+
+          <div class="control-group">
+            <label for="themeSelect">Color Palette</label>
+            <select id="themeSelect" onchange="updateCustomizer()"></select>
+          </div>
+
+          <div class="control-group">
+            <label for="heightInput">Prompt Line Height (px)</label>
+            <input type="number" id="heightInput" value="34" min="20" max="50" onchange="updateCustomizer()"
+              oninput="updateCustomizer()">
+          </div>
+
+          <div class="control-group">
+            <label for="scaleInput">Separator Vertical Scale</label>
+            <input type="range" id="scaleInput" value="1" min="0.75" max="1.25" step="0.01"
+              onchange="updateCustomizer()" oninput="updateCustomizer()">
+          </div>
+
+          <div class="control-group">
+            <label>Active Modules</label>
+            <div class="checkbox-grid">
+              <label class="checkbox-label"><input type="checkbox" id="modOS" checked onchange="updateCustomizer()"> OS
+                Icon</label>
+              <label class="checkbox-label"><input type="checkbox" id="modDir" checked onchange="updateCustomizer()">
+                Directory</label>
+              <label class="checkbox-label"><input type="checkbox" id="modGit" checked onchange="updateCustomizer()">
+                Git Branch</label>
+              <label class="checkbox-label"><input type="checkbox" id="modLang" checked onchange="updateCustomizer()">
+                Language</label>
+              <label class="checkbox-label"><input type="checkbox" id="modAI" checked onchange="updateCustomizer()"> AI
+                Badge</label>
+              <label class="checkbox-label"><input type="checkbox" id="modTime" checked onchange="updateCustomizer()">
+                Time</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Generated TOML Output -->
+      <div class="card">
+        <div class="card-title">
+          <span>📄 starship.toml Config</span>
+        </div>
+        <div class="toml-box">
+          <textarea id="tomlOutput" class="toml-editor" readonly></textarea>
+        </div>
+        <div class="actions-bar">
+          <button class="btn btn-secondary" onclick="downloadToml()">Download .toml</button>
+          <button class="btn" onclick="copyToml()">Copy Config</button>
+        </div>
+      </div>
+
+    </aside>
+
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toast">Copied to clipboard!</div>
+
+  <script>
+    // ── Glyphs Database from separators.md & Powerline standard ──────────────────
+    const glyphCategories = [
+      {
+        name: "Powerline Thick Rounds & Arrows",
+        items: [
+          { glyph: "", name: "Left Circle", desc: "U+E0B6" },
+          { glyph: "", name: "Right Circle", desc: "U+E0B4" },
+          { glyph: "", name: "Right Arrow", desc: "U+E0B0" },
+          { glyph: "", name: "Left Arrow", desc: "U+E0B2" },
+          { glyph: "", name: "Thin Left Round", desc: "U+E0B7" },
+          { glyph: "", name: "Thin Right Round", desc: "U+E0B5" },
+          { glyph: "", name: "Thin Right Arrow", desc: "U+E0B1" },
+          { glyph: "", name: "Thin Left Arrow", desc: "U+E0B3" }
+        ]
+      },
+      {
+        name: "Slanted Triangles & Inverted Hard",
+        items: [
+          { glyph: "", name: "Lower Right Triangle", desc: "U+E0BC" },
+          { glyph: "", name: "Lower Left Triangle", desc: "U+E0BA" },
+          { glyph: "", name: "Upper Left Triangle", desc: "U+E0BE" },
+          { glyph: "", name: "Upper Right Triangle", desc: "U+E0B8" },
+          { glyph: "", name: "Inverted Left Hard", desc: "U+E0D6" },
+          { glyph: "", name: "Inverted Right Hard", desc: "U+E0D7" },
+          { glyph: "", name: "Hard Inverse", desc: "U+E0C9" }
+        ]
+      },
+      {
+        name: "Waveforms, Pixels & Shading Blocks",
+        items: [
+          { glyph: "", name: "Ice Waveform", desc: "U+E0CC" },
+          { glyph: "", name: "Flame Waveform", desc: "U+E0D4" },
+          { glyph: "░▒▓", name: "Smooth Fade In", desc: "U+2591-93" },
+          { glyph: "▓▒░", name: "Smooth Fade Out", desc: "U+2593-91" },
+          { glyph: "░", name: "Light Shade", desc: "U+2591" },
+          { glyph: "▒", name: "Medium Shade", desc: "U+2592" },
+          { glyph: "▓", name: "Dark Shade", desc: "U+2593" },
+          { glyph: "", name: "Pixel Small", desc: "U+E0C4" },
+          { glyph: "", name: "Pixel Big", desc: "U+E0C5" },
+          { glyph: "", name: "Trapezoid Top", desc: "U+E0C3" },
+          { glyph: "", name: "Trapezoid Bot", desc: "U+E0D2" }
+        ]
+      },
+      {
+        name: "AI Status & Special Badges",
+        items: [
+          { glyph: "ai", name: "AI Badge Left", desc: "Custom AI" },
+          { glyph: "ai", name: "AI Badge Right", desc: "Custom AI" },
+          { glyph: "󰠠", name: "AI Chip", desc: "Nerd Font" },
+          { glyph: "", name: "Sparkles", desc: "Nerd Font" },
+          { glyph: "󱑺", name: "Clock", desc: "Nerd Font" },
+          { glyph: "", name: "Branch Code", desc: "Nerd Font" },
+          { glyph: "󰗐", name: "Shield", desc: "Nerd Font" },
+          { glyph: "󰕗", name: "Git Branch", desc: "Nerd Font" }
+        ]
+      }
+    ];
+
+    // ── Color Palettes ────────────────────────────────────────────────────────
+    const themes = {
+      firewatch: {
+        name: "Firewatch Sunset",
+        bg: "#1a0a2e",
+        fg: "#f0c0e0",
+        os: { bg: "#352a3e", fg: "#ffffff" },
+        dir: { bg: "#e8608a", fg: "#1a0a2e" },
+        git: { bg: "#9b59b6", fg: "#ffffff" },
+        lang: { bg: "#f7c96e", fg: "#1a0a2e" },
+        ai: { bg: "#06b6d4", fg: "#0f172a" },
+        time: { bg: "#2d1b4e", fg: "#f0c0e0" }
+      },
+      lumon: {
+        name: "Lumon Oceanic",
+        bg: "#16242d",
+        fg: "#d6e2ee",
+        os: { bg: "#1b2d40", fg: "#ffffff" },
+        dir: { bg: "#6fa4c9", fg: "#0f172a" },
+        git: { bg: "#5e95bc", fg: "#ffffff" },
+        lang: { bg: "#6fb8e3", fg: "#0f172a" },
+        ai: { bg: "#38bdf8", fg: "#0f172a" },
+        time: { bg: "#23394a", fg: "#d6e2ee" }
+      },
+      matrix: {
+        name: "Cyberpunk Matrix",
+        bg: "#05160b",
+        fg: "#a7f3d0",
+        os: { bg: "#064e3b", fg: "#ffffff" },
+        dir: { bg: "#10b981", fg: "#022c22" },
+        git: { bg: "#059669", fg: "#ffffff" },
+        lang: { bg: "#34d399", fg: "#022c22" },
+        ai: { bg: "#00ff66", fg: "#05160b" },
+        time: { bg: "#065f46", fg: "#a7f3d0" }
+      },
+      catppuccin: {
+        name: "Catppuccin Mocha",
+        bg: "#1e1e2e",
+        fg: "#cdd6f4",
+        os: { bg: "#313244", fg: "#cdd6f4" },
+        dir: { bg: "#89b4fa", fg: "#1e1e2e" },
+        git: { bg: "#cba6f7", fg: "#1e1e2e" },
+        lang: { bg: "#f9e2af", fg: "#1e1e2e" },
+        ai: { bg: "#a6e3a1", fg: "#1e1e2e" },
+        time: { bg: "#45475a", fg: "#cdd6f4" }
+      },
+      tokyonight: {
+        name: "Tokyo Night",
+        bg: "#1a1b26",
+        fg: "#a9b1d6",
+        os: { bg: "#24283b", fg: "#7aa2f7" },
+        dir: { bg: "#7aa2f7", fg: "#15161e" },
+        git: { bg: "#bb9af7", fg: "#15161e" },
+        lang: { bg: "#e0af68", fg: "#15161e" },
+        ai: { bg: "#7dcfff", fg: "#15161e" },
+        time: { bg: "#2ac3de", fg: "#15161e" }
+      }
+    };
+
+    // ── Presets ───────────────────────────────────────────────────────────────
+    const presets = [
+      {
+        id: "classic_pill",
+        name: "Powerline Pill",
+        preview: " █  █ ",
+        leftCap: "",
+        sep: "",
+        rightCap: "",
+        theme: "firewatch"
+      },
+      {
+        id: "cyberpunk_matrix",
+        name: "Cyberpunk AI",
+        preview: "ai  █  █ ",
+        leftCap: "",
+        sep: "",
+        rightCap: "",
+        theme: "matrix"
+      },
+      {
+        id: "slanted_blade",
+        name: "Slanted Blade",
+        preview: " █  █ ",
+        leftCap: "",
+        sep: "",
+        rightCap: "",
+        theme: "lumon"
+      },
+      {
+        id: "flame_wave",
+        name: "Flame Waveform",
+        preview: " █  █ ",
+        leftCap: "",
+        sep: "",
+        rightCap: "",
+        theme: "tokyonight"
+      },
+      {
+        id: "retro_pixel",
+        name: "Retro Pixel",
+        preview: "░ █  █ ▓",
+        leftCap: "░",
+        sep: "",
+        rightCap: "▓",
+        theme: "catppuccin"
+      },
+      {
+        id: "omarchy_shade",
+        name: "Omarchy Smooth Shade",
+        preview: "░▒▓ █ ▓▒░ █ ▓▒░",
+        leftCap: "░▒▓",
+        sep: "▓▒░",
+        rightCap: "▓▒░",
+        theme: "tokyonight"
+      },
+      {
+        id: "cyber_neon",
+        name: "Cyber Neon Glitch",
+        preview: " █  █ ",
+        leftCap: "",
+        sep: "",
+        rightCap: "",
+        theme: "matrix"
+      },
+      {
+        id: "zen_slanted",
+        name: "Zen Garden Origami",
+        preview: " █  █ ",
+        leftCap: "",
+        sep: "",
+        rightCap: "",
+        theme: "firewatch"
+      },
+      {
+        id: "synth_wave",
+        name: "Synthwave Sunset",
+        preview: " █  █ ",
+        leftCap: "",
+        sep: "",
+        rightCap: "",
+        theme: "tokyonight"
+      },
+      {
+        id: "nordic_aurora",
+        name: "Nordic Floating Pill",
+        preview: " █   █ ",
+        leftCap: "",
+        sep: "",
+        rightCap: "",
+        theme: "lumon"
+      },
+      {
+        id: "trapezoid_geo",
+        name: "Trapezoid Geo",
+        preview: " █  █ ",
+        leftCap: "",
+        sep: "",
+        rightCap: "",
+        theme: "firewatch"
+      }
+    ];
+
+    // ── State ─────────────────────────────────────────────────────────────────
+    let currentConfig = {
+      leftCap: "",
+      sep: "",
+      rightCap: "",
+      themeKey: "firewatch",
+      activePreset: "classic_pill",
+      promptHeight: 34,
+      sepScale: 1,
+      modules: {
+        os: true,
+        dir: true,
+        git: true,
+        lang: true,
+        ai: true,
+        time: true
+      }
+    };
+
+    // ── DOM Elements ──────────────────────────────────────────────────────────
+    const terminalPreview = document.getElementById("terminalPreview");
+    const promptContainer = document.getElementById("promptContainer");
+    const glyphsContainer = document.getElementById("glyphsContainer");
+    const presetsGrid = document.getElementById("presetsGrid");
+    const leftCapSelect = document.getElementById("leftCapSelect");
+    const sepSelect = document.getElementById("sepSelect");
+    const rightCapSelect = document.getElementById("rightCapSelect");
+    const themeSelect = document.getElementById("themeSelect");
+    const tomlOutput = document.getElementById("tomlOutput");
+    const toast = document.getElementById("toast");
+
+    // ── Initialize App ────────────────────────────────────────────────────────
+    function init() {
+      renderGlyphSelects();
+      renderGlyphLibrary();
+      renderPresetButtons();
+      renderThemeSelect();
+      updateCustomizer();
+    }
+
+    // Populate Select Dropdowns
+    function renderGlyphSelects() {
+      const allGlyphs = [];
+      glyphCategories.forEach(cat => {
+        cat.items.forEach(item => allGlyphs.push(item));
+      });
+
+      [leftCapSelect, sepSelect, rightCapSelect].forEach(select => {
+        select.innerHTML = "";
+        allGlyphs.forEach(item => {
+          const opt = document.createElement("option");
+          opt.value = item.glyph;
+          opt.textContent = `${item.glyph} (${item.name})`;
+          select.appendChild(opt);
+        });
+      });
+    }
+
+    // Render Theme Selector Options
+    function renderThemeSelect() {
+      themeSelect.innerHTML = "";
+      Object.keys(themes).forEach(key => {
+        const opt = document.createElement("option");
+        opt.value = key;
+        opt.textContent = themes[key].name;
+        themeSelect.appendChild(opt);
+      });
+    }
+
+    // Render Presets Grid
+    function renderPresetButtons() {
+      presetsGrid.innerHTML = "";
+      presets.forEach(p => {
+        const btn = document.createElement("div");
+        btn.className = `preset-btn ${currentConfig.activePreset === p.id ? 'active' : ''}`;
+        btn.onclick = () => applyPreset(p);
+        btn.innerHTML = `
+          <span class="preset-name">${p.name}</span>
+          <span class="preset-preview">${p.preview}</span>
+        `;
+        presetsGrid.appendChild(btn);
+      });
+    }
+
+    // Render Glyphs Library
+    function renderGlyphLibrary() {
+      glyphsContainer.innerHTML = "";
+      glyphCategories.forEach(cat => {
+        const catDiv = document.createElement("div");
+        catDiv.className = "glyphs-category";
+        catDiv.innerHTML = `<div class="category-name">${cat.name}</div>`;
+
+        const grid = document.createElement("div");
+        grid.className = "glyphs-grid";
+
+        cat.items.forEach(item => {
+          const card = document.createElement("div");
+          card.className = "glyph-card";
+          card.onclick = () => {
+            sepSelect.value = item.glyph;
+            currentConfig.sep = item.glyph;
+            updateCustomizer();
+            showToast(`Selected '${item.name}' as middle separator`);
+          };
+          card.innerHTML = `
+            <span class="glyph-symbol">${item.glyph}</span>
+            <span class="glyph-desc">${item.name}</span>
+          `;
+          grid.appendChild(card);
+        });
+
+        catDiv.appendChild(grid);
+        glyphsContainer.appendChild(catDiv);
+      });
+    }
+
+    // Apply Preset
+    function applyPreset(p) {
+      currentConfig.activePreset = p.id;
+      currentConfig.leftCap = p.leftCap;
+      currentConfig.sep = p.sep;
+      currentConfig.rightCap = p.rightCap;
+      currentConfig.themeKey = p.theme;
+
+      leftCapSelect.value = p.leftCap;
+      sepSelect.value = p.sep;
+      rightCapSelect.value = p.rightCap;
+      themeSelect.value = p.theme;
+
+      renderPresetButtons();
+      updateCustomizer();
+    }
+
+    // Update State & Re-render
+    function updateCustomizer() {
+      currentConfig.leftCap = leftCapSelect.value;
+      currentConfig.sep = sepSelect.value;
+      currentConfig.rightCap = rightCapSelect.value;
+      currentConfig.themeKey = themeSelect.value;
+
+      const hInput = document.getElementById("heightInput");
+      const sInput = document.getElementById("scaleInput");
+      if (hInput) currentConfig.promptHeight = parseInt(hInput.value) || 34;
+      if (sInput) currentConfig.sepScale = parseFloat(sInput.value) || 1;
+
+      document.documentElement.style.setProperty('--prompt-height', currentConfig.promptHeight + 'px');
+      document.documentElement.style.setProperty('--sep-scale', currentConfig.sepScale);
+
+      currentConfig.modules.os = document.getElementById("modOS").checked;
+      currentConfig.modules.dir = document.getElementById("modDir").checked;
+      currentConfig.modules.git = document.getElementById("modGit").checked;
+      currentConfig.modules.lang = document.getElementById("modLang").checked;
+      currentConfig.modules.ai = document.getElementById("modAI").checked;
+      currentConfig.modules.time = document.getElementById("modTime").checked;
+
+      renderPromptPreview();
+      generateToml();
+    }
+
+    // Render Live Terminal Prompt Preview
+    function renderPromptPreview() {
+      const theme = themes[currentConfig.themeKey] || themes.firewatch;
+      terminalPreview.style.backgroundColor = theme.bg;
+
+      // Build active segment chain
+      const activeSegs = [];
+      if (currentConfig.modules.os) activeSegs.push({ id: 'os', label: '󰣇 Arch', bg: theme.os.bg, fg: theme.os.fg });
+      if (currentConfig.modules.dir) activeSegs.push({ id: 'dir', label: '󰲋 ~/.dotfiles', bg: theme.dir.bg, fg: theme.dir.fg });
+      if (currentConfig.modules.git) activeSegs.push({ id: 'git', label: ' main', bg: theme.git.bg, fg: theme.git.fg });
+      if (currentConfig.modules.lang) activeSegs.push({ id: 'lang', label: ' v1.78.0', bg: theme.lang.bg, fg: theme.lang.fg });
+      if (currentConfig.modules.ai) activeSegs.push({ id: 'ai', label: 'ai ready', bg: theme.ai.bg, fg: theme.ai.fg });
+      if (currentConfig.modules.time) activeSegs.push({ id: 'time', label: ' 22:15', bg: theme.time.bg, fg: theme.time.fg });
+
+      promptContainer.innerHTML = "";
+
+      if (activeSegs.length === 0) {
+        promptContainer.innerHTML = `<span style="color: ${theme.fg};">Empty Prompt Line</span>`;
+        return;
+      }
+
+      // Left Cap Symbol
+      const leftCapSpan = document.createElement("span");
+      leftCapSpan.className = "separator-glyph";
+      leftCapSpan.style.color = activeSegs[0].bg;
+      leftCapSpan.style.backgroundColor = "transparent";
+      leftCapSpan.textContent = currentConfig.leftCap;
+      promptContainer.appendChild(leftCapSpan);
+
+      // Render segments with middle separators
+      activeSegs.forEach((seg, i) => {
+        const segSpan = document.createElement("span");
+        segSpan.className = "prompt-segment";
+        segSpan.style.backgroundColor = seg.bg;
+        segSpan.style.color = seg.fg;
+
+        const contentSpan = document.createElement("span");
+        contentSpan.className = "segment-content";
+        contentSpan.textContent = seg.label;
+        segSpan.appendChild(contentSpan);
+
+        promptContainer.appendChild(segSpan);
+
+        // Separator between segments or Right Cap
+        const sepSpan = document.createElement("span");
+        sepSpan.className = "separator-glyph";
+
+        if (i < activeSegs.length - 1) {
+          // Middle Separator: foreground = current segment bg, background = next segment bg
+          const nextSeg = activeSegs[i + 1];
+          sepSpan.style.color = seg.bg;
+          sepSpan.style.backgroundColor = nextSeg.bg;
+          sepSpan.textContent = currentConfig.sep;
+        } else {
+          // Right Cap: foreground = last segment bg, background = transparent
+          sepSpan.style.color = seg.bg;
+          sepSpan.style.backgroundColor = "transparent";
+          sepSpan.textContent = currentConfig.rightCap;
+        }
+
+        promptContainer.appendChild(sepSpan);
+      });
+    }
+
+    // Generate Starship TOML Config Text
+    function generateToml() {
+      const theme = themes[currentConfig.themeKey] || themes.firewatch;
+      const left = currentConfig.leftCap;
+      const sep = currentConfig.sep;
+      const right = currentConfig.rightCap;
+
+      let formatStr = `[${left}](color_os)`;
+      if (currentConfig.modules.os) formatStr += `$os`;
+      if (currentConfig.modules.dir) formatStr += `[${sep}](bg:color_dir fg:color_os)$directory`;
+      if (currentConfig.modules.git) formatStr += `[${sep}](fg:color_dir bg:color_git)$git_branch$git_status`;
+      if (currentConfig.modules.lang) formatStr += `[${sep}](fg:color_git bg:color_lang)$rust$nodejs$python`;
+      if (currentConfig.modules.time) formatStr += `[${sep}](fg:color_lang bg:color_bg)$time`;
+      formatStr += `[${right}](fg:color_bg)\\n$character`;
+
+      const tomlText = `"$schema" = 'https://starship.rs/config-schema.json'
+
+format = """
+${formatStr}"""
+
+palette = 'omarchy_theme'
+
+[palettes.omarchy_theme]
+color_bg = '${theme.bg}'
+color_os = '${theme.os.bg}'
+color_dir = '${theme.dir.bg}'
+color_git = '${theme.git.bg}'
+color_lang = '${theme.lang.bg}'
+
+[os]
+disabled = false
+style = "bg:color_os fg:${theme.os.fg}"
+format = '[󰣇 ]($style)'
+
+[directory]
+style = "fg:${theme.dir.fg} bg:color_dir"
+format = "[ $path ]($style)"
+truncation_length = 3
+
+[git_branch]
+symbol = " "
+style = "fg:${theme.git.fg} bg:color_git"
+format = '[[ $symbol$branch ]($style)]($style)'
+
+[character]
+success_symbol = "[❯](bold green)"
+error_symbol = "[❯](bold red)"
+`;
+
+      tomlOutput.value = tomlText;
+    }
+
+    // Copy to Clipboard
+    function copyToml() {
+      navigator.clipboard.writeText(tomlOutput.value).then(() => {
+        showToast("starship.toml copied to clipboard!");
+      });
+    }
+
+    // Download .toml File
+    function downloadToml() {
+      const blob = new Blob([tomlOutput.value], { type: "text/plain" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "starship.toml";
+      a.click();
+      URL.revokeObjectURL(url);
+      showToast("Downloading starship.toml...");
+    }
+
+    // Show Toast Notification
+    function showToast(msg) {
+      toast.textContent = msg;
+      toast.classList.add("show");
+      setTimeout(() => toast.classList.remove("show"), 2500);
+    }
+
+    // Start
+    window.onload = init;
+  </script>
+
+</body>
+
+</html>
