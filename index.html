@@ -4,7 +4,109 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Starship Separators & Prompt Studio</title>
+
+  <!-- Primary SEO Meta Tags -->
+  <title>Starship Studio — Interactive Starship Prompt Generator & Preset Customizer</title>
+  <meta name="title" content="Starship Studio — Interactive Starship Prompt Generator & Preset Customizer">
+  <meta name="description" content="Starship Studio is an interactive visual editor and preset generator for the Starship prompt. Customize themes and export your starship.toml easily.">
+  <meta name="keywords" content="starship prompt, starship preset generator, starship studio, starship toml generator, powerline prompt generator, terminal prompt customizer, nerd fonts separators, zsh starship prompt, starship themes, bash prompt designer, cross-shell prompt">
+  <meta name="author" content="Felipe Miranda">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="theme-color" content="#0f111a">
+  <link rel="canonical" href="https://felipecm-br.github.io/starship-studio/">
+
+  <!-- Open Graph / Facebook / LinkedIn / Discord -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://felipecm-br.github.io/starship-studio/">
+  <meta property="og:title" content="Starship Studio — Interactive Starship Prompt Generator & Preset Customizer">
+  <meta property="og:description" content="Starship Studio is an interactive visual editor and preset generator for the Starship prompt. Customize themes and export your starship.toml easily.">
+  <meta property="og:image" content="https://raw.githubusercontent.com/felipecm-br/starship-studio/main/preview.png">
+  <meta property="og:site_name" content="Starship Studio">
+  <meta property="og:locale" content="en_US">
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://felipecm-br.github.io/starship-studio/">
+  <meta name="twitter:title" content="Starship Studio — Interactive Starship Prompt Generator & Preset Customizer">
+  <meta name="twitter:description" content="Starship Studio is an interactive visual editor and preset generator for the Starship prompt. Customize themes and export your starship.toml easily.">
+  <meta name="twitter:image" content="https://raw.githubusercontent.com/felipecm-br/starship-studio/main/preview.png">
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚀</text></svg>">
+
+  <!-- JSON-LD Structured Data for Google Search -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "@id": "https://felipecm-br.github.io/starship-studio/#webapp",
+        "name": "Starship Studio",
+        "url": "https://felipecm-br.github.io/starship-studio/",
+        "description": "Starship Studio is an interactive visual editor and preset generator for the Starship prompt. Customize themes and export your starship.toml easily.",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "All (Linux, macOS, Windows)",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "featureList": [
+          "Live interactive terminal prompt preview",
+          "Powerline and Nerd Font separator explorer",
+          "Curated color palettes (Firewatch Sunset, Catppuccin, Tokyo Night, Matrix, Lumon)",
+          "One-click starship.toml generation and export",
+          "Prompt line height customizer with Powerline vertical scaling"
+        ],
+        "author": {
+          "@type": "Person",
+          "name": "Felipe Miranda",
+          "url": "https://github.com/felipecm-br"
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://felipecm-br.github.io/starship-studio/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is Starship Studio?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Starship Studio is an interactive visual editor and preset generator for the Starship prompt. Customize themes and export your starship.toml easily."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I install the generated starship.toml?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Download or copy the generated starship.toml configuration file and move it to ~/.config/starship.toml on Linux/macOS or %USERPROFILE%\\.config\\starship.toml on Windows."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Do I need a Nerd Font for Starship separators?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, to properly render Powerline glyphs (such as Left Circle, Right Arrow, Right Circle, triangles, and waveforms), your terminal must use a patched Nerd Font (like JetBrains Mono Nerd Font or Fira Code Nerd Font)."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which shells are supported by Starship?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Starship is a cross-shell prompt that works with Zsh, Bash, Fish, PowerShell, NuShell, Ion, and Tcsh on Linux, macOS, and Windows."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -211,7 +313,7 @@
     }
 
     :root {
-      --prompt-height: 34px;
+      --prompt-height: 30px;
       --sep-scale: 1;
     }
 
@@ -546,6 +648,240 @@
       width: 15px;
       height: 15px;
     }
+
+    /* Header Actions & GitHub Button */
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .github-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 7px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .github-btn:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--accent-primary);
+      color: #ffffff;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(99, 102, 241, 0.25);
+    }
+
+    .github-btn svg {
+      fill: currentColor;
+      flex-shrink: 0;
+      transition: transform 0.2s ease;
+    }
+
+    .github-btn:hover svg {
+      transform: scale(1.1);
+    }
+
+    /* SEO Documentation & FAQ Section */
+    .seo-section {
+      max-width: 1300px;
+      margin: 32px auto 0 auto;
+    }
+
+    .seo-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 28px 24px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    }
+
+    .seo-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 28px;
+      margin-bottom: 32px;
+    }
+
+    @media (min-width: 900px) {
+      .seo-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .seo-article h2 {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .seo-article p {
+      color: var(--text-muted);
+      font-size: 14px;
+      line-height: 1.7;
+      margin-bottom: 12px;
+    }
+
+    .seo-article a {
+      color: var(--accent-cyan);
+      text-decoration: none;
+      border-bottom: 1px dotted var(--accent-cyan);
+    }
+
+    .seo-article a:hover {
+      color: #ffffff;
+      border-bottom-style: solid;
+    }
+
+    .seo-steps {
+      list-style-position: inside;
+      color: var(--text-muted);
+      font-size: 14px;
+      line-height: 1.8;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .seo-steps strong {
+      color: var(--text-main);
+    }
+
+    .seo-code {
+      background: #0d0e15;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 10px 14px;
+      margin-top: 6px;
+      overflow-x: auto;
+      font-family: var(--font-code);
+      font-size: 12px;
+      color: #a9b1d6;
+    }
+
+    .seo-faq {
+      border-top: 1px solid var(--border-color);
+      padding-top: 24px;
+    }
+
+    .seo-faq h2 {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 20px;
+    }
+
+    .faq-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+
+    @media (min-width: 768px) {
+      .faq-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .faq-item {
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 18px;
+    }
+
+    .faq-item h3 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+
+    .faq-item p {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .faq-item a {
+      color: var(--accent-cyan);
+      text-decoration: none;
+    }
+
+    /* Site Footer */
+    .site-footer {
+      max-width: 1300px;
+      margin: 40px auto 0 auto;
+      padding-top: 24px;
+      border-top: 1px solid var(--border-color);
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 16px;
+      color: var(--text-main);
+      margin-bottom: 4px;
+    }
+
+    .footer-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 12px;
+      color: #6b7280;
+      padding-top: 16px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .footer-links {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent-cyan);
+    }
   </style>
 </head>
 
@@ -553,14 +889,26 @@
 
   <header>
     <div class="title-group">
-      <div class="logo-icon">🚀</div>
+      <div class="logo-icon" aria-hidden="true">🚀</div>
       <div>
-        <h1>Starship Separator & Prompt Studio</h1>
-        <div class="subtitle">Design creative Powerline & Nerd Font prompts for Starship shell</div>
+        <h1>Starship Studio</h1>
+        <div class="subtitle">Interactive visual editor and preset generator for Starship prompt</div>
       </div>
     </div>
-    <div class="header-badge">
-      <span>✨ 20+ Separator Glyphs</span>
+    <div class="header-actions">
+      <div class="header-badge">
+        <span>✨ 20+ Separator Glyphs</span>
+      </div>
+      <a href="https://github.com/felipecm-br/starship-studio" 
+         target="_blank" 
+         rel="noopener noreferrer" 
+         class="github-btn"
+         aria-label="Starship Studio GitHub Repository">
+        <svg class="github-icon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+        </svg>
+        <span>GitHub</span>
+      </a>
     </div>
   </header>
 
@@ -648,7 +996,7 @@
 
           <div class="control-group">
             <label for="heightInput">Prompt Line Height (px)</label>
-            <input type="number" id="heightInput" value="34" min="20" max="50" onchange="updateCustomizer()"
+            <input type="number" id="heightInput" value="30" min="20" max="50" onchange="updateCustomizer()"
               oninput="updateCustomizer()">
           </div>
 
@@ -659,9 +1007,14 @@
           </div>
 
           <div class="control-group">
+            <label for="iconSelect">Start Icon (First Segment)</label>
+            <select id="iconSelect" onchange="updateCustomizer()" style="font-size: 18px;"></select>
+          </div>
+
+          <div class="control-group">
             <label>Active Modules</label>
             <div class="checkbox-grid">
-              <label class="checkbox-label"><input type="checkbox" id="modOS" checked onchange="updateCustomizer()"> OS
+              <label class="checkbox-label"><input type="checkbox" id="modOS" checked onchange="updateCustomizer()"> Start
                 Icon</label>
               <label class="checkbox-label"><input type="checkbox" id="modDir" checked onchange="updateCustomizer()">
                 Directory</label>
@@ -669,8 +1022,6 @@
                 Git Branch</label>
               <label class="checkbox-label"><input type="checkbox" id="modLang" checked onchange="updateCustomizer()">
                 Language</label>
-              <label class="checkbox-label"><input type="checkbox" id="modAI" checked onchange="updateCustomizer()"> AI
-                Badge</label>
               <label class="checkbox-label"><input type="checkbox" id="modTime" checked onchange="updateCustomizer()">
                 Time</label>
             </div>
@@ -696,6 +1047,97 @@
 
   </div>
 
+  <!-- SEO & Documentation Section -->
+  <section class="seo-section" aria-label="About Starship Studio & Documentation">
+    <div class="seo-card">
+      <div class="seo-grid">
+        <article class="seo-article">
+          <h2>🚀 What is Starship Studio?</h2>
+          <p>
+            <strong>Starship Studio</strong> is an interactive visual editor and preset generator for the 
+            <a href="https://starship.rs" target="_blank" rel="noopener noreferrer">Starship cross-shell prompt</a>. 
+            Customize themes and export your <code>starship.toml</code> easily. Whether you work with <strong>Zsh, Bash, Fish, NuShell, or PowerShell</strong>, Starship Studio allows you to preview, experiment, and generate stunning Powerline-style prompts with ease.
+          </p>
+          <p>
+            Choose from over 20+ separator glyphs (including smooth shades, angled chevrons, flame waveforms, and retro pixel blocks) paired with curated color palettes like <strong>Firewatch Sunset</strong>, <strong>Catppuccin Mocha</strong>, and <strong>Tokyo Night</strong>.
+          </p>
+        </article>
+
+        <article class="seo-article">
+          <h2>⚡ How to Install Your Generated Prompt</h2>
+          <ol class="seo-steps">
+            <li>
+              <strong>Customize Prompt:</strong> Configure your start cap, middle separator, end cap, line height, and color palette.
+            </li>
+            <li>
+              <strong>Export Config:</strong> Click <em>"Copy Config"</em> or <em>"Download .toml"</em>.
+            </li>
+            <li>
+              <strong>Save Configuration:</strong>
+              <div class="seo-code"># Linux & macOS<br>cp starship.toml ~/.config/starship.toml<br><br># Windows (PowerShell)<br>cp starship.toml $HOME\.config\starship.toml</div>
+            </li>
+            <li>
+              <strong>Reload Shell:</strong> Restart your terminal session or run <code>source ~/.zshrc</code>. Ensure your terminal font is set to a <a href="https://www.nerdfonts.com" target="_blank" rel="noopener noreferrer">Nerd Font</a> (e.g., JetBrains Mono Nerd Font).
+            </li>
+          </ol>
+        </article>
+      </div>
+
+      <!-- FAQ Section -->
+      <div class="seo-faq">
+        <h2>💡 Frequently Asked Questions (FAQ)</h2>
+        <div class="faq-grid">
+          <div class="faq-item">
+            <h3>Do I need a Nerd Font installed?</h3>
+            <p>
+              Yes! To display Powerline glyphs, caps, arrows, and icon symbols properly, you need a patched font from <a href="https://www.nerdfonts.com" target="_blank" rel="noopener noreferrer">Nerd Fonts</a> installed in your terminal emulator (e.g. Alacritty, Kitty, WezTerm, iTerm2, Windows Terminal).
+            </p>
+          </div>
+          <div class="faq-item">
+            <h3>How do I adjust separator vertical height?</h3>
+            <p>
+              Use the <strong>Prompt Line Height</strong> input and <strong>Separator Vertical Scale</strong> slider in the Customizer to fine-tune glyph vertical alignment so separators fill the segment height seamlessly without cutoff.
+            </p>
+          </div>
+          <div class="faq-item">
+            <h3>Is Starship Studio free and open source?</h3>
+            <p>
+              Yes, 100% free and open-source under the MIT license! Check out the source code, star the project, or contribute presets on <a href="https://github.com/felipecm-br/starship-studio" target="_blank" rel="noopener noreferrer">GitHub</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <span class="footer-logo">🚀</span>
+        <strong>Starship Studio</strong>
+      </div>
+      <div class="footer-right">
+        <a href="https://github.com/felipecm-br/starship-studio" target="_blank" rel="noopener noreferrer" class="github-btn" aria-label="Starship Studio on GitHub">
+          <svg class="github-icon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+          </svg>
+          <span>Starship Studio on GitHub</span>
+        </a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>Starship Studio is an interactive visual editor and preset generator for the Starship prompt. Licensed under MIT.</span>
+      <div class="footer-links">
+        <a href="https://starship.rs" target="_blank" rel="noopener noreferrer">Starship.rs</a>
+        <span>•</span>
+        <a href="https://www.nerdfonts.com" target="_blank" rel="noopener noreferrer">Nerd Fonts</a>
+        <span>•</span>
+        <a href="https://github.com/felipecm-br/starship-studio" target="_blank" rel="noopener noreferrer">GitHub Repo</a>
+      </div>
+    </div>
+  </footer>
+
   <!-- Toast Notification -->
   <div class="toast" id="toast">Copied to clipboard!</div>
 
@@ -703,57 +1145,17 @@
     // ── Glyphs Database from separators.md & Powerline standard ──────────────────
     const glyphCategories = [
       {
-        name: "Powerline Thick Rounds & Arrows",
+        name: "Separator Glyphs Library",
         items: [
-          { glyph: "", name: "Left Circle", desc: "U+E0B6" },
           { glyph: "", name: "Right Circle", desc: "U+E0B4" },
           { glyph: "", name: "Right Arrow", desc: "U+E0B0" },
-          { glyph: "", name: "Left Arrow", desc: "U+E0B2" },
-          { glyph: "", name: "Thin Left Round", desc: "U+E0B7" },
-          { glyph: "", name: "Thin Right Round", desc: "U+E0B5" },
-          { glyph: "", name: "Thin Right Arrow", desc: "U+E0B1" },
-          { glyph: "", name: "Thin Left Arrow", desc: "U+E0B3" }
-        ]
-      },
-      {
-        name: "Slanted Triangles & Inverted Hard",
-        items: [
           { glyph: "", name: "Lower Right Triangle", desc: "U+E0BC" },
-          { glyph: "", name: "Lower Left Triangle", desc: "U+E0BA" },
-          { glyph: "", name: "Upper Left Triangle", desc: "U+E0BE" },
           { glyph: "", name: "Upper Right Triangle", desc: "U+E0B8" },
           { glyph: "", name: "Inverted Left Hard", desc: "U+E0D6" },
-          { glyph: "", name: "Inverted Right Hard", desc: "U+E0D7" },
-          { glyph: "", name: "Hard Inverse", desc: "U+E0C9" }
-        ]
-      },
-      {
-        name: "Waveforms, Pixels & Shading Blocks",
-        items: [
           { glyph: "", name: "Ice Waveform", desc: "U+E0CC" },
-          { glyph: "", name: "Flame Waveform", desc: "U+E0D4" },
-          { glyph: "░▒▓", name: "Smooth Fade In", desc: "U+2591-93" },
+          { glyph: "", name: "Trapezoid Bot", desc: "U+E0D2" },
           { glyph: "▓▒░", name: "Smooth Fade Out", desc: "U+2593-91" },
-          { glyph: "░", name: "Light Shade", desc: "U+2591" },
-          { glyph: "▒", name: "Medium Shade", desc: "U+2592" },
-          { glyph: "▓", name: "Dark Shade", desc: "U+2593" },
-          { glyph: "", name: "Pixel Small", desc: "U+E0C4" },
-          { glyph: "", name: "Pixel Big", desc: "U+E0C5" },
-          { glyph: "", name: "Trapezoid Top", desc: "U+E0C3" },
-          { glyph: "", name: "Trapezoid Bot", desc: "U+E0D2" }
-        ]
-      },
-      {
-        name: "AI Status & Special Badges",
-        items: [
-          { glyph: "ai", name: "AI Badge Left", desc: "Custom AI" },
-          { glyph: "ai", name: "AI Badge Right", desc: "Custom AI" },
-          { glyph: "󰠠", name: "AI Chip", desc: "Nerd Font" },
-          { glyph: "", name: "Sparkles", desc: "Nerd Font" },
-          { glyph: "󱑺", name: "Clock", desc: "Nerd Font" },
-          { glyph: "", name: "Branch Code", desc: "Nerd Font" },
-          { glyph: "󰗐", name: "Shield", desc: "Nerd Font" },
-          { glyph: "󰕗", name: "Git Branch", desc: "Nerd Font" }
+          { glyph: "󱑺", name: "Clock", desc: "Nerd Font" }
         ]
       }
     ];
@@ -830,11 +1232,11 @@
       },
       {
         id: "cyberpunk_matrix",
-        name: "Cyberpunk AI",
-        preview: "ai  █  █ ",
-        leftCap: "",
+        name: "Cyberpunk Matrix",
+        preview: " █  █ ",
+        leftCap: "",
         sep: "",
-        rightCap: "",
+        rightCap: "",
         theme: "matrix"
       },
       {
@@ -926,239 +1328,311 @@
       sep: "",
       rightCap: "",
       themeKey: "firewatch",
+      iconSymbol: "󰣇",
       activePreset: "classic_pill",
-      promptHeight: 34,
+      promptHeight: 30,
       sepScale: 1,
       modules: {
         os: true,
         dir: true,
         git: true,
         lang: true,
-        ai: true,
         time: true
       }
     };
 
-    // ── DOM Elements ──────────────────────────────────────────────────────────
-    const terminalPreview = document.getElementById("terminalPreview");
-    const promptContainer = document.getElementById("promptContainer");
-    const glyphsContainer = document.getElementById("glyphsContainer");
-    const presetsGrid = document.getElementById("presetsGrid");
-    const leftCapSelect = document.getElementById("leftCapSelect");
-    const sepSelect = document.getElementById("sepSelect");
-    const rightCapSelect = document.getElementById("rightCapSelect");
-    const themeSelect = document.getElementById("themeSelect");
-    const tomlOutput = document.getElementById("tomlOutput");
-    const toast = document.getElementById("toast");
+  // ── Start Segment Icons (Nerd Font Glyphs) ──────────────────────────────────
+  const startIcons = [
+    "󰣇", "", "󱃽", "", "", "", "", "󱓞", "󰊗", "󰔉",
+    "󰈸", "󱢗", "󰚌", "󰯈", "", "󱙝", "", "", "", "",
+    "", "", "", "󰯇", "󰭟", "", "󱗆", "󰯉", "󰇥", "",
+    "", "", "", "", "", "", "󱍢", "", "", "",
+    "", "", "", "󱐌", "", "", "", "󰫣", "󰫤", "󰫥",
+    "", "", "", "", "󰣙", "󰣘", "", "", "󰓎", "",
+    "", "", "󰙴", "", "", "󱓟", "󰺹", "󰅏", ""
+  ];
 
-    // ── Initialize App ────────────────────────────────────────────────────────
-    function init() {
-      renderGlyphSelects();
-      renderGlyphLibrary();
-      renderPresetButtons();
-      renderThemeSelect();
-      updateCustomizer();
-    }
+  // ── DOM Elements ──────────────────────────────────────────────────────────
+  const terminalPreview = document.getElementById("terminalPreview");
+  const promptContainer = document.getElementById("promptContainer");
+  const glyphsContainer = document.getElementById("glyphsContainer");
+  const presetsGrid = document.getElementById("presetsGrid");
+  const leftCapSelect = document.getElementById("leftCapSelect");
+  const sepSelect = document.getElementById("sepSelect");
+  const rightCapSelect = document.getElementById("rightCapSelect");
+  const themeSelect = document.getElementById("themeSelect");
+  const iconSelect = document.getElementById("iconSelect");
+  const tomlOutput = document.getElementById("tomlOutput");
+  const toast = document.getElementById("toast");
 
-    // Populate Select Dropdowns
-    function renderGlyphSelects() {
-      const allGlyphs = [];
-      glyphCategories.forEach(cat => {
-        cat.items.forEach(item => allGlyphs.push(item));
+  // ── Initialize App ────────────────────────────────────────────────────────
+  function init() {
+    renderGlyphSelects();
+    renderGlyphLibrary();
+    renderPresetButtons();
+    renderThemeSelect();
+    renderIconSelect();
+
+    // Ensure selects & inputs reflect initial defaults
+    leftCapSelect.value = currentConfig.leftCap;
+    sepSelect.value = currentConfig.sep;
+    rightCapSelect.value = currentConfig.rightCap;
+    themeSelect.value = currentConfig.themeKey;
+    if (iconSelect) iconSelect.value = currentConfig.iconSymbol;
+
+    const hInput = document.getElementById("heightInput");
+    if (hInput) hInput.value = currentConfig.promptHeight;
+
+    updateCustomizer();
+  }
+
+  // Populate Select Dropdowns
+  function renderGlyphSelects() {
+    const allGlyphs = [];
+    // Guarantee Left Circle is available for Left Cap Symbol (Start)
+    allGlyphs.push({ glyph: "", name: "Left Circle", desc: "U+E0B6" });
+    glyphCategories.forEach(cat => {
+      cat.items.forEach(item => {
+        if (!allGlyphs.some(g => g.glyph === item.glyph)) {
+          allGlyphs.push(item);
+        }
       });
+    });
 
-      [leftCapSelect, sepSelect, rightCapSelect].forEach(select => {
-        select.innerHTML = "";
-        allGlyphs.forEach(item => {
-          const opt = document.createElement("option");
-          opt.value = item.glyph;
-          opt.textContent = `${item.glyph} (${item.name})`;
-          select.appendChild(opt);
-        });
-      });
-    }
-
-    // Render Theme Selector Options
-    function renderThemeSelect() {
-      themeSelect.innerHTML = "";
-      Object.keys(themes).forEach(key => {
+    [leftCapSelect, sepSelect, rightCapSelect].forEach(select => {
+      select.innerHTML = "";
+      allGlyphs.forEach(item => {
         const opt = document.createElement("option");
-        opt.value = key;
-        opt.textContent = themes[key].name;
-        themeSelect.appendChild(opt);
+        opt.value = item.glyph;
+        opt.textContent = `${item.glyph} (${item.name})`;
+        select.appendChild(opt);
       });
-    }
+    });
+  }
 
-    // Render Presets Grid
-    function renderPresetButtons() {
-      presetsGrid.innerHTML = "";
-      presets.forEach(p => {
-        const btn = document.createElement("div");
-        btn.className = `preset-btn ${currentConfig.activePreset === p.id ? 'active' : ''}`;
-        btn.onclick = () => applyPreset(p);
-        btn.innerHTML = `
-          <span class="preset-name">${p.name}</span>
-          <span class="preset-preview">${p.preview}</span>
+  // Render Theme Selector Options
+  function renderThemeSelect() {
+    themeSelect.innerHTML = "";
+    Object.keys(themes).forEach(key => {
+      const opt = document.createElement("option");
+      opt.value = key;
+      opt.textContent = themes[key].name;
+      themeSelect.appendChild(opt);
+    });
+  }
+
+  // Render Icon Options (Just the icon itself, no names)
+  function renderIconSelect() {
+    if (!iconSelect) return;
+    iconSelect.innerHTML = "";
+    startIcons.forEach(icon => {
+      const opt = document.createElement("option");
+      opt.value = icon;
+      opt.textContent = icon;
+      iconSelect.appendChild(opt);
+    });
+  }
+
+  // Render Presets Grid
+  function renderPresetButtons() {
+    presetsGrid.innerHTML = "";
+    presets.forEach(p => {
+      const btn = document.createElement("div");
+      btn.className = `preset-btn ${currentConfig.activePreset === p.id ? 'active' : ''}`;
+      btn.onclick = () => applyPreset(p);
+      btn.innerHTML = `
+        <span class="preset-name">${p.name}</span>
+        <span class="preset-preview">${p.preview}</span>
+      `;
+      presetsGrid.appendChild(btn);
+    });
+  }
+
+  // Render Glyphs Library
+  function renderGlyphLibrary() {
+    glyphsContainer.innerHTML = "";
+    glyphCategories.forEach(cat => {
+      const catDiv = document.createElement("div");
+      catDiv.className = "glyphs-category";
+      catDiv.innerHTML = `<div class="category-name">${cat.name}</div>`;
+
+      const grid = document.createElement("div");
+      grid.className = "glyphs-grid";
+
+      cat.items.forEach(item => {
+        const card = document.createElement("div");
+        card.className = "glyph-card";
+        card.onclick = () => {
+          sepSelect.value = item.glyph;
+          currentConfig.sep = item.glyph;
+          updateCustomizer();
+          showToast(`Selected '${item.name}' as middle separator`);
+        };
+        card.innerHTML = `
+          <span class="glyph-symbol">${item.glyph}</span>
+          <span class="glyph-desc">${item.name}</span>
         `;
-        presetsGrid.appendChild(btn);
+        grid.appendChild(card);
       });
+
+      catDiv.appendChild(grid);
+      glyphsContainer.appendChild(catDiv);
+    });
+  }
+
+  // Apply Preset
+  function applyPreset(p) {
+    currentConfig.activePreset = p.id;
+    currentConfig.leftCap = p.leftCap;
+    currentConfig.sep = p.sep;
+    currentConfig.rightCap = p.rightCap;
+    currentConfig.themeKey = p.theme;
+
+    leftCapSelect.value = p.leftCap;
+    sepSelect.value = p.sep;
+    rightCapSelect.value = p.rightCap;
+    themeSelect.value = p.theme;
+
+    renderPresetButtons();
+    updateCustomizer();
+  }
+
+  // Update State & Re-render
+  function updateCustomizer() {
+    currentConfig.leftCap = leftCapSelect.value;
+    currentConfig.sep = sepSelect.value;
+    currentConfig.rightCap = rightCapSelect.value;
+    currentConfig.themeKey = themeSelect.value;
+    if (iconSelect) currentConfig.iconSymbol = iconSelect.value;
+
+    const hInput = document.getElementById("heightInput");
+    const sInput = document.getElementById("scaleInput");
+    if (hInput) currentConfig.promptHeight = parseInt(hInput.value) || 30;
+    if (sInput) currentConfig.sepScale = parseFloat(sInput.value) || 1;
+
+    document.documentElement.style.setProperty('--prompt-height', currentConfig.promptHeight + 'px');
+    document.documentElement.style.setProperty('--sep-scale', currentConfig.sepScale);
+
+    currentConfig.modules.os = document.getElementById("modOS").checked;
+    currentConfig.modules.dir = document.getElementById("modDir").checked;
+    currentConfig.modules.git = document.getElementById("modGit").checked;
+    currentConfig.modules.lang = document.getElementById("modLang").checked;
+    currentConfig.modules.time = document.getElementById("modTime").checked;
+
+    // Sync active state on preset buttons
+    const matched = presets.find(p =>
+      p.leftCap === currentConfig.leftCap &&
+      p.sep === currentConfig.sep &&
+      p.rightCap === currentConfig.rightCap &&
+      p.theme === currentConfig.themeKey
+    );
+    currentConfig.activePreset = matched ? matched.id : null;
+    document.querySelectorAll(".preset-btn").forEach((btn, index) => {
+      if (presets[index]) {
+        btn.classList.toggle("active", presets[index].id === currentConfig.activePreset);
+      }
+    });
+
+    renderPromptPreview();
+    generateToml();
+  }
+
+  // Render Live Terminal Prompt Preview
+  function renderPromptPreview() {
+    const theme = themes[currentConfig.themeKey] || themes.firewatch;
+    terminalPreview.style.backgroundColor = theme.bg;
+
+    // Build active segment chain
+    const activeSegs = [];
+    if (currentConfig.modules.os) activeSegs.push({ id: 'os', label: currentConfig.iconSymbol, bg: theme.os.bg, fg: theme.os.fg });
+    if (currentConfig.modules.dir) activeSegs.push({ id: 'dir', label: '󰲋 ~/.dotfiles', bg: theme.dir.bg, fg: theme.dir.fg });
+    if (currentConfig.modules.git) activeSegs.push({ id: 'git', label: ' main', bg: theme.git.bg, fg: theme.git.fg });
+    if (currentConfig.modules.lang) activeSegs.push({ id: 'lang', label: ' v1.78.0', bg: theme.lang.bg, fg: theme.lang.fg });
+    if (currentConfig.modules.time) activeSegs.push({ id: 'time', label: ' 22:15', bg: theme.time.bg, fg: theme.time.fg });
+
+    promptContainer.innerHTML = "";
+
+    if (activeSegs.length === 0) {
+      promptContainer.innerHTML = `<span style="color: ${theme.fg};">Empty Prompt Line</span>`;
+      return;
     }
 
-    // Render Glyphs Library
-    function renderGlyphLibrary() {
-      glyphsContainer.innerHTML = "";
-      glyphCategories.forEach(cat => {
-        const catDiv = document.createElement("div");
-        catDiv.className = "glyphs-category";
-        catDiv.innerHTML = `<div class="category-name">${cat.name}</div>`;
+    // Left Cap Symbol
+    const leftCapSpan = document.createElement("span");
+    leftCapSpan.className = "separator-glyph";
+    leftCapSpan.style.color = activeSegs[0].bg;
+    leftCapSpan.style.backgroundColor = "transparent";
+    leftCapSpan.textContent = currentConfig.leftCap;
+    promptContainer.appendChild(leftCapSpan);
 
-        const grid = document.createElement("div");
-        grid.className = "glyphs-grid";
+    // Render segments with middle separators
+    activeSegs.forEach((seg, i) => {
+      const segSpan = document.createElement("span");
+      segSpan.className = "prompt-segment";
+      segSpan.style.backgroundColor = seg.bg;
+      segSpan.style.color = seg.fg;
 
-        cat.items.forEach(item => {
-          const card = document.createElement("div");
-          card.className = "glyph-card";
-          card.onclick = () => {
-            sepSelect.value = item.glyph;
-            currentConfig.sep = item.glyph;
-            updateCustomizer();
-            showToast(`Selected '${item.name}' as middle separator`);
-          };
-          card.innerHTML = `
-            <span class="glyph-symbol">${item.glyph}</span>
-            <span class="glyph-desc">${item.name}</span>
-          `;
-          grid.appendChild(card);
-        });
+      const contentSpan = document.createElement("span");
+      contentSpan.className = "segment-content";
+      contentSpan.textContent = seg.label;
+      segSpan.appendChild(contentSpan);
 
-        catDiv.appendChild(grid);
-        glyphsContainer.appendChild(catDiv);
-      });
-    }
+      promptContainer.appendChild(segSpan);
 
-    // Apply Preset
-    function applyPreset(p) {
-      currentConfig.activePreset = p.id;
-      currentConfig.leftCap = p.leftCap;
-      currentConfig.sep = p.sep;
-      currentConfig.rightCap = p.rightCap;
-      currentConfig.themeKey = p.theme;
+      // Separator between segments or Right Cap
+      const sepSpan = document.createElement("span");
+      sepSpan.className = "separator-glyph";
 
-      leftCapSelect.value = p.leftCap;
-      sepSelect.value = p.sep;
-      rightCapSelect.value = p.rightCap;
-      themeSelect.value = p.theme;
-
-      renderPresetButtons();
-      updateCustomizer();
-    }
-
-    // Update State & Re-render
-    function updateCustomizer() {
-      currentConfig.leftCap = leftCapSelect.value;
-      currentConfig.sep = sepSelect.value;
-      currentConfig.rightCap = rightCapSelect.value;
-      currentConfig.themeKey = themeSelect.value;
-
-      const hInput = document.getElementById("heightInput");
-      const sInput = document.getElementById("scaleInput");
-      if (hInput) currentConfig.promptHeight = parseInt(hInput.value) || 34;
-      if (sInput) currentConfig.sepScale = parseFloat(sInput.value) || 1;
-
-      document.documentElement.style.setProperty('--prompt-height', currentConfig.promptHeight + 'px');
-      document.documentElement.style.setProperty('--sep-scale', currentConfig.sepScale);
-
-      currentConfig.modules.os = document.getElementById("modOS").checked;
-      currentConfig.modules.dir = document.getElementById("modDir").checked;
-      currentConfig.modules.git = document.getElementById("modGit").checked;
-      currentConfig.modules.lang = document.getElementById("modLang").checked;
-      currentConfig.modules.ai = document.getElementById("modAI").checked;
-      currentConfig.modules.time = document.getElementById("modTime").checked;
-
-      renderPromptPreview();
-      generateToml();
-    }
-
-    // Render Live Terminal Prompt Preview
-    function renderPromptPreview() {
-      const theme = themes[currentConfig.themeKey] || themes.firewatch;
-      terminalPreview.style.backgroundColor = theme.bg;
-
-      // Build active segment chain
-      const activeSegs = [];
-      if (currentConfig.modules.os) activeSegs.push({ id: 'os', label: '󰣇 Arch', bg: theme.os.bg, fg: theme.os.fg });
-      if (currentConfig.modules.dir) activeSegs.push({ id: 'dir', label: '󰲋 ~/.dotfiles', bg: theme.dir.bg, fg: theme.dir.fg });
-      if (currentConfig.modules.git) activeSegs.push({ id: 'git', label: ' main', bg: theme.git.bg, fg: theme.git.fg });
-      if (currentConfig.modules.lang) activeSegs.push({ id: 'lang', label: ' v1.78.0', bg: theme.lang.bg, fg: theme.lang.fg });
-      if (currentConfig.modules.ai) activeSegs.push({ id: 'ai', label: 'ai ready', bg: theme.ai.bg, fg: theme.ai.fg });
-      if (currentConfig.modules.time) activeSegs.push({ id: 'time', label: ' 22:15', bg: theme.time.bg, fg: theme.time.fg });
-
-      promptContainer.innerHTML = "";
-
-      if (activeSegs.length === 0) {
-        promptContainer.innerHTML = `<span style="color: ${theme.fg};">Empty Prompt Line</span>`;
-        return;
+      if (i < activeSegs.length - 1) {
+        // Middle Separator: foreground = current segment bg, background = next segment bg
+        const nextSeg = activeSegs[i + 1];
+        sepSpan.style.color = seg.bg;
+        sepSpan.style.backgroundColor = nextSeg.bg;
+        sepSpan.textContent = currentConfig.sep;
+      } else {
+        // Right Cap: foreground = last segment bg, background = transparent
+        sepSpan.style.color = seg.bg;
+        sepSpan.style.backgroundColor = "transparent";
+        sepSpan.textContent = currentConfig.rightCap;
       }
 
-      // Left Cap Symbol
-      const leftCapSpan = document.createElement("span");
-      leftCapSpan.className = "separator-glyph";
-      leftCapSpan.style.color = activeSegs[0].bg;
-      leftCapSpan.style.backgroundColor = "transparent";
-      leftCapSpan.textContent = currentConfig.leftCap;
-      promptContainer.appendChild(leftCapSpan);
+      promptContainer.appendChild(sepSpan);
+    });
+  }
 
-      // Render segments with middle separators
-      activeSegs.forEach((seg, i) => {
-        const segSpan = document.createElement("span");
-        segSpan.className = "prompt-segment";
-        segSpan.style.backgroundColor = seg.bg;
-        segSpan.style.color = seg.fg;
+  // Generate Starship TOML Config Text
+  function generateToml() {
+    const theme = themes[currentConfig.themeKey] || themes.firewatch;
+    const left = currentConfig.leftCap;
+    const sep = currentConfig.sep;
+    const right = currentConfig.rightCap;
 
-        const contentSpan = document.createElement("span");
-        contentSpan.className = "segment-content";
-        contentSpan.textContent = seg.label;
-        segSpan.appendChild(contentSpan);
+    // Determine segments order for seamless Powerline coloring
+    const activeList = [];
+    if (currentConfig.modules.os) activeList.push({ name: 'os', tomlVar: '$os', colorKey: 'color_os' });
+    if (currentConfig.modules.dir) activeList.push({ name: 'dir', tomlVar: '$directory', colorKey: 'color_dir' });
+    if (currentConfig.modules.git) activeList.push({ name: 'git', tomlVar: '$git_branch$git_status', colorKey: 'color_git' });
+    if (currentConfig.modules.lang) activeList.push({ name: 'lang', tomlVar: '$rust$nodejs$python', colorKey: 'color_lang' });
+    if (currentConfig.modules.time) activeList.push({ name: 'time', tomlVar: '$time', colorKey: 'color_bg' });
 
-        promptContainer.appendChild(segSpan);
-
-        // Separator between segments or Right Cap
-        const sepSpan = document.createElement("span");
-        sepSpan.className = "separator-glyph";
-
-        if (i < activeSegs.length - 1) {
-          // Middle Separator: foreground = current segment bg, background = next segment bg
-          const nextSeg = activeSegs[i + 1];
-          sepSpan.style.color = seg.bg;
-          sepSpan.style.backgroundColor = nextSeg.bg;
-          sepSpan.textContent = currentConfig.sep;
+    let formatStr = '';
+    if (activeList.length > 0) {
+      formatStr += `[${left}](${activeList[0].colorKey})`;
+      activeList.forEach((item, idx) => {
+        formatStr += item.tomlVar;
+        if (idx < activeList.length - 1) {
+          const nextItem = activeList[idx + 1];
+          formatStr += `[${sep}](fg:${item.colorKey} bg:${nextItem.colorKey})`;
         } else {
-          // Right Cap: foreground = last segment bg, background = transparent
-          sepSpan.style.color = seg.bg;
-          sepSpan.style.backgroundColor = "transparent";
-          sepSpan.textContent = currentConfig.rightCap;
+          formatStr += `[${right}](fg:${item.colorKey})`;
         }
-
-        promptContainer.appendChild(sepSpan);
       });
+      formatStr += `\\n$character`;
+    } else {
+      formatStr = `\\n$character`;
     }
 
-    // Generate Starship TOML Config Text
-    function generateToml() {
-      const theme = themes[currentConfig.themeKey] || themes.firewatch;
-      const left = currentConfig.leftCap;
-      const sep = currentConfig.sep;
-      const right = currentConfig.rightCap;
-
-      let formatStr = `[${left}](color_os)`;
-      if (currentConfig.modules.os) formatStr += `$os`;
-      if (currentConfig.modules.dir) formatStr += `[${sep}](bg:color_dir fg:color_os)$directory`;
-      if (currentConfig.modules.git) formatStr += `[${sep}](fg:color_dir bg:color_git)$git_branch$git_status`;
-      if (currentConfig.modules.lang) formatStr += `[${sep}](fg:color_git bg:color_lang)$rust$nodejs$python`;
-      if (currentConfig.modules.time) formatStr += `[${sep}](fg:color_lang bg:color_bg)$time`;
-      formatStr += `[${right}](fg:color_bg)\\n$character`;
-
-      const tomlText = `"$schema" = 'https://starship.rs/config-schema.json'
+    const tomlText = `"$schema" = 'https://starship.rs/config-schema.json'
 
 format = """
 ${formatStr}"""
@@ -1173,9 +1647,9 @@ color_git = '${theme.git.bg}'
 color_lang = '${theme.lang.bg}'
 
 [os]
-disabled = false
+disabled = ${!currentConfig.modules.os}
 style = "bg:color_os fg:${theme.os.fg}"
-format = '[󰣇 ]($style)'
+format = '[${currentConfig.iconSymbol} ]($style)'
 
 [directory]
 style = "fg:${theme.dir.fg} bg:color_dir"
@@ -1192,10 +1666,10 @@ success_symbol = "[❯](bold green)"
 error_symbol = "[❯](bold red)"
 `;
 
-      tomlOutput.value = tomlText;
-    }
+    tomlOutput.value = tomlText;
+  }
 
-    // Copy to Clipboard
+  // Copy to Clipboard
     function copyToml() {
       navigator.clipboard.writeText(tomlOutput.value).then(() => {
         showToast("starship.toml copied to clipboard!");

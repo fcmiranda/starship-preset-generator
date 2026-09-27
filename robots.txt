@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://felipecm-br.github.io/starship-studio/sitemap.xml
