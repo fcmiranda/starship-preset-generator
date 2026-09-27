@@ -1274,6 +1274,7 @@
 
     // ── Presets ───────────────────────────────────────────────────────────────
     const presets = [
+      // ── Preserved Presets ──────────────────────────────────────────────────
       {
         id: "classic_pill",
         name: "Powerline Pill",
@@ -1286,30 +1287,8 @@
         modules: { os: true, dir: true, git: true, lang: true, time: true }
       },
       {
-        id: "origami_diamond",
-        name: "Origami Diamond Slant",
-        preview: " █  █  █  █ ",
-        leftCap: "",
-        sep: ["", "", ""],
-        rightCap: "",
-        theme: "tokyonight",
-        icon: "󰙴",
-        modules: { os: false, dir: true, git: true, lang: true, time: true }
-      },
-      {
-        id: "oceanic_waves",
-        name: "Oceanic Waveforms",
-        preview: " █  █  █ ",
-        leftCap: "",
-        sep: ["", "", ""],
-        rightCap: "",
-        theme: "lumon",
-        icon: "",
-        modules: { os: true, dir: true, git: true, lang: true, time: true }
-      },
-      {
         id: "pastel_powerline",
-        name: "Pastel Powerline",
+        name: "Powerline Pastel",
         preview: " █  █  █ ",
         leftCap: "",
         sep: "",
@@ -1342,7 +1321,7 @@
       },
       {
         id: "pixel_steps",
-        name: "8-Bit Pixel Steps",
+        name: "8-Bit Retro Pixel Steps",
         preview: " █  █  █ ",
         leftCap: "",
         sep: ["", "", ""],
@@ -1350,39 +1329,6 @@
         theme: "matrix",
         icon: "󱑻",
         modules: { os: true, dir: true, git: true, lang: true, time: true }
-      },
-      {
-        id: "trapezoid_flow",
-        name: "Trapezoid Shift Flow",
-        preview: " █  █  █ ",
-        leftCap: "",
-        sep: ["", "", ""],
-        rightCap: "",
-        theme: "firewatch",
-        icon: "󰕤",
-        modules: { os: true, dir: true, git: true, lang: true, time: true }
-      },
-      {
-        id: "orbital_circles",
-        name: "Orbital Half-Circles",
-        preview: " █  █  █ ",
-        leftCap: "",
-        sep: ["", "", ""],
-        rightCap: "",
-        theme: "nord",
-        icon: "󰂵",
-        modules: { os: true, dir: true, git: true, lang: true, time: true }
-      },
-      {
-        id: "slanted_triangles",
-        name: "Slanted Triangles",
-        preview: " █  █  █ ",
-        leftCap: "",
-        sep: ["", "", ""],
-        rightCap: "",
-        theme: "gruvbox",
-        icon: "󱃏",
-        modules: { os: false, dir: true, git: true, lang: true, time: true }
       },
       {
         id: "rose_pine_horizon",
@@ -1405,6 +1351,107 @@
         theme: "catppuccin",
         icon: "󰹪",
         modules: { os: true, dir: true, git: true, lang: true, time: true }
+      },
+      {
+        id: "slanted_triangles",
+        name: "Slanted Triangles",
+        preview: " █  █  █ ",
+        leftCap: "",
+        sep: ["", "", ""],
+        rightCap: "",
+        theme: "gruvbox",
+        icon: "󱃏",
+        modules: { os: false, dir: true, git: true, lang: true, time: true }
+      },
+
+      // ── New Creative Alternating Presets ────────────────────────────────────
+      {
+        id: "cyber_honeycomb",
+        name: "Cyber Honeycomb Hex",
+        preview: " █  █  █ ",
+        leftCap: "",
+        sep: ["", "", ""],
+        rightCap: "",
+        theme: "matrix",
+        icon: "󰷗",
+        modules: { os: true, dir: true, git: true, lang: true, time: true }
+      },
+      {
+        id: "ice_flame_aurora",
+        name: "Ice & Flame Horizon",
+        preview: " █  █  █ ",
+        leftCap: "",
+        sep: ["", "", ""],
+        rightCap: "",
+        theme: "nord",
+        icon: "",
+        modules: { os: true, dir: true, git: true, lang: true, time: true }
+      },
+      {
+        id: "lego_modular",
+        name: "Lego Modular Interlock",
+        preview: " █  █  █ ",
+        leftCap: "",
+        sep: ["", "", ""],
+        rightCap: "",
+        theme: "firewatch",
+        icon: "󰕤",
+        modules: { os: true, dir: true, git: true, lang: true, time: true }
+      },
+      {
+        id: "oceanic_pulse",
+        name: "Waveform Oceanic Pulse",
+        preview: " █  █  █ ",
+        leftCap: "",
+        sep: ["", "", ""],
+        rightCap: "",
+        theme: "lumon",
+        icon: "󰈸",
+        modules: { os: true, dir: true, git: true, lang: true, time: true }
+      },
+      {
+        id: "trapezoid_shift",
+        name: "Trapezoid Geometric Shift",
+        preview: " █  █  █ ",
+        leftCap: "",
+        sep: ["", "", ""],
+        rightCap: "",
+        theme: "firewatch",
+        icon: "󱃏",
+        modules: { os: false, dir: true, git: true, lang: true, time: true }
+      },
+      {
+        id: "orbital_pulse",
+        name: "Orbital Pulse Rings",
+        preview: " █  █  █ ",
+        leftCap: "",
+        sep: ["", "", ""],
+        rightCap: "",
+        theme: "tokyonight",
+        icon: "󰂵",
+        modules: { os: true, dir: true, git: true, lang: true, time: true }
+      },
+      {
+        id: "prism_blade",
+        name: "Prism Blade Glitch",
+        preview: " █  █  █ ",
+        leftCap: "",
+        sep: ["", "", ""],
+        rightCap: "",
+        theme: "rosepine",
+        icon: "󰙴",
+        modules: { os: false, dir: true, git: true, lang: true, time: true }
+      },
+      {
+        id: "gradient_wave",
+        name: "Shading Gradient Wave",
+        preview: "░▒▓ █ ▓▒░ █ ░▒▓ █ ▓▒░",
+        leftCap: "░▒▓",
+        sep: ["▓▒░", "░▒▓", "▓▒░"],
+        rightCap: "▓▒░",
+        theme: "tokyoshadow",
+        icon: "",
+        modules: { os: false, dir: true, git: true, lang: true, time: true }
       }
     ];
 
@@ -1464,16 +1511,24 @@
   function syncSepSelectValue(sep) {
     if (Array.isArray(sep)) {
       const joined = sep.join("");
-      if (joined === "" || joined === "") {
-        sepSelect.value = "origami_alternating";
-      } else if (joined === "") {
-        sepSelect.value = "waves_alternating";
+      if (joined === "") {
+        sepSelect.value = "honeycomb_alternating";
+      } else if (joined === "") {
+        sepSelect.value = "iceflame_alternating";
+      } else if (joined === "") {
+        sepSelect.value = "lego_alternating";
+      } else if (joined === "" || joined === "") {
+        sepSelect.value = "oceanpulse_alternating";
+      } else if (joined === "") {
+        sepSelect.value = "trapezoid_alternating";
+      } else if (joined === "" || joined === "") {
+        sepSelect.value = "orbitalpulse_alternating";
+      } else if (joined === "" || joined === "") {
+        sepSelect.value = "prismblade_alternating";
+      } else if (joined.includes("▓▒░") || joined.includes("░▒▓")) {
+        sepSelect.value = "gradientwave_alternating";
       } else if (joined === "" || joined === "") {
         sepSelect.value = "steps_alternating";
-      } else if (joined === "" || joined.includes("")) {
-        sepSelect.value = "trapezoid_alternating";
-      } else if (joined === "") {
-        sepSelect.value = "circles_alternating";
       } else if (joined === "" || joined === "") {
         sepSelect.value = "slants_alternating";
       } else {
@@ -1517,6 +1572,10 @@
     allGlyphs.push({ glyph: "", name: "Trapezoid Top", desc: "U+E0D1" });
     allGlyphs.push({ glyph: "", name: "Thin Right Circle", desc: "U+E0B5" });
     allGlyphs.push({ glyph: "", name: "Thin Left Circle", desc: "U+E0B7" });
+    allGlyphs.push({ glyph: "", name: "Honeycomb Right", desc: "U+E0C8" });
+    allGlyphs.push({ glyph: "", name: "Honeycomb Left", desc: "U+E0CA" });
+    allGlyphs.push({ glyph: "", name: "Flame Right", desc: "U+E0C0" });
+    allGlyphs.push({ glyph: "", name: "Lego Block", desc: "U+E0D0" });
 
     glyphCategories.forEach(cat => {
       cat.items.forEach(item => {
@@ -1544,35 +1603,24 @@
       sepSelect.appendChild(opt);
     });
 
-    const origamiOpt = document.createElement("option");
-    origamiOpt.value = "origami_alternating";
-    origamiOpt.textContent = "   (Origami Diamond Slant)";
-    sepSelect.appendChild(origamiOpt);
-
-    const wavesOpt = document.createElement("option");
-    wavesOpt.value = "waves_alternating";
-    wavesOpt.textContent = "   (Oceanic Waveforms)";
-    sepSelect.appendChild(wavesOpt);
-
-    const stepsOpt = document.createElement("option");
-    stepsOpt.value = "steps_alternating";
-    stepsOpt.textContent = "   (8-Bit Pixel Steps)";
-    sepSelect.appendChild(stepsOpt);
-
-    const trapezoidOpt = document.createElement("option");
-    trapezoidOpt.value = "trapezoid_alternating";
-    trapezoidOpt.textContent = "   (Trapezoid Flow)";
-    sepSelect.appendChild(trapezoidOpt);
-
-    const circlesOpt = document.createElement("option");
-    circlesOpt.value = "circles_alternating";
-    circlesOpt.textContent = "   (Orbital Half-Circles)";
-    sepSelect.appendChild(circlesOpt);
-
-    const slantsOpt = document.createElement("option");
-    slantsOpt.value = "slants_alternating";
-    slantsOpt.textContent = "   (Slanted Triangles)";
-    sepSelect.appendChild(slantsOpt);
+    const altOptions = [
+      { val: "slants_alternating", text: "   (Slanted Triangles)" },
+      { val: "steps_alternating", text: "   (8-Bit Pixel Steps)" },
+      { val: "honeycomb_alternating", text: "   (Honeycomb Cyber Hex)" },
+      { val: "iceflame_alternating", text: "   (Ice & Flame Horizon)" },
+      { val: "lego_alternating", text: "   (Lego Modular Interlock)" },
+      { val: "oceanpulse_alternating", text: "   (Waveform Oceanic Pulse)" },
+      { val: "trapezoid_alternating", text: "   (Trapezoid Shift Flow)" },
+      { val: "orbitalpulse_alternating", text: "   (Orbital Pulse Rings)" },
+      { val: "prismblade_alternating", text: "   (Prism Blade Glitch)" },
+      { val: "gradientwave_alternating", text: "▓▒░ ░▒▓ (Shading Gradient Wave)" }
+    ];
+    altOptions.forEach(opt => {
+      const o = document.createElement("option");
+      o.value = opt.val;
+      o.textContent = opt.text;
+      sepSelect.appendChild(o);
+    });
   }
 
   // Render Theme Selector Options
@@ -1689,16 +1737,24 @@
   // Update State & Re-render
   function updateCustomizer() {
     currentConfig.leftCap = leftCapSelect.value;
-    if (sepSelect.value === "origami_alternating") {
-      currentConfig.sep = ["", "", ""];
-    } else if (sepSelect.value === "waves_alternating") {
-      currentConfig.sep = ["", "", ""];
-    } else if (sepSelect.value === "steps_alternating") {
-      currentConfig.sep = ["", "", ""];
+    if (sepSelect.value === "honeycomb_alternating") {
+      currentConfig.sep = ["", "", ""];
+    } else if (sepSelect.value === "iceflame_alternating") {
+      currentConfig.sep = ["", "", ""];
+    } else if (sepSelect.value === "lego_alternating") {
+      currentConfig.sep = ["", "", ""];
+    } else if (sepSelect.value === "oceanpulse_alternating") {
+      currentConfig.sep = ["", "", ""];
     } else if (sepSelect.value === "trapezoid_alternating") {
       currentConfig.sep = ["", "", ""];
-    } else if (sepSelect.value === "circles_alternating") {
-      currentConfig.sep = ["", "", ""];
+    } else if (sepSelect.value === "orbitalpulse_alternating") {
+      currentConfig.sep = ["", "", ""];
+    } else if (sepSelect.value === "prismblade_alternating") {
+      currentConfig.sep = ["", "", ""];
+    } else if (sepSelect.value === "gradientwave_alternating") {
+      currentConfig.sep = ["▓▒░", "░▒▓", "▓▒░"];
+    } else if (sepSelect.value === "steps_alternating") {
+      currentConfig.sep = ["", "", ""];
     } else if (sepSelect.value === "slants_alternating") {
       currentConfig.sep = ["", "", ""];
     } else {
