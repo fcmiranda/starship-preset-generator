@@ -896,9 +896,6 @@
       </div>
     </div>
     <div class="header-actions">
-      <div class="header-badge">
-        <span>✨ 20+ Separator Glyphs</span>
-      </div>
       <a href="https://github.com/felipecm-br/starship-studio" 
          target="_blank" 
          rel="noopener noreferrer" 
@@ -1059,7 +1056,7 @@
             Customize themes and export your <code>starship.toml</code> easily. Whether you work with <strong>Zsh, Bash, Fish, NuShell, or PowerShell</strong>, Starship Studio allows you to preview, experiment, and generate stunning Powerline-style prompts with ease.
           </p>
           <p>
-            Choose from over 20+ separator glyphs (including smooth shades, angled chevrons, flame waveforms, and retro pixel blocks) paired with curated color palettes like <strong>Firewatch Sunset</strong>, <strong>Catppuccin Mocha</strong>, and <strong>Tokyo Night</strong>.
+            Choose from curated separator glyphs (including smooth shades, angled chevrons, ice waveforms, trapezoids, and origami prism slants) paired with popular color palettes like <strong>Firewatch Sunset</strong>, <strong>Pastel Powerline</strong>, <strong>Gruvbox Rainbow</strong>, <strong>Catppuccin Mocha</strong>, and <strong>Tokyo Night</strong>.
           </p>
         </article>
 
@@ -1152,6 +1149,7 @@
           { glyph: "", name: "Lower Right Triangle", desc: "U+E0BC" },
           { glyph: "", name: "Upper Right Triangle", desc: "U+E0B8" },
           { glyph: "", name: "Inverted Left Hard", desc: "U+E0D6" },
+          { glyph: "", name: "Inverted Right Hard", desc: "U+E0D7" },
           { glyph: "", name: "Ice Waveform", desc: "U+E0CC" },
           { glyph: "", name: "Trapezoid Bot", desc: "U+E0D2" },
           { glyph: "▓▒░", name: "Smooth Fade Out", desc: "U+2593-91" },
@@ -1216,6 +1214,61 @@
         lang: { bg: "#e0af68", fg: "#15161e" },
         ai: { bg: "#7dcfff", fg: "#15161e" },
         time: { bg: "#2ac3de", fg: "#15161e" }
+      },
+      pastel: {
+        name: "Pastel Powerline",
+        bg: "#1e1e2e",
+        fg: "#f8f8f2",
+        os: { bg: "#9A348E", fg: "#ffffff" },
+        dir: { bg: "#DA627D", fg: "#ffffff" },
+        git: { bg: "#FCA17D", fg: "#1a1a24" },
+        lang: { bg: "#86BBD8", fg: "#1a1a24" },
+        ai: { bg: "#06969A", fg: "#ffffff" },
+        time: { bg: "#33658A", fg: "#ffffff" }
+      },
+      gruvbox: {
+        name: "Gruvbox Rainbow",
+        bg: "#282828",
+        fg: "#ebdbb2",
+        os: { bg: "#fe8019", fg: "#282828" },
+        dir: { bg: "#fabd2f", fg: "#282828" },
+        git: { bg: "#b8bb26", fg: "#282828" },
+        lang: { bg: "#83a598", fg: "#282828" },
+        ai: { bg: "#d3869b", fg: "#282828" },
+        time: { bg: "#504945", fg: "#ebdbb2" }
+      },
+      tokyoshadow: {
+        name: "Tokyo Night Shading",
+        bg: "#16161e",
+        fg: "#a9b1d6",
+        os: { bg: "#a3aed2", fg: "#1a1b26" },
+        dir: { bg: "#769ff0", fg: "#1a1b26" },
+        git: { bg: "#394260", fg: "#769ff0" },
+        lang: { bg: "#212736", fg: "#a3aed2" },
+        ai: { bg: "#7aa2f7", fg: "#1a1b26" },
+        time: { bg: "#1d2230", fg: "#7aa2f7" }
+      },
+      rosepine: {
+        name: "Rosé Pine Moon",
+        bg: "#232136",
+        fg: "#e0def4",
+        os: { bg: "#eb6f92", fg: "#232136" },
+        dir: { bg: "#ea9a97", fg: "#232136" },
+        git: { bg: "#c4a7e7", fg: "#232136" },
+        lang: { bg: "#f6c177", fg: "#232136" },
+        ai: { bg: "#9ccfd8", fg: "#232136" },
+        time: { bg: "#393552", fg: "#e0def4" }
+      },
+      nord: {
+        name: "Nord Frost",
+        bg: "#2e3440",
+        fg: "#eceff4",
+        os: { bg: "#5e81ac", fg: "#eceff4" },
+        dir: { bg: "#81a1c1", fg: "#2e3440" },
+        git: { bg: "#88c0d0", fg: "#2e3440" },
+        lang: { bg: "#8fbcbb", fg: "#2e3440" },
+        ai: { bg: "#b48ead", fg: "#2e3440" },
+        time: { bg: "#3b4252", fg: "#d8dee9" }
       }
     };
 
@@ -1228,97 +1281,138 @@
         leftCap: "",
         sep: "",
         rightCap: "",
-        theme: "firewatch"
+        theme: "firewatch",
+        icon: "󰣇"
       },
       {
-        id: "cyberpunk_matrix",
-        name: "Cyberpunk Matrix",
-        preview: " █  █ ",
+        id: "origami_diamond",
+        name: "Origami Prism Slants",
+        preview: " █  █  █  █ ",
+        leftCap: "",
+        sep: ["", "", "", ""],
+        rightCap: "",
+        theme: "tokyonight",
+        icon: "󰙴"
+      },
+      {
+        id: "pastel_powerline",
+        name: "Pastel Powerline",
+        preview: " █  █  █ ",
+        leftCap: "",
+        sep: "",
+        rightCap: "",
+        theme: "pastel",
+        icon: ""
+      },
+      {
+        id: "gruvbox_rainbow",
+        name: "Gruvbox Rainbow",
+        preview: " █  █  █ ",
+        leftCap: "",
+        sep: "",
+        rightCap: "",
+        theme: "gruvbox",
+        icon: "󰀻"
+      },
+      {
+        id: "tokyo_shading",
+        name: "Tokyo Night Shading",
+        preview: "░▒▓ █  █  █ ",
+        leftCap: "░▒▓",
+        sep: "",
+        rightCap: "",
+        theme: "tokyoshadow",
+        icon: ""
+      },
+      {
+        id: "cyber_glitch",
+        name: "Cyber Glitch Matrix",
+        preview: " █  █  █ ",
         leftCap: "",
-        sep: "",
+        sep: ["", ""],
         rightCap: "",
-        theme: "matrix"
+        theme: "matrix",
+        icon: "󰷗"
       },
       {
         id: "slanted_blade",
         name: "Slanted Blade",
-        preview: " █  █ ",
-        leftCap: "",
+        preview: " █  █ ",
+        leftCap: "",
         sep: "",
         rightCap: "",
-        theme: "lumon"
+        theme: "lumon",
+        icon: "󱃏"
       },
       {
-        id: "flame_wave",
-        name: "Flame Waveform",
-        preview: " █  █ ",
-        leftCap: "",
-        sep: "",
-        rightCap: "",
-        theme: "tokyonight"
-      },
-      {
-        id: "retro_pixel",
-        name: "Retro Pixel",
-        preview: "░ █  █ ▓",
-        leftCap: "░",
-        sep: "",
-        rightCap: "▓",
-        theme: "catppuccin"
-      },
-      {
-        id: "omarchy_shade",
-        name: "Omarchy Smooth Shade",
+        id: "rose_pine_horizon",
+        name: "Rosé Pine Horizon",
         preview: "░▒▓ █ ▓▒░ █ ▓▒░",
         leftCap: "░▒▓",
         sep: "▓▒░",
         rightCap: "▓▒░",
-        theme: "tokyonight"
+        theme: "rosepine",
+        icon: ""
       },
       {
-        id: "cyber_neon",
-        name: "Cyber Neon Glitch",
-        preview: " █  █ ",
-        leftCap: "",
-        sep: "",
-        rightCap: "",
-        theme: "matrix"
-      },
-      {
-        id: "zen_slanted",
-        name: "Zen Garden Origami",
-        preview: " █  █ ",
-        leftCap: "",
-        sep: "",
-        rightCap: "",
-        theme: "firewatch"
-      },
-      {
-        id: "synth_wave",
-        name: "Synthwave Sunset",
-        preview: " █  █ ",
+        id: "ice_waveform",
+        name: "Ice Waveform Horizon",
+        preview: " █  █ ",
         leftCap: "",
-        sep: "",
-        rightCap: "",
-        theme: "tokyonight"
+        sep: "",
+        rightCap: "",
+        theme: "lumon",
+        icon: ""
       },
       {
-        id: "nordic_aurora",
-        name: "Nordic Floating Pill",
-        preview: " █   █ ",
+        id: "catppuccin_mocha",
+        name: "Catppuccin Powerline",
+        preview: " █  █ ",
         leftCap: "",
-        sep: "",
+        sep: "",
         rightCap: "",
-        theme: "lumon"
+        theme: "catppuccin",
+        icon: "󰹪"
       },
       {
         id: "trapezoid_geo",
-        name: "Trapezoid Geo",
-        preview: " █  █ ",
-        leftCap: "",
+        name: "Trapezoid Geometric",
+        preview: " █  █ ",
+        leftCap: "",
         sep: "",
-        rightCap: "",
-        theme: "firewatch"
+        rightCap: "",
+        theme: "firewatch",
+        icon: "󰕤"
+      },
+      {
+        id: "nordic_aurora",
+        name: "Nordic Aurora Pill",
+        preview: " █  █ ",
+        leftCap: "",
+        sep: "",
+        rightCap: "",
+        theme: "nord",
+        icon: "󰂵"
+      },
+      {
+        id: "retro_pixel_matrix",
+        name: "Retro Pixel Matrix",
+        preview: "▓▒░ █ ▓▒░ █ ░▒▓",
+        leftCap: "▓▒░",
+        sep: "▓▒░",
+        rightCap: "░▒▓",
+        theme: "matrix",
+        icon: "󱑻"
+      },
+      {
+        id: "zen_origami_flow",
+        name: "Zen Origami Flow",
+        preview: " █  █  █ ",
+        leftCap: "",
+        sep: ["", ""],
+        rightCap: "",
+        theme: "firewatch",
+        icon: "󱝊"
       }
     ];
 
@@ -1348,8 +1442,10 @@
     "", "", "", "󰯇", "󰭟", "", "󱗆", "󰯉", "󰇥", "",
     "", "", "", "", "", "", "󱍢", "", "", "",
     "", "", "", "󱐌", "", "", "", "󰫣", "󰫤", "󰫥",
-    "", "", "", "", "󰣙", "󰣘", "", "", "󰓎", "",
-    "", "", "󰙴", "", "", "󱓟", "󰺹", "󰅏", ""
+    "", "", "󰙴", "", "", "󰣙", "󰣘", "", "", "󰓎",
+    "", "", "", "", "", "󱓟", "󰺹", "󰅏", "", "",
+    "", "󱃏", "", "", "", "󰷗", "󰀻", "󰔌", "󰂵", "󰢶",
+    "󱝊", "󱪶", "󱪷", "", "󱑻", "󰕤", "󰹪"
   ];
 
   // ── DOM Elements ──────────────────────────────────────────────────────────
@@ -1365,6 +1461,31 @@
   const tomlOutput = document.getElementById("tomlOutput");
   const toast = document.getElementById("toast");
 
+  // ── Helper for Alternating / Single Separators ────────────────────────────
+  function getSeparator(index) {
+    if (Array.isArray(currentConfig.sep)) {
+      return currentConfig.sep[index % currentConfig.sep.length];
+    }
+    return currentConfig.sep;
+  }
+
+  function syncSepSelectValue(sep) {
+    if (Array.isArray(sep)) {
+      const joined = sep.join("");
+      if (joined === "") {
+        sepSelect.value = "origami_alternating";
+      } else if (joined === "" || joined === "") {
+        sepSelect.value = "glitch_alternating";
+      } else if (joined === "" || joined === "") {
+        sepSelect.value = "slants_alternating";
+      } else {
+        sepSelect.value = sep[0];
+      }
+    } else {
+      sepSelect.value = sep;
+    }
+  }
+
   // ── Initialize App ────────────────────────────────────────────────────────
   function init() {
     renderGlyphSelects();
@@ -1375,7 +1496,7 @@
 
     // Ensure selects & inputs reflect initial defaults
     leftCapSelect.value = currentConfig.leftCap;
-    sepSelect.value = currentConfig.sep;
+    syncSepSelectValue(currentConfig.sep);
     rightCapSelect.value = currentConfig.rightCap;
     themeSelect.value = currentConfig.themeKey;
     if (iconSelect) iconSelect.value = currentConfig.iconSymbol;
@@ -1391,6 +1512,7 @@
     const allGlyphs = [];
     // Guarantee Left Circle is available for Left Cap Symbol (Start)
     allGlyphs.push({ glyph: "", name: "Left Circle", desc: "U+E0B6" });
+    allGlyphs.push({ glyph: "░▒▓", name: "Smooth Fade In", desc: "U+2591-93" });
     glyphCategories.forEach(cat => {
       cat.items.forEach(item => {
         if (!allGlyphs.some(g => g.glyph === item.glyph)) {
@@ -1399,7 +1521,7 @@
       });
     });
 
-    [leftCapSelect, sepSelect, rightCapSelect].forEach(select => {
+    [leftCapSelect, rightCapSelect].forEach(select => {
       select.innerHTML = "";
       allGlyphs.forEach(item => {
         const opt = document.createElement("option");
@@ -1408,6 +1530,29 @@
         select.appendChild(opt);
       });
     });
+
+    sepSelect.innerHTML = "";
+    allGlyphs.forEach(item => {
+      const opt = document.createElement("option");
+      opt.value = item.glyph;
+      opt.textContent = `${item.glyph} (${item.name})`;
+      sepSelect.appendChild(opt);
+    });
+
+    const origamiOpt = document.createElement("option");
+    origamiOpt.value = "origami_alternating";
+    origamiOpt.textContent = "    (Origami Alternating)";
+    sepSelect.appendChild(origamiOpt);
+
+    const glitchOpt = document.createElement("option");
+    glitchOpt.value = "glitch_alternating";
+    glitchOpt.textContent = "  (Glitch Alternating)";
+    sepSelect.appendChild(glitchOpt);
+
+    const slantsOpt = document.createElement("option");
+    slantsOpt.value = "slants_alternating";
+    slantsOpt.textContent = "  (Slants Alternating)";
+    sepSelect.appendChild(slantsOpt);
   }
 
   // Render Theme Selector Options
@@ -1487,9 +1632,13 @@
     currentConfig.sep = p.sep;
     currentConfig.rightCap = p.rightCap;
     currentConfig.themeKey = p.theme;
+    if (p.icon) {
+      currentConfig.iconSymbol = p.icon;
+      if (iconSelect) iconSelect.value = p.icon;
+    }
 
     leftCapSelect.value = p.leftCap;
-    sepSelect.value = p.sep;
+    syncSepSelectValue(p.sep);
     rightCapSelect.value = p.rightCap;
     themeSelect.value = p.theme;
 
@@ -1500,7 +1649,15 @@
   // Update State & Re-render
   function updateCustomizer() {
     currentConfig.leftCap = leftCapSelect.value;
-    currentConfig.sep = sepSelect.value;
+    if (sepSelect.value === "origami_alternating") {
+      currentConfig.sep = ["", "", "", ""];
+    } else if (sepSelect.value === "glitch_alternating") {
+      currentConfig.sep = ["", ""];
+    } else if (sepSelect.value === "slants_alternating") {
+      currentConfig.sep = ["", ""];
+    } else {
+      currentConfig.sep = sepSelect.value;
+    }
     currentConfig.rightCap = rightCapSelect.value;
     currentConfig.themeKey = themeSelect.value;
     if (iconSelect) currentConfig.iconSymbol = iconSelect.value;
@@ -1520,12 +1677,17 @@
     currentConfig.modules.time = document.getElementById("modTime").checked;
 
     // Sync active state on preset buttons
-    const matched = presets.find(p =>
-      p.leftCap === currentConfig.leftCap &&
-      p.sep === currentConfig.sep &&
-      p.rightCap === currentConfig.rightCap &&
-      p.theme === currentConfig.themeKey
-    );
+    const matched = presets.find(p => {
+      const sepMatch = Array.isArray(p.sep) && Array.isArray(currentConfig.sep)
+        ? p.sep.join("") === currentConfig.sep.join("")
+        : p.sep === currentConfig.sep;
+      return (
+        p.leftCap === currentConfig.leftCap &&
+        sepMatch &&
+        p.rightCap === currentConfig.rightCap &&
+        p.theme === currentConfig.themeKey
+      );
+    });
     currentConfig.activePreset = matched ? matched.id : null;
     document.querySelectorAll(".preset-btn").forEach((btn, index) => {
       if (presets[index]) {
@@ -1588,7 +1750,7 @@
         const nextSeg = activeSegs[i + 1];
         sepSpan.style.color = seg.bg;
         sepSpan.style.backgroundColor = nextSeg.bg;
-        sepSpan.textContent = currentConfig.sep;
+        sepSpan.textContent = getSeparator(i);
       } else {
         // Right Cap: foreground = last segment bg, background = transparent
         sepSpan.style.color = seg.bg;
@@ -1604,7 +1766,6 @@
   function generateToml() {
     const theme = themes[currentConfig.themeKey] || themes.firewatch;
     const left = currentConfig.leftCap;
-    const sep = currentConfig.sep;
     const right = currentConfig.rightCap;
 
     // Determine segments order for seamless Powerline coloring
@@ -1613,7 +1774,7 @@
     if (currentConfig.modules.dir) activeList.push({ name: 'dir', tomlVar: '$directory', colorKey: 'color_dir' });
     if (currentConfig.modules.git) activeList.push({ name: 'git', tomlVar: '$git_branch$git_status', colorKey: 'color_git' });
     if (currentConfig.modules.lang) activeList.push({ name: 'lang', tomlVar: '$rust$nodejs$python', colorKey: 'color_lang' });
-    if (currentConfig.modules.time) activeList.push({ name: 'time', tomlVar: '$time', colorKey: 'color_bg' });
+    if (currentConfig.modules.time) activeList.push({ name: 'time', tomlVar: '$time', colorKey: 'color_time' });
 
     let formatStr = '';
     if (activeList.length > 0) {
@@ -1622,7 +1783,8 @@
         formatStr += item.tomlVar;
         if (idx < activeList.length - 1) {
           const nextItem = activeList[idx + 1];
-          formatStr += `[${sep}](fg:${item.colorKey} bg:${nextItem.colorKey})`;
+          const sepChar = getSeparator(idx);
+          formatStr += `[${sepChar}](fg:${item.colorKey} bg:${nextItem.colorKey})`;
         } else {
           formatStr += `[${right}](fg:${item.colorKey})`;
         }
@@ -1637,14 +1799,15 @@
 format = """
 ${formatStr}"""
 
-palette = 'omarchy_theme'
+palette = 'starship_theme'
 
-[palettes.omarchy_theme]
+[palettes.starship_theme]
 color_bg = '${theme.bg}'
 color_os = '${theme.os.bg}'
 color_dir = '${theme.dir.bg}'
 color_git = '${theme.git.bg}'
 color_lang = '${theme.lang.bg}'
+color_time = '${theme.time.bg}'
 
 [os]
 disabled = ${!currentConfig.modules.os}
@@ -1660,6 +1823,12 @@ truncation_length = 3
 symbol = " "
 style = "fg:${theme.git.fg} bg:color_git"
 format = '[[ $symbol$branch ]($style)]($style)'
+
+[time]
+disabled = ${!currentConfig.modules.time}
+time_format = "%R"
+style = "bg:color_time fg:${theme.time.fg}"
+format = '[ ♥ $time ]($style)'
 
 [character]
 success_symbol = "[❯](bold green)"
