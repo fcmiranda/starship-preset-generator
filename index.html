@@ -55,7 +55,7 @@
         "featureList": [
           "Live interactive terminal prompt preview",
           "Powerline and Nerd Font separator explorer",
-          "Curated color palettes (Firewatch Sunset, Catppuccin, Tokyo Night, Matrix, Lumon)",
+          "Curated color palettes (Firewatch Sunset, Catppuccin, Tokyo Night, Matrix, Lumon, Dracula, Nord, Rosé Pine, Monokai Pro, Gruvbox, Synthwave)",
           "One-click starship.toml generation and export",
           "Prompt line height customizer with Powerline vertical scaling"
         ],
@@ -1059,7 +1059,7 @@
             Customize themes and export your <code>starship.toml</code> easily. Whether you work with <strong>Zsh, Bash, Fish, NuShell, or PowerShell</strong>, Starship Studio allows you to preview, experiment, and generate stunning Powerline-style prompts with ease.
           </p>
           <p>
-            Choose from over 20+ separator glyphs (including smooth shades, angled chevrons, flame waveforms, and retro pixel blocks) paired with curated color palettes like <strong>Firewatch Sunset</strong>, <strong>Catppuccin Mocha</strong>, and <strong>Tokyo Night</strong>.
+            Choose from over 20+ separator glyphs (including smooth shades, angled chevrons, flame waveforms, and retro pixel blocks) paired with curated color palettes like <strong>Firewatch Sunset</strong>, <strong>Catppuccin Mocha</strong>, <strong>Tokyo Night</strong>, <strong>Dracula</strong>, <strong>Nord</strong>, <strong>Rosé Pine</strong>, and <strong>Monokai Pro</strong>.
           </p>
         </article>
 
@@ -1243,6 +1243,83 @@
         lang: { bg: "#e0af68", fg: "#15161e" },
         ai: { bg: "#7dcfff", fg: "#15161e" },
         time: { bg: "#2ac3de", fg: "#15161e" }
+      },
+      dracula: {
+        name: "Dracula Vampire",
+        bg: "#282a36",
+        fg: "#f8f8f2",
+        os: { bg: "#44475a", fg: "#f8f8f2" },
+        dir: { bg: "#bd93f9", fg: "#282a36" },
+        git: { bg: "#ff79c6", fg: "#282a36" },
+        lang: { bg: "#50fa7b", fg: "#282a36" },
+        ai: { bg: "#8be9fd", fg: "#282a36" },
+        time: { bg: "#6272a4", fg: "#f8f8f2" }
+      },
+      nord: {
+        name: "Nordic Frost",
+        bg: "#2e3440",
+        fg: "#eceff4",
+        os: { bg: "#3b4252", fg: "#eceff4" },
+        dir: { bg: "#88c0d0", fg: "#2e3440" },
+        git: { bg: "#81a1c1", fg: "#2e3440" },
+        lang: { bg: "#ebcb8b", fg: "#2e3440" },
+        ai: { bg: "#a3be8c", fg: "#2e3440" },
+        time: { bg: "#4c566a", fg: "#eceff4" }
+      },
+      rosepine: {
+        name: "Rosé Pine",
+        bg: "#191724",
+        fg: "#e0def4",
+        os: { bg: "#26233a", fg: "#ebbcba" },
+        dir: { bg: "#eb6f92", fg: "#191724" },
+        git: { bg: "#c4a7e7", fg: "#191724" },
+        lang: { bg: "#f6c177", fg: "#191724" },
+        ai: { bg: "#9ccfd8", fg: "#191724" },
+        time: { bg: "#31748f", fg: "#e0def4" }
+      },
+      monokai: {
+        name: "Monokai Pro",
+        bg: "#222222",
+        fg: "#fcfcfa",
+        os: { bg: "#363537", fg: "#ffd866" },
+        dir: { bg: "#ff6188", fg: "#222222" },
+        git: { bg: "#ab9df2", fg: "#222222" },
+        lang: { bg: "#a9dc76", fg: "#222222" },
+        ai: { bg: "#78dce8", fg: "#222222" },
+        time: { bg: "#403e41", fg: "#fcfcfa" }
+      },
+      gruvbox: {
+        name: "Gruvbox Warm Dark",
+        bg: "#282828",
+        fg: "#ebdbb2",
+        os: { bg: "#3c3836", fg: "#fabd2f" },
+        dir: { bg: "#d65d0e", fg: "#282828" },
+        git: { bg: "#b16286", fg: "#ebdbb2" },
+        lang: { bg: "#b8bb26", fg: "#282828" },
+        ai: { bg: "#8ec07c", fg: "#282828" },
+        time: { bg: "#504945", fg: "#ebdbb2" }
+      },
+      cyber_sunset: {
+        name: "Synthwave 80s Sunset",
+        bg: "#110b29",
+        fg: "#ffe6ff",
+        os: { bg: "#261447", fg: "#ff71ce" },
+        dir: { bg: "#ff2a85", fg: "#110b29" },
+        git: { bg: "#8a2be2", fg: "#ffe6ff" },
+        lang: { bg: "#00e5ff", fg: "#110b29" },
+        ai: { bg: "#ffbe0b", fg: "#110b29" },
+        time: { bg: "#4d1979", fg: "#ffe6ff" }
+      },
+      emerald: {
+        name: "Emerald Forest",
+        bg: "#061a14",
+        fg: "#d1fae5",
+        os: { bg: "#064e3b", fg: "#6ee7b7" },
+        dir: { bg: "#047857", fg: "#ffffff" },
+        git: { bg: "#059669", fg: "#ffffff" },
+        lang: { bg: "#d97706", fg: "#061a14" },
+        ai: { bg: "#10b981", fg: "#061a14" },
+        time: { bg: "#065f46", fg: "#d1fae5" }
       }
     };
 
@@ -1255,6 +1332,15 @@
         leftCap: "",
         sep: "",
         rightCap: "",
+        theme: "firewatch"
+      },
+      {
+        id: "trapezoid_geo",
+        name: "Trapezoid Geo",
+        preview: " █  █ ",
+        leftCap: "",
+        sep: "",
+        rightCap: "",
         theme: "firewatch"
       },
       {
@@ -1286,7 +1372,7 @@
       },
       {
         id: "retro_pixel",
-        name: "Retro Pixel",
+        name: "Retro Pixel 8-Bit",
         preview: "░ █  █ ▓",
         leftCap: "░",
         sep: "",
@@ -1295,7 +1381,7 @@
       },
       {
         id: "omarchy_shade",
-        name: "Omarchy Smooth Shade",
+        name: "Smooth Shade Gradient",
         preview: "░▒▓ █ ▓▒░ █ ▓▒░",
         leftCap: "░▒▓",
         sep: "▓▒░",
@@ -1303,48 +1389,120 @@
         theme: "tokyonight"
       },
       {
-        id: "cyber_neon",
-        name: "Cyber Neon Glitch",
-        preview: " █  █ ",
+        id: "dither_matrix",
+        name: "Dither Shading Cascade",
+        preview: "░▒▓ █ ▒ █ ▓▒░",
+        leftCap: "░▒▓",
+        sep: "▒",
+        rightCap: "▓▒░",
+        theme: "emerald"
+      },
+      {
+        id: "double_hard_inverse",
+        name: "Hard Inverse Cuts",
+        preview: " █  █ ",
         leftCap: "",
-        sep: "",
+        sep: "",
         rightCap: "",
-        theme: "matrix"
+        theme: "nord"
       },
       {
-        id: "zen_slanted",
-        name: "Zen Garden Origami",
-        preview: " █  █ ",
+        id: "origami_zigzag",
+        name: "Origami Chevron Zigzag",
+        preview: " █  █ ",
         leftCap: "",
-        sep: "",
-        rightCap: "",
-        theme: "firewatch"
+        sep: "",
+        rightCap: "",
+        theme: "gruvbox"
       },
       {
-        id: "synth_wave",
-        name: "Synthwave Sunset",
-        preview: " █  █ ",
+        id: "pixel_arcade",
+        name: "8-Bit Arcade Blocks",
+        preview: " █  █ ",
+        leftCap: "",
+        sep: "",
+        rightCap: "",
+        theme: "monokai"
+      },
+      {
+        id: "minimal_thin_round",
+        name: "Thin Rounded Minimal",
+        preview: " █  █ ",
+        leftCap: "",
+        sep: "",
+        rightCap: "",
+        theme: "rosepine"
+      },
+      {
+        id: "prism_diamond",
+        name: "Prism Diamond Shift",
+        preview: " █  █ ",
+        leftCap: "",
+        sep: "",
+        rightCap: "",
+        theme: "dracula"
+      },
+      {
+        id: "cyber_ramp",
+        name: "Cyber Gradient Ramp",
+        preview: "░ █ ▓▒░ █ ▓",
+        leftCap: "░",
+        sep: "▓▒░",
+        rightCap: "▓",
+        theme: "cyber_sunset"
+      },
+      {
+        id: "trapezoid_blade",
+        name: "Trapezoid Blade Hybrid",
+        preview: " █  █ ",
+        leftCap: "",
+        sep: "",
+        rightCap: "",
+        theme: "catppuccin"
+      },
+      {
+        id: "reverse_arrow",
+        name: "Vanguard Arrowhead",
+        preview: " █  █ ",
+        leftCap: "",
+        sep: "",
+        rightCap: "",
+        theme: "gruvbox"
+      },
+      {
+        id: "frost_crystal",
+        name: "Frost Ice Crystal",
+        preview: " █  █ ",
         leftCap: "",
-        sep: "",
+        sep: "",
         rightCap: "",
-        theme: "tokyonight"
+        theme: "nord"
+      },
+      {
+        id: "dracula_fangs",
+        name: "Dracula Geometric Fangs",
+        preview: " █  █ ",
+        leftCap: "",
+        sep: "",
+        rightCap: "",
+        theme: "dracula"
       },
       {
         id: "nordic_aurora",
         name: "Nordic Floating Pill",
-        preview: " █   █ ",
+        preview: " █  █ ",
         leftCap: "",
         sep: "",
         rightCap: "",
         theme: "lumon"
       },
       {
-        id: "trapezoid_geo",
-        name: "Trapezoid Geo",
-        preview: " █  █ ",
-        leftCap: "",
-        sep: "",
-        rightCap: "",
+        id: "zen_slanted",
+        name: "Zen Slanted Garden",
+        preview: " █  █ ",
+        leftCap: "",
+        sep: "",
+        rightCap: "",
         theme: "firewatch"
       }
     ];
