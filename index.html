@@ -980,8 +980,13 @@
           </div>
 
           <div class="control-group">
-            <label for="sepSelect">Middle Separator (Between)</label>
+            <label for="sepSelect">Middle Separator (Primary / Odd)</label>
             <select id="sepSelect" onchange="updateCustomizer()"></select>
+          </div>
+
+          <div class="control-group">
+            <label for="sep2Select">Secondary Separator (Alternating / Even, Optional)</label>
+            <select id="sep2Select" onchange="updateCustomizer()"></select>
           </div>
 
           <div class="control-group">
@@ -1143,6 +1148,7 @@
 
   <script>
     // ── Glyphs Database from separators.md & Powerline standard ──────────────────
+    // ── Glyphs Database from separators.md & Powerline standard ──────────────────
     const glyphCategories = [
       {
         name: "Powerline Thick Rounds & Arrows",
@@ -1158,31 +1164,62 @@
         ]
       },
       {
-        name: "Slanted Triangles & Inverted Hard",
+        name: "Slanted Triangles & Bevels",
         items: [
           { glyph: "", name: "Lower Right Triangle", desc: "U+E0BC" },
           { glyph: "", name: "Lower Left Triangle", desc: "U+E0BA" },
           { glyph: "", name: "Upper Left Triangle", desc: "U+E0BE" },
           { glyph: "", name: "Upper Right Triangle", desc: "U+E0B8" },
-          { glyph: "", name: "Inverted Left Hard", desc: "U+E0D6" },
-          { glyph: "", name: "Inverted Right Hard", desc: "U+E0D7" },
-          { glyph: "", name: "Hard Inverse", desc: "U+E0C9" }
+          { glyph: "", name: "Lower Right Slanted Thin", desc: "U+E0BB" },
+          { glyph: "", name: "Lower Left Slanted Thin", desc: "U+E0BF" },
+          { glyph: "", name: "Upper Left Slanted Thin", desc: "U+E0BD" },
+          { glyph: "", name: "Upper Right Slanted Thin", desc: "U+E0B9" }
         ]
       },
       {
-        name: "Waveforms, Pixels & Shading Blocks",
+        name: "Waveforms, Curves & Flames",
         items: [
           { glyph: "", name: "Ice Waveform", desc: "U+E0CC" },
           { glyph: "", name: "Flame Waveform", desc: "U+E0D4" },
-          { glyph: "░▒▓", name: "Smooth Fade In", desc: "U+2591-93" },
-          { glyph: "▓▒░", name: "Smooth Fade Out", desc: "U+2593-91" },
-          { glyph: "░", name: "Light Shade", desc: "U+2591" },
-          { glyph: "▒", name: "Medium Shade", desc: "U+2592" },
-          { glyph: "▓", name: "Dark Shade", desc: "U+2593" },
+          { glyph: "", name: "Ice Wave Inverse", desc: "U+E0CD" },
+          { glyph: "", name: "Flame Wave Inverse", desc: "U+E0D5" },
+          { glyph: "", name: "Rounded Waveform", desc: "U+E0CE" },
+          { glyph: "", name: "Rounded Wave Inverse", desc: "U+E0CF" }
+        ]
+      },
+      {
+        name: "Hard Inverted & Angular Cuts",
+        items: [
+          { glyph: "", name: "Inverted Left Hard", desc: "U+E0D6" },
+          { glyph: "", name: "Inverted Right Hard", desc: "U+E0D7" },
+          { glyph: "", name: "Hard Inverse", desc: "U+E0C9" },
+          { glyph: "", name: "Hard Cut Top", desc: "U+E0C8" },
+          { glyph: "", name: "Hard Cut Bot", desc: "U+E0CA" }
+        ]
+      },
+      {
+        name: "Pixels, Diamonds & Trapezoids",
+        items: [
           { glyph: "", name: "Pixel Small", desc: "U+E0C4" },
           { glyph: "", name: "Pixel Big", desc: "U+E0C5" },
           { glyph: "", name: "Trapezoid Top", desc: "U+E0C3" },
-          { glyph: "", name: "Trapezoid Bot", desc: "U+E0D2" }
+          { glyph: "", name: "Trapezoid Bot", desc: "U+E0D2" },
+          { glyph: "", name: "Diamond Left", desc: "U+E0D0" },
+          { glyph: "", name: "Diamond Right", desc: "U+E0D1" }
+        ]
+      },
+      {
+        name: "Shading Blocks & Dither Gradients",
+        items: [
+          { glyph: "░▒▓", name: "Smooth Fade In", desc: "U+2591-93" },
+          { glyph: "▓▒░", name: "Smooth Fade Out", desc: "U+2593-91" },
+          { glyph: "░", name: "Light Shade 25%", desc: "U+2591" },
+          { glyph: "▒", name: "Medium Shade 50%", desc: "U+2592" },
+          { glyph: "▓", name: "Dark Shade 75%", desc: "U+2593" },
+          { glyph: "░▒", name: "Light to Medium Ramp", desc: "Dual Step Light" },
+          { glyph: "▒▓", name: "Medium to Dark Ramp", desc: "Dual Step Dark" },
+          { glyph: "▓▒", name: "Dark to Medium Ramp", desc: "Dual Step Fall" },
+          { glyph: "▒░", name: "Medium to Light Ramp", desc: "Dual Step Fall" }
         ]
       },
       {
@@ -1198,15 +1235,14 @@
           { glyph: "", name: "Ice & Flame Duality", desc: "Dual Waveform" },
           { glyph: "", name: "Pixel Step Dual", desc: "Dual Pixel Step" },
           { glyph: "", name: "Hourglass Trapezoid", desc: "Dual Trapezoid" },
-          { glyph: "░▒", name: "Soft Shade Incline", desc: "Dual Step Light" },
-          { glyph: "▒▓", name: "Deep Shade Incline", desc: "Dual Step Dark" },
+          { glyph: "", name: "Diamond Sparkle Duo", desc: "Dual Diamond" },
           { glyph: "", name: "Outward Double Chevron", desc: "Split Center Arrow" },
           { glyph: "", name: "Pill Pinch Hourglass", desc: "Pinch Center Pill" }
         ]
       }
     ];
 
-    // ── Color Palettes ────────────────────────────────────────────────────────
+    // ── Color Palettes (Curated High-Contrast Designer Themes) ───────────────
     const themes = {
       firewatch: {
         name: "Firewatch Sunset",
@@ -1219,19 +1255,30 @@
         ai: { bg: "#06b6d4", fg: "#0f172a" },
         time: { bg: "#2d1b4e", fg: "#f0c0e0" }
       },
-      lumon: {
-        name: "Lumon Oceanic",
-        bg: "#16242d",
-        fg: "#d6e2ee",
-        os: { bg: "#1b2d40", fg: "#ffffff" },
-        dir: { bg: "#6fa4c9", fg: "#0f172a" },
-        git: { bg: "#5e95bc", fg: "#ffffff" },
-        lang: { bg: "#6fb8e3", fg: "#0f172a" },
-        ai: { bg: "#38bdf8", fg: "#0f172a" },
-        time: { bg: "#23394a", fg: "#d6e2ee" }
+      tokyonight: {
+        name: "Tokyo Night Cyber",
+        bg: "#1a1b26",
+        fg: "#a9b1d6",
+        os: { bg: "#24283b", fg: "#7aa2f7" },
+        dir: { bg: "#7aa2f7", fg: "#15161e" },
+        git: { bg: "#bb9af7", fg: "#15161e" },
+        lang: { bg: "#e0af68", fg: "#15161e" },
+        ai: { bg: "#7dcfff", fg: "#15161e" },
+        time: { bg: "#2ac3de", fg: "#15161e" }
+      },
+      cyber_ronin: {
+        name: "Cyber Ronin Obsidian",
+        bg: "#121214",
+        fg: "#f43f5e",
+        os: { bg: "#1f1f23", fg: "#fb7185" },
+        dir: { bg: "#e11d48", fg: "#ffffff" },
+        git: { bg: "#f59e0b", fg: "#18181b" },
+        lang: { bg: "#3b82f6", fg: "#ffffff" },
+        ai: { bg: "#10b981", fg: "#09090b" },
+        time: { bg: "#27272a", fg: "#fda4af" }
       },
       matrix: {
-        name: "Cyberpunk Matrix",
+        name: "Cyberpunk Matrix Neon",
         bg: "#05160b",
         fg: "#a7f3d0",
         os: { bg: "#064e3b", fg: "#ffffff" },
@@ -1240,6 +1287,105 @@
         lang: { bg: "#34d399", fg: "#022c22" },
         ai: { bg: "#00ff66", fg: "#05160b" },
         time: { bg: "#065f46", fg: "#a7f3d0" }
+      },
+      dracula: {
+        name: "Dracula Bloodline",
+        bg: "#282a36",
+        fg: "#f8f8f2",
+        os: { bg: "#44475a", fg: "#f8f8f2" },
+        dir: { bg: "#bd93f9", fg: "#282a36" },
+        git: { bg: "#ff79c6", fg: "#282a36" },
+        lang: { bg: "#50fa7b", fg: "#282a36" },
+        ai: { bg: "#8be9fd", fg: "#282a36" },
+        time: { bg: "#6272a4", fg: "#f8f8f2" }
+      },
+      nord: {
+        name: "Nordic Aurora Borealis",
+        bg: "#2e3440",
+        fg: "#eceff4",
+        os: { bg: "#3b4252", fg: "#eceff4" },
+        dir: { bg: "#88c0d0", fg: "#2e3440" },
+        git: { bg: "#81a1c1", fg: "#2e3440" },
+        lang: { bg: "#ebcb8b", fg: "#2e3440" },
+        ai: { bg: "#a3be8c", fg: "#2e3440" },
+        time: { bg: "#4c566a", fg: "#eceff4" }
+      },
+      kanagawa: {
+        name: "Kanagawa Great Wave",
+        bg: "#1f1f28",
+        fg: "#dcd7ba",
+        os: { bg: "#2d4f67", fg: "#dcd7ba" },
+        dir: { bg: "#7e9cd8", fg: "#1f1f28" },
+        git: { bg: "#957fb8", fg: "#1f1f28" },
+        lang: { bg: "#ffa066", fg: "#1f1f28" },
+        ai: { bg: "#76946a", fg: "#1f1f28" },
+        time: { bg: "#223249", fg: "#dcd7ba" }
+      },
+      dune_spice: {
+        name: "Dune Spice Desert",
+        bg: "#1f110e",
+        fg: "#ffedd5",
+        os: { bg: "#431407", fg: "#fed7aa" },
+        dir: { bg: "#ea580c", fg: "#ffffff" },
+        git: { bg: "#d97706", fg: "#1f110e" },
+        lang: { bg: "#f59e0b", fg: "#1f110e" },
+        ai: { bg: "#0284c7", fg: "#ffffff" },
+        time: { bg: "#2e1008", fg: "#ffedd5" }
+      },
+      matcha_zen: {
+        name: "Matcha Tea & Zen",
+        bg: "#152017",
+        fg: "#ecfccb",
+        os: { bg: "#233827", fg: "#bef264" },
+        dir: { bg: "#65a30d", fg: "#152017" },
+        git: { bg: "#4d7c0f", fg: "#ecfccb" },
+        lang: { bg: "#a3e635", fg: "#152017" },
+        ai: { bg: "#10b981", fg: "#152017" },
+        time: { bg: "#1e2e21", fg: "#ecfccb" }
+      },
+      arcane_void: {
+        name: "Arcane Cosmic Void",
+        bg: "#0c071e",
+        fg: "#f5d0fe",
+        os: { bg: "#211145", fg: "#e879f9" },
+        dir: { bg: "#7c3aed", fg: "#ffffff" },
+        git: { bg: "#c026d3", fg: "#ffffff" },
+        lang: { bg: "#06b6d4", fg: "#0c071e" },
+        ai: { bg: "#f43f5e", fg: "#ffffff" },
+        time: { bg: "#2e1065", fg: "#f5d0fe" }
+      },
+      cyber_sunset: {
+        name: "Synthwave Horizon 1984",
+        bg: "#110b29",
+        fg: "#ffe6ff",
+        os: { bg: "#261447", fg: "#ff71ce" },
+        dir: { bg: "#ff2a85", fg: "#110b29" },
+        git: { bg: "#8a2be2", fg: "#ffe6ff" },
+        lang: { bg: "#00e5ff", fg: "#110b29" },
+        ai: { bg: "#ffbe0b", fg: "#110b29" },
+        time: { bg: "#4d1979", fg: "#ffe6ff" }
+      },
+      sakura: {
+        name: "Sakura Cherry Blossom",
+        bg: "#201824",
+        fg: "#fce7f3",
+        os: { bg: "#38233f", fg: "#f472b6" },
+        dir: { bg: "#f472b6", fg: "#201824" },
+        git: { bg: "#c084fc", fg: "#201824" },
+        lang: { bg: "#fbcfe8", fg: "#38233f" },
+        ai: { bg: "#fb7185", fg: "#201824" },
+        time: { bg: "#2e1b36", fg: "#fce7f3" }
+      },
+      everforest: {
+        name: "Everforest Deep Moss",
+        bg: "#2b3339",
+        fg: "#d3c6aa",
+        os: { bg: "#3a4248", fg: "#a7c080" },
+        dir: { bg: "#a7c080", fg: "#2b3339" },
+        git: { bg: "#7fbbb3", fg: "#2b3339" },
+        lang: { bg: "#dbbc7f", fg: "#2b3339" },
+        ai: { bg: "#83c092", fg: "#2b3339" },
+        time: { bg: "#323c41", fg: "#d3c6aa" }
       },
       catppuccin: {
         name: "Catppuccin Mocha",
@@ -1252,52 +1398,8 @@
         ai: { bg: "#a6e3a1", fg: "#1e1e2e" },
         time: { bg: "#45475a", fg: "#cdd6f4" }
       },
-      tokyonight: {
-        name: "Tokyo Night",
-        bg: "#1a1b26",
-        fg: "#a9b1d6",
-        os: { bg: "#24283b", fg: "#7aa2f7" },
-        dir: { bg: "#7aa2f7", fg: "#15161e" },
-        git: { bg: "#bb9af7", fg: "#15161e" },
-        lang: { bg: "#e0af68", fg: "#15161e" },
-        ai: { bg: "#7dcfff", fg: "#15161e" },
-        time: { bg: "#2ac3de", fg: "#15161e" }
-      },
-      dracula: {
-        name: "Dracula Vampire",
-        bg: "#282a36",
-        fg: "#f8f8f2",
-        os: { bg: "#44475a", fg: "#f8f8f2" },
-        dir: { bg: "#bd93f9", fg: "#282a36" },
-        git: { bg: "#ff79c6", fg: "#282a36" },
-        lang: { bg: "#50fa7b", fg: "#282a36" },
-        ai: { bg: "#8be9fd", fg: "#282a36" },
-        time: { bg: "#6272a4", fg: "#f8f8f2" }
-      },
-      nord: {
-        name: "Nordic Frost",
-        bg: "#2e3440",
-        fg: "#eceff4",
-        os: { bg: "#3b4252", fg: "#eceff4" },
-        dir: { bg: "#88c0d0", fg: "#2e3440" },
-        git: { bg: "#81a1c1", fg: "#2e3440" },
-        lang: { bg: "#ebcb8b", fg: "#2e3440" },
-        ai: { bg: "#a3be8c", fg: "#2e3440" },
-        time: { bg: "#4c566a", fg: "#eceff4" }
-      },
-      rosepine: {
-        name: "Rosé Pine",
-        bg: "#191724",
-        fg: "#e0def4",
-        os: { bg: "#26233a", fg: "#ebbcba" },
-        dir: { bg: "#eb6f92", fg: "#191724" },
-        git: { bg: "#c4a7e7", fg: "#191724" },
-        lang: { bg: "#f6c177", fg: "#191724" },
-        ai: { bg: "#9ccfd8", fg: "#191724" },
-        time: { bg: "#31748f", fg: "#e0def4" }
-      },
       monokai: {
-        name: "Monokai Pro",
+        name: "Monokai Pro Vivid",
         bg: "#222222",
         fg: "#fcfcfa",
         os: { bg: "#363537", fg: "#ffd866" },
@@ -1308,7 +1410,7 @@
         time: { bg: "#403e41", fg: "#fcfcfa" }
       },
       gruvbox: {
-        name: "Gruvbox Warm Dark",
+        name: "Gruvbox Warm Leather",
         bg: "#282828",
         fg: "#ebdbb2",
         os: { bg: "#3c3836", fg: "#fabd2f" },
@@ -1318,52 +1420,41 @@
         ai: { bg: "#8ec07c", fg: "#282828" },
         time: { bg: "#504945", fg: "#ebdbb2" }
       },
-      cyber_sunset: {
-        name: "Synthwave 80s Sunset",
-        bg: "#110b29",
-        fg: "#ffe6ff",
-        os: { bg: "#261447", fg: "#ff71ce" },
-        dir: { bg: "#ff2a85", fg: "#110b29" },
-        git: { bg: "#8a2be2", fg: "#ffe6ff" },
-        lang: { bg: "#00e5ff", fg: "#110b29" },
-        ai: { bg: "#ffbe0b", fg: "#110b29" },
-        time: { bg: "#4d1979", fg: "#ffe6ff" }
+      coffee_mocha: {
+        name: "Espresso Velvet Roast",
+        bg: "#181210",
+        fg: "#fef3c7",
+        os: { bg: "#2e1c17", fg: "#fde68a" },
+        dir: { bg: "#b45309", fg: "#ffffff" },
+        git: { bg: "#78350f", fg: "#fde68a" },
+        lang: { bg: "#d97706", fg: "#181210" },
+        ai: { bg: "#a16207", fg: "#fef3c7" },
+        time: { bg: "#241612", fg: "#fef3c7" }
       },
-      emerald: {
-        name: "Emerald Forest",
-        bg: "#061a14",
-        fg: "#d1fae5",
-        os: { bg: "#064e3b", fg: "#6ee7b7" },
-        dir: { bg: "#047857", fg: "#ffffff" },
-        git: { bg: "#059669", fg: "#ffffff" },
-        lang: { bg: "#d97706", fg: "#061a14" },
-        ai: { bg: "#10b981", fg: "#061a14" },
-        time: { bg: "#065f46", fg: "#d1fae5" }
+      cyber_platinum: {
+        name: "Ghost Platinum Shell",
+        bg: "#11161b",
+        fg: "#e2e8f0",
+        os: { bg: "#1e293b", fg: "#38bdf8" },
+        dir: { bg: "#38bdf8", fg: "#0f172a" },
+        git: { bg: "#64748b", fg: "#ffffff" },
+        lang: { bg: "#94a3b8", fg: "#0f172a" },
+        ai: { bg: "#10b981", fg: "#0f172a" },
+        time: { bg: "#1e293b", fg: "#e2e8f0" }
       },
-      kanagawa: {
-        name: "Kanagawa Wave",
-        bg: "#1f1f28",
-        fg: "#dcd7ba",
-        os: { bg: "#2d4f67", fg: "#dcd7ba" },
-        dir: { bg: "#7e9cd8", fg: "#1f1f28" },
-        git: { bg: "#957fb8", fg: "#1f1f28" },
-        lang: { bg: "#ffa066", fg: "#1f1f28" },
-        ai: { bg: "#76946a", fg: "#1f1f28" },
-        time: { bg: "#223249", fg: "#dcd7ba" }
-      },
-      everforest: {
-        name: "Everforest Natural",
-        bg: "#2b3339",
-        fg: "#d3c6aa",
-        os: { bg: "#3a4248", fg: "#a7c080" },
-        dir: { bg: "#a7c080", fg: "#2b3339" },
-        git: { bg: "#7fbbb3", fg: "#2b3339" },
-        lang: { bg: "#dbbc7f", fg: "#2b3339" },
-        ai: { bg: "#83c092", fg: "#2b3339" },
-        time: { bg: "#323c41", fg: "#d3c6aa" }
+      rosepine: {
+        name: "Rosé Pine Vintage",
+        bg: "#191724",
+        fg: "#e0def4",
+        os: { bg: "#26233a", fg: "#ebbcba" },
+        dir: { bg: "#eb6f92", fg: "#191724" },
+        git: { bg: "#c4a7e7", fg: "#191724" },
+        lang: { bg: "#f6c177", fg: "#191724" },
+        ai: { bg: "#9ccfd8", fg: "#191724" },
+        time: { bg: "#31748f", fg: "#e0def4" }
       },
       onedark: {
-        name: "One Dark Pro",
+        name: "One Dark Pro Iconic",
         bg: "#21252b",
         fg: "#abb2bf",
         os: { bg: "#282c34", fg: "#61afef" },
@@ -1374,7 +1465,7 @@
         time: { bg: "#3e4451", fg: "#abb2bf" }
       },
       solarized: {
-        name: "Solarized Dark Precision",
+        name: "Solarized Cyan Precision",
         bg: "#002b36",
         fg: "#93a1a1",
         os: { bg: "#073642", fg: "#2aa198" },
@@ -1384,19 +1475,8 @@
         ai: { bg: "#2aa198", fg: "#002b36" },
         time: { bg: "#073642", fg: "#93a1a1" }
       },
-      sakura: {
-        name: "Sakura Blossom",
-        bg: "#201824",
-        fg: "#fce7f3",
-        os: { bg: "#38233f", fg: "#f472b6" },
-        dir: { bg: "#f472b6", fg: "#201824" },
-        git: { bg: "#c084fc", fg: "#201824" },
-        lang: { bg: "#fbcfe8", fg: "#38233f" },
-        ai: { bg: "#fb7185", fg: "#201824" },
-        time: { bg: "#2e1b36", fg: "#fce7f3" }
-      },
       outrun: {
-        name: "Outrun Neon Grid",
+        name: "Outrun Hypergrid",
         bg: "#0d0221",
         fg: "#00f6ff",
         os: { bg: "#241734", fg: "#ff3864" },
@@ -1405,298 +1485,272 @@
         lang: { bg: "#ff9e00", fg: "#0d0221" },
         ai: { bg: "#00f6ff", fg: "#0d0221" },
         time: { bg: "#3c096c", fg: "#00f6ff" }
+      },
+      lumon: {
+        name: "Lumon Oceanic Fjord",
+        bg: "#16242d",
+        fg: "#d6e2ee",
+        os: { bg: "#1b2d40", fg: "#ffffff" },
+        dir: { bg: "#6fa4c9", fg: "#0f172a" },
+        git: { bg: "#5e95bc", fg: "#ffffff" },
+        lang: { bg: "#6fb8e3", fg: "#0f172a" },
+        ai: { bg: "#38bdf8", fg: "#0f172a" },
+        time: { bg: "#23394a", fg: "#d6e2ee" }
+      },
+      emerald: {
+        name: "Emerald Dragon Jewel",
+        bg: "#061a14",
+        fg: "#d1fae5",
+        os: { bg: "#064e3b", fg: "#6ee7b7" },
+        dir: { bg: "#047857", fg: "#ffffff" },
+        git: { bg: "#059669", fg: "#ffffff" },
+        lang: { bg: "#d97706", fg: "#061a14" },
+        ai: { bg: "#10b981", fg: "#061a14" },
+        time: { bg: "#065f46", fg: "#d1fae5" }
       }
     };
 
-    // ── Presets ───────────────────────────────────────────────────────────────
+    // ── Presets (Geometric Motifs & Uniform Interleaved Rhythm) ───────────────
     const presets = [
       {
+        id: "pixel_symphony",
+        name: "Pixel Symphony Rhythm",
+        preview: " █  █  █ ",
+        leftCap: "",
+        sep: "",
+        sep2: "",
+        rightCap: "",
+        theme: "cyber_ronin"
+      },
+      {
+        id: "origami_zigzag",
+        name: "Origami Sawtooth Wave",
+        preview: " █  █  █ ",
+        leftCap: "",
+        sep: "",
+        sep2: "",
+        rightCap: "",
+        theme: "kanagawa"
+      },
+      {
+        id: "wave_pulse_duality",
+        name: "Wave Pulse Duality",
+        preview: " █  █  █ ",
+        leftCap: "",
+        sep: "",
+        sep2: "",
+        rightCap: "",
+        theme: "cyber_sunset"
+      },
+      {
+        id: "cyber_notch_stepper",
+        name: "Cyber Hard Notch Stepper",
+        preview: " █  █  █ ",
+        leftCap: "",
+        sep: "",
+        sep2: "",
+        rightCap: "",
+        theme: "matrix"
+      },
+      {
+        id: "hourglass_kinetic",
+        name: "Hourglass Kinetic Rhythm",
+        preview: " █  █  █ ",
+        leftCap: "",
+        sep: "",
+        sep2: "",
+        rightCap: "",
+        theme: "dune_spice"
+      },
+      {
+        id: "smooth_dither_cascade",
+        name: "Dither Multi-Step Cascade",
+        preview: "░▒▓ █ ▒ █ ▓ █ ▓▒░",
+        leftCap: "░▒▓",
+        sep: "▒",
+        sep2: "▓",
+        rightCap: "▓▒░",
+        theme: "emerald"
+      },
+      {
         id: "classic_pill",
-        name: "Powerline Pill",
+        name: "Powerline Pill Classic",
         preview: " █  █ ",
         leftCap: "",
         sep: "",
+        sep2: "",
         rightCap: "",
         theme: "firewatch"
       },
       {
         id: "trapezoid_geo",
-        name: "Trapezoid Geo",
+        name: "Trapezoid Geo Flow",
         preview: " █  █ ",
         leftCap: "",
         sep: "",
+        sep2: "",
         rightCap: "",
         theme: "firewatch"
       },
       {
-        id: "cyberpunk_matrix",
-        name: "Cyberpunk Matrix",
-        preview: " █  █ ",
-        leftCap: "",
-        sep: "",
-        rightCap: "",
-        theme: "matrix"
-      },
-      {
-        id: "slanted_blade",
-        name: "Slanted Blade",
-        preview: " █  █ ",
-        leftCap: "",
-        sep: "",
-        rightCap: "",
-        theme: "lumon"
-      },
-      {
-        id: "flame_wave",
-        name: "Flame Waveform",
-        preview: " █  █ ",
-        leftCap: "",
-        sep: "",
-        rightCap: "",
-        theme: "tokyonight"
-      },
-      {
-        id: "retro_pixel",
-        name: "Retro Pixel 8-Bit",
-        preview: "░ █  █ ▓",
-        leftCap: "░",
-        sep: "",
-        rightCap: "▓",
-        theme: "catppuccin"
-      },
-      {
-        id: "omarchy_shade",
-        name: "Smooth Shade Gradient",
-        preview: "░▒▓ █ ▓▒░ █ ▓▒░",
-        leftCap: "░▒▓",
-        sep: "▓▒░",
-        rightCap: "▓▒░",
-        theme: "tokyonight"
-      },
-      {
-        id: "dither_matrix",
-        name: "Dither Shading Cascade",
-        preview: "░▒▓ █ ▒ █ ▓▒░",
-        leftCap: "░▒▓",
-        sep: "▒",
-        rightCap: "▓▒░",
-        theme: "emerald"
-      },
-      {
-        id: "double_hard_inverse",
-        name: "Hard Inverse Cuts",
-        preview: " █  █ ",
-        leftCap: "",
-        sep: "",
-        rightCap: "",
-        theme: "nord"
-      },
-      {
-        id: "origami_zigzag",
-        name: "Origami Chevron Zigzag",
-        preview: " █  █ ",
-        leftCap: "",
-        sep: "",
-        rightCap: "",
-        theme: "gruvbox"
-      },
-      {
-        id: "pixel_arcade",
-        name: "8-Bit Arcade Blocks",
-        preview: " █  █ ",
-        leftCap: "",
-        sep: "",
-        rightCap: "",
-        theme: "monokai"
-      },
-      {
-        id: "minimal_thin_round",
-        name: "Thin Rounded Minimal",
-        preview: " █  █ ",
-        leftCap: "",
-        sep: "",
-        rightCap: "",
-        theme: "rosepine"
-      },
-      {
-        id: "prism_diamond",
-        name: "Prism Diamond Shift",
-        preview: " █  █ ",
-        leftCap: "",
-        sep: "",
-        rightCap: "",
-        theme: "dracula"
-      },
-      {
-        id: "cyber_ramp",
-        name: "Cyber Gradient Ramp",
-        preview: "░ █ ▓▒░ █ ▓",
-        leftCap: "░",
-        sep: "▓▒░",
-        rightCap: "▓",
-        theme: "cyber_sunset"
-      },
-      {
-        id: "trapezoid_blade",
-        name: "Trapezoid Blade Hybrid",
-        preview: " █  █ ",
-        leftCap: "",
-        sep: "",
-        rightCap: "",
-        theme: "catppuccin"
-      },
-      {
-        id: "reverse_arrow",
-        name: "Vanguard Arrowhead",
-        preview: " █  █ ",
-        leftCap: "",
-        sep: "",
-        rightCap: "",
-        theme: "gruvbox"
-      },
-      {
-        id: "frost_crystal",
-        name: "Frost Ice Crystal",
-        preview: " █  █ ",
-        leftCap: "",
-        sep: "",
-        rightCap: "",
-        theme: "nord"
-      },
-      {
-        id: "dracula_fangs",
-        name: "Dracula Geometric Fangs",
-        preview: " █  █ ",
-        leftCap: "",
-        sep: "",
-        rightCap: "",
-        theme: "dracula"
-      },
-      {
-        id: "neon_double_arrow",
-        name: "Neon Double Chevron",
+        id: "neon_double_chevron",
+        name: "Neon Double Speedline",
         preview: " █  █ ",
         leftCap: "",
         sep: "",
+        sep2: "",
         rightCap: "",
         theme: "outrun"
       },
       {
-        id: "bubble_pill_spacing",
-        name: "Floating Bubble Pill",
+        id: "bubble_pill_floating",
+        name: "Floating Capsule Bubbles",
         preview: " █  █ ",
         leftCap: "",
         sep: "",
+        sep2: "",
         rightCap: "",
         theme: "sakura"
       },
       {
-        id: "chevron_interleaved_spear",
-        name: "Chevron Interleaved Spear",
+        id: "diamond_spear_peak",
+        name: "Diamond Spear Peak",
         preview: " █  █ ",
         leftCap: "",
         sep: "",
+        sep2: "",
         rightCap: "",
-        theme: "kanagawa"
+        theme: "arcane_void"
       },
       {
-        id: "ice_fire_dual",
-        name: "Dual Waveform Collision",
-        preview: " █  █ ",
-        leftCap: "",
-        sep: "",
-        rightCap: "",
-        theme: "tokyonight"
+        id: "cyber_gradient_ramp",
+        name: "Cyber Gradient Ramp",
+        preview: "░ █ ▓▒░ █ ▓",
+        leftCap: "░",
+        sep: "▓▒░",
+        sep2: "",
+        rightCap: "▓",
+        theme: "matcha_zen"
       },
       {
-        id: "hard_cyber_notch",
-        name: "Hard Cyber Notched Cut",
-        preview: " █  █ ",
+        id: "slanted_blade",
+        name: "Slanted Blade Cut",
+        preview: " █  █ ",
+        leftCap: "",
+        sep: "",
+        sep2: "",
+        rightCap: "",
+        theme: "lumon"
+      },
+      {
+        id: "cyberpunk_matrix",
+        name: "Cyberpunk Matrix Angle",
+        preview: " █  █ ",
         leftCap: "",
-        sep: "",
+        sep: "",
+        sep2: "",
         rightCap: "",
         theme: "matrix"
       },
       {
-        id: "pixel_staircase",
-        name: "Pixel Step Staircase",
-        preview: " █  █ ",
-        leftCap: "",
-        sep: "",
-        rightCap: "",
-        theme: "onedark"
+        id: "flame_wave",
+        name: "Flame Waveform Flow",
+        preview: " █  █ ",
+        leftCap: "",
+        sep: "",
+        sep2: "",
+        rightCap: "",
+        theme: "tokyonight"
       },
       {
-        id: "hourglass_sandclock",
-        name: "Hourglass Dual Trapezoid",
-        preview: " █  █ ",
-        leftCap: "",
-        sep: "",
-        rightCap: "",
-        theme: "solarized"
-      },
-      {
-        id: "deep_shading_tritone",
-        name: "Multi-Shade Step Cascade",
-        preview: "░▒ █ ▒▓ █ ▓▒░",
-        leftCap: "░▒",
-        sep: "▒▓",
-        rightCap: "▓▒░",
-        theme: "everforest"
-      },
-      {
-        id: "pill_flare_chevron",
-        name: "Pill Flare Chevron Hybrid",
-        preview: " █  █ ",
-        leftCap: "",
-        sep: "",
-        rightCap: "",
-        theme: "rosepine"
-      },
-      {
-        id: "slanted_mountain_peak",
-        name: "Slanted Peak Incline",
-        preview: " █  █ ",
-        leftCap: "",
-        sep: "",
-        rightCap: "",
+        id: "hard_inverse_cuts",
+        name: "Hard Inverse Geometry",
+        preview: " █  █ ",
+        leftCap: "",
+        sep: "",
+        sep2: "",
+        rightCap: "",
         theme: "nord"
       },
       {
-        id: "slanted_valley_drop",
-        name: "Slanted Valley Drop",
-        preview: " █  █ ",
-        leftCap: "",
-        sep: "",
-        rightCap: "",
-        theme: "dracula"
-      },
-      {
-        id: "minimal_double_thin",
-        name: "Double Thin Chevron Trail",
-        preview: " █  █ ",
-        leftCap: "",
-        sep: "",
-        rightCap: "",
+        id: "arcade_pixel_blocks",
+        name: "8-Bit Arcade Blocks",
+        preview: " █  █ ",
+        leftCap: "",
+        sep: "",
+        sep2: "",
+        rightCap: "",
         theme: "monokai"
       },
       {
-        id: "nordic_aurora",
-        name: "Nordic Floating Pill",
-        preview: " █  █ ",
-        leftCap: "",
-        sep: "",
-        rightCap: "",
-        theme: "lumon"
+        id: "thin_minimal_elegance",
+        name: "Thin Rounded Minimal",
+        preview: " █  █ ",
+        leftCap: "",
+        sep: "",
+        sep2: "",
+        rightCap: "",
+        theme: "rosepine"
       },
       {
-        id: "zen_slanted",
-        name: "Zen Slanted Garden",
-        preview: " █  █ ",
-        leftCap: "",
+        id: "diamond_facet_shift",
+        name: "Prism Diamond Facet",
+        preview: " █  █ ",
+        leftCap: "",
         sep: "",
+        sep2: "",
+        rightCap: "",
+        theme: "dracula"
+      },
+      {
+        id: "vanguard_arrowhead",
+        name: "Vanguard Double Arrow",
+        preview: " █  █ ",
+        leftCap: "",
+        sep: "",
+        sep2: "",
+        rightCap: "",
+        theme: "gruvbox"
+      },
+      {
+        id: "frost_crystal_flow",
+        name: "Frost Ice Crystal Flow",
+        preview: " █  █ ",
+        leftCap: "",
+        sep: "",
+        sep2: "",
+        rightCap: "",
+        theme: "nord"
+      },
+      {
+        id: "dracula_fang_stepper",
+        name: "Dracula Geometric Fangs",
+        preview: " █  █ ",
+        leftCap: "",
+        sep: "",
+        sep2: "",
         rightCap: "",
-        theme: "firewatch"
+        theme: "dracula"
+      },
+      {
+        id: "coffee_roast_pill",
+        name: "Espresso Velvet Pill",
+        preview: " █  █ ",
+        leftCap: "",
+        sep: "",
+        sep2: "",
+        rightCap: "",
+        theme: "coffee_mocha"
+      },
+      {
+        id: "platinum_shell_edge",
+        name: "Ghost Platinum Shell",
+        preview: " █  █ ",
+        leftCap: "",
+        sep: "",
+        sep2: "",
+        rightCap: "",
+        theme: "cyber_platinum"
       }
     ];
 
@@ -1704,6 +1758,7 @@
     let currentConfig = {
       leftCap: "",
       sep: "",
+      sep2: "",
       rightCap: "",
       themeKey: "firewatch",
       iconSymbol: "󰣇",
@@ -1719,296 +1774,320 @@
       }
     };
 
-  // ── Start Segment Icons (Nerd Font Glyphs) ──────────────────────────────────
-  const startIcons = [
-    "󰣇", "", "󱃽", "", "", "", "", "󱓞", "󰊗", "󰔉",
-    "󰈸", "󱢗", "󰚌", "󰯈", "", "󱙝", "", "", "", "",
-    "", "", "", "󰯇", "󰭟", "", "󱗆", "󰯉", "󰇥", "",
-    "", "", "", "", "", "", "󱍢", "", "", "",
-    "", "", "", "󱐌", "", "", "", "󰫣", "󰫤", "󰫥",
-    "", "", "", "", "󰣙", "󰣘", "", "", "󰓎", "",
-    "", "", "󰙴", "", "", "󱓟", "󰺹", "󰅏", ""
-  ];
+    // ── Start Segment Icons (Nerd Font Glyphs) ──────────────────────────────────
+    const startIcons = [
+      "󰣇", "", "󱃽", "", "", "", "", "󱓞", "󰊗", "󰔉",
+      "󰈸", "󱢗", "󰚌", "󰯈", "", "󱙝", "", "", "", "",
+      "", "", "", "󰯇", "󰭟", "", "󱗆", "󰯉", "󰇥", "",
+      "", "", "", "", "", "", "󱍢", "", "", "",
+      "", "", "", "󱐌", "", "", "", "󰫣", "󰫤", "󰫥",
+      "", "", "", "", "󰣙", "󰣘", "", "", "󰓎", "",
+      "", "", "󰙴", "", "", "󱓟", "󰺹", "󰅏", ""
+    ];
 
-  // ── DOM Elements ──────────────────────────────────────────────────────────
-  const terminalPreview = document.getElementById("terminalPreview");
-  const promptContainer = document.getElementById("promptContainer");
-  const glyphsContainer = document.getElementById("glyphsContainer");
-  const presetsGrid = document.getElementById("presetsGrid");
-  const leftCapSelect = document.getElementById("leftCapSelect");
-  const sepSelect = document.getElementById("sepSelect");
-  const rightCapSelect = document.getElementById("rightCapSelect");
-  const themeSelect = document.getElementById("themeSelect");
-  const iconSelect = document.getElementById("iconSelect");
-  const tomlOutput = document.getElementById("tomlOutput");
-  const toast = document.getElementById("toast");
+    // ── DOM Elements ──────────────────────────────────────────────────────────
+    const terminalPreview = document.getElementById("terminalPreview");
+    const promptContainer = document.getElementById("promptContainer");
+    const glyphsContainer = document.getElementById("glyphsContainer");
+    const presetsGrid = document.getElementById("presetsGrid");
+    const leftCapSelect = document.getElementById("leftCapSelect");
+    const sepSelect = document.getElementById("sepSelect");
+    const sep2Select = document.getElementById("sep2Select");
+    const rightCapSelect = document.getElementById("rightCapSelect");
+    const themeSelect = document.getElementById("themeSelect");
+    const iconSelect = document.getElementById("iconSelect");
+    const tomlOutput = document.getElementById("tomlOutput");
+    const toast = document.getElementById("toast");
 
-  // ── Initialize App ────────────────────────────────────────────────────────
-  function init() {
-    renderGlyphSelects();
-    renderGlyphLibrary();
-    renderPresetButtons();
-    renderThemeSelect();
-    renderIconSelect();
+    // ── Initialize App ────────────────────────────────────────────────────────
+    function init() {
+      renderGlyphSelects();
+      renderGlyphLibrary();
+      renderPresetButtons();
+      renderThemeSelect();
+      renderIconSelect();
 
-    // Ensure selects & inputs reflect initial defaults
-    leftCapSelect.value = currentConfig.leftCap;
-    sepSelect.value = currentConfig.sep;
-    rightCapSelect.value = currentConfig.rightCap;
-    themeSelect.value = currentConfig.themeKey;
-    if (iconSelect) iconSelect.value = currentConfig.iconSymbol;
+      // Ensure selects & inputs reflect initial defaults
+      leftCapSelect.value = currentConfig.leftCap;
+      sepSelect.value = currentConfig.sep;
+      if (sep2Select) sep2Select.value = currentConfig.sep2 || "";
+      rightCapSelect.value = currentConfig.rightCap;
+      themeSelect.value = currentConfig.themeKey;
+      if (iconSelect) iconSelect.value = currentConfig.iconSymbol;
 
-    const hInput = document.getElementById("heightInput");
-    if (hInput) hInput.value = currentConfig.promptHeight;
+      const hInput = document.getElementById("heightInput");
+      if (hInput) hInput.value = currentConfig.promptHeight;
 
-    updateCustomizer();
-  }
+      updateCustomizer();
+    }
 
-  // Populate Select Dropdowns
-  function renderGlyphSelects() {
-    const allGlyphs = [];
-    glyphCategories.forEach(cat => {
-      cat.items.forEach(item => {
-        if (!allGlyphs.some(g => g.glyph === item.glyph)) {
-          allGlyphs.push(item);
-        }
+    // Populate Select Dropdowns
+    function renderGlyphSelects() {
+      const allGlyphs = [];
+      glyphCategories.forEach(cat => {
+        cat.items.forEach(item => {
+          if (!allGlyphs.some(g => g.glyph === item.glyph)) {
+            allGlyphs.push(item);
+          }
+        });
       });
-    });
 
-    [leftCapSelect, sepSelect, rightCapSelect].forEach(select => {
-      select.innerHTML = "";
-      allGlyphs.forEach(item => {
+      [leftCapSelect, sepSelect, rightCapSelect].forEach(select => {
+        if (!select) return;
+        select.innerHTML = "";
+        allGlyphs.forEach(item => {
+          const opt = document.createElement("option");
+          opt.value = item.glyph;
+          opt.textContent = `${item.glyph} (${item.name})`;
+          select.appendChild(opt);
+        });
+      });
+
+      if (sep2Select) {
+        sep2Select.innerHTML = "";
+        const noneOpt = document.createElement("option");
+        noneOpt.value = "";
+        noneOpt.textContent = "— (None / Uniform Primary) —";
+        sep2Select.appendChild(noneOpt);
+        allGlyphs.forEach(item => {
+          const opt = document.createElement("option");
+          opt.value = item.glyph;
+          opt.textContent = `${item.glyph} (${item.name})`;
+          sep2Select.appendChild(opt);
+        });
+      }
+    }
+
+    // Render Theme Selector Options
+    function renderThemeSelect() {
+      themeSelect.innerHTML = "";
+      Object.keys(themes).forEach(key => {
         const opt = document.createElement("option");
-        opt.value = item.glyph;
-        opt.textContent = `${item.glyph} (${item.name})`;
-        select.appendChild(opt);
+        opt.value = key;
+        opt.textContent = themes[key].name;
+        themeSelect.appendChild(opt);
       });
-    });
-  }
-
-  // Render Theme Selector Options
-  function renderThemeSelect() {
-    themeSelect.innerHTML = "";
-    Object.keys(themes).forEach(key => {
-      const opt = document.createElement("option");
-      opt.value = key;
-      opt.textContent = themes[key].name;
-      themeSelect.appendChild(opt);
-    });
-  }
-
-  // Render Icon Options (Just the icon itself, no names)
-  function renderIconSelect() {
-    if (!iconSelect) return;
-    iconSelect.innerHTML = "";
-    startIcons.forEach(icon => {
-      const opt = document.createElement("option");
-      opt.value = icon;
-      opt.textContent = icon;
-      iconSelect.appendChild(opt);
-    });
-  }
-
-  // Render Presets Grid
-  function renderPresetButtons() {
-    presetsGrid.innerHTML = "";
-    presets.forEach(p => {
-      const btn = document.createElement("div");
-      btn.className = `preset-btn ${currentConfig.activePreset === p.id ? 'active' : ''}`;
-      btn.onclick = () => applyPreset(p);
-      btn.innerHTML = `
-        <span class="preset-name">${p.name}</span>
-        <span class="preset-preview">${p.preview}</span>
-      `;
-      presetsGrid.appendChild(btn);
-    });
-  }
-
-  // Render Glyphs Library
-  function renderGlyphLibrary() {
-    glyphsContainer.innerHTML = "";
-    glyphCategories.forEach(cat => {
-      const catDiv = document.createElement("div");
-      catDiv.className = "glyphs-category";
-      catDiv.innerHTML = `<div class="category-name">${cat.name}</div>`;
-
-      const grid = document.createElement("div");
-      grid.className = "glyphs-grid";
-
-      cat.items.forEach(item => {
-        const card = document.createElement("div");
-        card.className = "glyph-card";
-        card.onclick = () => {
-          sepSelect.value = item.glyph;
-          currentConfig.sep = item.glyph;
-          updateCustomizer();
-          showToast(`Selected '${item.name}' as middle separator`);
-        };
-        card.innerHTML = `
-          <span class="glyph-symbol">${item.glyph}</span>
-          <span class="glyph-desc">${item.name}</span>
-        `;
-        grid.appendChild(card);
-      });
-
-      catDiv.appendChild(grid);
-      glyphsContainer.appendChild(catDiv);
-    });
-  }
-
-  // Apply Preset
-  function applyPreset(p) {
-    currentConfig.activePreset = p.id;
-    currentConfig.leftCap = p.leftCap;
-    currentConfig.sep = p.sep;
-    currentConfig.rightCap = p.rightCap;
-    currentConfig.themeKey = p.theme;
-
-    leftCapSelect.value = p.leftCap;
-    sepSelect.value = p.sep;
-    rightCapSelect.value = p.rightCap;
-    themeSelect.value = p.theme;
-
-    renderPresetButtons();
-    updateCustomizer();
-  }
-
-  // Update State & Re-render
-  function updateCustomizer() {
-    currentConfig.leftCap = leftCapSelect.value;
-    currentConfig.sep = sepSelect.value;
-    currentConfig.rightCap = rightCapSelect.value;
-    currentConfig.themeKey = themeSelect.value;
-    if (iconSelect) currentConfig.iconSymbol = iconSelect.value;
-
-    const hInput = document.getElementById("heightInput");
-    const sInput = document.getElementById("scaleInput");
-    if (hInput) currentConfig.promptHeight = parseInt(hInput.value) || 30;
-    if (sInput) currentConfig.sepScale = parseFloat(sInput.value) || 1;
-
-    document.documentElement.style.setProperty('--prompt-height', currentConfig.promptHeight + 'px');
-    document.documentElement.style.setProperty('--sep-scale', currentConfig.sepScale);
-
-    currentConfig.modules.os = document.getElementById("modOS").checked;
-    currentConfig.modules.dir = document.getElementById("modDir").checked;
-    currentConfig.modules.git = document.getElementById("modGit").checked;
-    currentConfig.modules.lang = document.getElementById("modLang").checked;
-    currentConfig.modules.time = document.getElementById("modTime").checked;
-
-    // Sync active state on preset buttons
-    const matched = presets.find(p =>
-      p.leftCap === currentConfig.leftCap &&
-      p.sep === currentConfig.sep &&
-      p.rightCap === currentConfig.rightCap &&
-      p.theme === currentConfig.themeKey
-    );
-    currentConfig.activePreset = matched ? matched.id : null;
-    document.querySelectorAll(".preset-btn").forEach((btn, index) => {
-      if (presets[index]) {
-        btn.classList.toggle("active", presets[index].id === currentConfig.activePreset);
-      }
-    });
-
-    renderPromptPreview();
-    generateToml();
-  }
-
-  // Render Live Terminal Prompt Preview
-  function renderPromptPreview() {
-    const theme = themes[currentConfig.themeKey] || themes.firewatch;
-    terminalPreview.style.backgroundColor = theme.bg;
-
-    // Build active segment chain
-    const activeSegs = [];
-    if (currentConfig.modules.os) activeSegs.push({ id: 'os', label: currentConfig.iconSymbol, bg: theme.os.bg, fg: theme.os.fg });
-    if (currentConfig.modules.dir) activeSegs.push({ id: 'dir', label: '󰲋 ~/.dotfiles', bg: theme.dir.bg, fg: theme.dir.fg });
-    if (currentConfig.modules.git) activeSegs.push({ id: 'git', label: ' main', bg: theme.git.bg, fg: theme.git.fg });
-    if (currentConfig.modules.lang) activeSegs.push({ id: 'lang', label: ' v1.78.0', bg: theme.lang.bg, fg: theme.lang.fg });
-    if (currentConfig.modules.time) activeSegs.push({ id: 'time', label: ' 22:15', bg: theme.time.bg, fg: theme.time.fg });
-
-    promptContainer.innerHTML = "";
-
-    if (activeSegs.length === 0) {
-      promptContainer.innerHTML = `<span style="color: ${theme.fg};">Empty Prompt Line</span>`;
-      return;
     }
 
-    // Left Cap Symbol
-    const leftCapSpan = document.createElement("span");
-    leftCapSpan.className = "separator-glyph";
-    leftCapSpan.style.color = activeSegs[0].bg;
-    leftCapSpan.style.backgroundColor = "transparent";
-    leftCapSpan.textContent = currentConfig.leftCap;
-    promptContainer.appendChild(leftCapSpan);
+    // Render Icon Options (Just the icon itself, no names)
+    function renderIconSelect() {
+      if (!iconSelect) return;
+      iconSelect.innerHTML = "";
+      startIcons.forEach(icon => {
+        const opt = document.createElement("option");
+        opt.value = icon;
+        opt.textContent = icon;
+        iconSelect.appendChild(opt);
+      });
+    }
 
-    // Render segments with middle separators
-    activeSegs.forEach((seg, i) => {
-      const segSpan = document.createElement("span");
-      segSpan.className = "prompt-segment";
-      segSpan.style.backgroundColor = seg.bg;
-      segSpan.style.color = seg.fg;
+    // Render Presets Grid
+    function renderPresetButtons() {
+      presetsGrid.innerHTML = "";
+      presets.forEach(p => {
+        const btn = document.createElement("div");
+        btn.className = `preset-btn ${currentConfig.activePreset === p.id ? 'active' : ''}`;
+        btn.onclick = () => applyPreset(p);
+        btn.innerHTML = `
+          <span class="preset-name">${p.name}</span>
+          <span class="preset-preview">${p.preview}</span>
+        `;
+        presetsGrid.appendChild(btn);
+      });
+    }
 
-      const contentSpan = document.createElement("span");
-      contentSpan.className = "segment-content";
-      contentSpan.textContent = seg.label;
-      segSpan.appendChild(contentSpan);
+    // Render Glyphs Library
+    function renderGlyphLibrary() {
+      glyphsContainer.innerHTML = "";
+      glyphCategories.forEach(cat => {
+        const catDiv = document.createElement("div");
+        catDiv.className = "glyphs-category";
+        catDiv.innerHTML = `<div class="category-name">${cat.name}</div>`;
 
-      promptContainer.appendChild(segSpan);
+        const grid = document.createElement("div");
+        grid.className = "glyphs-grid";
 
-      // Separator between segments or Right Cap
-      const sepSpan = document.createElement("span");
-      sepSpan.className = "separator-glyph";
+        cat.items.forEach(item => {
+          const card = document.createElement("div");
+          card.className = "glyph-card";
+          card.onclick = () => {
+            sepSelect.value = item.glyph;
+            currentConfig.sep = item.glyph;
+            updateCustomizer();
+            showToast(`Selected '${item.name}' as primary separator`);
+          };
+          card.innerHTML = `
+            <span class="glyph-symbol">${item.glyph}</span>
+            <span class="glyph-desc">${item.name}</span>
+          `;
+          grid.appendChild(card);
+        });
 
-      if (i < activeSegs.length - 1) {
-        // Middle Separator: foreground = current segment bg, background = next segment bg
-        const nextSeg = activeSegs[i + 1];
-        sepSpan.style.color = seg.bg;
-        sepSpan.style.backgroundColor = nextSeg.bg;
-        sepSpan.textContent = currentConfig.sep;
-      } else {
-        // Right Cap: foreground = last segment bg, background = transparent
-        sepSpan.style.color = seg.bg;
-        sepSpan.style.backgroundColor = "transparent";
-        sepSpan.textContent = currentConfig.rightCap;
-      }
+        catDiv.appendChild(grid);
+        glyphsContainer.appendChild(catDiv);
+      });
+    }
 
-      promptContainer.appendChild(sepSpan);
-    });
-  }
+    // Apply Preset
+    function applyPreset(p) {
+      currentConfig.activePreset = p.id;
+      currentConfig.leftCap = p.leftCap;
+      currentConfig.sep = p.sep;
+      currentConfig.sep2 = p.sep2 || "";
+      currentConfig.rightCap = p.rightCap;
+      currentConfig.themeKey = p.theme;
 
-  // Generate Starship TOML Config Text
-  function generateToml() {
-    const theme = themes[currentConfig.themeKey] || themes.firewatch;
-    const left = currentConfig.leftCap;
-    const sep = currentConfig.sep;
-    const right = currentConfig.rightCap;
+      leftCapSelect.value = p.leftCap;
+      sepSelect.value = p.sep;
+      if (sep2Select) sep2Select.value = p.sep2 || "";
+      rightCapSelect.value = p.rightCap;
+      themeSelect.value = p.theme;
 
-    // Determine segments order for seamless Powerline coloring
-    const activeList = [];
-    if (currentConfig.modules.os) activeList.push({ name: 'os', tomlVar: '$os', colorKey: 'color_os' });
-    if (currentConfig.modules.dir) activeList.push({ name: 'dir', tomlVar: '$directory', colorKey: 'color_dir' });
-    if (currentConfig.modules.git) activeList.push({ name: 'git', tomlVar: '$git_branch$git_status', colorKey: 'color_git' });
-    if (currentConfig.modules.lang) activeList.push({ name: 'lang', tomlVar: '$rust$nodejs$python', colorKey: 'color_lang' });
-    if (currentConfig.modules.time) activeList.push({ name: 'time', tomlVar: '$time', colorKey: 'color_bg' });
+      renderPresetButtons();
+      updateCustomizer();
+    }
 
-    let formatStr = '';
-    if (activeList.length > 0) {
-      formatStr += `[${left}](${activeList[0].colorKey})`;
-      activeList.forEach((item, idx) => {
-        formatStr += item.tomlVar;
-        if (idx < activeList.length - 1) {
-          const nextItem = activeList[idx + 1];
-          formatStr += `[${sep}](fg:${item.colorKey} bg:${nextItem.colorKey})`;
-        } else {
-          formatStr += `[${right}](fg:${item.colorKey})`;
+    // Update State & Re-render
+    function updateCustomizer() {
+      currentConfig.leftCap = leftCapSelect.value;
+      currentConfig.sep = sepSelect.value;
+      if (sep2Select) currentConfig.sep2 = sep2Select.value;
+      currentConfig.rightCap = rightCapSelect.value;
+      currentConfig.themeKey = themeSelect.value;
+      if (iconSelect) currentConfig.iconSymbol = iconSelect.value;
+
+      const hInput = document.getElementById("heightInput");
+      const sInput = document.getElementById("scaleInput");
+      if (hInput) currentConfig.promptHeight = parseInt(hInput.value) || 30;
+      if (sInput) currentConfig.sepScale = parseFloat(sInput.value) || 1;
+
+      document.documentElement.style.setProperty('--prompt-height', currentConfig.promptHeight + 'px');
+      document.documentElement.style.setProperty('--sep-scale', currentConfig.sepScale);
+
+      currentConfig.modules.os = document.getElementById("modOS").checked;
+      currentConfig.modules.dir = document.getElementById("modDir").checked;
+      currentConfig.modules.git = document.getElementById("modGit").checked;
+      currentConfig.modules.lang = document.getElementById("modLang").checked;
+      currentConfig.modules.time = document.getElementById("modTime").checked;
+
+      // Sync active state on preset buttons
+      const matched = presets.find(p =>
+        p.leftCap === currentConfig.leftCap &&
+        p.sep === currentConfig.sep &&
+        (p.sep2 || "") === (currentConfig.sep2 || "") &&
+        p.rightCap === currentConfig.rightCap &&
+        p.theme === currentConfig.themeKey
+      );
+      currentConfig.activePreset = matched ? matched.id : null;
+      document.querySelectorAll(".preset-btn").forEach((btn, index) => {
+        if (presets[index]) {
+          btn.classList.toggle("active", presets[index].id === currentConfig.activePreset);
         }
       });
-      formatStr += `\\n$character`;
-    } else {
-      formatStr = `\\n$character`;
+
+      renderPromptPreview();
+      generateToml();
     }
 
-    const tomlText = `"$schema" = 'https://starship.rs/config-schema.json'
+    // Render Live Terminal Prompt Preview
+    function renderPromptPreview() {
+      const theme = themes[currentConfig.themeKey] || themes.firewatch;
+      terminalPreview.style.backgroundColor = theme.bg;
+
+      // Build active segment chain
+      const activeSegs = [];
+      if (currentConfig.modules.os) activeSegs.push({ id: 'os', label: currentConfig.iconSymbol, bg: theme.os.bg, fg: theme.os.fg });
+      if (currentConfig.modules.dir) activeSegs.push({ id: 'dir', label: '󰲋 ~/.dotfiles', bg: theme.dir.bg, fg: theme.dir.fg });
+      if (currentConfig.modules.git) activeSegs.push({ id: 'git', label: ' main', bg: theme.git.bg, fg: theme.git.fg });
+      if (currentConfig.modules.lang) activeSegs.push({ id: 'lang', label: ' v1.78.0', bg: theme.lang.bg, fg: theme.lang.fg });
+      if (currentConfig.modules.time) activeSegs.push({ id: 'time', label: ' 22:15', bg: theme.time.bg, fg: theme.time.fg });
+
+      promptContainer.innerHTML = "";
+
+      if (activeSegs.length === 0) {
+        promptContainer.innerHTML = `<span style="color: ${theme.fg};">Empty Prompt Line</span>`;
+        return;
+      }
+
+      // Left Cap Symbol
+      const leftCapSpan = document.createElement("span");
+      leftCapSpan.className = "separator-glyph";
+      leftCapSpan.style.color = activeSegs[0].bg;
+      leftCapSpan.style.backgroundColor = "transparent";
+      leftCapSpan.textContent = currentConfig.leftCap;
+      promptContainer.appendChild(leftCapSpan);
+
+      // Render segments with middle separators
+      activeSegs.forEach((seg, i) => {
+        const segSpan = document.createElement("span");
+        segSpan.className = "prompt-segment";
+        segSpan.style.backgroundColor = seg.bg;
+        segSpan.style.color = seg.fg;
+
+        const contentSpan = document.createElement("span");
+        contentSpan.className = "segment-content";
+        contentSpan.textContent = seg.label;
+        segSpan.appendChild(contentSpan);
+
+        promptContainer.appendChild(segSpan);
+
+        // Separator between segments or Right Cap
+        const sepSpan = document.createElement("span");
+        sepSpan.className = "separator-glyph";
+
+        if (i < activeSegs.length - 1) {
+          // Middle Separator: foreground = current segment bg, background = next segment bg
+          const nextSeg = activeSegs[i + 1];
+          sepSpan.style.color = seg.bg;
+          sepSpan.style.backgroundColor = nextSeg.bg;
+          const activeSep = (currentConfig.sep2 && i % 2 === 1) ? currentConfig.sep2 : currentConfig.sep;
+          sepSpan.textContent = activeSep;
+        } else {
+          // Right Cap: foreground = last segment bg, background = transparent
+          sepSpan.style.color = seg.bg;
+          sepSpan.style.backgroundColor = "transparent";
+          sepSpan.textContent = currentConfig.rightCap;
+        }
+
+        promptContainer.appendChild(sepSpan);
+      });
+    }
+
+    // Generate Starship TOML Config Text
+    function generateToml() {
+      const theme = themes[currentConfig.themeKey] || themes.firewatch;
+      const left = currentConfig.leftCap;
+      const sep = currentConfig.sep;
+      const sep2 = currentConfig.sep2;
+      const right = currentConfig.rightCap;
+
+      // Determine segments order for seamless Powerline coloring
+      const activeList = [];
+      if (currentConfig.modules.os) activeList.push({ name: 'os', tomlVar: '$os', colorKey: 'color_os' });
+      if (currentConfig.modules.dir) activeList.push({ name: 'dir', tomlVar: '$directory', colorKey: 'color_dir' });
+      if (currentConfig.modules.git) activeList.push({ name: 'git', tomlVar: '$git_branch$git_status', colorKey: 'color_git' });
+      if (currentConfig.modules.lang) activeList.push({ name: 'lang', tomlVar: '$rust$nodejs$python', colorKey: 'color_lang' });
+      if (currentConfig.modules.time) activeList.push({ name: 'time', tomlVar: '$time', colorKey: 'color_bg' });
+
+      let formatStr = '';
+      if (activeList.length > 0) {
+        formatStr += `[${left}](${activeList[0].colorKey})`;
+        activeList.forEach((item, idx) => {
+          formatStr += item.tomlVar;
+          if (idx < activeList.length - 1) {
+            const nextItem = activeList[idx + 1];
+            const activeSep = (sep2 && idx % 2 === 1) ? sep2 : sep;
+            formatStr += `[${activeSep}](fg:${item.colorKey} bg:${nextItem.colorKey})`;
+          } else {
+            formatStr += `[${right}](fg:${item.colorKey})`;
+          }
+        });
+        formatStr += `\\n$character`;
+      } else {
+        formatStr = `\\n$character`;
+      }
+
+      const tomlText = `"$schema" = 'https://starship.rs/config-schema.json'
 
 format = """
 ${formatStr}"""
@@ -2042,10 +2121,10 @@ success_symbol = "[❯](bold green)"
 error_symbol = "[❯](bold red)"
 `;
 
-    tomlOutput.value = tomlText;
-  }
+      tomlOutput.value = tomlText;
+    }
 
-  // Copy to Clipboard
+    // Copy to Clipboard
     function copyToml() {
       navigator.clipboard.writeText(tomlOutput.value).then(() => {
         showToast("starship.toml copied to clipboard!");
