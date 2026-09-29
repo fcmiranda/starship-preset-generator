@@ -1184,6 +1184,25 @@
           { glyph: "", name: "Trapezoid Top", desc: "U+E0C3" },
           { glyph: "", name: "Trapezoid Bot", desc: "U+E0D2" }
         ]
+      },
+      {
+        name: "Multi-Glyph Interleaved & Compound Separators",
+        items: [
+          { glyph: "", name: "Thick & Thin Chevron", desc: "Dual Arrow" },
+          { glyph: "", name: "Thin to Thick Chevron", desc: "Lead-in Chevron" },
+          { glyph: "", name: "Bubble Pill Spacing", desc: "Dual Pill Inversion" },
+          { glyph: "", name: "Thick & Thin Round", desc: "Dual Round Curve" },
+          { glyph: "", name: "Chevron Double Blade", desc: "Dual Slant Peak" },
+          { glyph: "", name: "Slanted Valley Incline", desc: "Dual Slant Valley" },
+          { glyph: "", name: "Inverted Hard Pair", desc: "Dual Hard Cut" },
+          { glyph: "", name: "Ice & Flame Duality", desc: "Dual Waveform" },
+          { glyph: "", name: "Pixel Step Dual", desc: "Dual Pixel Step" },
+          { glyph: "", name: "Hourglass Trapezoid", desc: "Dual Trapezoid" },
+          { glyph: "░▒", name: "Soft Shade Incline", desc: "Dual Step Light" },
+          { glyph: "▒▓", name: "Deep Shade Incline", desc: "Dual Step Dark" },
+          { glyph: "", name: "Outward Double Chevron", desc: "Split Center Arrow" },
+          { glyph: "", name: "Pill Pinch Hourglass", desc: "Pinch Center Pill" }
+        ]
       }
     ];
 
@@ -1320,6 +1339,72 @@
         lang: { bg: "#d97706", fg: "#061a14" },
         ai: { bg: "#10b981", fg: "#061a14" },
         time: { bg: "#065f46", fg: "#d1fae5" }
+      },
+      kanagawa: {
+        name: "Kanagawa Wave",
+        bg: "#1f1f28",
+        fg: "#dcd7ba",
+        os: { bg: "#2d4f67", fg: "#dcd7ba" },
+        dir: { bg: "#7e9cd8", fg: "#1f1f28" },
+        git: { bg: "#957fb8", fg: "#1f1f28" },
+        lang: { bg: "#ffa066", fg: "#1f1f28" },
+        ai: { bg: "#76946a", fg: "#1f1f28" },
+        time: { bg: "#223249", fg: "#dcd7ba" }
+      },
+      everforest: {
+        name: "Everforest Natural",
+        bg: "#2b3339",
+        fg: "#d3c6aa",
+        os: { bg: "#3a4248", fg: "#a7c080" },
+        dir: { bg: "#a7c080", fg: "#2b3339" },
+        git: { bg: "#7fbbb3", fg: "#2b3339" },
+        lang: { bg: "#dbbc7f", fg: "#2b3339" },
+        ai: { bg: "#83c092", fg: "#2b3339" },
+        time: { bg: "#323c41", fg: "#d3c6aa" }
+      },
+      onedark: {
+        name: "One Dark Pro",
+        bg: "#21252b",
+        fg: "#abb2bf",
+        os: { bg: "#282c34", fg: "#61afef" },
+        dir: { bg: "#61afef", fg: "#21252b" },
+        git: { bg: "#c678dd", fg: "#21252b" },
+        lang: { bg: "#e5c07b", fg: "#21252b" },
+        ai: { bg: "#98c379", fg: "#21252b" },
+        time: { bg: "#3e4451", fg: "#abb2bf" }
+      },
+      solarized: {
+        name: "Solarized Dark Precision",
+        bg: "#002b36",
+        fg: "#93a1a1",
+        os: { bg: "#073642", fg: "#2aa198" },
+        dir: { bg: "#268bd2", fg: "#002b36" },
+        git: { bg: "#6c71c4", fg: "#fdf6e3" },
+        lang: { bg: "#b58900", fg: "#002b36" },
+        ai: { bg: "#2aa198", fg: "#002b36" },
+        time: { bg: "#073642", fg: "#93a1a1" }
+      },
+      sakura: {
+        name: "Sakura Blossom",
+        bg: "#201824",
+        fg: "#fce7f3",
+        os: { bg: "#38233f", fg: "#f472b6" },
+        dir: { bg: "#f472b6", fg: "#201824" },
+        git: { bg: "#c084fc", fg: "#201824" },
+        lang: { bg: "#fbcfe8", fg: "#38233f" },
+        ai: { bg: "#fb7185", fg: "#201824" },
+        time: { bg: "#2e1b36", fg: "#fce7f3" }
+      },
+      outrun: {
+        name: "Outrun Neon Grid",
+        bg: "#0d0221",
+        fg: "#00f6ff",
+        os: { bg: "#241734", fg: "#ff3864" },
+        dir: { bg: "#ff3864", fg: "#0d0221" },
+        git: { bg: "#7b2cbf", fg: "#ffffff" },
+        lang: { bg: "#ff9e00", fg: "#0d0221" },
+        ai: { bg: "#00f6ff", fg: "#0d0221" },
+        time: { bg: "#3c096c", fg: "#00f6ff" }
       }
     };
 
@@ -1486,6 +1571,114 @@
         sep: "",
         rightCap: "",
         theme: "dracula"
+      },
+      {
+        id: "neon_double_arrow",
+        name: "Neon Double Chevron",
+        preview: " █  █ ",
+        leftCap: "",
+        sep: "",
+        rightCap: "",
+        theme: "outrun"
+      },
+      {
+        id: "bubble_pill_spacing",
+        name: "Floating Bubble Pill",
+        preview: " █  █ ",
+        leftCap: "",
+        sep: "",
+        rightCap: "",
+        theme: "sakura"
+      },
+      {
+        id: "chevron_interleaved_spear",
+        name: "Chevron Interleaved Spear",
+        preview: " █  █ ",
+        leftCap: "",
+        sep: "",
+        rightCap: "",
+        theme: "kanagawa"
+      },
+      {
+        id: "ice_fire_dual",
+        name: "Dual Waveform Collision",
+        preview: " █  █ ",
+        leftCap: "",
+        sep: "",
+        rightCap: "",
+        theme: "tokyonight"
+      },
+      {
+        id: "hard_cyber_notch",
+        name: "Hard Cyber Notched Cut",
+        preview: " █  █ ",
+        leftCap: "",
+        sep: "",
+        rightCap: "",
+        theme: "matrix"
+      },
+      {
+        id: "pixel_staircase",
+        name: "Pixel Step Staircase",
+        preview: " █  █ ",
+        leftCap: "",
+        sep: "",
+        rightCap: "",
+        theme: "onedark"
+      },
+      {
+        id: "hourglass_sandclock",
+        name: "Hourglass Dual Trapezoid",
+        preview: " █  █ ",
+        leftCap: "",
+        sep: "",
+        rightCap: "",
+        theme: "solarized"
+      },
+      {
+        id: "deep_shading_tritone",
+        name: "Multi-Shade Step Cascade",
+        preview: "░▒ █ ▒▓ █ ▓▒░",
+        leftCap: "░▒",
+        sep: "▒▓",
+        rightCap: "▓▒░",
+        theme: "everforest"
+      },
+      {
+        id: "pill_flare_chevron",
+        name: "Pill Flare Chevron Hybrid",
+        preview: " █  █ ",
+        leftCap: "",
+        sep: "",
+        rightCap: "",
+        theme: "rosepine"
+      },
+      {
+        id: "slanted_mountain_peak",
+        name: "Slanted Peak Incline",
+        preview: " █  █ ",
+        leftCap: "",
+        sep: "",
+        rightCap: "",
+        theme: "nord"
+      },
+      {
+        id: "slanted_valley_drop",
+        name: "Slanted Valley Drop",
+        preview: " █  █ ",
+        leftCap: "",
+        sep: "",
+        rightCap: "",
+        theme: "dracula"
+      },
+      {
+        id: "minimal_double_thin",
+        name: "Double Thin Chevron Trail",
+        preview: " █  █ ",
+        leftCap: "",
+        sep: "",
+        rightCap: "",
+        theme: "monokai"
       },
       {
         id: "nordic_aurora",
