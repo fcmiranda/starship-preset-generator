@@ -1145,17 +1145,44 @@
     // ── Glyphs Database from separators.md & Powerline standard ──────────────────
     const glyphCategories = [
       {
-        name: "Separator Glyphs Library",
+        name: "Powerline Thick Rounds & Arrows",
         items: [
+          { glyph: "", name: "Left Circle", desc: "U+E0B6" },
           { glyph: "", name: "Right Circle", desc: "U+E0B4" },
           { glyph: "", name: "Right Arrow", desc: "U+E0B0" },
+          { glyph: "", name: "Left Arrow", desc: "U+E0B2" },
+          { glyph: "", name: "Thin Left Round", desc: "U+E0B7" },
+          { glyph: "", name: "Thin Right Round", desc: "U+E0B5" },
+          { glyph: "", name: "Thin Right Arrow", desc: "U+E0B1" },
+          { glyph: "", name: "Thin Left Arrow", desc: "U+E0B3" }
+        ]
+      },
+      {
+        name: "Slanted Triangles & Inverted Hard",
+        items: [
           { glyph: "", name: "Lower Right Triangle", desc: "U+E0BC" },
+          { glyph: "", name: "Lower Left Triangle", desc: "U+E0BA" },
+          { glyph: "", name: "Upper Left Triangle", desc: "U+E0BE" },
           { glyph: "", name: "Upper Right Triangle", desc: "U+E0B8" },
           { glyph: "", name: "Inverted Left Hard", desc: "U+E0D6" },
+          { glyph: "", name: "Inverted Right Hard", desc: "U+E0D7" },
+          { glyph: "", name: "Hard Inverse", desc: "U+E0C9" }
+        ]
+      },
+      {
+        name: "Waveforms, Pixels & Shading Blocks",
+        items: [
           { glyph: "", name: "Ice Waveform", desc: "U+E0CC" },
-          { glyph: "", name: "Trapezoid Bot", desc: "U+E0D2" },
+          { glyph: "", name: "Flame Waveform", desc: "U+E0D4" },
+          { glyph: "░▒▓", name: "Smooth Fade In", desc: "U+2591-93" },
           { glyph: "▓▒░", name: "Smooth Fade Out", desc: "U+2593-91" },
-          { glyph: "󱑺", name: "Clock", desc: "Nerd Font" }
+          { glyph: "░", name: "Light Shade", desc: "U+2591" },
+          { glyph: "▒", name: "Medium Shade", desc: "U+2592" },
+          { glyph: "▓", name: "Dark Shade", desc: "U+2593" },
+          { glyph: "", name: "Pixel Small", desc: "U+E0C4" },
+          { glyph: "", name: "Pixel Big", desc: "U+E0C5" },
+          { glyph: "", name: "Trapezoid Top", desc: "U+E0C3" },
+          { glyph: "", name: "Trapezoid Bot", desc: "U+E0D2" }
         ]
       }
     ];
@@ -1389,8 +1416,6 @@
   // Populate Select Dropdowns
   function renderGlyphSelects() {
     const allGlyphs = [];
-    // Guarantee Left Circle is available for Left Cap Symbol (Start)
-    allGlyphs.push({ glyph: "", name: "Left Circle", desc: "U+E0B6" });
     glyphCategories.forEach(cat => {
       cat.items.forEach(item => {
         if (!allGlyphs.some(g => g.glyph === item.glyph)) {
