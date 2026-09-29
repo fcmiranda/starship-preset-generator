@@ -337,10 +337,10 @@
     }
 
     .segment-content {
-      padding: 0 10px;
+      padding: 0 4px;
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 4px;
       height: 100%;
       line-height: 1;
     }
@@ -995,6 +995,11 @@
           </div>
 
           <div class="control-group">
+            <label for="innerPatternSelect">Segment Inner Texture (Boundary Fillers)</label>
+            <select id="innerPatternSelect" onchange="updateCustomizer()"></select>
+          </div>
+
+          <div class="control-group">
             <label for="themeSelect">Color Palette</label>
             <select id="themeSelect" onchange="updateCustomizer()"></select>
           </div>
@@ -1510,6 +1515,100 @@
       }
     };
 
+    // ── Segment Inner Patterns & Seamless Boundary Fillers ──────────────────
+    const innerPatterns = {
+      none: {
+        name: "Classic Spacing (Standard)",
+        prefix: " ",
+        suffix: " ",
+        desc: "Clean standard Powerline padding"
+      },
+      pixel_step: {
+        name: "Pixel Step Duo (  …  )",
+        prefix: "  ",
+        suffix: "  ",
+        desc: "Retro 8-bit pixel insets"
+      },
+      dither_mid: {
+        name: "Dither Medium Shade ( ▒ … ▒ )",
+        prefix: " ▒ ",
+        suffix: " ▒ ",
+        desc: "Cyberpunk 50% dot matrix texture"
+      },
+      dither_light: {
+        name: "Dither Light Shade ( ░ … ░ )",
+        prefix: " ░ ",
+        suffix: " ░ ",
+        desc: "Subtle 25% screen door texture"
+      },
+      dither_dark: {
+        name: "Dither Dark Shade ( ▓ … ▓ )",
+        prefix: " ▓ ",
+        suffix: " ▓ ",
+        desc: "Dense 75% digital fill"
+      },
+      dither_gradient: {
+        name: "Dither Dual Inset ( ░▒ … ▒░ )",
+        prefix: " ░▒ ",
+        suffix: " ▒░ ",
+        desc: "Bidirectional shading gradient"
+      },
+      slant_wings: {
+        name: "Slanted Bevel Wings (  …  )",
+        prefix: "  ",
+        suffix: "  ",
+        desc: "Aerodynamic angled edge fins"
+      },
+      chevron_wings: {
+        name: "Thin Chevrons (  …  )",
+        prefix: "  ",
+        suffix: "  ",
+        desc: "Double speedline pulse"
+      },
+      round_capsule: {
+        name: "Thin Round Capsule (  …  )",
+        prefix: "  ",
+        suffix: "  ",
+        desc: "Subtle rounded pill contour"
+      },
+      hard_notches: {
+        name: "Hard Angular Cuts (  …  )",
+        prefix: "  ",
+        suffix: "  ",
+        desc: "Brutalist cyber notches"
+      },
+      wave_echo: {
+        name: "Flame Wave Echo (  …  )",
+        prefix: "  ",
+        suffix: "  ",
+        desc: "Oscilloscope harmonic ripple"
+      },
+      diamond_spark: {
+        name: "Diamond Sparkle (  …  )",
+        prefix: "  ",
+        suffix: "  ",
+        desc: "Gemstone geometric facets"
+      },
+      trapezoid_bracket: {
+        name: "Trapezoid Frame (  …  )",
+        prefix: "  ",
+        suffix: "  ",
+        desc: "Isometric polygon casing"
+      },
+      dot_beads: {
+        name: "Minimal Dot Beads ( • … • )",
+        prefix: " • ",
+        suffix: " • ",
+        desc: "Subtle celestial dot markers"
+      },
+      tech_brackets: {
+        name: "Cyber Brackets ( ‹ … › )",
+        prefix: " ‹ ",
+        suffix: " › ",
+        desc: "Futuristic HUD telemetry accents"
+      }
+    };
+
     // ── Presets (Geometric Motifs & Uniform Interleaved Rhythm) ───────────────
     const presets = [
       {
@@ -1520,6 +1619,7 @@
         sep: "",
         sep2: "",
         rightCap: "",
+        innerPattern: "pixel_step",
         theme: "cyber_ronin"
       },
       {
@@ -1530,6 +1630,7 @@
         sep: "",
         sep2: "",
         rightCap: "",
+        innerPattern: "slant_wings",
         theme: "kanagawa"
       },
       {
@@ -1540,6 +1641,7 @@
         sep: "",
         sep2: "",
         rightCap: "",
+        innerPattern: "wave_echo",
         theme: "cyber_sunset"
       },
       {
@@ -1550,6 +1652,7 @@
         sep: "",
         sep2: "",
         rightCap: "",
+        innerPattern: "hard_notches",
         theme: "matrix"
       },
       {
@@ -1560,6 +1663,7 @@
         sep: "",
         sep2: "",
         rightCap: "",
+        innerPattern: "trapezoid_bracket",
         theme: "dune_spice"
       },
       {
@@ -1570,6 +1674,7 @@
         sep: "▒",
         sep2: "▓",
         rightCap: "▓▒░",
+        innerPattern: "dither_gradient",
         theme: "emerald"
       },
       {
@@ -1580,6 +1685,7 @@
         sep: "",
         sep2: "",
         rightCap: "",
+        innerPattern: "none",
         theme: "firewatch"
       },
       {
@@ -1590,6 +1696,7 @@
         sep: "",
         sep2: "",
         rightCap: "",
+        innerPattern: "trapezoid_bracket",
         theme: "firewatch"
       },
       {
@@ -1598,8 +1705,9 @@
         preview: " █  █ ",
         leftCap: "",
         sep: "",
-        sep2: "",
+        sep2: "",
         rightCap: "",
+        innerPattern: "chevron_wings",
         theme: "outrun"
       },
       {
@@ -1610,6 +1718,7 @@
         sep: "",
         sep2: "",
         rightCap: "",
+        innerPattern: "round_capsule",
         theme: "sakura"
       },
       {
@@ -1618,8 +1727,9 @@
         preview: " █  █ ",
         leftCap: "",
         sep: "",
-        sep2: "",
+        sep2: "",
         rightCap: "",
+        innerPattern: "diamond_spark",
         theme: "arcane_void"
       },
       {
@@ -1628,8 +1738,9 @@
         preview: "░ █ ▓▒░ █ ▓",
         leftCap: "░",
         sep: "▓▒░",
-        sep2: "",
+        sep2: "░▒▓",
         rightCap: "▓",
+        innerPattern: "dither_mid",
         theme: "matcha_zen"
       },
       {
@@ -1638,8 +1749,9 @@
         preview: " █  █ ",
         leftCap: "",
         sep: "",
-        sep2: "",
+        sep2: "",
         rightCap: "",
+        innerPattern: "slant_wings",
         theme: "lumon"
       },
       {
@@ -1650,6 +1762,7 @@
         sep: "",
         sep2: "",
         rightCap: "",
+        innerPattern: "tech_brackets",
         theme: "matrix"
       },
       {
@@ -1658,8 +1771,9 @@
         preview: " █  █ ",
         leftCap: "",
         sep: "",
-        sep2: "",
+        sep2: "",
         rightCap: "",
+        innerPattern: "wave_echo",
         theme: "tokyonight"
       },
       {
@@ -1668,8 +1782,9 @@
         preview: " █  █ ",
         leftCap: "",
         sep: "",
-        sep2: "",
+        sep2: "",
         rightCap: "",
+        innerPattern: "hard_notches",
         theme: "nord"
       },
       {
@@ -1678,8 +1793,9 @@
         preview: " █  █ ",
         leftCap: "",
         sep: "",
-        sep2: "",
+        sep2: "",
         rightCap: "",
+        innerPattern: "pixel_step",
         theme: "monokai"
       },
       {
@@ -1688,8 +1804,9 @@
         preview: " █  █ ",
         leftCap: "",
         sep: "",
-        sep2: "",
+        sep2: "",
         rightCap: "",
+        innerPattern: "round_capsule",
         theme: "rosepine"
       },
       {
@@ -1698,8 +1815,9 @@
         preview: " █  █ ",
         leftCap: "",
         sep: "",
-        sep2: "",
+        sep2: "",
         rightCap: "",
+        innerPattern: "diamond_spark",
         theme: "dracula"
       },
       {
@@ -1708,8 +1826,9 @@
         preview: " █  █ ",
         leftCap: "",
         sep: "",
-        sep2: "",
+        sep2: "",
         rightCap: "",
+        innerPattern: "chevron_wings",
         theme: "gruvbox"
       },
       {
@@ -1718,8 +1837,9 @@
         preview: " █  █ ",
         leftCap: "",
         sep: "",
-        sep2: "",
+        sep2: "",
         rightCap: "",
+        innerPattern: "dot_beads",
         theme: "nord"
       },
       {
@@ -1728,8 +1848,9 @@
         preview: " █  █ ",
         leftCap: "",
         sep: "",
-        sep2: "",
+        sep2: "",
         rightCap: "",
+        innerPattern: "hard_notches",
         theme: "dracula"
       },
       {
@@ -1738,8 +1859,9 @@
         preview: " █  █ ",
         leftCap: "",
         sep: "",
-        sep2: "",
+        sep2: "",
         rightCap: "",
+        innerPattern: "round_capsule",
         theme: "coffee_mocha"
       },
       {
@@ -1748,8 +1870,9 @@
         preview: " █  █ ",
         leftCap: "",
         sep: "",
-        sep2: "",
+        sep2: "",
         rightCap: "",
+        innerPattern: "tech_brackets",
         theme: "cyber_platinum"
       }
     ];
@@ -1760,6 +1883,7 @@
       sep: "",
       sep2: "",
       rightCap: "",
+      innerPattern: "none",
       themeKey: "firewatch",
       iconSymbol: "󰣇",
       activePreset: "classic_pill",
@@ -1794,6 +1918,7 @@
     const sepSelect = document.getElementById("sepSelect");
     const sep2Select = document.getElementById("sep2Select");
     const rightCapSelect = document.getElementById("rightCapSelect");
+    const innerPatternSelect = document.getElementById("innerPatternSelect");
     const themeSelect = document.getElementById("themeSelect");
     const iconSelect = document.getElementById("iconSelect");
     const tomlOutput = document.getElementById("tomlOutput");
@@ -1805,6 +1930,7 @@
       renderGlyphLibrary();
       renderPresetButtons();
       renderThemeSelect();
+      renderInnerPatternSelect();
       renderIconSelect();
 
       // Ensure selects & inputs reflect initial defaults
@@ -1812,6 +1938,7 @@
       sepSelect.value = currentConfig.sep;
       if (sep2Select) sep2Select.value = currentConfig.sep2 || "";
       rightCapSelect.value = currentConfig.rightCap;
+      if (innerPatternSelect) innerPatternSelect.value = currentConfig.innerPattern || "none";
       themeSelect.value = currentConfig.themeKey;
       if (iconSelect) iconSelect.value = currentConfig.iconSymbol;
 
@@ -1866,6 +1993,18 @@
         opt.value = key;
         opt.textContent = themes[key].name;
         themeSelect.appendChild(opt);
+      });
+    }
+
+    // Render Inner Pattern Selector Options
+    function renderInnerPatternSelect() {
+      if (!innerPatternSelect) return;
+      innerPatternSelect.innerHTML = "";
+      Object.keys(innerPatterns).forEach(key => {
+        const opt = document.createElement("option");
+        opt.value = key;
+        opt.textContent = innerPatterns[key].name;
+        innerPatternSelect.appendChild(opt);
       });
     }
 
@@ -1935,12 +2074,14 @@
       currentConfig.sep = p.sep;
       currentConfig.sep2 = p.sep2 || "";
       currentConfig.rightCap = p.rightCap;
+      currentConfig.innerPattern = p.innerPattern || "none";
       currentConfig.themeKey = p.theme;
 
       leftCapSelect.value = p.leftCap;
       sepSelect.value = p.sep;
       if (sep2Select) sep2Select.value = p.sep2 || "";
       rightCapSelect.value = p.rightCap;
+      if (innerPatternSelect) innerPatternSelect.value = currentConfig.innerPattern;
       themeSelect.value = p.theme;
 
       renderPresetButtons();
@@ -1953,6 +2094,7 @@
       currentConfig.sep = sepSelect.value;
       if (sep2Select) currentConfig.sep2 = sep2Select.value;
       currentConfig.rightCap = rightCapSelect.value;
+      if (innerPatternSelect) currentConfig.innerPattern = innerPatternSelect.value;
       currentConfig.themeKey = themeSelect.value;
       if (iconSelect) currentConfig.iconSymbol = iconSelect.value;
 
@@ -1976,6 +2118,7 @@
         p.sep === currentConfig.sep &&
         (p.sep2 || "") === (currentConfig.sep2 || "") &&
         p.rightCap === currentConfig.rightCap &&
+        (p.innerPattern || "none") === (currentConfig.innerPattern || "none") &&
         p.theme === currentConfig.themeKey
       );
       currentConfig.activePreset = matched ? matched.id : null;
@@ -1993,6 +2136,8 @@
     function renderPromptPreview() {
       const theme = themes[currentConfig.themeKey] || themes.firewatch;
       terminalPreview.style.backgroundColor = theme.bg;
+
+      const pat = innerPatterns[currentConfig.innerPattern] || innerPatterns.none;
 
       // Build active segment chain
       const activeSegs = [];
@@ -2026,7 +2171,7 @@
 
         const contentSpan = document.createElement("span");
         contentSpan.className = "segment-content";
-        contentSpan.textContent = seg.label;
+        contentSpan.textContent = `${pat.prefix}${seg.label}${pat.suffix}`;
         segSpan.appendChild(contentSpan);
 
         promptContainer.appendChild(segSpan);
@@ -2060,6 +2205,7 @@
       const sep = currentConfig.sep;
       const sep2 = currentConfig.sep2;
       const right = currentConfig.rightCap;
+      const pat = innerPatterns[currentConfig.innerPattern] || innerPatterns.none;
 
       // Determine segments order for seamless Powerline coloring
       const activeList = [];
@@ -2082,10 +2228,14 @@
             formatStr += `[${right}](fg:${item.colorKey})`;
           }
         });
-        formatStr += `\\n$character`;
+        formatStr += `
+$character`;
       } else {
-        formatStr = `\\n$character`;
+        formatStr = `$character`;
       }
+
+      const pPre = pat.prefix;
+      const pSuf = pat.suffix;
 
       const tomlText = `"$schema" = 'https://starship.rs/config-schema.json'
 
@@ -2104,17 +2254,38 @@ color_lang = '${theme.lang.bg}'
 [os]
 disabled = ${!currentConfig.modules.os}
 style = "bg:color_os fg:${theme.os.fg}"
-format = '[${currentConfig.iconSymbol} ]($style)'
+format = '[${pPre}${currentConfig.iconSymbol}${pSuf}]($style)'
 
 [directory]
 style = "fg:${theme.dir.fg} bg:color_dir"
-format = "[ $path ]($style)"
+format = "[${pPre}$path${pSuf}]($style)"
 truncation_length = 3
 
 [git_branch]
 symbol = " "
 style = "fg:${theme.git.fg} bg:color_git"
-format = '[[ $symbol$branch ]($style)]($style)'
+format = '[[${pPre}$symbol$branch${pSuf}]($style)]($style)'
+
+[rust]
+symbol = " "
+style = "fg:${theme.lang.fg} bg:color_lang"
+format = '[[${pPre}$symbol($version)${pSuf}]($style)]($style)'
+
+[nodejs]
+symbol = " "
+style = "fg:${theme.lang.fg} bg:color_lang"
+format = '[[${pPre}$symbol($version)${pSuf}]($style)]($style)'
+
+[python]
+symbol = " "
+style = "fg:${theme.lang.fg} bg:color_lang"
+format = '[[${pPre}$symbol($version)${pSuf}]($style)]($style)'
+
+[time]
+disabled = ${!currentConfig.modules.time}
+time_format = "%R"
+style = "bg:color_bg fg:${theme.time.fg}"
+format = '[${pPre} $time${pSuf}]($style)'
 
 [character]
 success_symbol = "[❯](bold green)"
