@@ -70,8 +70,11 @@
         ],
         "author": {
           "@type": "Person",
-          "name": "Felipe Miranda",
-          "url": "https://github.com/felipecm-br"
+          "name": "Felipe Miranda (felipecm-br)",
+          "url": "https://felipecm.com/",
+          "sameAs": [
+            "https://github.com/felipecm-br"
+          ]
         }
       },
       {
@@ -269,6 +272,18 @@
       font-size: 13px;
       color: var(--text-muted);
       margin-top: 2px;
+    }
+
+    .header-author-link {
+      color: var(--accent-cyan);
+      text-decoration: none;
+      font-weight: 500;
+      transition: opacity 0.2s ease, text-decoration 0.2s ease;
+    }
+
+    .header-author-link:hover {
+      text-decoration: underline;
+      opacity: 0.85;
     }
 
     .header-badge {
@@ -1272,6 +1287,36 @@
     .footer-desc {
       font-size: 13px;
       color: var(--text-muted);
+      margin-top: 4px;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .footer-desc a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .footer-desc a:hover {
+      color: var(--accent-cyan);
+    }
+
+    .footer-author-link {
+      color: var(--accent-cyan) !important;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .footer-author-link:hover {
+      text-decoration: underline !important;
+    }
+
+    .footer-dot {
+      opacity: 0.4;
+      font-size: 10px;
     }
 
     .footer-bottom {
@@ -1311,7 +1356,7 @@
       <img src="icon.png" alt="Starship Studio" class="logo-icon" width="44" height="44">
       <div>
         <h1>Starship Studio</h1>
-        <div class="subtitle">Interactive visual editor and preset generator for Starship prompt</div>
+        <div class="subtitle">Interactive visual editor and preset generator for Starship prompt · Made by <a href="https://github.com/felipecm-br" target="_blank" rel="noopener noreferrer" class="header-author-link">felipecm-br</a></div>
       </div>
     </div>
     <div class="header-actions">
@@ -1714,9 +1759,18 @@
   <!-- Site Footer -->
   <footer class="site-footer">
     <div class="footer-content">
-      <div class="footer-brand">
-        <img src="icon.png" alt="Starship Studio" class="footer-logo" width="24" height="24">
-        <strong>Starship Studio</strong>
+      <div class="footer-left">
+        <div class="footer-brand">
+          <img src="icon.png" alt="Starship Studio" class="footer-logo" width="24" height="24">
+          <strong>Starship Studio</strong>
+        </div>
+        <div class="footer-desc">
+          Made by <a href="https://github.com/felipecm-br" target="_blank" rel="noopener noreferrer" class="footer-author-link">felipecm-br</a>
+          <span class="footer-dot">•</span>
+          <a href="https://github.com/felipecm-br" target="_blank" rel="noopener noreferrer" title="GitHub Profile">GitHub</a>
+          <span class="footer-dot">•</span>
+          <a href="https://felipecm.com/" target="_blank" rel="noopener noreferrer" title="Personal Website">felipecm.com</a>
+        </div>
       </div>
       <div class="footer-right">
         <a href="https://github.com/felipecm-br/starship-studio" target="_blank" rel="noopener noreferrer" class="github-btn" aria-label="Starship Studio on GitHub">
@@ -1730,6 +1784,10 @@
     <div class="footer-bottom">
       <span>Starship Studio is an interactive visual editor and preset generator for the Starship prompt. Licensed under MIT.</span>
       <div class="footer-links">
+        <a href="https://felipecm.com/" target="_blank" rel="noopener noreferrer">felipecm.com</a>
+        <span>•</span>
+        <a href="https://github.com/felipecm-br" target="_blank" rel="noopener noreferrer">@felipecm-br</a>
+        <span>•</span>
         <a href="https://starship.rs" target="_blank" rel="noopener noreferrer">Starship.rs</a>
         <span>•</span>
         <a href="https://www.nerdfonts.com" target="_blank" rel="noopener noreferrer">Nerd Fonts</a>
