@@ -1207,12 +1207,8 @@
         ]
       },
       {
-        name: "Honeycomb, Hexagons & Hard Cuts",
+        name: "Hexagons & Hard Cuts",
         items: [
-          { glyph: "", name: "Honeycomb Left", desc: "U+E0CA" },
-          { glyph: "", name: "Honeycomb Right", desc: "U+E0C8" },
-          { glyph: "", name: "Honeycomb Left Thin", desc: "U+E0C9" },
-          { glyph: "", name: "Honeycomb Right Thin", desc: "U+E0CB" },
           { glyph: "", name: "Inverted Left Hard", desc: "U+E0D6" },
           { glyph: "", name: "Inverted Right Hard", desc: "U+E0D7" },
           { glyph: "", name: "Lego Block", desc: "U+E0D0" },
@@ -1256,26 +1252,11 @@
         ]
       },
       {
-        name: "Telemetry, Clocks & Status Badges",
+        name: "Clocks & Badges",
         items: [
-          { glyph: "󱑺", name: "Clock 8:00", desc: "Nerd Font U+F147A" },
-          { glyph: "󱑼", name: "Clock 9:00", desc: "Nerd Font U+F147C" },
+          { glyph: "󱑺", name: "Clock", desc: "Nerd Font U+F147A" },
+          { glyph: "󱑼", name: "Clock 9", desc: "Nerd Font U+F147C" },
           { glyph: "󱑻", name: "Clock 8:30", desc: "Nerd Font U+F147B" },
-          { glyph: "", name: "Clock Face", desc: "Nerd Font U+F017" },
-          { glyph: "", name: "Signal Telemetry", desc: "Nerd Font U+F012" },
-          { glyph: "󰓅", name: "Speedometer Gauge", desc: "Nerd Font U+F04C5" },
-          { glyph: "󱐋", name: "Lightning Flash", desc: "Nerd Font U+F140B" },
-          { glyph: "⚡", name: "Electric Bolt", desc: "Unicode U+26A1" },
-          { glyph: "󰔉", name: "Stopwatch Timer", desc: "Nerd Font U+F0509" },
-          { glyph: "", name: "Flame Pulse", desc: "Nerd Font U+F490" },
-          { glyph: "", name: "Git Branch", desc: "Nerd Font U+F418" },
-          { glyph: "", name: "Commit Hash", desc: "Nerd Font U+F292" },
-          { glyph: "󰌷", name: "Enter Prompt", desc: "Nerd Font U+F0337" },
-          { glyph: "󰄬", name: "Success Mark", desc: "Nerd Font U+F012C" },
-          { glyph: "󰅖", name: "Error Cross", desc: "Nerd Font U+F0156" },
-          { glyph: "", name: "Terminal Prompt", desc: "Nerd Font U+F489" },
-          { glyph: "", name: "Heart Health", desc: "Nerd Font U+F004" },
-          { glyph: "󰮯", name: "Pacman Retro", desc: "Nerd Font U+F0BBF" },
           { glyph: "󰊠", name: "Ghost Retro", desc: "Nerd Font U+F02A0" }
         ]
       }
@@ -1730,7 +1711,7 @@
     "", "", "", "", "", "󱓟", "󰺹", "󰅏", "", "",
     "", "󱃏", "", "", "", "󰷗", "󰀻", "󰔌", "󰂵", "󰢶",
     "󱝊", "󱪶", "󱪷", "", "󱑻", "󰕤", "󰹪",
-    "󱑺", "󱑼", "", "⚡", "󱐋", "", "", "󰌷", "󰄬", "󰅖", "", "󰓅", "", "", "󰮯", "󰊠"
+    "󱑺", "󱑼", "󰊠"
   ];
 
   // ── DOM Elements ──────────────────────────────────────────────────────────
@@ -1827,6 +1808,17 @@
       cat.items.forEach(item => {
         if (!allGlyphs.some(g => g.glyph === item.glyph)) {
           allGlyphs.push(item);
+        }
+      });
+    });
+
+    presets.forEach(p => {
+      const pGlyphs = [p.leftCap, p.rightCap];
+      if (Array.isArray(p.sep)) pGlyphs.push(...p.sep);
+      else if (p.sep) pGlyphs.push(p.sep);
+      pGlyphs.forEach(g => {
+        if (g && !allGlyphs.some(item => item.glyph === g)) {
+          allGlyphs.push({ glyph: g, name: g, desc: "Preset Glyph" });
         }
       });
     });
