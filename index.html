@@ -11,8 +11,16 @@
   <meta name="description" content="Starship Studio is an interactive visual editor and preset generator for the Starship prompt. Customize themes and export your starship.toml easily.">
   <meta name="keywords" content="starship prompt, starship preset generator, starship studio, starship toml generator, powerline prompt generator, terminal prompt customizer, nerd fonts separators, zsh starship prompt, starship themes, bash prompt designer, cross-shell prompt">
   <meta name="author" content="Felipe Miranda">
-  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
-  <meta name="theme-color" content="#0f111a">
+  <meta name="theme-color" id="metaThemeColor" content="#0f111a">
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('starship_studio_theme');
+        var theme = saved || (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+        document.documentElement.setAttribute('data-theme', theme);
+      } catch (e) {}
+    })();
+  </script>
   <link rel="canonical" href="https://felipecm-br.github.io/starship-studio/">
 
   <!-- Open Graph / Facebook / LinkedIn / Discord -->
@@ -128,10 +136,20 @@
       --bg-card: #181b28;
       --bg-card-hover: #222638;
       --bg-tertiary: #272c40;
+      --bg-secondary: #141724;
       --border-color: #2e344e;
-      --border-glow: #6366f140;
+      --border-glow: rgba(99, 102, 241, 0.25);
       --text-main: #f3f4f6;
       --text-muted: #9ca3af;
+      --heading-color-1: #ffffff;
+      --heading-color-2: #94a3b8;
+      --code-bg: #0d0e15;
+      --code-fg: #a9b1d6;
+      --terminal-bar-bg: #141724;
+      --terminal-bar-border: #1f2336;
+      --terminal-win-border: #1f2336;
+      --scenario-bar-bg: rgba(13, 14, 21, 0.6);
+      --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
       --accent-primary: #6366f1;
       --accent-glow: #818cf8;
       --accent-cyan: #06b6d4;
@@ -146,10 +164,53 @@
       --font-nerd: 'Symbols Nerd Font', 'JetBrainsMono Nerd Font', 'JetBrainsMono NF', 'CaskaydiaMono Nerd Font', 'CaskaydiaMono NF', monospace;
     }
 
+    [data-theme="light"] {
+      --bg-dark: #f8fafc;
+      --bg-card: #ffffff;
+      --bg-card-hover: #f1f5f9;
+      --bg-tertiary: #f1f5f9;
+      --bg-secondary: #ffffff;
+      --border-color: #e2e8f0;
+      --border-glow: rgba(99, 102, 241, 0.15);
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --heading-color-1: #0f172a;
+      --heading-color-2: #334155;
+      --code-bg: #f8fafc;
+      --code-fg: #1e293b;
+      --terminal-bar-bg: #f1f5f9;
+      --terminal-bar-border: #e2e8f0;
+      --terminal-win-border: #cbd5e1;
+      --scenario-bar-bg: #f8fafc;
+      --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      --accent-primary: #4f46e5;
+      --accent-glow: #6366f1;
+      --accent-cyan: #0891b2;
+      --accent-green: #059669;
+      --accent-amber: #d97706;
+      --accent-pink: #db2777;
+    }
+
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+    }
+
+    /* Custom Scrollbars */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--bg-dark);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--border-color);
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--text-muted);
     }
 
     body {
@@ -163,6 +224,7 @@
         radial-gradient(circle at 15% 15%, rgba(99, 102, 241, 0.08) 0%, transparent 40%),
         radial-gradient(circle at 85% 85%, rgba(6, 182, 212, 0.08) 0%, transparent 40%);
       background-attachment: fixed;
+      transition: background-color 0.25s ease, color 0.25s ease;
     }
 
     header {
@@ -198,7 +260,7 @@
     h1 {
       font-size: 24px;
       font-weight: 700;
-      background: linear-gradient(90deg, #ffffff, #94a3b8);
+      background: linear-gradient(90deg, var(--heading-color-1), var(--heading-color-2));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       letter-spacing: -0.5px;
@@ -242,8 +304,9 @@
       border: 1px solid var(--border-color);
       border-radius: var(--radius-lg);
       padding: 20px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+      box-shadow: var(--card-shadow);
       backdrop-filter: blur(10px);
+      transition: background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
     }
 
     .card-title {
@@ -265,21 +328,23 @@
 
     /* Terminal Mockup */
     .terminal-window {
-      background: #0d0e15;
-      border: 1px solid #1f2336;
+      background: var(--code-bg);
+      border: 1px solid var(--terminal-win-border);
       border-radius: var(--radius-md);
       overflow: hidden;
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+      box-shadow: var(--card-shadow);
       margin-bottom: 24px;
+      transition: all 0.25s ease;
     }
 
     .terminal-header {
-      background: #141724;
+      background: var(--terminal-bar-bg);
       padding: 10px 16px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      border-bottom: 1px solid #1f2336;
+      border-bottom: 1px solid var(--terminal-bar-border);
+      transition: all 0.25s ease;
     }
 
     .window-dots {
@@ -312,7 +377,7 @@
     }
 
     .terminal-action-btn {
-      background: rgba(255, 255, 255, 0.06);
+      background: var(--bg-tertiary);
       border: 1px solid var(--border-color);
       color: var(--text-main);
       padding: 4px 10px;
@@ -329,20 +394,21 @@
     .terminal-action-btn:hover {
       background: var(--bg-card-hover);
       border-color: var(--accent-cyan);
-      color: #ffffff;
+      color: var(--accent-cyan);
       transform: translateY(-1px);
     }
 
     /* Interactive Playground Scenario Bar */
     .scenario-toolbar {
-      background: rgba(13, 14, 21, 0.6);
-      border-bottom: 1px solid #1f2336;
+      background: var(--scenario-bar-bg);
+      border-bottom: 1px solid var(--terminal-bar-border);
       padding: 8px 16px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       flex-wrap: wrap;
       gap: 8px;
+      transition: all 0.25s ease;
     }
 
     .scenario-title {
@@ -383,7 +449,7 @@
     .scenario-btn.active {
       background: rgba(99, 102, 241, 0.18);
       border-color: var(--accent-primary);
-      color: #ffffff;
+      color: var(--accent-primary);
       font-weight: 600;
     }
 
@@ -837,10 +903,10 @@
     textarea.toml-editor {
       width: 100%;
       height: 380px;
-      background: #0d0e15;
+      background: var(--code-bg);
       border: 1px solid var(--border-color);
       border-radius: var(--radius-md);
-      color: #a9b1d6;
+      color: var(--code-fg);
       font-family: var(--font-code);
       font-size: 13px;
       line-height: 1.6;
@@ -848,6 +914,7 @@
       resize: vertical;
       outline: none;
       tab-size: 2;
+      transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
     }
 
     textarea.toml-editor:focus {
@@ -942,12 +1009,61 @@
       height: 15px;
     }
 
-    /* Header Actions & GitHub Button */
+    /* Header Actions, Theme Toggle & GitHub Button */
     .header-actions {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       flex-wrap: wrap;
+    }
+
+    .theme-toggle-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 7px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      font-family: inherit;
+      user-select: none;
+    }
+
+    .theme-toggle-btn:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--accent-primary);
+      color: var(--accent-primary);
+      transform: translateY(-1px);
+    }
+
+    .theme-icon-sun {
+      display: block;
+      color: #f59e0b;
+      transition: transform 0.25s ease;
+    }
+
+    .theme-icon-moon {
+      display: none;
+      color: #6366f1;
+      transition: transform 0.25s ease;
+    }
+
+    [data-theme="light"] .theme-icon-sun {
+      display: none;
+    }
+
+    [data-theme="light"] .theme-icon-moon {
+      display: block;
+    }
+
+    .theme-toggle-btn:hover svg {
+      transform: rotate(18deg) scale(1.1);
     }
 
     .github-btn {
@@ -963,13 +1079,13 @@
       font-weight: 600;
       text-decoration: none;
       transition: all 0.2s ease;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     }
 
     .github-btn:hover {
       background: var(--bg-card-hover);
       border-color: var(--accent-primary);
-      color: #ffffff;
+      color: var(--accent-primary);
       transform: translateY(-1px);
       box-shadow: 0 4px 14px rgba(99, 102, 241, 0.25);
     }
@@ -1054,7 +1170,7 @@
     }
 
     .seo-code {
-      background: #0d0e15;
+      background: var(--code-bg);
       border: 1px solid var(--border-color);
       border-radius: var(--radius-sm);
       padding: 10px 14px;
@@ -1062,7 +1178,8 @@
       overflow-x: auto;
       font-family: var(--font-code);
       font-size: 12px;
-      color: #a9b1d6;
+      color: var(--code-fg);
+      transition: background-color 0.25s ease, color 0.25s ease;
     }
 
     .seo-faq {
@@ -1155,9 +1272,9 @@
       flex-wrap: wrap;
       gap: 12px;
       font-size: 12px;
-      color: #6b7280;
+      color: var(--text-muted);
       padding-top: 16px;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      border-top: 1px solid var(--border-color);
     }
 
     .footer-links {
@@ -1189,6 +1306,24 @@
       </div>
     </div>
     <div class="header-actions">
+      <button id="themeToggleBtn" class="theme-toggle-btn" onclick="toggleAppTheme()" aria-label="Switch to Light Mode" title="Toggle Light/Dark Theme">
+        <svg class="theme-icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <svg class="theme-icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+        <span id="themeToggleText">Light Mode</span>
+      </button>
+
       <a href="https://github.com/felipecm-br/starship-studio" 
          target="_blank" 
          rel="noopener noreferrer" 
@@ -1984,6 +2119,50 @@
         lang: { bg: "#212736", fg: "#a3aed2" },
         ai: { bg: "#7aa2f7", fg: "#1a1b26" },
         time: { bg: "#1d2230", fg: "#7aa2f7" }
+      },
+      catppuccin_latte: {
+        name: "Catppuccin Latte (Light)",
+        bg: "#eff1f5",
+        fg: "#4c4f69",
+        os: { bg: "#dce0e8", fg: "#1e66f5" },
+        dir: { bg: "#1e66f5", fg: "#ffffff" },
+        git: { bg: "#8839ef", fg: "#ffffff" },
+        lang: { bg: "#df8e1d", fg: "#ffffff" },
+        ai: { bg: "#40a02b", fg: "#ffffff" },
+        time: { bg: "#ccd0da", fg: "#4c4f69" }
+      },
+      solarized_light: {
+        name: "Solarized Light Precision",
+        bg: "#fdf6e3",
+        fg: "#657b83",
+        os: { bg: "#eee8d5", fg: "#2aa198" },
+        dir: { bg: "#268bd2", fg: "#ffffff" },
+        git: { bg: "#6c71c4", fg: "#ffffff" },
+        lang: { bg: "#b58900", fg: "#ffffff" },
+        ai: { bg: "#2aa198", fg: "#ffffff" },
+        time: { bg: "#eee8d5", fg: "#586e75" }
+      },
+      github_light: {
+        name: "GitHub Crisp Light",
+        bg: "#ffffff",
+        fg: "#24292f",
+        os: { bg: "#f6f8fa", fg: "#0969da" },
+        dir: { bg: "#0969da", fg: "#ffffff" },
+        git: { bg: "#8250df", fg: "#ffffff" },
+        lang: { bg: "#cf8200", fg: "#ffffff" },
+        ai: { bg: "#1a7f37", fg: "#ffffff" },
+        time: { bg: "#eaeef2", fg: "#57606a" }
+      },
+      onelight: {
+        name: "One Light Pro",
+        bg: "#fafafa",
+        fg: "#383a42",
+        os: { bg: "#f0f0f0", fg: "#4078f2" },
+        dir: { bg: "#4078f2", fg: "#ffffff" },
+        git: { bg: "#a626a4", fg: "#ffffff" },
+        lang: { bg: "#c18401", fg: "#ffffff" },
+        ai: { bg: "#50a14f", fg: "#ffffff" },
+        time: { bg: "#e5e5e6", fg: "#383a42" }
       }
     };
 
@@ -2162,6 +2341,42 @@
         theme: "cyber_sunset",
         icon: "🚀",
         modules: { os: true, dir: true, git: true, lang: true, time: false }
+      },
+
+      // ── Curated Light Theme Presets ────────────────────────────────────────
+      {
+        id: "catppuccin_latte_pill",
+        name: "Catppuccin Latte Light",
+        preview: " █  █ ",
+        leftCap: "",
+        sep: "",
+        rightCap: "",
+        theme: "catppuccin_latte",
+        icon: "󰣇",
+        modules: { os: true, dir: true, git: true, lang: true, time: true }
+      },
+      {
+        id: "solarized_light_arrows",
+        name: "Solarized Light Precision",
+        preview: " █  █ ",
+        leftCap: "",
+        sep: "",
+        rightCap: "",
+        theme: "solarized_light",
+        icon: "󱃏",
+        modules: { os: true, dir: true, git: true, lang: true, time: true }
+      },
+      {
+        id: "github_light_minimal",
+        name: "GitHub Light Minimal",
+        promptStyle: "transparent",
+        preview: "󰣇 ~  main 󱑺",
+        leftCap: "",
+        sep: " ",
+        rightCap: "",
+        theme: "github_light",
+        icon: "󰣇",
+        modules: { os: true, dir: true, git: true, lang: true, time: true }
       }
     ];
 
@@ -2424,8 +2639,52 @@
     }
   }
 
+  // ── UI Theme Management (Dark / Light Mode) ──────────────────────────────
+  function initTheme() {
+    const current = document.documentElement.getAttribute("data-theme") || "dark";
+    updateThemeToggleUI(current);
+
+    if (window.matchMedia) {
+      window.matchMedia("(prefers-color-scheme: light)").addEventListener("change", e => {
+        if (!localStorage.getItem("starship_studio_theme")) {
+          const newTheme = e.matches ? "light" : "dark";
+          document.documentElement.setAttribute("data-theme", newTheme);
+          updateThemeToggleUI(newTheme);
+        }
+      });
+    }
+  }
+
+  function toggleAppTheme() {
+    const current = document.documentElement.getAttribute("data-theme") || "dark";
+    const next = current === "light" ? "dark" : "light";
+    document.documentElement.setAttribute("data-theme", next);
+    try {
+      localStorage.setItem("starship_studio_theme", next);
+    } catch (e) {}
+    updateThemeToggleUI(next);
+    showToast(`Switched to ${next === "light" ? "Light" : "Dark"} Mode`);
+  }
+
+  function updateThemeToggleUI(theme) {
+    const textEl = document.getElementById("themeToggleText");
+    if (textEl) {
+      textEl.textContent = theme === "light" ? "Dark Mode" : "Light Mode";
+    }
+    const btn = document.getElementById("themeToggleBtn");
+    if (btn) {
+      btn.setAttribute("aria-label", `Switch to ${theme === "light" ? "Dark" : "Light"} Mode`);
+      btn.title = `Switch to ${theme === "light" ? "Dark" : "Light"} Mode`;
+    }
+    const metaTheme = document.getElementById("metaThemeColor");
+    if (metaTheme) {
+      metaTheme.setAttribute("content", theme === "light" ? "#f8fafc" : "#0f111a");
+    }
+  }
+
   // ── Initialize App ────────────────────────────────────────────────────────
   function init() {
+    initTheme();
     renderGlyphSelects();
     renderGlyphLibrary();
     renderPresetButtons();
@@ -2774,6 +3033,10 @@
     }
     if (demoCommand) {
       demoCommand.textContent = scen.command;
+    }
+    const promptLine2 = document.querySelector(".prompt-line-2");
+    if (promptLine2) {
+      promptLine2.style.color = theme.fg || "#a9b1d6";
     }
 
     // Build active segment chain
@@ -3288,14 +3551,16 @@ error_symbol = "[❯](bold red)"
     const ctx = canvas.getContext("2d");
     ctx.scale(dpr, dpr);
 
+    const isLightUi = document.documentElement.getAttribute("data-theme") === "light";
+
     // Terminal Outer Window
-    ctx.fillStyle = "#0d0e15";
+    ctx.fillStyle = isLightUi ? "#f1f5f9" : "#0d0e15";
     ctx.beginPath();
     ctx.roundRect(0, 0, width, height, 12);
     ctx.fill();
 
     // Terminal Header
-    ctx.fillStyle = "#141724";
+    ctx.fillStyle = isLightUi ? "#e2e8f0" : "#141724";
     ctx.beginPath();
     ctx.roundRect(0, 0, width, 40, [12, 12, 0, 0]);
     ctx.fill();
@@ -3314,7 +3579,7 @@ error_symbol = "[❯](bold red)"
     });
 
     // Window Title
-    ctx.fillStyle = "#6b7280";
+    ctx.fillStyle = isLightUi ? "#64748b" : "#6b7280";
     ctx.font = "12px monospace";
     ctx.textAlign = "center";
     ctx.fillText("zsh — starship prompt preview", width / 2, 24);
