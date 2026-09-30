@@ -1158,7 +1158,7 @@
       }
     ];
 
-    // ── Color Palettes ────────────────────────────────────────────────────────
+    // ── Color Palettes (Curated High-Contrast Designer Themes) ───────────────
     const themes = {
       firewatch: {
         name: "Firewatch Sunset",
@@ -1171,19 +1171,30 @@
         ai: { bg: "#06b6d4", fg: "#0f172a" },
         time: { bg: "#2d1b4e", fg: "#f0c0e0" }
       },
-      lumon: {
-        name: "Lumon Oceanic",
-        bg: "#16242d",
-        fg: "#d6e2ee",
-        os: { bg: "#1b2d40", fg: "#ffffff" },
-        dir: { bg: "#6fa4c9", fg: "#0f172a" },
-        git: { bg: "#5e95bc", fg: "#ffffff" },
-        lang: { bg: "#6fb8e3", fg: "#0f172a" },
-        ai: { bg: "#38bdf8", fg: "#0f172a" },
-        time: { bg: "#23394a", fg: "#d6e2ee" }
+      tokyonight: {
+        name: "Tokyo Night Cyber",
+        bg: "#1a1b26",
+        fg: "#a9b1d6",
+        os: { bg: "#24283b", fg: "#7aa2f7" },
+        dir: { bg: "#7aa2f7", fg: "#15161e" },
+        git: { bg: "#bb9af7", fg: "#15161e" },
+        lang: { bg: "#e0af68", fg: "#15161e" },
+        ai: { bg: "#7dcfff", fg: "#15161e" },
+        time: { bg: "#2ac3de", fg: "#15161e" }
+      },
+      cyber_ronin: {
+        name: "Cyber Ronin Obsidian",
+        bg: "#121214",
+        fg: "#f43f5e",
+        os: { bg: "#1f1f23", fg: "#fb7185" },
+        dir: { bg: "#e11d48", fg: "#ffffff" },
+        git: { bg: "#f59e0b", fg: "#18181b" },
+        lang: { bg: "#3b82f6", fg: "#ffffff" },
+        ai: { bg: "#10b981", fg: "#09090b" },
+        time: { bg: "#27272a", fg: "#fda4af" }
       },
       matrix: {
-        name: "Cyberpunk Matrix",
+        name: "Cyberpunk Matrix Neon",
         bg: "#05160b",
         fg: "#a7f3d0",
         os: { bg: "#064e3b", fg: "#ffffff" },
@@ -1192,6 +1203,105 @@
         lang: { bg: "#34d399", fg: "#022c22" },
         ai: { bg: "#00ff66", fg: "#05160b" },
         time: { bg: "#065f46", fg: "#a7f3d0" }
+      },
+      dracula: {
+        name: "Dracula Bloodline",
+        bg: "#282a36",
+        fg: "#f8f8f2",
+        os: { bg: "#44475a", fg: "#f8f8f2" },
+        dir: { bg: "#bd93f9", fg: "#282a36" },
+        git: { bg: "#ff79c6", fg: "#282a36" },
+        lang: { bg: "#50fa7b", fg: "#282a36" },
+        ai: { bg: "#8be9fd", fg: "#282a36" },
+        time: { bg: "#6272a4", fg: "#f8f8f2" }
+      },
+      nord: {
+        name: "Nordic Aurora Borealis",
+        bg: "#2e3440",
+        fg: "#eceff4",
+        os: { bg: "#3b4252", fg: "#eceff4" },
+        dir: { bg: "#88c0d0", fg: "#2e3440" },
+        git: { bg: "#81a1c1", fg: "#2e3440" },
+        lang: { bg: "#ebcb8b", fg: "#2e3440" },
+        ai: { bg: "#a3be8c", fg: "#2e3440" },
+        time: { bg: "#4c566a", fg: "#eceff4" }
+      },
+      kanagawa: {
+        name: "Kanagawa Great Wave",
+        bg: "#1f1f28",
+        fg: "#dcd7ba",
+        os: { bg: "#2d4f67", fg: "#dcd7ba" },
+        dir: { bg: "#7e9cd8", fg: "#1f1f28" },
+        git: { bg: "#957fb8", fg: "#1f1f28" },
+        lang: { bg: "#ffa066", fg: "#1f1f28" },
+        ai: { bg: "#76946a", fg: "#1f1f28" },
+        time: { bg: "#223249", fg: "#dcd7ba" }
+      },
+      dune_spice: {
+        name: "Dune Spice Desert",
+        bg: "#1f110e",
+        fg: "#ffedd5",
+        os: { bg: "#431407", fg: "#fed7aa" },
+        dir: { bg: "#ea580c", fg: "#ffffff" },
+        git: { bg: "#d97706", fg: "#1f110e" },
+        lang: { bg: "#f59e0b", fg: "#1f110e" },
+        ai: { bg: "#0284c7", fg: "#ffffff" },
+        time: { bg: "#2e1008", fg: "#ffedd5" }
+      },
+      matcha_zen: {
+        name: "Matcha Tea & Zen",
+        bg: "#152017",
+        fg: "#ecfccb",
+        os: { bg: "#233827", fg: "#bef264" },
+        dir: { bg: "#65a30d", fg: "#152017" },
+        git: { bg: "#4d7c0f", fg: "#ecfccb" },
+        lang: { bg: "#a3e635", fg: "#152017" },
+        ai: { bg: "#10b981", fg: "#152017" },
+        time: { bg: "#1e2e21", fg: "#ecfccb" }
+      },
+      arcane_void: {
+        name: "Arcane Cosmic Void",
+        bg: "#0c071e",
+        fg: "#f5d0fe",
+        os: { bg: "#211145", fg: "#e879f9" },
+        dir: { bg: "#7c3aed", fg: "#ffffff" },
+        git: { bg: "#c026d3", fg: "#ffffff" },
+        lang: { bg: "#06b6d4", fg: "#0c071e" },
+        ai: { bg: "#f43f5e", fg: "#ffffff" },
+        time: { bg: "#2e1065", fg: "#f5d0fe" }
+      },
+      cyber_sunset: {
+        name: "Synthwave Horizon 1984",
+        bg: "#110b29",
+        fg: "#ffe6ff",
+        os: { bg: "#261447", fg: "#ff71ce" },
+        dir: { bg: "#ff2a85", fg: "#110b29" },
+        git: { bg: "#8a2be2", fg: "#ffe6ff" },
+        lang: { bg: "#00e5ff", fg: "#110b29" },
+        ai: { bg: "#ffbe0b", fg: "#110b29" },
+        time: { bg: "#4d1979", fg: "#ffe6ff" }
+      },
+      sakura: {
+        name: "Sakura Cherry Blossom",
+        bg: "#201824",
+        fg: "#fce7f3",
+        os: { bg: "#38233f", fg: "#f472b6" },
+        dir: { bg: "#f472b6", fg: "#201824" },
+        git: { bg: "#c084fc", fg: "#201824" },
+        lang: { bg: "#fbcfe8", fg: "#38233f" },
+        ai: { bg: "#fb7185", fg: "#201824" },
+        time: { bg: "#2e1b36", fg: "#fce7f3" }
+      },
+      everforest: {
+        name: "Everforest Deep Moss",
+        bg: "#2b3339",
+        fg: "#d3c6aa",
+        os: { bg: "#3a4248", fg: "#a7c080" },
+        dir: { bg: "#a7c080", fg: "#2b3339" },
+        git: { bg: "#7fbbb3", fg: "#2b3339" },
+        lang: { bg: "#dbbc7f", fg: "#2b3339" },
+        ai: { bg: "#83c092", fg: "#2b3339" },
+        time: { bg: "#323c41", fg: "#d3c6aa" }
       },
       catppuccin: {
         name: "Catppuccin Mocha",
@@ -1204,16 +1314,115 @@
         ai: { bg: "#a6e3a1", fg: "#1e1e2e" },
         time: { bg: "#45475a", fg: "#cdd6f4" }
       },
-      tokyonight: {
-        name: "Tokyo Night",
-        bg: "#1a1b26",
-        fg: "#a9b1d6",
-        os: { bg: "#24283b", fg: "#7aa2f7" },
-        dir: { bg: "#7aa2f7", fg: "#15161e" },
-        git: { bg: "#bb9af7", fg: "#15161e" },
-        lang: { bg: "#e0af68", fg: "#15161e" },
-        ai: { bg: "#7dcfff", fg: "#15161e" },
-        time: { bg: "#2ac3de", fg: "#15161e" }
+      monokai: {
+        name: "Monokai Pro Vivid",
+        bg: "#222222",
+        fg: "#fcfcfa",
+        os: { bg: "#363537", fg: "#ffd866" },
+        dir: { bg: "#ff6188", fg: "#222222" },
+        git: { bg: "#ab9df2", fg: "#222222" },
+        lang: { bg: "#a9dc76", fg: "#222222" },
+        ai: { bg: "#78dce8", fg: "#222222" },
+        time: { bg: "#403e41", fg: "#fcfcfa" }
+      },
+      gruvbox: {
+        name: "Gruvbox Warm Leather",
+        bg: "#282828",
+        fg: "#ebdbb2",
+        os: { bg: "#3c3836", fg: "#fabd2f" },
+        dir: { bg: "#d65d0e", fg: "#282828" },
+        git: { bg: "#b16286", fg: "#ebdbb2" },
+        lang: { bg: "#b8bb26", fg: "#282828" },
+        ai: { bg: "#8ec07c", fg: "#282828" },
+        time: { bg: "#504945", fg: "#ebdbb2" }
+      },
+      coffee_mocha: {
+        name: "Espresso Velvet Roast",
+        bg: "#181210",
+        fg: "#fef3c7",
+        os: { bg: "#2e1c17", fg: "#fde68a" },
+        dir: { bg: "#b45309", fg: "#ffffff" },
+        git: { bg: "#78350f", fg: "#fde68a" },
+        lang: { bg: "#d97706", fg: "#181210" },
+        ai: { bg: "#a16207", fg: "#fef3c7" },
+        time: { bg: "#241612", fg: "#fef3c7" }
+      },
+      cyber_platinum: {
+        name: "Ghost Platinum Shell",
+        bg: "#11161b",
+        fg: "#e2e8f0",
+        os: { bg: "#1e293b", fg: "#38bdf8" },
+        dir: { bg: "#38bdf8", fg: "#0f172a" },
+        git: { bg: "#64748b", fg: "#ffffff" },
+        lang: { bg: "#94a3b8", fg: "#0f172a" },
+        ai: { bg: "#10b981", fg: "#0f172a" },
+        time: { bg: "#1e293b", fg: "#e2e8f0" }
+      },
+      rosepine: {
+        name: "Rosé Pine Vintage",
+        bg: "#191724",
+        fg: "#e0def4",
+        os: { bg: "#26233a", fg: "#ebbcba" },
+        dir: { bg: "#eb6f92", fg: "#191724" },
+        git: { bg: "#c4a7e7", fg: "#191724" },
+        lang: { bg: "#f6c177", fg: "#191724" },
+        ai: { bg: "#9ccfd8", fg: "#191724" },
+        time: { bg: "#31748f", fg: "#e0def4" }
+      },
+      onedark: {
+        name: "One Dark Pro Iconic",
+        bg: "#21252b",
+        fg: "#abb2bf",
+        os: { bg: "#282c34", fg: "#61afef" },
+        dir: { bg: "#61afef", fg: "#21252b" },
+        git: { bg: "#c678dd", fg: "#21252b" },
+        lang: { bg: "#e5c07b", fg: "#21252b" },
+        ai: { bg: "#98c379", fg: "#21252b" },
+        time: { bg: "#3e4451", fg: "#abb2bf" }
+      },
+      solarized: {
+        name: "Solarized Cyan Precision",
+        bg: "#002b36",
+        fg: "#93a1a1",
+        os: { bg: "#073642", fg: "#2aa198" },
+        dir: { bg: "#268bd2", fg: "#002b36" },
+        git: { bg: "#6c71c4", fg: "#fdf6e3" },
+        lang: { bg: "#b58900", fg: "#002b36" },
+        ai: { bg: "#2aa198", fg: "#002b36" },
+        time: { bg: "#073642", fg: "#93a1a1" }
+      },
+      outrun: {
+        name: "Outrun Hypergrid",
+        bg: "#0d0221",
+        fg: "#00f6ff",
+        os: { bg: "#241734", fg: "#ff3864" },
+        dir: { bg: "#ff3864", fg: "#0d0221" },
+        git: { bg: "#7b2cbf", fg: "#ffffff" },
+        lang: { bg: "#ff9e00", fg: "#0d0221" },
+        ai: { bg: "#00f6ff", fg: "#0d0221" },
+        time: { bg: "#3c096c", fg: "#00f6ff" }
+      },
+      lumon: {
+        name: "Lumon Oceanic Fjord",
+        bg: "#16242d",
+        fg: "#d6e2ee",
+        os: { bg: "#1b2d40", fg: "#ffffff" },
+        dir: { bg: "#6fa4c9", fg: "#0f172a" },
+        git: { bg: "#5e95bc", fg: "#ffffff" },
+        lang: { bg: "#6fb8e3", fg: "#0f172a" },
+        ai: { bg: "#38bdf8", fg: "#0f172a" },
+        time: { bg: "#23394a", fg: "#d6e2ee" }
+      },
+      emerald: {
+        name: "Emerald Dragon Jewel",
+        bg: "#061a14",
+        fg: "#d1fae5",
+        os: { bg: "#064e3b", fg: "#6ee7b7" },
+        dir: { bg: "#047857", fg: "#ffffff" },
+        git: { bg: "#059669", fg: "#ffffff" },
+        lang: { bg: "#d97706", fg: "#061a14" },
+        ai: { bg: "#10b981", fg: "#061a14" },
+        time: { bg: "#065f46", fg: "#d1fae5" }
       },
       pastel: {
         name: "Pastel Powerline",
@@ -1226,17 +1435,6 @@
         ai: { bg: "#06969A", fg: "#ffffff" },
         time: { bg: "#33658A", fg: "#ffffff" }
       },
-      gruvbox: {
-        name: "Gruvbox Rainbow",
-        bg: "#282828",
-        fg: "#ebdbb2",
-        os: { bg: "#fe8019", fg: "#282828" },
-        dir: { bg: "#fabd2f", fg: "#282828" },
-        git: { bg: "#b8bb26", fg: "#282828" },
-        lang: { bg: "#83a598", fg: "#282828" },
-        ai: { bg: "#d3869b", fg: "#282828" },
-        time: { bg: "#504945", fg: "#ebdbb2" }
-      },
       tokyoshadow: {
         name: "Tokyo Night Shading",
         bg: "#16161e",
@@ -1247,28 +1445,6 @@
         lang: { bg: "#212736", fg: "#a3aed2" },
         ai: { bg: "#7aa2f7", fg: "#1a1b26" },
         time: { bg: "#1d2230", fg: "#7aa2f7" }
-      },
-      rosepine: {
-        name: "Rosé Pine Moon",
-        bg: "#232136",
-        fg: "#e0def4",
-        os: { bg: "#eb6f92", fg: "#232136" },
-        dir: { bg: "#ea9a97", fg: "#232136" },
-        git: { bg: "#c4a7e7", fg: "#232136" },
-        lang: { bg: "#f6c177", fg: "#232136" },
-        ai: { bg: "#9ccfd8", fg: "#232136" },
-        time: { bg: "#393552", fg: "#e0def4" }
-      },
-      nord: {
-        name: "Nord Frost",
-        bg: "#2e3440",
-        fg: "#eceff4",
-        os: { bg: "#5e81ac", fg: "#eceff4" },
-        dir: { bg: "#81a1c1", fg: "#2e3440" },
-        git: { bg: "#88c0d0", fg: "#2e3440" },
-        lang: { bg: "#8fbcbb", fg: "#2e3440" },
-        ai: { bg: "#b48ead", fg: "#2e3440" },
-        time: { bg: "#3b4252", fg: "#d8dee9" }
       }
     };
 
