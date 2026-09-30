@@ -454,6 +454,71 @@
       transform: scaleY(var(--sep-scale));
     }
 
+    /* Prompt Style Mode Toggles & Minimalist Styling */
+    .style-toggle-group {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+      margin-top: 4px;
+    }
+
+    .style-toggle-btn {
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      padding: 7px 6px;
+      border-radius: var(--radius-sm);
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .style-toggle-btn:hover {
+      background: var(--bg-card-hover);
+      color: var(--text-main);
+      border-color: var(--accent-primary);
+    }
+
+    .style-toggle-btn.active {
+      background: rgba(99, 102, 241, 0.2);
+      border-color: var(--accent-primary);
+      color: #ffffff;
+      box-shadow: 0 2px 8px rgba(99, 102, 241, 0.25);
+    }
+
+    .prompt-segment-minimal {
+      display: inline-flex;
+      align-items: center;
+      height: var(--prompt-height);
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 1;
+      padding: 0 4px;
+    }
+
+    .prompt-segment-bracketed {
+      display: inline-flex;
+      align-items: center;
+      height: var(--prompt-height);
+      font-size: 14px;
+      line-height: 1;
+      padding: 0 3px;
+    }
+
+    .separator-minimal {
+      font-size: 12px;
+      color: var(--text-muted);
+      display: inline-flex;
+      align-items: center;
+      padding: 0 2px;
+      user-select: none;
+    }
+
     .prompt-line-2 {
       display: flex;
       align-items: center;
@@ -1085,42 +1150,63 @@
 
         <div class="controls-grid" style="grid-template-columns: 1fr;">
           <div class="control-group">
-            <label for="leftCapSelect">Left Cap Symbol (Start)</label>
-            <select id="leftCapSelect" onchange="updateCustomizer()"></select>
+            <label>Prompt Style Mode</label>
+            <div class="style-toggle-group">
+              <button type="button" class="style-toggle-btn active" id="styleBtn-powerline" onclick="setPromptStyle('powerline')">Powerline (Fill)</button>
+              <button type="button" class="style-toggle-btn" id="styleBtn-transparent" onclick="setPromptStyle('transparent')">Transparent Minimal</button>
+              <button type="button" class="style-toggle-btn" id="styleBtn-bracketed" onclick="setPromptStyle('bracketed')">Bracketed [ ]</button>
+            </div>
           </div>
 
-          <div class="control-group">
-            <label for="rightCapSelect">Right Cap Symbol (End)</label>
-            <select id="rightCapSelect" onchange="updateCustomizer()"></select>
+          <div id="minimalStyleNotice" style="display: none; padding: 10px 12px; background: rgba(99, 102, 241, 0.08); border: 1px solid rgba(99, 102, 241, 0.25); border-radius: var(--radius-sm); font-size: 11px; color: var(--text-muted); line-height: 1.4; margin-bottom: 8px;">
+            ✨ <strong>Minimalist Mode</strong>: Segments render with clean spacing, vibrant foreground colors, and optional brackets without Powerline block fills or cap glyphs.
           </div>
 
-          <!-- Individual Middle Separators Section -->
-          <div class="control-group" style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-color); border-radius: 8px; padding: 12px; margin-bottom: 1rem;">
-            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
-              <span style="font-weight: 600; font-size: 0.85rem; color: var(--text-primary);">Middle Separators</span>
-              <label style="display: flex; align-items: center; gap: 6px; font-size: 0.75rem; color: var(--text-muted); cursor: pointer; user-select: none;">
-                <input type="checkbox" id="linkSeparators" onchange="toggleLinkSeparators()" checked>
-                <span>Link all</span>
-              </label>
+          <div id="capsSeparatorsSection">
+            <div class="control-group">
+              <label for="leftCapSelect">Left Cap Symbol (Start)</label>
+              <select id="leftCapSelect" onchange="updateCustomizer()"></select>
             </div>
 
-            <div style="display: flex; flex-direction: column; gap: 8px;">
-              <div>
-                <label for="sep1Select" style="font-size: 0.75rem; color: var(--text-muted); display: block; margin-bottom: 4px;">Separator 1 (OS ➔ Dir)</label>
-                <select id="sep1Select" onchange="onSeparatorChange(0)"></select>
+            <div class="control-group">
+              <label for="rightCapSelect">Right Cap Symbol (End)</label>
+              <select id="rightCapSelect" onchange="updateCustomizer()"></select>
+            </div>
+
+            <!-- Individual Middle Separators Section -->
+            <div class="control-group" style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-color); border-radius: 8px; padding: 12px; margin-bottom: 1rem;">
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                <span style="font-weight: 600; font-size: 0.85rem; color: var(--text-primary);">Middle Separators</span>
+                <label style="display: flex; align-items: center; gap: 6px; font-size: 0.75rem; color: var(--text-muted); cursor: pointer; user-select: none;">
+                  <input type="checkbox" id="linkSeparators" onchange="toggleLinkSeparators()" checked>
+                  <span>Link all</span>
+                </label>
               </div>
-              <div>
-                <label for="sep2Select" style="font-size: 0.75rem; color: var(--text-muted); display: block; margin-bottom: 4px;">Separator 2 (Dir ➔ Git)</label>
-                <select id="sep2Select" onchange="onSeparatorChange(1)"></select>
+
+              <div style="display: flex; flex-direction: column; gap: 8px;">
+                <div>
+                  <label for="sep1Select" style="font-size: 0.75rem; color: var(--text-muted); display: block; margin-bottom: 4px;">Separator 1 (OS ➔ Dir)</label>
+                  <select id="sep1Select" onchange="onSeparatorChange(0)"></select>
+                </div>
+                <div>
+                  <label for="sep2Select" style="font-size: 0.75rem; color: var(--text-muted); display: block; margin-bottom: 4px;">Separator 2 (Dir ➔ Git)</label>
+                  <select id="sep2Select" onchange="onSeparatorChange(1)"></select>
+                </div>
+                <div>
+                  <label for="sep3Select" style="font-size: 0.75rem; color: var(--text-muted); display: block; margin-bottom: 4px;">Separator 3 (Git ➔ Lang)</label>
+                  <select id="sep3Select" onchange="onSeparatorChange(2)"></select>
+                </div>
+                <div>
+                  <label for="sep4Select" style="font-size: 0.75rem; color: var(--text-muted); display: block; margin-bottom: 4px;">Separator 4 (Lang ➔ Time)</label>
+                  <select id="sep4Select" onchange="onSeparatorChange(3)"></select>
+                </div>
               </div>
-              <div>
-                <label for="sep3Select" style="font-size: 0.75rem; color: var(--text-muted); display: block; margin-bottom: 4px;">Separator 3 (Git ➔ Lang)</label>
-                <select id="sep3Select" onchange="onSeparatorChange(2)"></select>
-              </div>
-              <div>
-                <label for="sep4Select" style="font-size: 0.75rem; color: var(--text-muted); display: block; margin-bottom: 4px;">Separator 4 (Lang ➔ Time)</label>
-                <select id="sep4Select" onchange="onSeparatorChange(3)"></select>
-              </div>
+            </div>
+
+            <div class="control-group">
+              <label for="scaleInput">Separator Vertical Scale</label>
+              <input type="range" id="scaleInput" value="1" min="0.75" max="1.25" step="0.01"
+                onchange="updateCustomizer()" oninput="updateCustomizer()">
             </div>
           </div>
 
@@ -1133,12 +1219,6 @@
             <label for="heightInput">Prompt Line Height (px)</label>
             <input type="number" id="heightInput" value="30" min="20" max="50" onchange="updateCustomizer()"
               oninput="updateCustomizer()">
-          </div>
-
-          <div class="control-group">
-            <label for="scaleInput">Separator Vertical Scale</label>
-            <input type="range" id="scaleInput" value="1" min="0.75" max="1.25" step="0.01"
-              onchange="updateCustomizer()" oninput="updateCustomizer()">
           </div>
 
           <div class="control-group">
@@ -1793,11 +1873,62 @@
         theme: "nord",
         icon: "",
         modules: { os: true, dir: true, git: true, lang: true, time: true }
+      },
+
+      // ── Transparent & Bracketed Presets ────────────────────────────────────
+      {
+        id: "pure_minimal",
+        name: "Pure Prompt (Minimal)",
+        promptStyle: "transparent",
+        preview: "󰲋 ~  main ❯",
+        leftCap: "",
+        sep: " ",
+        rightCap: "",
+        theme: "nord",
+        icon: "󰣇",
+        modules: { os: false, dir: true, git: true, lang: true, time: false }
+      },
+      {
+        id: "bracketed_segments",
+        name: "Bracketed Segments",
+        promptStyle: "bracketed",
+        preview: "[ ~ ] [  main ]",
+        leftCap: "[",
+        sep: " ",
+        rightCap: "]",
+        theme: "catppuccin",
+        icon: "󰣇",
+        modules: { os: false, dir: true, git: true, lang: true, time: true }
+      },
+      {
+        id: "nerd_font_minimal",
+        name: "Nerd Font Rainbow",
+        promptStyle: "transparent",
+        preview: " 󰲋 ~  main 󱑺",
+        leftCap: "",
+        sep: " ",
+        rightCap: "",
+        theme: "tokyonight",
+        icon: "",
+        modules: { os: true, dir: true, git: true, lang: true, time: true }
+      },
+      {
+        id: "jetpack_minimal",
+        name: "Jetpack Spaceship",
+        promptStyle: "transparent",
+        preview: "🚀 󰲋 ~  main ⚡",
+        leftCap: "",
+        sep: " ",
+        rightCap: "",
+        theme: "cyber_sunset",
+        icon: "🚀",
+        modules: { os: true, dir: true, git: true, lang: true, time: false }
       }
     ];
 
     // ── State ─────────────────────────────────────────────────────────────────
     let currentConfig = {
+      promptStyle: "powerline",
       leftCap: "",
       separators: ["", "", "", ""],
       rightCap: "",
@@ -1827,7 +1958,7 @@
     "", "", "", "", "", "󱓟", "󰺹", "󰅏", "", "",
     "", "󱃏", "", "", "", "󰷗", "󰀻", "󰔌", "󰂵", "󰢶",
     "󱝊", "󱪶", "󱪷", "", "󱑻", "󰕤", "󰹪",
-    "󱑺", "󱑼", "󰊠"
+    "󱑺", "󱑼", "󰊠", "🚀", ""
   ];
 
   // ── DOM Elements ──────────────────────────────────────────────────────────
@@ -1899,6 +2030,23 @@
     if (themeSelect) themeSelect.value = currentConfig.themeKey;
   }
 
+  function setPromptStyle(style, skipUpdate = false) {
+    currentConfig.promptStyle = style;
+    ["powerline", "transparent", "bracketed"].forEach(s => {
+      const btn = document.getElementById(`styleBtn-${s}`);
+      if (btn) btn.classList.toggle("active", s === style);
+    });
+
+    const capGroup = document.getElementById("capsSeparatorsSection");
+    const notice = document.getElementById("minimalStyleNotice");
+    if (capGroup) capGroup.style.display = style === "powerline" ? "block" : "none";
+    if (notice) notice.style.display = style === "powerline" ? "none" : "block";
+
+    if (!skipUpdate) {
+      updateCustomizer();
+    }
+  }
+
   // ── Initialize App ────────────────────────────────────────────────────────
   function init() {
     renderGlyphSelects();
@@ -1909,6 +2057,7 @@
 
     // Ensure selects & inputs reflect initial defaults
     syncSeparatorUI();
+    setPromptStyle(currentConfig.promptStyle, true);
     if (iconSelect) iconSelect.value = currentConfig.iconSymbol;
 
     const hInput = document.getElementById("heightInput");
@@ -2031,21 +2180,25 @@
 
   // Apply Preset
   function applyPreset(p) {
+    const style = p.promptStyle || "powerline";
+    setPromptStyle(style, true);
     currentConfig.activePreset = p.id;
-    currentConfig.leftCap = p.leftCap;
-    if (Array.isArray(p.sep)) {
-      currentConfig.separators = [
-        p.sep[0] || "",
-        p.sep[1] || p.sep[0] || "",
-        p.sep[2] || p.sep[0] || "",
-        p.sep[3] || p.sep[1] || p.sep[0] || ""
-      ];
-      currentConfig.linkSeparators = false;
-    } else {
-      currentConfig.separators = [p.sep, p.sep, p.sep, p.sep];
-      currentConfig.linkSeparators = true;
+    if (p.leftCap !== undefined) currentConfig.leftCap = p.leftCap;
+    if (p.rightCap !== undefined) currentConfig.rightCap = p.rightCap;
+    if (p.sep !== undefined) {
+      if (Array.isArray(p.sep)) {
+        currentConfig.separators = [
+          p.sep[0] || "",
+          p.sep[1] || p.sep[0] || "",
+          p.sep[2] || p.sep[0] || "",
+          p.sep[3] || p.sep[1] || p.sep[0] || ""
+        ];
+        currentConfig.linkSeparators = false;
+      } else {
+        currentConfig.separators = [p.sep, p.sep, p.sep, p.sep];
+        currentConfig.linkSeparators = true;
+      }
     }
-    currentConfig.rightCap = p.rightCap;
     currentConfig.themeKey = p.theme;
     if (p.icon) {
       currentConfig.iconSymbol = p.icon;
@@ -2179,12 +2332,9 @@
 
     // Sync active state on preset buttons
     const matched = presets.find(p => {
-      let sepMatch = false;
-      if (Array.isArray(p.sep)) {
-        sepMatch = p.sep.every((s, i) => s === currentConfig.separators[i % currentConfig.separators.length]);
-      } else {
-        sepMatch = currentConfig.separators.every(s => s === p.sep);
-      }
+      const pStyle = p.promptStyle || "powerline";
+      if (pStyle !== currentConfig.promptStyle) return false;
+
       const modulesMatch = !p.modules || (
         (p.modules.os === undefined || p.modules.os === currentConfig.modules.os) &&
         (p.modules.dir === undefined || p.modules.dir === currentConfig.modules.dir) &&
@@ -2192,6 +2342,17 @@
         (p.modules.lang === undefined || p.modules.lang === currentConfig.modules.lang) &&
         (p.modules.time === undefined || p.modules.time === currentConfig.modules.time)
       );
+
+      if (pStyle !== "powerline") {
+        return p.theme === currentConfig.themeKey && modulesMatch;
+      }
+
+      let sepMatch = false;
+      if (Array.isArray(p.sep)) {
+        sepMatch = p.sep.every((s, i) => s === currentConfig.separators[i % currentConfig.separators.length]);
+      } else {
+        sepMatch = currentConfig.separators.every(s => s === p.sep);
+      }
       return (
         p.leftCap === currentConfig.leftCap &&
         sepMatch &&
@@ -2245,6 +2406,60 @@
       return;
     }
 
+    if (currentConfig.promptStyle === "transparent") {
+      activeSegs.forEach((seg, i) => {
+        const segSpan = document.createElement("span");
+        segSpan.className = "prompt-segment-minimal";
+        segSpan.style.color = seg.bg;
+        segSpan.textContent = seg.label;
+        promptContainer.appendChild(segSpan);
+
+        if (i < activeSegs.length - 1) {
+          const sep = document.createElement("span");
+          sep.className = "separator-minimal";
+          sep.textContent = " ";
+          promptContainer.appendChild(sep);
+        }
+      });
+      return;
+    }
+
+    if (currentConfig.promptStyle === "bracketed") {
+      activeSegs.forEach((seg, i) => {
+        const segSpan = document.createElement("span");
+        segSpan.className = "prompt-segment-bracketed";
+
+        const openBracket = document.createElement("span");
+        openBracket.style.color = "var(--text-muted)";
+        openBracket.style.opacity = "0.7";
+        openBracket.textContent = "[";
+        segSpan.appendChild(openBracket);
+
+        const contentSpan = document.createElement("span");
+        contentSpan.style.color = seg.bg;
+        contentSpan.style.fontWeight = "600";
+        contentSpan.style.padding = "0 4px";
+        contentSpan.textContent = seg.label;
+        segSpan.appendChild(contentSpan);
+
+        const closeBracket = document.createElement("span");
+        closeBracket.style.color = "var(--text-muted)";
+        closeBracket.style.opacity = "0.7";
+        closeBracket.textContent = "]";
+        segSpan.appendChild(closeBracket);
+
+        promptContainer.appendChild(segSpan);
+
+        if (i < activeSegs.length - 1) {
+          const sep = document.createElement("span");
+          sep.className = "separator-minimal";
+          sep.textContent = " ";
+          promptContainer.appendChild(sep);
+        }
+      });
+      return;
+    }
+
     // Left Cap Symbol
     const leftCapSpan = document.createElement("span");
     leftCapSpan.className = "separator-glyph";
@@ -2291,6 +2506,120 @@
   // Generate Starship TOML Config Text
   function generateToml() {
     const theme = themes[currentConfig.themeKey] || themes.firewatch;
+    const styleMode = currentConfig.promptStyle || "powerline";
+
+    if (styleMode === "transparent") {
+      const activeVars = [];
+      if (currentConfig.modules.os) activeVars.push('$os');
+      if (currentConfig.modules.dir) activeVars.push('$directory');
+      if (currentConfig.modules.git) activeVars.push('$git_branch$git_status');
+      if (currentConfig.modules.lang) activeVars.push('$rust$nodejs$python');
+      if (currentConfig.modules.time) activeVars.push('$time');
+
+      const formatStr = activeVars.join(' ') + '\\n$character';
+
+      const tomlText = `"$schema" = 'https://starship.rs/config-schema.json'
+
+format = """
+${formatStr}"""
+
+palette = 'starship_theme'
+
+[palettes.starship_theme]
+color_bg = '${theme.bg}'
+color_os = '${theme.os.bg}'
+color_dir = '${theme.dir.bg}'
+color_git = '${theme.git.bg}'
+color_lang = '${theme.lang.bg}'
+color_time = '${theme.time.bg}'
+
+[os]
+disabled = ${!currentConfig.modules.os}
+style = "bold fg:color_os"
+format = '[${currentConfig.iconSymbol} ]($style)'
+
+[directory]
+disabled = ${!currentConfig.modules.dir}
+style = "bold fg:color_dir"
+format = '[$path]($style) '
+truncation_length = 3
+
+[git_branch]
+disabled = ${!currentConfig.modules.git}
+symbol = " "
+style = "bold fg:color_git"
+format = '[$symbol$branch]($style) '
+
+[time]
+disabled = ${!currentConfig.modules.time}
+time_format = "%R"
+style = "fg:color_time"
+format = '[♥ $time]($style) '
+
+[character]
+success_symbol = "[❯](bold green)"
+error_symbol = "[❯](bold red)"
+`;
+      tomlOutput.value = tomlText;
+      return;
+    }
+
+    if (styleMode === "bracketed") {
+      const activeVars = [];
+      if (currentConfig.modules.os) activeVars.push('$os');
+      if (currentConfig.modules.dir) activeVars.push('$directory');
+      if (currentConfig.modules.git) activeVars.push('$git_branch$git_status');
+      if (currentConfig.modules.lang) activeVars.push('$rust$nodejs$python');
+      if (currentConfig.modules.time) activeVars.push('$time');
+
+      const formatStr = activeVars.join(' ') + '\\n$character';
+
+      const tomlText = `"$schema" = 'https://starship.rs/config-schema.json'
+
+format = """
+${formatStr}"""
+
+palette = 'starship_theme'
+
+[palettes.starship_theme]
+color_bg = '${theme.bg}'
+color_os = '${theme.os.bg}'
+color_dir = '${theme.dir.bg}'
+color_git = '${theme.git.bg}'
+color_lang = '${theme.lang.bg}'
+color_time = '${theme.time.bg}'
+
+[os]
+disabled = ${!currentConfig.modules.os}
+style = "bold fg:color_os"
+format = '[\[](bright-black)[${currentConfig.iconSymbol} ]($style)[\]](bright-black)'
+
+[directory]
+disabled = ${!currentConfig.modules.dir}
+style = "bold fg:color_dir"
+format = '[\[](bright-black)[$path]($style)[\]](bright-black)'
+truncation_length = 3
+
+[git_branch]
+disabled = ${!currentConfig.modules.git}
+symbol = " "
+style = "bold fg:color_git"
+format = '[\[](bright-black)[$symbol$branch]($style)[\]](bright-black)'
+
+[time]
+disabled = ${!currentConfig.modules.time}
+time_format = "%R"
+style = "fg:color_time"
+format = '[\[](bright-black)[♥ $time]($style)[\]](bright-black)'
+
+[character]
+success_symbol = "[❯](bold green)"
+error_symbol = "[❯](bold red)"
+`;
+      tomlOutput.value = tomlText;
+      return;
+    }
+
     const left = currentConfig.leftCap;
     const right = currentConfig.rightCap;
 
@@ -2376,6 +2705,7 @@ error_symbol = "[❯](bold red)"
 
   function parseStarshipToml(toml) {
     const result = {
+      promptStyle: null,
       modules: { os: false, dir: false, git: false, lang: false, time: false },
       separators: [],
       leftCap: null,
@@ -2385,6 +2715,14 @@ error_symbol = "[❯](bold red)"
     };
 
     if (!toml || typeof toml !== "string") return result;
+
+    if (toml.includes("\\[") || toml.includes("[\[]") || toml.includes("\[\]")) {
+      result.promptStyle = "bracketed";
+    } else if (toml.includes("bg:color_") || toml.includes("bg:#")) {
+      result.promptStyle = "powerline";
+    } else if (toml.includes("bold fg:") || toml.includes("fg:color_")) {
+      result.promptStyle = "transparent";
+    }
 
     const formatMatch = toml.match(/format\s*=\s*(?:"""([\s\S]*?)"""|'''([\s\S]*?)'''|"([^"]*)"|'([^']*)')/);
     if (formatMatch) {
@@ -2443,6 +2781,11 @@ error_symbol = "[❯](bold red)"
     const tomlText = tomlOutput.value;
     const parsed = parseStarshipToml(tomlText);
     let changed = false;
+
+    if (parsed.promptStyle && parsed.promptStyle !== currentConfig.promptStyle) {
+      setPromptStyle(parsed.promptStyle, true);
+      changed = true;
+    }
 
     if (parsed.leftCap) {
       currentConfig.leftCap = parsed.leftCap;
@@ -2600,43 +2943,69 @@ error_symbol = "[❯](bold red)"
     ctx.textBaseline = "middle";
 
     if (activeSegs.length > 0) {
-      // Left Cap
-      ctx.fillStyle = activeSegs[0].bg;
-      ctx.font = "30px 'JetBrainsMono Nerd Font', 'FiraCode Nerd Font', monospace";
-      const capWidth = ctx.measureText(currentConfig.leftCap).width;
-      ctx.fillText(currentConfig.leftCap, startX, startY + segHeight / 2);
-      startX += capWidth;
+      if (currentConfig.promptStyle === "transparent") {
+        activeSegs.forEach(seg => {
+          ctx.font = "bold 14px 'JetBrainsMono Nerd Font', 'FiraCode Nerd Font', monospace";
+          ctx.fillStyle = seg.bg;
+          ctx.fillText(seg.label, startX, startY + segHeight / 2);
+          startX += ctx.measureText(seg.label).width + 12;
+        });
+      } else if (currentConfig.promptStyle === "bracketed") {
+        activeSegs.forEach(seg => {
+          ctx.font = "14px 'JetBrainsMono Nerd Font', 'FiraCode Nerd Font', monospace";
+          ctx.fillStyle = "#64748b";
+          ctx.fillText("[ ", startX, startY + segHeight / 2);
+          startX += ctx.measureText("[ ").width;
 
-      activeSegs.forEach((seg, i) => {
-        ctx.font = "14px 'JetBrainsMono Nerd Font', 'FiraCode Nerd Font', monospace";
-        const textMetrics = ctx.measureText(seg.label);
-        const padX = 10;
-        const boxWidth = textMetrics.width + (padX * 2);
+          ctx.font = "bold 14px 'JetBrainsMono Nerd Font', 'FiraCode Nerd Font', monospace";
+          ctx.fillStyle = seg.bg;
+          ctx.fillText(seg.label, startX, startY + segHeight / 2);
+          startX += ctx.measureText(seg.label).width;
 
-        // Segment Box
-        ctx.fillStyle = seg.bg;
-        ctx.fillRect(startX, startY, boxWidth, segHeight);
-
-        // Segment Text
-        ctx.fillStyle = seg.fg;
-        ctx.fillText(seg.label, startX + padX, startY + segHeight / 2);
-        startX += boxWidth;
-
-        // Separator / Right Cap
-        const sepChar = (i < activeSegs.length - 1) ? getSeparator(i) : currentConfig.rightCap;
+          ctx.font = "14px 'JetBrainsMono Nerd Font', 'FiraCode Nerd Font', monospace";
+          ctx.fillStyle = "#64748b";
+          ctx.fillText(" ] ", startX, startY + segHeight / 2);
+          startX += ctx.measureText(" ] ").width + 4;
+        });
+      } else {
+        // Left Cap
+        ctx.fillStyle = activeSegs[0].bg;
         ctx.font = "30px 'JetBrainsMono Nerd Font', 'FiraCode Nerd Font', monospace";
-        const sepWidth = ctx.measureText(sepChar).width;
+        const capWidth = ctx.measureText(currentConfig.leftCap).width;
+        ctx.fillText(currentConfig.leftCap, startX, startY + segHeight / 2);
+        startX += capWidth;
 
-        if (i < activeSegs.length - 1) {
-          const nextSeg = activeSegs[i + 1];
-          ctx.fillStyle = nextSeg.bg;
-          ctx.fillRect(startX, startY, sepWidth, segHeight);
-        }
+        activeSegs.forEach((seg, i) => {
+          ctx.font = "14px 'JetBrainsMono Nerd Font', 'FiraCode Nerd Font', monospace";
+          const textMetrics = ctx.measureText(seg.label);
+          const padX = 10;
+          const boxWidth = textMetrics.width + (padX * 2);
 
-        ctx.fillStyle = seg.bg;
-        ctx.fillText(sepChar, startX, startY + segHeight / 2);
-        startX += sepWidth;
-      });
+          // Segment Box
+          ctx.fillStyle = seg.bg;
+          ctx.fillRect(startX, startY, boxWidth, segHeight);
+
+          // Segment Text
+          ctx.fillStyle = seg.fg;
+          ctx.fillText(seg.label, startX + padX, startY + segHeight / 2);
+          startX += boxWidth;
+
+          // Separator / Right Cap
+          const sepChar = (i < activeSegs.length - 1) ? getSeparator(i) : currentConfig.rightCap;
+          ctx.font = "30px 'JetBrainsMono Nerd Font', 'FiraCode Nerd Font', monospace";
+          const sepWidth = ctx.measureText(sepChar).width;
+
+          if (i < activeSegs.length - 1) {
+            const nextSeg = activeSegs[i + 1];
+            ctx.fillStyle = nextSeg.bg;
+            ctx.fillRect(startX, startY, sepWidth, segHeight);
+          }
+
+          ctx.fillStyle = seg.bg;
+          ctx.fillText(sepChar, startX, startY + segHeight / 2);
+          startX += sepWidth;
+        });
+      }
     }
 
     // Line 2: Prompt symbol and command
