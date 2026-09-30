@@ -113,6 +113,16 @@
     href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap"
     rel="stylesheet">
   <style>
+    @font-face {
+      font-family: 'Symbols Nerd Font';
+      src: local('Symbols Nerd Font'),
+           local('JetBrainsMono Nerd Font'),
+           local('JetBrainsMono NF'),
+           local('CaskaydiaMono Nerd Font'),
+           url('https://cdn.jsdelivr.net/gh/ryanoasis/nerd-fonts@v3.2.1/patched-fonts/NerdFontsSymbolsOnly/SymbolsNerdFontMono-Regular.ttf') format('truetype');
+      font-display: swap;
+    }
+
     :root {
       --bg-dark: #0f111a;
       --bg-card: #181b28;
@@ -132,7 +142,8 @@
       --radius-md: 12px;
       --radius-lg: 18px;
       --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      --font-code: 'JetBrains Mono', 'Fira Code', monospace;
+      --font-code: 'Symbols Nerd Font', 'JetBrainsMono Nerd Font', 'JetBrainsMono NF', 'CaskaydiaMono Nerd Font', 'CaskaydiaMono NF', 'FiraCode Nerd Font', 'MesloLGS NF', 'JetBrains Mono', 'Fira Code', monospace;
+      --font-nerd: 'Symbols Nerd Font', 'JetBrainsMono Nerd Font', 'JetBrainsMono NF', 'CaskaydiaMono Nerd Font', 'CaskaydiaMono NF', monospace;
     }
 
     * {
@@ -553,8 +564,18 @@
     }
 
     .seg-color-icon {
-      font-size: 13px;
+      font-family: var(--font-nerd), var(--font-code);
+      font-size: 15px;
+      line-height: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 18px;
+      min-height: 18px;
       color: var(--accent-cyan);
+      vertical-align: middle;
+      flex-shrink: 0;
+      transition: color 0.2s ease, background-color 0.2s ease;
     }
 
     .seg-color-pickers {
@@ -1358,7 +1379,7 @@
               <!-- Directory Row -->
               <div class="seg-color-row" id="colorRow-dir">
                 <span class="seg-color-label">
-                  <span class="seg-color-icon">󰲋</span> Directory
+                  <span class="seg-color-icon" id="colorIcon-dir">󰲋</span> Directory
                 </span>
                 <div class="seg-color-pickers">
                   <label class="color-picker-wrapper" id="colorWrapper-dir-bg" title="Segment Fill Color (Powerline) or Directory Color (Transparent)">
@@ -1377,7 +1398,7 @@
               <!-- Git Branch Row -->
               <div class="seg-color-row" id="colorRow-git">
                 <span class="seg-color-label">
-                  <span class="seg-color-icon"></span> Git Branch
+                  <span class="seg-color-icon" id="colorIcon-git"></span> Git Branch
                 </span>
                 <div class="seg-color-pickers">
                   <label class="color-picker-wrapper" id="colorWrapper-git-bg" title="Segment Fill Color (Powerline) or Git Color (Transparent)">
@@ -1396,7 +1417,7 @@
               <!-- Language Row -->
               <div class="seg-color-row" id="colorRow-lang">
                 <span class="seg-color-label">
-                  <span class="seg-color-icon"></span> Language
+                  <span class="seg-color-icon" id="colorIcon-lang"></span> Language
                 </span>
                 <div class="seg-color-pickers">
                   <label class="color-picker-wrapper" id="colorWrapper-lang-bg" title="Segment Fill Color (Powerline) or Language Color (Transparent)">
@@ -1415,7 +1436,7 @@
               <!-- Time Row -->
               <div class="seg-color-row" id="colorRow-time">
                 <span class="seg-color-label">
-                  <span class="seg-color-icon"></span> Time
+                  <span class="seg-color-icon" id="colorIcon-time"></span> Time
                 </span>
                 <div class="seg-color-pickers">
                   <label class="color-picker-wrapper" id="colorWrapper-time-bg" title="Segment Fill Color (Powerline) or Time Color (Transparent)">
@@ -2329,8 +2350,39 @@
       });
     });
 
+    const isPowerline = currentConfig.promptStyle === "powerline";
     const previewIcon = document.getElementById("colorPreviewIcon");
-    if (previewIcon) previewIcon.textContent = currentConfig.iconSymbol;
+    if (previewIcon) {
+      previewIcon.textContent = currentConfig.iconSymbol;
+      if (isPowerline) {
+        previewIcon.style.backgroundColor = (colors.os && colors.os.bg) ? colors.os.bg : "transparent";
+        previewIcon.style.color = (colors.os && colors.os.fg) ? colors.os.fg : "#ffffff";
+        previewIcon.style.borderRadius = "4px";
+        previewIcon.style.padding = "2px 4px";
+      } else {
+        previewIcon.style.backgroundColor = "transparent";
+        previewIcon.style.color = (colors.os && colors.os.bg) ? colors.os.bg : "var(--accent-cyan)";
+        previewIcon.style.borderRadius = "0";
+        previewIcon.style.padding = "0";
+      }
+    }
+
+    ['dir', 'git', 'lang', 'time'].forEach(mod => {
+      const iconEl = document.getElementById(`colorIcon-${mod}`);
+      if (iconEl && colors[mod]) {
+        if (isPowerline) {
+          iconEl.style.backgroundColor = colors[mod].bg || "transparent";
+          iconEl.style.color = colors[mod].fg || "#ffffff";
+          iconEl.style.borderRadius = "4px";
+          iconEl.style.padding = "2px 4px";
+        } else {
+          iconEl.style.backgroundColor = "transparent";
+          iconEl.style.color = colors[mod].bg || "var(--accent-cyan)";
+          iconEl.style.borderRadius = "0";
+          iconEl.style.padding = "0";
+        }
+      }
+    });
   }
 
   function resetColorsToPalette() {
