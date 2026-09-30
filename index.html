@@ -300,6 +300,102 @@
       color: var(--text-muted);
     }
 
+    .terminal-action-btn {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 4px 10px;
+      border-radius: var(--radius-sm);
+      font-size: 11px;
+      font-family: var(--font-code);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .terminal-action-btn:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--accent-cyan);
+      color: #ffffff;
+      transform: translateY(-1px);
+    }
+
+    /* Interactive Playground Scenario Bar */
+    .scenario-toolbar {
+      background: rgba(13, 14, 21, 0.6);
+      border-bottom: 1px solid #1f2336;
+      padding: 8px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .scenario-title {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .scenario-pills {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .scenario-btn {
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 500;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.2s ease;
+    }
+
+    .scenario-btn:hover {
+      background: var(--bg-card-hover);
+      color: var(--text-main);
+      border-color: var(--accent-primary);
+    }
+
+    .scenario-btn.active {
+      background: rgba(99, 102, 241, 0.18);
+      border-color: var(--accent-primary);
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    .toml-sync-badge {
+      position: absolute;
+      top: 10px;
+      right: 14px;
+      font-size: 10px;
+      font-family: var(--font-code);
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--accent-green);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      padding: 2px 8px;
+      border-radius: 999px;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .toml-sync-badge.show {
+      opacity: 1;
+    }
+
     .terminal-body {
       padding: 24px 20px;
       min-height: 160px;
@@ -923,7 +1019,24 @@
             <div class="dot dot-green"></div>
           </div>
           <div class="terminal-title">zsh — starship prompt preview</div>
-          <div style="width: 50px;"></div>
+          <button class="terminal-action-btn" onclick="exportTerminalPng()" title="Download live terminal prompt as a PNG image">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            <span>Export PNG</span>
+          </button>
+        </div>
+        <!-- Interactive Terminal Scenario Playground -->
+        <div class="scenario-toolbar">
+          <span class="scenario-title">Playground Scenario:</span>
+          <div class="scenario-pills">
+            <button class="scenario-btn active" id="btn-scen-clean" onclick="setScenario('clean')">🌿 Clean Main</button>
+            <button class="scenario-btn" id="btn-scen-dirty" onclick="setScenario('dirty')">⚡ Dirty Git (+1*)</button>
+            <button class="scenario-btn" id="btn-scen-error" onclick="setScenario('error')">🚨 Error (127)</button>
+            <button class="scenario-btn" id="btn-scen-deep" onclick="setScenario('deep')">📂 Deep Project</button>
+          </div>
         </div>
         <div class="terminal-body" id="terminalPreview">
           <div class="prompt-preview-container" id="promptContainer">
@@ -1051,15 +1164,18 @@
         </div>
       </div>
 
-      <!-- Generated TOML Output -->
+      <!-- Generated TOML Output & Two-Way Editor -->
       <div class="card">
         <div class="card-title">
           <span>📄 starship.toml Config</span>
+          <span style="font-size: 11px; font-weight: normal; color: var(--accent-cyan); background: rgba(56, 189, 248, 0.1); padding: 2px 8px; border-radius: 999px;">Two-Way Live Editor</span>
         </div>
         <div class="toml-box">
-          <textarea id="tomlOutput" class="toml-editor" readonly></textarea>
+          <textarea id="tomlOutput" class="toml-editor" placeholder="Edit or paste your starship.toml here to update the live preview..." oninput="onTomlInput()"></textarea>
+          <span id="tomlSyncBadge" class="toml-sync-badge">Live Synced</span>
         </div>
         <div class="actions-bar">
+          <button class="btn btn-secondary" onclick="applyTomlFromEditor()" title="Parse and apply edited TOML to the UI preview">⚡ Apply TOML</button>
           <button class="btn btn-secondary" onclick="downloadToml()">Download .toml</button>
           <button class="btn" onclick="copyToml()">Copy Config</button>
         </div>
@@ -1961,30 +2077,105 @@
     updateCustomizer();
   }
 
-  // Update State & Re-render
-  function updateCustomizer() {
-    if (leftCapSelect) currentConfig.leftCap = leftCapSelect.value;
-    if (rightCapSelect) currentConfig.rightCap = rightCapSelect.value;
-    if (sep1Select) currentConfig.separators[0] = sep1Select.value;
-    if (sep2Select) currentConfig.separators[1] = sep2Select.value;
-    if (sep3Select) currentConfig.separators[2] = sep3Select.value;
-    if (sep4Select) currentConfig.separators[3] = sep4Select.value;
-    if (themeSelect) currentConfig.themeKey = themeSelect.value;
-    if (iconSelect) currentConfig.iconSymbol = iconSelect.value;
+  // ── Interactive Playground Scenarios ──────────────────────────────────────
+  const scenarios = {
+    clean: {
+      name: "Clean Main",
+      dir: "~/.dotfiles",
+      git: " main",
+      lang: " v1.78.0",
+      time: " 14:32",
+      charSymbol: "❯",
+      charColor: "#10b981",
+      command: "git status"
+    },
+    dirty: {
+      name: "Dirty Git",
+      dir: "~/dev/starship-studio",
+      git: " feat/live-editor ⇡1 *",
+      lang: " v20.10.0",
+      time: " 18:45",
+      charSymbol: "❯",
+      charColor: "#10b981",
+      command: "git diff --stat"
+    },
+    error: {
+      name: "Exit Error",
+      dir: "~/services/api-gateway",
+      git: " staging !",
+      lang: " v3.12.3",
+      time: " 03:12",
+      charSymbol: "❯",
+      charColor: "#ef4444",
+      command: "systemctl restart nginx (exit 1)"
+    },
+    deep: {
+      name: "Deep Project",
+      dir: "~/projects/core/pkg/engine/v2",
+      git: " release/v2.4",
+      lang: " v1.22.4",
+      time: " 09:00",
+      charSymbol: "❯",
+      charColor: "#10b981",
+      command: "go test -v ./..."
+    }
+  };
+  let currentScenario = "clean";
 
-    const hInput = document.getElementById("heightInput");
-    const sInput = document.getElementById("scaleInput");
-    if (hInput) currentConfig.promptHeight = parseInt(hInput.value) || 30;
-    if (sInput) currentConfig.sepScale = parseFloat(sInput.value) || 1;
+  function setScenario(scenKey) {
+    if (!scenarios[scenKey]) return;
+    currentScenario = scenKey;
+    document.querySelectorAll(".scenario-btn").forEach(btn => {
+      btn.classList.toggle("active", btn.id === `btn-scen-${scenKey}`);
+    });
+    renderPromptPreview();
+  }
+
+  // Update State & Re-render (supports skipTomlSync for two-way binding)
+  function updateCustomizer(skipTomlSync = false) {
+    if (!skipTomlSync) {
+      if (leftCapSelect) currentConfig.leftCap = leftCapSelect.value;
+      if (rightCapSelect) currentConfig.rightCap = rightCapSelect.value;
+      if (sep1Select) currentConfig.separators[0] = sep1Select.value;
+      if (sep2Select) currentConfig.separators[1] = sep2Select.value;
+      if (sep3Select) currentConfig.separators[2] = sep3Select.value;
+      if (sep4Select) currentConfig.separators[3] = sep4Select.value;
+      if (themeSelect) currentConfig.themeKey = themeSelect.value;
+      if (iconSelect) currentConfig.iconSymbol = iconSelect.value;
+
+      const hInput = document.getElementById("heightInput");
+      const sInput = document.getElementById("scaleInput");
+      if (hInput) currentConfig.promptHeight = parseInt(hInput.value, 10) || 30;
+      if (sInput) currentConfig.sepScale = parseFloat(sInput.value) || 1;
+
+      currentConfig.modules.os = document.getElementById("modOS").checked;
+      currentConfig.modules.dir = document.getElementById("modDir").checked;
+      currentConfig.modules.git = document.getElementById("modGit").checked;
+      currentConfig.modules.lang = document.getElementById("modLang").checked;
+      currentConfig.modules.time = document.getElementById("modTime").checked;
+    } else {
+      if (leftCapSelect) leftCapSelect.value = currentConfig.leftCap;
+      if (rightCapSelect) rightCapSelect.value = currentConfig.rightCap;
+      if (sep1Select) sep1Select.value = currentConfig.separators[0];
+      if (sep2Select) sep2Select.value = currentConfig.separators[1];
+      if (sep3Select) sep3Select.value = currentConfig.separators[2];
+      if (sep4Select) sep4Select.value = currentConfig.separators[3];
+      if (themeSelect) themeSelect.value = currentConfig.themeKey;
+      if (iconSelect) iconSelect.value = currentConfig.iconSymbol;
+      const modOS = document.getElementById("modOS");
+      const modDir = document.getElementById("modDir");
+      const modGit = document.getElementById("modGit");
+      const modLang = document.getElementById("modLang");
+      const modTime = document.getElementById("modTime");
+      if (modOS) modOS.checked = currentConfig.modules.os;
+      if (modDir) modDir.checked = currentConfig.modules.dir;
+      if (modGit) modGit.checked = currentConfig.modules.git;
+      if (modLang) modLang.checked = currentConfig.modules.lang;
+      if (modTime) modTime.checked = currentConfig.modules.time;
+    }
 
     document.documentElement.style.setProperty('--prompt-height', currentConfig.promptHeight + 'px');
     document.documentElement.style.setProperty('--sep-scale', currentConfig.sepScale);
-
-    currentConfig.modules.os = document.getElementById("modOS").checked;
-    currentConfig.modules.dir = document.getElementById("modDir").checked;
-    currentConfig.modules.git = document.getElementById("modGit").checked;
-    currentConfig.modules.lang = document.getElementById("modLang").checked;
-    currentConfig.modules.time = document.getElementById("modTime").checked;
 
     // Sync active state on preset buttons
     const matched = presets.find(p => {
@@ -2017,21 +2208,35 @@
     });
 
     renderPromptPreview();
-    generateToml();
+    if (!skipTomlSync) {
+      generateToml();
+    }
   }
 
-  // Render Live Terminal Prompt Preview
+  // Render Live Terminal Prompt Preview with Active Scenario
   function renderPromptPreview() {
     const theme = themes[currentConfig.themeKey] || themes.firewatch;
     terminalPreview.style.backgroundColor = theme.bg;
 
+    const scen = scenarios[currentScenario] || scenarios.clean;
+
+    const charSymbol = document.getElementById("charSymbol");
+    const demoCommand = document.getElementById("demoCommand");
+    if (charSymbol) {
+      charSymbol.textContent = scen.charSymbol;
+      charSymbol.style.color = scen.charColor;
+    }
+    if (demoCommand) {
+      demoCommand.textContent = scen.command;
+    }
+
     // Build active segment chain
     const activeSegs = [];
     if (currentConfig.modules.os) activeSegs.push({ id: 'os', label: currentConfig.iconSymbol, bg: theme.os.bg, fg: theme.os.fg });
-    if (currentConfig.modules.dir) activeSegs.push({ id: 'dir', label: '󰲋 ~/.dotfiles', bg: theme.dir.bg, fg: theme.dir.fg });
-    if (currentConfig.modules.git) activeSegs.push({ id: 'git', label: ' main', bg: theme.git.bg, fg: theme.git.fg });
-    if (currentConfig.modules.lang) activeSegs.push({ id: 'lang', label: ' v1.78.0', bg: theme.lang.bg, fg: theme.lang.fg });
-    if (currentConfig.modules.time) activeSegs.push({ id: 'time', label: ' 22:15', bg: theme.time.bg, fg: theme.time.fg });
+    if (currentConfig.modules.dir) activeSegs.push({ id: 'dir', label: `󰲋 ${scen.dir}`, bg: theme.dir.bg, fg: theme.dir.fg });
+    if (currentConfig.modules.git) activeSegs.push({ id: 'git', label: scen.git, bg: theme.git.bg, fg: theme.git.fg });
+    if (currentConfig.modules.lang) activeSegs.push({ id: 'lang', label: scen.lang, bg: theme.lang.bg, fg: theme.lang.fg });
+    if (currentConfig.modules.time) activeSegs.push({ id: 'time', label: scen.time, bg: theme.time.bg, fg: theme.time.fg });
 
     promptContainer.innerHTML = "";
 
@@ -2159,24 +2364,327 @@ error_symbol = "[❯](bold red)"
     tomlOutput.value = tomlText;
   }
 
-  // Copy to Clipboard
-    function copyToml() {
-      navigator.clipboard.writeText(tomlOutput.value).then(() => {
-        showToast("starship.toml copied to clipboard!");
+  // ── Two-Way TOML Parser & Live Sync ───────────────────────────────────────
+  let tomlDebounceTimer = null;
+
+  function onTomlInput() {
+    clearTimeout(tomlDebounceTimer);
+    tomlDebounceTimer = setTimeout(() => {
+      applyTomlFromEditor(true);
+    }, 400);
+  }
+
+  function parseStarshipToml(toml) {
+    const result = {
+      modules: { os: false, dir: false, git: false, lang: false, time: false },
+      separators: [],
+      leftCap: null,
+      rightCap: null,
+      palette: {},
+      icon: null
+    };
+
+    if (!toml || typeof toml !== "string") return result;
+
+    const formatMatch = toml.match(/format\s*=\s*(?:"""([\s\S]*?)"""|'''([\s\S]*?)'''|"([^"]*)"|'([^']*)')/);
+    if (formatMatch) {
+      const rawFormat = formatMatch[1] || formatMatch[2] || formatMatch[3] || formatMatch[4] || "";
+      const promptLine = rawFormat.split(/\\n|\n/).map(l => l.trim()).find(l => l.includes("[") && l.includes("]")) || "";
+
+      const glyphRegex = /\[([^\]]+)\]\(([^)]*)\)/g;
+      let match;
+      const glyphs = [];
+      while ((match = glyphRegex.exec(promptLine)) !== null) {
+        glyphs.push({ glyph: match[1], style: match[2], index: match.index });
+      }
+
+      if (glyphs.length > 0) {
+        result.leftCap = glyphs[0].glyph;
+      }
+      if (glyphs.length > 1) {
+        result.rightCap = glyphs[glyphs.length - 1].glyph;
+      }
+      if (glyphs.length > 2) {
+        result.separators = glyphs.slice(1, glyphs.length - 1).map(g => g.glyph);
+      }
+
+      if (rawFormat.includes("$os")) result.modules.os = true;
+      if (rawFormat.includes("$directory") || rawFormat.includes("$path")) result.modules.dir = true;
+      if (rawFormat.includes("$git_branch") || rawFormat.includes("$git_status")) result.modules.git = true;
+      if (rawFormat.includes("$rust") || rawFormat.includes("$nodejs") || rawFormat.includes("$python")) result.modules.lang = true;
+      if (rawFormat.includes("$time")) result.modules.time = true;
+    }
+
+    const disabledRegex = /\[([a-zA-Z0-9_]+)\][^\[]*?disabled\s*=\s*true/g;
+    let disMatch;
+    while ((disMatch = disabledRegex.exec(toml)) !== null) {
+      const mod = disMatch[1];
+      if (mod === "os") result.modules.os = false;
+      if (mod === "directory") result.modules.dir = false;
+      if (mod === "git_branch" || mod === "git_status") result.modules.git = false;
+      if (mod === "time") result.modules.time = false;
+    }
+
+    const osFormatMatch = toml.match(/\[os\][^\[]*?format\s*=\s*['"]\[([^ \]]+)\s*\]/);
+    if (osFormatMatch) {
+      result.icon = osFormatMatch[1];
+    }
+
+    const paletteRegex = /color_([a-z_]+)\s*=\s*['"](#[0-9a-fA-F]{6}|#[0-9a-fA-F]{3}|[a-zA-Z0-9_]+)['"]/g;
+    let palMatch;
+    while ((palMatch = paletteRegex.exec(toml)) !== null) {
+      result.palette[palMatch[1]] = palMatch[2];
+    }
+
+    return result;
+  }
+
+  function applyTomlFromEditor(isAutoSync = false) {
+    const tomlText = tomlOutput.value;
+    const parsed = parseStarshipToml(tomlText);
+    let changed = false;
+
+    if (parsed.leftCap) {
+      currentConfig.leftCap = parsed.leftCap;
+      changed = true;
+    }
+    if (parsed.rightCap) {
+      currentConfig.rightCap = parsed.rightCap;
+      changed = true;
+    }
+    if (parsed.separators && parsed.separators.length > 0) {
+      currentConfig.separators = [
+        parsed.separators[0] || "",
+        parsed.separators[1] || parsed.separators[0] || "",
+        parsed.separators[2] || parsed.separators[0] || "",
+        parsed.separators[3] || parsed.separators[1] || parsed.separators[0] || ""
+      ];
+      const allSame = currentConfig.separators.every(s => s === currentConfig.separators[0]);
+      currentConfig.linkSeparators = allSame;
+      if (linkSeparators) linkSeparators.checked = allSame;
+      changed = true;
+    }
+
+    if (parsed.icon) {
+      currentConfig.iconSymbol = parsed.icon;
+      if (!startIcons.includes(parsed.icon)) {
+        startIcons.unshift(parsed.icon);
+        renderIconSelect();
+      }
+      if (iconSelect) iconSelect.value = parsed.icon;
+      changed = true;
+    }
+
+    if (parsed.palette && (parsed.palette.os || parsed.palette.dir)) {
+      let matchedThemeKey = null;
+      Object.keys(themes).forEach(key => {
+        const t = themes[key];
+        if (t.os && parsed.palette.os && t.os.bg.toLowerCase() === parsed.palette.os.toLowerCase() &&
+            t.dir && parsed.palette.dir && t.dir.bg.toLowerCase() === parsed.palette.dir.toLowerCase()) {
+          matchedThemeKey = key;
+        }
+      });
+
+      if (matchedThemeKey) {
+        currentConfig.themeKey = matchedThemeKey;
+      } else {
+        themes.custom_toml = {
+          name: "Custom (from TOML)",
+          bg: parsed.palette.bg || "#1a1b26",
+          fg: "#f8f8f2",
+          os: { bg: parsed.palette.os || "#3b4252", fg: "#ffffff" },
+          dir: { bg: parsed.palette.dir || "#88c0d0", fg: "#1a1b26" },
+          git: { bg: parsed.palette.git || "#81a1c1", fg: "#1a1b26" },
+          lang: { bg: parsed.palette.lang || "#ebcb8b", fg: "#1a1b26" },
+          ai: { bg: "#7dcfff", fg: "#15161e" },
+          time: { bg: parsed.palette.time || "#4c566a", fg: "#ffffff" }
+        };
+        renderThemeSelect();
+        currentConfig.themeKey = "custom_toml";
+      }
+      changed = true;
+    }
+
+    if (parsed.modules) {
+      currentConfig.modules = {
+        os: parsed.modules.os,
+        dir: parsed.modules.dir,
+        git: parsed.modules.git,
+        lang: parsed.modules.lang,
+        time: parsed.modules.time
+      };
+      changed = true;
+    }
+
+    if (changed) {
+      renderGlyphSelects();
+      syncSeparatorUI();
+      updateCustomizer(true);
+
+      const badge = document.getElementById("tomlSyncBadge");
+      if (badge) {
+        badge.classList.add("show");
+        setTimeout(() => badge.classList.remove("show"), 1500);
+      }
+      if (!isAutoSync) {
+        showToast("TOML configuration parsed and applied to preview!");
+      }
+    }
+  }
+
+  // ── Native Canvas Terminal Image Exporter ─────────────────────────────────
+  function exportTerminalPng() {
+    const theme = themes[currentConfig.themeKey] || themes.firewatch;
+    const scen = scenarios[currentScenario] || scenarios.clean;
+
+    const width = 880;
+    const height = 220;
+    const dpr = window.devicePixelRatio || 2;
+
+    const canvas = document.createElement("canvas");
+    canvas.width = width * dpr;
+    canvas.height = height * dpr;
+    const ctx = canvas.getContext("2d");
+    ctx.scale(dpr, dpr);
+
+    // Terminal Outer Window
+    ctx.fillStyle = "#0d0e15";
+    ctx.beginPath();
+    ctx.roundRect(0, 0, width, height, 12);
+    ctx.fill();
+
+    // Terminal Header
+    ctx.fillStyle = "#141724";
+    ctx.beginPath();
+    ctx.roundRect(0, 0, width, 40, [12, 12, 0, 0]);
+    ctx.fill();
+
+    // Window Dots
+    const dots = [
+      { x: 20, y: 20, color: "#ef4444" },
+      { x: 38, y: 20, color: "#f59e0b" },
+      { x: 56, y: 20, color: "#10b981" }
+    ];
+    dots.forEach(d => {
+      ctx.beginPath();
+      ctx.arc(d.x, d.y, 5.5, 0, Math.PI * 2);
+      ctx.fillStyle = d.color;
+      ctx.fill();
+    });
+
+    // Window Title
+    ctx.fillStyle = "#6b7280";
+    ctx.font = "12px monospace";
+    ctx.textAlign = "center";
+    ctx.fillText("zsh — starship prompt preview", width / 2, 24);
+
+    // Terminal Body Background
+    ctx.fillStyle = theme.bg;
+    ctx.beginPath();
+    ctx.roundRect(0, 40, width, height - 40, [0, 0, 12, 12]);
+    ctx.fill();
+
+    // Active Segments
+    const activeSegs = [];
+    if (currentConfig.modules.os) activeSegs.push({ label: currentConfig.iconSymbol, bg: theme.os.bg, fg: theme.os.fg });
+    if (currentConfig.modules.dir) activeSegs.push({ label: `󰲋 ${scen.dir}`, bg: theme.dir.bg, fg: theme.dir.fg });
+    if (currentConfig.modules.git) activeSegs.push({ label: scen.git, bg: theme.git.bg, fg: theme.git.fg });
+    if (currentConfig.modules.lang) activeSegs.push({ label: scen.lang, bg: theme.lang.bg, fg: theme.lang.fg });
+    if (currentConfig.modules.time) activeSegs.push({ label: scen.time, bg: theme.time.bg, fg: theme.time.fg });
+
+    let startX = 24;
+    const startY = 85;
+    const segHeight = 32;
+
+    ctx.textAlign = "left";
+    ctx.textBaseline = "middle";
+
+    if (activeSegs.length > 0) {
+      // Left Cap
+      ctx.fillStyle = activeSegs[0].bg;
+      ctx.font = "30px 'JetBrainsMono Nerd Font', 'FiraCode Nerd Font', monospace";
+      const capWidth = ctx.measureText(currentConfig.leftCap).width;
+      ctx.fillText(currentConfig.leftCap, startX, startY + segHeight / 2);
+      startX += capWidth;
+
+      activeSegs.forEach((seg, i) => {
+        ctx.font = "14px 'JetBrainsMono Nerd Font', 'FiraCode Nerd Font', monospace";
+        const textMetrics = ctx.measureText(seg.label);
+        const padX = 10;
+        const boxWidth = textMetrics.width + (padX * 2);
+
+        // Segment Box
+        ctx.fillStyle = seg.bg;
+        ctx.fillRect(startX, startY, boxWidth, segHeight);
+
+        // Segment Text
+        ctx.fillStyle = seg.fg;
+        ctx.fillText(seg.label, startX + padX, startY + segHeight / 2);
+        startX += boxWidth;
+
+        // Separator / Right Cap
+        const sepChar = (i < activeSegs.length - 1) ? getSeparator(i) : currentConfig.rightCap;
+        ctx.font = "30px 'JetBrainsMono Nerd Font', 'FiraCode Nerd Font', monospace";
+        const sepWidth = ctx.measureText(sepChar).width;
+
+        if (i < activeSegs.length - 1) {
+          const nextSeg = activeSegs[i + 1];
+          ctx.fillStyle = nextSeg.bg;
+          ctx.fillRect(startX, startY, sepWidth, segHeight);
+        }
+
+        ctx.fillStyle = seg.bg;
+        ctx.fillText(sepChar, startX, startY + segHeight / 2);
+        startX += sepWidth;
       });
     }
 
-    // Download .toml File
-    function downloadToml() {
-      const blob = new Blob([tomlOutput.value], { type: "text/plain" });
+    // Line 2: Prompt symbol and command
+    const line2Y = 160;
+    ctx.font = "15px monospace";
+    ctx.fillStyle = scen.charColor;
+    ctx.fillText(scen.charSymbol + " ", 24, line2Y);
+
+    const charWidth = ctx.measureText(scen.charSymbol + " ").width;
+    ctx.fillStyle = theme.fg || "#a9b1d6";
+    ctx.fillText(scen.command, 24 + charWidth, line2Y);
+
+    // Cursor
+    const cmdWidth = ctx.measureText(scen.command).width;
+    ctx.fillStyle = "rgba(169, 177, 214, 0.7)";
+    ctx.fillRect(24 + charWidth + cmdWidth + 4, line2Y - 8, 8, 16);
+
+    // Download PNG blob
+    canvas.toBlob(blob => {
+      if (!blob) return;
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
-      a.download = "starship.toml";
+      a.download = `starship-prompt-${currentConfig.activePreset || 'custom'}.png`;
       a.click();
       URL.revokeObjectURL(url);
-      showToast("Downloading starship.toml...");
-    }
+      showToast("Terminal preview saved as PNG image!");
+    }, "image/png");
+  }
+
+  // Copy to Clipboard
+  function copyToml() {
+    navigator.clipboard.writeText(tomlOutput.value).then(() => {
+      showToast("starship.toml copied to clipboard!");
+    });
+  }
+
+  // Download .toml File
+  function downloadToml() {
+    const blob = new Blob([tomlOutput.value], { type: "text/plain" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "starship.toml";
+    a.click();
+    URL.revokeObjectURL(url);
+    showToast("Downloading starship.toml...");
+  }
 
     // Show Toast Notification
     function showToast(msg) {
