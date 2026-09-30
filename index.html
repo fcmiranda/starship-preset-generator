@@ -1167,18 +1167,116 @@
     // ── Glyphs Database from separators.md & Powerline standard ──────────────────
     const glyphCategories = [
       {
-        name: "Separator Glyphs Library",
+        name: "Powerline Classic Rounds & Arrows",
         items: [
+          { glyph: "", name: "Left Circle", desc: "U+E0B6" },
           { glyph: "", name: "Right Circle", desc: "U+E0B4" },
-          { glyph: "", name: "Right Arrow", desc: "U+E0B0" },
-          { glyph: "", name: "Lower Right Triangle", desc: "U+E0BC" },
-          { glyph: "", name: "Upper Right Triangle", desc: "U+E0B8" },
+          { glyph: "", name: "Right Solid Arrow", desc: "U+E0B0" },
+          { glyph: "", name: "Left Solid Arrow", desc: "U+E0B2" },
+          { glyph: "", name: "Thin Left Round", desc: "U+E0B7" },
+          { glyph: "", name: "Thin Right Round", desc: "U+E0B5" },
+          { glyph: "", name: "Thin Right Arrow", desc: "U+E0B1" },
+          { glyph: "", name: "Thin Left Arrow", desc: "U+E0B3" }
+        ]
+      },
+      {
+        name: "Slanted Triangles & Diagonals",
+        items: [
+          { glyph: "", name: "Lower Left Triangle", desc: "U+E0B8" },
+          { glyph: "", name: "Lower Right Triangle", desc: "U+E0BA" },
+          { glyph: "", name: "Upper Left Triangle", desc: "U+E0BC" },
+          { glyph: "", name: "Upper Right Triangle", desc: "U+E0BE" },
+          { glyph: "", name: "Thin Lower Left Triangle", desc: "U+E0B9" },
+          { glyph: "", name: "Thin Lower Right Triangle", desc: "U+E0BB" },
+          { glyph: "", name: "Thin Upper Left Triangle", desc: "U+E0BD" },
+          { glyph: "", name: "Thin Upper Right Triangle", desc: "U+E0BF" }
+        ]
+      },
+      {
+        name: "Flames, Waves & Organic Contours",
+        items: [
+          { glyph: "", name: "Flame Right Solid", desc: "U+E0C0" },
+          { glyph: "", name: "Flame Right Thin", desc: "U+E0C1" },
+          { glyph: "", name: "Flame Left Solid", desc: "U+E0C2" },
+          { glyph: "", name: "Flame Left Thin", desc: "U+E0C3" },
+          { glyph: "", name: "Ice Waveform", desc: "U+E0CC" },
+          { glyph: "", name: "Waveform Thin", desc: "U+E0CD" },
+          { glyph: "", name: "Solid Wave", desc: "U+E0CE" },
+          { glyph: "", name: "Flame Waveform", desc: "U+E0D4" },
+          { glyph: "", name: "Flame Waveform Thin", desc: "U+E0D5" }
+        ]
+      },
+      {
+        name: "Honeycomb, Hexagons & Hard Cuts",
+        items: [
+          { glyph: "", name: "Honeycomb Left", desc: "U+E0CA" },
+          { glyph: "", name: "Honeycomb Right", desc: "U+E0C8" },
+          { glyph: "", name: "Honeycomb Left Thin", desc: "U+E0C9" },
+          { glyph: "", name: "Honeycomb Right Thin", desc: "U+E0CB" },
           { glyph: "", name: "Inverted Left Hard", desc: "U+E0D6" },
           { glyph: "", name: "Inverted Right Hard", desc: "U+E0D7" },
-          { glyph: "", name: "Ice Waveform", desc: "U+E0CC" },
-          { glyph: "", name: "Trapezoid Bot", desc: "U+E0D2" },
+          { glyph: "", name: "Lego Block", desc: "U+E0D0" },
+          { glyph: "", name: "Trapezoid Top", desc: "U+E0D1" },
+          { glyph: "", name: "Trapezoid Bot", desc: "U+E0D2" }
+        ]
+      },
+      {
+        name: "Retro 8-Bit Pixels & Shading Blocks",
+        items: [
+          { glyph: "", name: "Pixel Big", desc: "U+E0C4" },
+          { glyph: "", name: "Pixel Small", desc: "U+E0C5" },
+          { glyph: "", name: "Pixel Step Tier 3", desc: "U+E0C6" },
+          { glyph: "", name: "Pixel Step Tier 4", desc: "U+E0C7" },
+          { glyph: "░▒▓", name: "Smooth Fade In", desc: "U+2591-93" },
           { glyph: "▓▒░", name: "Smooth Fade Out", desc: "U+2593-91" },
-          { glyph: "󱑺", name: "Clock", desc: "Nerd Font" }
+          { glyph: "░", name: "Light Shade", desc: "U+2591" },
+          { glyph: "▒", name: "Medium Shade", desc: "U+2592" },
+          { glyph: "▓", name: "Dark Shade", desc: "U+2593" },
+          { glyph: "█", name: "Full Block", desc: "U+2588" }
+        ]
+      },
+      {
+        name: "Compound & Modern Accents",
+        items: [
+          { glyph: "", name: "Double Speedline Arrow", desc: "Chevron Compound" },
+          { glyph: "", name: "Reverse Speedline", desc: "Chevron Invert" },
+          { glyph: "", name: "Capsule Bubble Gap", desc: "Pill Float" },
+          { glyph: "", name: "Diamond Spear Point", desc: "Peak Triangle" },
+          { glyph: "", name: "Diamond Inset", desc: "Facet Inset" },
+          { glyph: "", name: "Arcade Pixel Duo", desc: "8-Bit Compound" },
+          { glyph: "", name: "Arcade Pixel Inverted", desc: "8-Bit Reverse" },
+          { glyph: "", name: "Dual Hard Clamp", desc: "Tech Notch" },
+          { glyph: "", name: "Waveform Pulse Duo", desc: "Soundwave" },
+          { glyph: "❯", name: "Heavy Angle Right", desc: "U+276F" },
+          { glyph: "❮", name: "Heavy Angle Left", desc: "U+276E" },
+          { glyph: "»", name: "Double Angle Guillemet", desc: "U+00BB" },
+          { glyph: "«", name: "Left Angle Guillemet", desc: "U+00AB" },
+          { glyph: "▶", name: "Solid Arrowhead Right", desc: "U+25B6" },
+          { glyph: "◆", name: "Solid Diamond Accent", desc: "U+25C6" }
+        ]
+      },
+      {
+        name: "Telemetry, Clocks & Status Badges",
+        items: [
+          { glyph: "󱑺", name: "Clock 8:00", desc: "Nerd Font U+F147A" },
+          { glyph: "󱑼", name: "Clock 9:00", desc: "Nerd Font U+F147C" },
+          { glyph: "󱑻", name: "Clock 8:30", desc: "Nerd Font U+F147B" },
+          { glyph: "", name: "Clock Face", desc: "Nerd Font U+F017" },
+          { glyph: "", name: "Signal Telemetry", desc: "Nerd Font U+F012" },
+          { glyph: "󰓅", name: "Speedometer Gauge", desc: "Nerd Font U+F04C5" },
+          { glyph: "󱐋", name: "Lightning Flash", desc: "Nerd Font U+F140B" },
+          { glyph: "⚡", name: "Electric Bolt", desc: "Unicode U+26A1" },
+          { glyph: "󰔉", name: "Stopwatch Timer", desc: "Nerd Font U+F0509" },
+          { glyph: "", name: "Flame Pulse", desc: "Nerd Font U+F490" },
+          { glyph: "", name: "Git Branch", desc: "Nerd Font U+F418" },
+          { glyph: "", name: "Commit Hash", desc: "Nerd Font U+F292" },
+          { glyph: "󰌷", name: "Enter Prompt", desc: "Nerd Font U+F0337" },
+          { glyph: "󰄬", name: "Success Mark", desc: "Nerd Font U+F012C" },
+          { glyph: "󰅖", name: "Error Cross", desc: "Nerd Font U+F0156" },
+          { glyph: "", name: "Terminal Prompt", desc: "Nerd Font U+F489" },
+          { glyph: "", name: "Heart Health", desc: "Nerd Font U+F004" },
+          { glyph: "󰮯", name: "Pacman Retro", desc: "Nerd Font U+F0BBF" },
+          { glyph: "󰊠", name: "Ghost Retro", desc: "Nerd Font U+F02A0" }
         ]
       }
     ];
@@ -1675,7 +1773,8 @@
     "", "", "󰙴", "", "", "󰣙", "󰣘", "", "", "󰓎",
     "", "", "", "", "", "󱓟", "󰺹", "󰅏", "", "",
     "", "󱃏", "", "", "", "󰷗", "󰀻", "󰔌", "󰂵", "󰢶",
-    "󱝊", "󱪶", "󱪷", "", "󱑻", "󰕤", "󰹪"
+    "󱝊", "󱪶", "󱪷", "", "󱑻", "󰕤", "󰹪",
+    "󱑺", "󱑼", "", "⚡", "󱐋", "", "", "󰌷", "󰄬", "󰅖", "", "󰓅", "", "", "󰮯", "󰊠"
   ];
 
   // ── DOM Elements ──────────────────────────────────────────────────────────
@@ -1768,20 +1867,6 @@
   // Populate Select Dropdowns
   function renderGlyphSelects() {
     const allGlyphs = [];
-    allGlyphs.push({ glyph: "", name: "Left Circle", desc: "U+E0B6" });
-    allGlyphs.push({ glyph: "░▒▓", name: "Smooth Fade In", desc: "U+2591-93" });
-    allGlyphs.push({ glyph: "", name: "Pixel Small", desc: "U+E0C5" });
-    allGlyphs.push({ glyph: "", name: "Pixel Big", desc: "U+E0C4" });
-    allGlyphs.push({ glyph: "", name: "Solid Wave", desc: "U+E0CE" });
-    allGlyphs.push({ glyph: "", name: "Waveform", desc: "U+E0D4" });
-    allGlyphs.push({ glyph: "", name: "Trapezoid Top", desc: "U+E0D1" });
-    allGlyphs.push({ glyph: "", name: "Thin Right Circle", desc: "U+E0B5" });
-    allGlyphs.push({ glyph: "", name: "Thin Left Circle", desc: "U+E0B7" });
-    allGlyphs.push({ glyph: "", name: "Honeycomb Right", desc: "U+E0C8" });
-    allGlyphs.push({ glyph: "", name: "Honeycomb Left", desc: "U+E0CA" });
-    allGlyphs.push({ glyph: "", name: "Flame Right", desc: "U+E0C0" });
-    allGlyphs.push({ glyph: "", name: "Lego Block", desc: "U+E0D0" });
-
     glyphCategories.forEach(cat => {
       cat.items.forEach(item => {
         if (!allGlyphs.some(g => g.glyph === item.glyph)) {
