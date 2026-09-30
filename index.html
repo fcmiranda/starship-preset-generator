@@ -977,13 +977,38 @@
           </div>
 
           <div class="control-group">
-            <label for="sepSelect">Middle Separator (Between)</label>
-            <select id="sepSelect" onchange="updateCustomizer()"></select>
-          </div>
-
-          <div class="control-group">
             <label for="rightCapSelect">Right Cap Symbol (End)</label>
             <select id="rightCapSelect" onchange="updateCustomizer()"></select>
+          </div>
+
+          <!-- Individual Middle Separators Section -->
+          <div class="control-group" style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-color); border-radius: 8px; padding: 12px; margin-bottom: 1rem;">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+              <span style="font-weight: 600; font-size: 0.85rem; color: var(--text-primary);">Middle Separators</span>
+              <label style="display: flex; align-items: center; gap: 6px; font-size: 0.75rem; color: var(--text-muted); cursor: pointer; user-select: none;">
+                <input type="checkbox" id="linkSeparators" onchange="toggleLinkSeparators()" checked>
+                <span>Link all</span>
+              </label>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <div>
+                <label for="sep1Select" style="font-size: 0.75rem; color: var(--text-muted); display: block; margin-bottom: 4px;">Separator 1 (OS ➔ Dir)</label>
+                <select id="sep1Select" onchange="onSeparatorChange(0)"></select>
+              </div>
+              <div>
+                <label for="sep2Select" style="font-size: 0.75rem; color: var(--text-muted); display: block; margin-bottom: 4px;">Separator 2 (Dir ➔ Git)</label>
+                <select id="sep2Select" onchange="onSeparatorChange(1)"></select>
+              </div>
+              <div>
+                <label for="sep3Select" style="font-size: 0.75rem; color: var(--text-muted); display: block; margin-bottom: 4px;">Separator 3 (Git ➔ Lang)</label>
+                <select id="sep3Select" onchange="onSeparatorChange(2)"></select>
+              </div>
+              <div>
+                <label for="sep4Select" style="font-size: 0.75rem; color: var(--text-muted); display: block; margin-bottom: 4px;">Separator 4 (Lang ➔ Time)</label>
+                <select id="sep4Select" onchange="onSeparatorChange(3)"></select>
+              </div>
+            </div>
           </div>
 
           <div class="control-group">
@@ -1463,6 +1488,39 @@
         modules: { os: true, dir: true, git: true, lang: true, time: true }
       },
       {
+        id: "pastel_powerline",
+        name: "Powerline Pastel",
+        preview: " █  █  █ ",
+        leftCap: "",
+        sep: "",
+        rightCap: "",
+        theme: "pastel",
+        icon: "",
+        modules: { os: true, dir: true, git: true, lang: true, time: true }
+      },
+      {
+        id: "gruvbox_rainbow",
+        name: "Gruvbox Rainbow",
+        preview: " █  █  █ ",
+        leftCap: "",
+        sep: "",
+        rightCap: "",
+        theme: "gruvbox",
+        icon: "󰀻",
+        modules: { os: true, dir: true, git: true, lang: true, time: true }
+      },
+      {
+        id: "catppuccin_mocha",
+        name: "Catppuccin Powerline",
+        preview: " █  █ ",
+        leftCap: "",
+        sep: "",
+        rightCap: "",
+        theme: "catppuccin",
+        icon: "󰹪",
+        modules: { os: true, dir: true, git: true, lang: true, time: true }
+      },
+      {
         id: "tokyo_shading",
         name: "Tokyo Night Shading",
         preview: "░▒▓ █  █  █ ",
@@ -1601,13 +1659,14 @@
     // ── State ─────────────────────────────────────────────────────────────────
     let currentConfig = {
       leftCap: "",
-      sep: "",
+      separators: ["", "", "", ""],
       rightCap: "",
       themeKey: "firewatch",
       iconSymbol: "󰣇",
       activePreset: "classic_pill",
       promptHeight: 30,
       sepScale: 1,
+      linkSeparators: true,
       modules: {
         os: true,
         dir: true,
@@ -1636,50 +1695,67 @@
   const glyphsContainer = document.getElementById("glyphsContainer");
   const presetsGrid = document.getElementById("presetsGrid");
   const leftCapSelect = document.getElementById("leftCapSelect");
-  const sepSelect = document.getElementById("sepSelect");
+  const sep1Select = document.getElementById("sep1Select");
+  const sep2Select = document.getElementById("sep2Select");
+  const sep3Select = document.getElementById("sep3Select");
+  const sep4Select = document.getElementById("sep4Select");
+  const linkSeparators = document.getElementById("linkSeparators");
   const rightCapSelect = document.getElementById("rightCapSelect");
   const themeSelect = document.getElementById("themeSelect");
   const iconSelect = document.getElementById("iconSelect");
   const tomlOutput = document.getElementById("tomlOutput");
   const toast = document.getElementById("toast");
 
-  // ── Helper for Alternating / Single Separators ────────────────────────────
+  // ── Helpers for Separators & Multi-Separator Synchronization ──────────────
   function getSeparator(index) {
-    if (Array.isArray(currentConfig.sep)) {
-      return currentConfig.sep[index % currentConfig.sep.length];
+    if (Array.isArray(currentConfig.separators) && currentConfig.separators.length > 0) {
+      return currentConfig.separators[index % currentConfig.separators.length];
     }
-    return currentConfig.sep;
+    return "";
   }
 
-  function syncSepSelectValue(sep) {
-    if (Array.isArray(sep)) {
-      const joined = sep.join("");
-      if (joined === "") {
-        sepSelect.value = "honeycomb_alternating";
-      } else if (joined === "") {
-        sepSelect.value = "iceflame_alternating";
-      } else if (joined === "") {
-        sepSelect.value = "lego_alternating";
-      } else if (joined === "" || joined === "") {
-        sepSelect.value = "oceanpulse_alternating";
-      } else if (joined === "") {
-        sepSelect.value = "trapezoid_alternating";
-      } else if (joined === "" || joined === "") {
-        sepSelect.value = "orbitalpulse_alternating";
-      } else if (joined === "" || joined === "") {
-        sepSelect.value = "prismblade_alternating";
-      } else if (joined.includes("▓▒░") || joined.includes("░▒▓")) {
-        sepSelect.value = "gradientwave_alternating";
-      } else if (joined === "" || joined === "") {
-        sepSelect.value = "steps_alternating";
-      } else if (joined === "" || joined === "") {
-        sepSelect.value = "slants_alternating";
-      } else {
-        sepSelect.value = sep[0];
-      }
+  function onSeparatorChange(index) {
+    const isLinked = linkSeparators && linkSeparators.checked;
+    const selects = [sep1Select, sep2Select, sep3Select, sep4Select];
+
+    if (index === 0 && isLinked) {
+      const val = sep1Select.value;
+      currentConfig.separators = [val, val, val, val];
+      if (sep2Select) sep2Select.value = val;
+      if (sep3Select) sep3Select.value = val;
+      if (sep4Select) sep4Select.value = val;
     } else {
-      sepSelect.value = sep;
+      if (selects[index]) currentConfig.separators[index] = selects[index].value;
+      if (index > 0 && isLinked && selects[index] && sep1Select && selects[index].value !== sep1Select.value) {
+        if (linkSeparators) linkSeparators.checked = false;
+        currentConfig.linkSeparators = false;
+      }
     }
+    updateCustomizer();
+  }
+
+  function toggleLinkSeparators() {
+    if (!linkSeparators) return;
+    currentConfig.linkSeparators = linkSeparators.checked;
+    if (currentConfig.linkSeparators && sep1Select) {
+      const val = sep1Select.value;
+      currentConfig.separators = [val, val, val, val];
+      if (sep2Select) sep2Select.value = val;
+      if (sep3Select) sep3Select.value = val;
+      if (sep4Select) sep4Select.value = val;
+      updateCustomizer();
+    }
+  }
+
+  function syncSeparatorUI() {
+    if (leftCapSelect) leftCapSelect.value = currentConfig.leftCap;
+    if (rightCapSelect) rightCapSelect.value = currentConfig.rightCap;
+    if (sep1Select) sep1Select.value = currentConfig.separators[0] || "";
+    if (sep2Select) sep2Select.value = currentConfig.separators[1] || "";
+    if (sep3Select) sep3Select.value = currentConfig.separators[2] || "";
+    if (sep4Select) sep4Select.value = currentConfig.separators[3] || "";
+    if (linkSeparators) linkSeparators.checked = currentConfig.linkSeparators;
+    if (themeSelect) themeSelect.value = currentConfig.themeKey;
   }
 
   // ── Initialize App ────────────────────────────────────────────────────────
@@ -1691,10 +1767,7 @@
     renderIconSelect();
 
     // Ensure selects & inputs reflect initial defaults
-    leftCapSelect.value = currentConfig.leftCap;
-    syncSepSelectValue(currentConfig.sep);
-    rightCapSelect.value = currentConfig.rightCap;
-    themeSelect.value = currentConfig.themeKey;
+    syncSeparatorUI();
     if (iconSelect) iconSelect.value = currentConfig.iconSymbol;
 
     const hInput = document.getElementById("heightInput");
@@ -1728,7 +1801,8 @@
       });
     });
 
-    [leftCapSelect, rightCapSelect].forEach(select => {
+    [leftCapSelect, rightCapSelect, sep1Select, sep2Select, sep3Select, sep4Select].forEach(select => {
+      if (!select) return;
       select.innerHTML = "";
       allGlyphs.forEach(item => {
         const opt = document.createElement("option");
@@ -1736,33 +1810,6 @@
         opt.textContent = `${item.glyph} (${item.name})`;
         select.appendChild(opt);
       });
-    });
-
-    sepSelect.innerHTML = "";
-    allGlyphs.forEach(item => {
-      const opt = document.createElement("option");
-      opt.value = item.glyph;
-      opt.textContent = `${item.glyph} (${item.name})`;
-      sepSelect.appendChild(opt);
-    });
-
-    const altOptions = [
-      { val: "slants_alternating", text: "   (Slanted Triangles)" },
-      { val: "steps_alternating", text: "   (8-Bit Pixel Steps)" },
-      { val: "honeycomb_alternating", text: "   (Honeycomb Cyber Hex)" },
-      { val: "iceflame_alternating", text: "   (Ice & Flame Horizon)" },
-      { val: "lego_alternating", text: "   (Lego Modular Interlock)" },
-      { val: "oceanpulse_alternating", text: "   (Waveform Oceanic Pulse)" },
-      { val: "trapezoid_alternating", text: "   (Trapezoid Shift Flow)" },
-      { val: "orbitalpulse_alternating", text: "   (Orbital Pulse Rings)" },
-      { val: "prismblade_alternating", text: "   (Prism Blade Glitch)" },
-      { val: "gradientwave_alternating", text: "▓▒░ ░▒▓ (Shading Gradient Wave)" }
-    ];
-    altOptions.forEach(opt => {
-      const o = document.createElement("option");
-      o.value = opt.val;
-      o.textContent = opt.text;
-      sepSelect.appendChild(o);
     });
   }
 
@@ -1819,10 +1866,18 @@
         const card = document.createElement("div");
         card.className = "glyph-card";
         card.onclick = () => {
-          sepSelect.value = item.glyph;
-          currentConfig.sep = item.glyph;
+          if (sep1Select) sep1Select.value = item.glyph;
+          if (linkSeparators && linkSeparators.checked) {
+            if (sep2Select) sep2Select.value = item.glyph;
+            if (sep3Select) sep3Select.value = item.glyph;
+            if (sep4Select) sep4Select.value = item.glyph;
+            currentConfig.separators = [item.glyph, item.glyph, item.glyph, item.glyph];
+            showToast(`Selected '${item.name}' for all separators`);
+          } else {
+            currentConfig.separators[0] = item.glyph;
+            showToast(`Selected '${item.name}' for Separator 1`);
+          }
           updateCustomizer();
-          showToast(`Selected '${item.name}' as middle separator`);
         };
         card.innerHTML = `
           <span class="glyph-symbol">${item.glyph}</span>
@@ -1840,7 +1895,18 @@
   function applyPreset(p) {
     currentConfig.activePreset = p.id;
     currentConfig.leftCap = p.leftCap;
-    currentConfig.sep = p.sep;
+    if (Array.isArray(p.sep)) {
+      currentConfig.separators = [
+        p.sep[0] || "",
+        p.sep[1] || p.sep[0] || "",
+        p.sep[2] || p.sep[0] || "",
+        p.sep[3] || p.sep[1] || p.sep[0] || ""
+      ];
+      currentConfig.linkSeparators = false;
+    } else {
+      currentConfig.separators = [p.sep, p.sep, p.sep, p.sep];
+      currentConfig.linkSeparators = true;
+    }
     currentConfig.rightCap = p.rightCap;
     currentConfig.themeKey = p.theme;
     if (p.icon) {
@@ -1868,43 +1934,20 @@
       if (modTime) modTime.checked = currentConfig.modules.time;
     }
 
-    leftCapSelect.value = p.leftCap;
-    syncSepSelectValue(p.sep);
-    rightCapSelect.value = p.rightCap;
-    themeSelect.value = p.theme;
-
+    syncSeparatorUI();
     renderPresetButtons();
     updateCustomizer();
   }
 
   // Update State & Re-render
   function updateCustomizer() {
-    currentConfig.leftCap = leftCapSelect.value;
-    if (sepSelect.value === "honeycomb_alternating") {
-      currentConfig.sep = ["", "", ""];
-    } else if (sepSelect.value === "iceflame_alternating") {
-      currentConfig.sep = ["", "", ""];
-    } else if (sepSelect.value === "lego_alternating") {
-      currentConfig.sep = ["", "", ""];
-    } else if (sepSelect.value === "oceanpulse_alternating") {
-      currentConfig.sep = ["", "", ""];
-    } else if (sepSelect.value === "trapezoid_alternating") {
-      currentConfig.sep = ["", "", ""];
-    } else if (sepSelect.value === "orbitalpulse_alternating") {
-      currentConfig.sep = ["", "", ""];
-    } else if (sepSelect.value === "prismblade_alternating") {
-      currentConfig.sep = ["", "", ""];
-    } else if (sepSelect.value === "gradientwave_alternating") {
-      currentConfig.sep = ["▓▒░", "░▒▓", "▓▒░"];
-    } else if (sepSelect.value === "steps_alternating") {
-      currentConfig.sep = ["", "", ""];
-    } else if (sepSelect.value === "slants_alternating") {
-      currentConfig.sep = ["", "", ""];
-    } else {
-      currentConfig.sep = sepSelect.value;
-    }
-    currentConfig.rightCap = rightCapSelect.value;
-    currentConfig.themeKey = themeSelect.value;
+    if (leftCapSelect) currentConfig.leftCap = leftCapSelect.value;
+    if (rightCapSelect) currentConfig.rightCap = rightCapSelect.value;
+    if (sep1Select) currentConfig.separators[0] = sep1Select.value;
+    if (sep2Select) currentConfig.separators[1] = sep2Select.value;
+    if (sep3Select) currentConfig.separators[2] = sep3Select.value;
+    if (sep4Select) currentConfig.separators[3] = sep4Select.value;
+    if (themeSelect) currentConfig.themeKey = themeSelect.value;
     if (iconSelect) currentConfig.iconSymbol = iconSelect.value;
 
     const hInput = document.getElementById("heightInput");
@@ -1923,9 +1966,12 @@
 
     // Sync active state on preset buttons
     const matched = presets.find(p => {
-      const sepMatch = Array.isArray(p.sep) && Array.isArray(currentConfig.sep)
-        ? p.sep.join("") === currentConfig.sep.join("")
-        : p.sep === currentConfig.sep;
+      let sepMatch = false;
+      if (Array.isArray(p.sep)) {
+        sepMatch = p.sep.every((s, i) => s === currentConfig.separators[i % currentConfig.separators.length]);
+      } else {
+        sepMatch = currentConfig.separators.every(s => s === p.sep);
+      }
       const modulesMatch = !p.modules || (
         (p.modules.os === undefined || p.modules.os === currentConfig.modules.os) &&
         (p.modules.dir === undefined || p.modules.dir === currentConfig.modules.dir) &&
