@@ -40,7 +40,8 @@
   <meta name="twitter:image" content="https://raw.githubusercontent.com/felipecm-br/starship-studio/main/preview.png">
 
   <!-- Favicon -->
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚀</text></svg>">
+  <link rel="icon" type="image/png" href="icon.png">
+  <link rel="apple-touch-icon" href="icon.png">
 
   <!-- JSON-LD Structured Data for Google Search -->
   <script type="application/ld+json">
@@ -248,13 +249,11 @@
     .logo-icon {
       width: 44px;
       height: 44px;
-      background: linear-gradient(135deg, var(--accent-primary), var(--accent-cyan));
-      border-radius: var(--radius-md);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 22px;
-      box-shadow: 0 4px 20px rgba(99, 102, 241, 0.3);
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+      box-shadow: 0 4px 20px rgba(99, 102, 241, 0.35);
+      flex-shrink: 0;
     }
 
     h1 {
@@ -1254,10 +1253,20 @@
     .footer-brand {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
       font-size: 16px;
       color: var(--text-main);
       margin-bottom: 4px;
+    }
+
+    .footer-logo {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+      box-shadow: 0 2px 8px rgba(99, 102, 241, 0.25);
+      flex-shrink: 0;
     }
 
     .footer-desc {
@@ -1299,7 +1308,7 @@
 
   <header>
     <div class="title-group">
-      <div class="logo-icon" aria-hidden="true">🚀</div>
+      <img src="icon.png" alt="Starship Studio" class="logo-icon" width="44" height="44">
       <div>
         <h1>Starship Studio</h1>
         <div class="subtitle">Interactive visual editor and preset generator for Starship prompt</div>
@@ -1706,7 +1715,7 @@
   <footer class="site-footer">
     <div class="footer-content">
       <div class="footer-brand">
-        <span class="footer-logo">🚀</span>
+        <img src="icon.png" alt="Starship Studio" class="footer-logo" width="24" height="24">
         <strong>Starship Studio</strong>
       </div>
       <div class="footer-right">
