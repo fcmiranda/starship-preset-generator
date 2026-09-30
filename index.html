@@ -519,6 +519,117 @@
       user-select: none;
     }
 
+    /* Segment & Start Icon Color Customizer */
+    .segment-colors-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-top: 4px;
+    }
+
+    .seg-color-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 5px 8px;
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      transition: all 0.2s ease;
+    }
+
+    .seg-color-row:hover {
+      border-color: var(--accent-primary);
+      background: var(--bg-card-hover);
+    }
+
+    .seg-color-label {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .seg-color-icon {
+      font-size: 13px;
+      color: var(--accent-cyan);
+    }
+
+    .seg-color-pickers {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .color-picker-wrapper {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      padding: 2px 5px;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+
+    .color-picker-wrapper:hover {
+      border-color: var(--accent-primary);
+    }
+
+    .color-picker-tag {
+      font-size: 9px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .color-hex-label {
+      font-size: 10px;
+      font-family: monospace;
+      color: var(--text-main);
+      min-width: 48px;
+    }
+
+    .color-picker-wrapper input[type="color"] {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      background: none;
+      padding: 0;
+    }
+
+    .color-picker-wrapper input[type="color"]::-webkit-color-swatch-wrapper {
+      padding: 0;
+    }
+
+    .color-picker-wrapper input[type="color"]::-webkit-color-swatch {
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 3px;
+    }
+
+    .color-picker-wrapper input[type="color"]::-moz-color-swatch {
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 3px;
+    }
+
+    body.mode-minimal .fg-picker {
+      display: none !important;
+    }
+
+    body.mode-minimal .color-picker-tag {
+      display: none !important;
+    }
+
     .prompt-line-2 {
       display: flex;
       align-items: center;
@@ -1212,7 +1323,114 @@
 
           <div class="control-group">
             <label for="themeSelect">Color Palette</label>
-            <select id="themeSelect" onchange="updateCustomizer()"></select>
+            <select id="themeSelect" onchange="onThemeSelectChange()"></select>
+          </div>
+
+          <!-- Segment & Start Icon Color Customizer -->
+          <div class="control-group" id="segmentColorsSection" style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-color); border-radius: 8px; padding: 12px; margin-bottom: 1rem;">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+              <span style="font-weight: 600; font-size: 0.85rem; color: var(--text-primary); display: flex; align-items: center; gap: 6px;">
+                <span>🎨</span> Segment & Icon Colors
+              </span>
+              <button type="button" class="btn btn-secondary" style="padding: 2px 8px; font-size: 10px; height: auto;" onclick="resetColorsToPalette()" title="Reset to palette defaults">Reset</button>
+            </div>
+
+            <div class="segment-colors-grid">
+              <!-- Start Icon Row -->
+              <div class="seg-color-row" id="colorRow-os">
+                <span class="seg-color-label">
+                  <span class="seg-color-icon" id="colorPreviewIcon">󰣇</span> Start Icon
+                </span>
+                <div class="seg-color-pickers">
+                  <label class="color-picker-wrapper" id="colorWrapper-os-bg" title="Segment Fill Color (Powerline) or Icon Color (Transparent)">
+                    <span class="color-picker-tag" id="colorTag-os-bg">BG</span>
+                    <input type="color" id="colorInput-os-bg" oninput="onColorChange('os', 'bg', this.value)">
+                    <span class="color-hex-label" id="colorHex-os-bg">#352a3e</span>
+                  </label>
+                  <label class="color-picker-wrapper fg-picker" id="colorWrapper-os-fg" title="Icon Foreground Color">
+                    <span class="color-picker-tag">FG</span>
+                    <input type="color" id="colorInput-os-fg" oninput="onColorChange('os', 'fg', this.value)">
+                    <span class="color-hex-label" id="colorHex-os-fg">#ffffff</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Directory Row -->
+              <div class="seg-color-row" id="colorRow-dir">
+                <span class="seg-color-label">
+                  <span class="seg-color-icon">󰲋</span> Directory
+                </span>
+                <div class="seg-color-pickers">
+                  <label class="color-picker-wrapper" id="colorWrapper-dir-bg" title="Segment Fill Color (Powerline) or Directory Color (Transparent)">
+                    <span class="color-picker-tag" id="colorTag-dir-bg">BG</span>
+                    <input type="color" id="colorInput-dir-bg" oninput="onColorChange('dir', 'bg', this.value)">
+                    <span class="color-hex-label" id="colorHex-dir-bg">#e8608a</span>
+                  </label>
+                  <label class="color-picker-wrapper fg-picker" id="colorWrapper-dir-fg" title="Directory Text Color">
+                    <span class="color-picker-tag">FG</span>
+                    <input type="color" id="colorInput-dir-fg" oninput="onColorChange('dir', 'fg', this.value)">
+                    <span class="color-hex-label" id="colorHex-dir-fg">#1a0a2e</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Git Branch Row -->
+              <div class="seg-color-row" id="colorRow-git">
+                <span class="seg-color-label">
+                  <span class="seg-color-icon"></span> Git Branch
+                </span>
+                <div class="seg-color-pickers">
+                  <label class="color-picker-wrapper" id="colorWrapper-git-bg" title="Segment Fill Color (Powerline) or Git Color (Transparent)">
+                    <span class="color-picker-tag" id="colorTag-git-bg">BG</span>
+                    <input type="color" id="colorInput-git-bg" oninput="onColorChange('git', 'bg', this.value)">
+                    <span class="color-hex-label" id="colorHex-git-bg">#9b59b6</span>
+                  </label>
+                  <label class="color-picker-wrapper fg-picker" id="colorWrapper-git-fg" title="Git Text Color">
+                    <span class="color-picker-tag">FG</span>
+                    <input type="color" id="colorInput-git-fg" oninput="onColorChange('git', 'fg', this.value)">
+                    <span class="color-hex-label" id="colorHex-git-fg">#ffffff</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Language Row -->
+              <div class="seg-color-row" id="colorRow-lang">
+                <span class="seg-color-label">
+                  <span class="seg-color-icon"></span> Language
+                </span>
+                <div class="seg-color-pickers">
+                  <label class="color-picker-wrapper" id="colorWrapper-lang-bg" title="Segment Fill Color (Powerline) or Language Color (Transparent)">
+                    <span class="color-picker-tag" id="colorTag-lang-bg">BG</span>
+                    <input type="color" id="colorInput-lang-bg" oninput="onColorChange('lang', 'bg', this.value)">
+                    <span class="color-hex-label" id="colorHex-lang-bg">#f7c96e</span>
+                  </label>
+                  <label class="color-picker-wrapper fg-picker" id="colorWrapper-lang-fg" title="Language Text Color">
+                    <span class="color-picker-tag">FG</span>
+                    <input type="color" id="colorInput-lang-fg" oninput="onColorChange('lang', 'fg', this.value)">
+                    <span class="color-hex-label" id="colorHex-lang-fg">#1a0a2e</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Time Row -->
+              <div class="seg-color-row" id="colorRow-time">
+                <span class="seg-color-label">
+                  <span class="seg-color-icon"></span> Time
+                </span>
+                <div class="seg-color-pickers">
+                  <label class="color-picker-wrapper" id="colorWrapper-time-bg" title="Segment Fill Color (Powerline) or Time Color (Transparent)">
+                    <span class="color-picker-tag" id="colorTag-time-bg">BG</span>
+                    <input type="color" id="colorInput-time-bg" oninput="onColorChange('time', 'bg', this.value)">
+                    <span class="color-hex-label" id="colorHex-time-bg">#2d1b4e</span>
+                  </label>
+                  <label class="color-picker-wrapper fg-picker" id="colorWrapper-time-fg" title="Time Text Color">
+                    <span class="color-picker-tag">FG</span>
+                    <input type="color" id="colorInput-time-fg" oninput="onColorChange('time', 'fg', this.value)">
+                    <span class="color-hex-label" id="colorHex-time-fg">#f0c0e0</span>
+                  </label>
+                </div>
+              </div>
+            </div>
           </div>
 
           <div class="control-group">
@@ -1935,6 +2153,7 @@
       themeKey: "firewatch",
       iconSymbol: "󰣇",
       activePreset: "classic_pill",
+      customColors: null,
       promptHeight: 30,
       sepScale: 1,
       linkSeparators: true,
@@ -2030,6 +2249,106 @@
     if (themeSelect) themeSelect.value = currentConfig.themeKey;
   }
 
+  function normalizeHex(color, fallback = "#ffffff") {
+    if (!color || typeof color !== "string") return fallback;
+    const c = color.trim();
+    if (c.startsWith('#')) {
+      if (c.length === 7) return c.toLowerCase();
+      if (c.length === 4) {
+        return `#${c[1]}${c[1]}${c[2]}${c[2]}${c[3]}${c[3]}`.toLowerCase();
+      }
+    }
+    return fallback;
+  }
+
+  function getActiveColors() {
+    const base = themes[currentConfig.themeKey] || themes.firewatch;
+    if (!currentConfig.customColors) {
+      return {
+        bg: base.bg,
+        fg: base.fg,
+        os: { ...base.os },
+        dir: { ...base.dir },
+        git: { ...base.git },
+        lang: { ...base.lang },
+        time: { ...base.time }
+      };
+    }
+    return {
+      bg: currentConfig.customColors.bg || base.bg,
+      fg: currentConfig.customColors.fg || base.fg,
+      os: { ...(base.os || {}), ...(currentConfig.customColors.os || {}) },
+      dir: { ...(base.dir || {}), ...(currentConfig.customColors.dir || {}) },
+      git: { ...(base.git || {}), ...(currentConfig.customColors.git || {}) },
+      lang: { ...(base.lang || {}), ...(currentConfig.customColors.lang || {}) },
+      time: { ...(base.time || {}), ...(currentConfig.customColors.time || {}) }
+    };
+  }
+
+  function onColorChange(moduleKey, type, val) {
+    if (!currentConfig.customColors) {
+      const base = themes[currentConfig.themeKey] || themes.firewatch;
+      currentConfig.customColors = {
+        bg: base.bg,
+        fg: base.fg,
+        os: { ...base.os },
+        dir: { ...base.dir },
+        git: { ...base.git },
+        lang: { ...base.lang },
+        time: { ...base.time }
+      };
+    }
+    if (!currentConfig.customColors[moduleKey]) {
+      currentConfig.customColors[moduleKey] = {};
+    }
+    currentConfig.customColors[moduleKey][type] = val;
+
+    const hexLabel = document.getElementById(`colorHex-${moduleKey}-${type}`);
+    if (hexLabel) hexLabel.textContent = val;
+
+    updateCustomizer();
+  }
+
+  function syncColorPickers() {
+    const colors = getActiveColors();
+    const mods = ['os', 'dir', 'git', 'lang', 'time'];
+    mods.forEach(mod => {
+      const row = document.getElementById(`colorRow-${mod}`);
+      if (row && currentConfig.modules) {
+        row.style.display = currentConfig.modules[mod] ? "flex" : "none";
+      }
+
+      ['bg', 'fg'].forEach(type => {
+        const input = document.getElementById(`colorInput-${mod}-${type}`);
+        const hex = document.getElementById(`colorHex-${mod}-${type}`);
+        if (colors[mod] && colors[mod][type]) {
+          const val = colors[mod][type];
+          if (input) input.value = normalizeHex(val, type === 'fg' ? '#ffffff' : '#000000');
+          if (hex) hex.textContent = val;
+        }
+      });
+    });
+
+    const previewIcon = document.getElementById("colorPreviewIcon");
+    if (previewIcon) previewIcon.textContent = currentConfig.iconSymbol;
+  }
+
+  function resetColorsToPalette() {
+    currentConfig.customColors = null;
+    syncColorPickers();
+    updateCustomizer();
+    showToast("Colors reset to palette defaults!");
+  }
+
+  function onThemeSelectChange() {
+    if (themeSelect) {
+      currentConfig.themeKey = themeSelect.value;
+      currentConfig.customColors = null;
+      syncColorPickers();
+      updateCustomizer();
+    }
+  }
+
   function setPromptStyle(style, skipUpdate = false) {
     currentConfig.promptStyle = style;
     ["powerline", "transparent", "bracketed"].forEach(s => {
@@ -2041,6 +2360,12 @@
     const notice = document.getElementById("minimalStyleNotice");
     if (capGroup) capGroup.style.display = style === "powerline" ? "block" : "none";
     if (notice) notice.style.display = style === "powerline" ? "none" : "block";
+
+    if (style === "powerline") {
+      document.body.classList.remove("mode-minimal");
+    } else {
+      document.body.classList.add("mode-minimal");
+    }
 
     if (!skipUpdate) {
       updateCustomizer();
@@ -2059,6 +2384,7 @@
     syncSeparatorUI();
     setPromptStyle(currentConfig.promptStyle, true);
     if (iconSelect) iconSelect.value = currentConfig.iconSymbol;
+    syncColorPickers();
 
     const hInput = document.getElementById("heightInput");
     if (hInput) hInput.value = currentConfig.promptHeight;
@@ -2225,6 +2551,8 @@
       if (modTime) modTime.checked = currentConfig.modules.time;
     }
 
+    currentConfig.customColors = null;
+    syncColorPickers();
     syncSeparatorUI();
     renderPresetButtons();
     updateCustomizer();
@@ -2332,6 +2660,7 @@
 
     // Sync active state on preset buttons
     const matched = presets.find(p => {
+      if (currentConfig.customColors) return false;
       const pStyle = p.promptStyle || "powerline";
       if (pStyle !== currentConfig.promptStyle) return false;
 
@@ -2368,6 +2697,10 @@
       }
     });
 
+    const previewIcon = document.getElementById("colorPreviewIcon");
+    if (previewIcon) previewIcon.textContent = currentConfig.iconSymbol;
+
+    syncColorPickers();
     renderPromptPreview();
     if (!skipTomlSync) {
       generateToml();
@@ -2376,7 +2709,7 @@
 
   // Render Live Terminal Prompt Preview with Active Scenario
   function renderPromptPreview() {
-    const theme = themes[currentConfig.themeKey] || themes.firewatch;
+    const theme = getActiveColors();
     terminalPreview.style.backgroundColor = theme.bg;
 
     const scen = scenarios[currentScenario] || scenarios.clean;
@@ -2505,7 +2838,7 @@
 
   // Generate Starship TOML Config Text
   function generateToml() {
-    const theme = themes[currentConfig.themeKey] || themes.firewatch;
+    const theme = getActiveColors();
     const styleMode = currentConfig.promptStyle || "powerline";
 
     if (styleMode === "transparent") {
@@ -2774,6 +3107,15 @@ error_symbol = "[❯](bold red)"
       result.palette[palMatch[1]] = palMatch[2];
     }
 
+    const osFgMatch = toml.match(/\[os\][^\[]*?style\s*=\s*['"][^'"]*fg:([^'" ]+)/);
+    if (osFgMatch) result.osFg = osFgMatch[1];
+    const dirFgMatch = toml.match(/\[directory\][^\[]*?style\s*=\s*['"][^'"]*fg:([^'" ]+)/);
+    if (dirFgMatch) result.dirFg = dirFgMatch[1];
+    const gitFgMatch = toml.match(/\[git_branch\][^\[]*?style\s*=\s*['"][^'"]*fg:([^'" ]+)/);
+    if (gitFgMatch) result.gitFg = gitFgMatch[1];
+    const timeFgMatch = toml.match(/\[time\][^\[]*?style\s*=\s*['"][^'"]*fg:([^'" ]+)/);
+    if (timeFgMatch) result.timeFg = timeFgMatch[1];
+
     return result;
   }
 
@@ -2830,21 +3172,24 @@ error_symbol = "[❯](bold red)"
 
       if (matchedThemeKey) {
         currentConfig.themeKey = matchedThemeKey;
+        currentConfig.customColors = null;
       } else {
         themes.custom_toml = {
           name: "Custom (from TOML)",
           bg: parsed.palette.bg || "#1a1b26",
           fg: "#f8f8f2",
-          os: { bg: parsed.palette.os || "#3b4252", fg: "#ffffff" },
-          dir: { bg: parsed.palette.dir || "#88c0d0", fg: "#1a1b26" },
-          git: { bg: parsed.palette.git || "#81a1c1", fg: "#1a1b26" },
+          os: { bg: parsed.palette.os || "#3b4252", fg: parsed.osFg || "#ffffff" },
+          dir: { bg: parsed.palette.dir || "#88c0d0", fg: parsed.dirFg || "#1a1b26" },
+          git: { bg: parsed.palette.git || "#81a1c1", fg: parsed.gitFg || "#ffffff" },
           lang: { bg: parsed.palette.lang || "#ebcb8b", fg: "#1a1b26" },
           ai: { bg: "#7dcfff", fg: "#15161e" },
-          time: { bg: parsed.palette.time || "#4c566a", fg: "#ffffff" }
+          time: { bg: parsed.palette.time || "#4c566a", fg: parsed.timeFg || "#ffffff" }
         };
         renderThemeSelect();
         currentConfig.themeKey = "custom_toml";
+        currentConfig.customColors = null;
       }
+      syncColorPickers();
       changed = true;
     }
 
@@ -2862,6 +3207,7 @@ error_symbol = "[❯](bold red)"
     if (changed) {
       renderGlyphSelects();
       syncSeparatorUI();
+      syncColorPickers();
       updateCustomizer(true);
 
       const badge = document.getElementById("tomlSyncBadge");
@@ -2877,7 +3223,7 @@ error_symbol = "[❯](bold red)"
 
   // ── Native Canvas Terminal Image Exporter ─────────────────────────────────
   function exportTerminalPng() {
-    const theme = themes[currentConfig.themeKey] || themes.firewatch;
+    const theme = getActiveColors();
     const scen = scenarios[currentScenario] || scenarios.clean;
 
     const width = 880;
