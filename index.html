@@ -390,6 +390,13 @@
       color: var(--text-muted);
     }
 
+    .terminal-actions-group {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
     .terminal-action-btn {
       background: var(--bg-tertiary);
       border: 1px solid var(--border-color);
@@ -403,6 +410,7 @@
       align-items: center;
       gap: 6px;
       transition: all 0.2s ease;
+      user-select: none;
     }
 
     .terminal-action-btn:hover {
@@ -410,6 +418,435 @@
       border-color: var(--accent-cyan);
       color: var(--accent-cyan);
       transform: translateY(-1px);
+    }
+
+    .terminal-btn-copy {
+      color: var(--accent-green);
+      border-color: rgba(16, 185, 129, 0.35);
+      background: rgba(16, 185, 129, 0.08);
+      font-weight: 500;
+    }
+
+    .terminal-btn-copy:hover {
+      background: rgba(16, 185, 129, 0.2);
+      border-color: var(--accent-green);
+      color: var(--accent-green);
+    }
+
+    .terminal-btn-copy.copied {
+      background: var(--accent-green) !important;
+      border-color: var(--accent-green) !important;
+      color: #ffffff !important;
+    }
+
+    .terminal-btn-export {
+      color: #ffffff;
+      background: var(--accent-primary);
+      border-color: var(--accent-primary);
+      box-shadow: 0 0 10px var(--border-glow);
+      font-weight: 600;
+    }
+
+    .terminal-btn-export:hover {
+      background: var(--accent-primary-hover);
+      border-color: var(--accent-primary-hover);
+      color: #ffffff;
+      transform: translateY(-1px);
+    }
+
+    .export-header-btn {
+      padding: 4px 10px;
+      font-size: 11px;
+      border-radius: var(--radius-sm);
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-weight: 600;
+    }
+
+    /* Floating Quick Actions Bar */
+    .floating-quick-bar {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 850;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 999px;
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.45), 0 0 20px var(--border-glow);
+      padding: 6px 8px 6px 14px;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .floating-preset-info {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      user-select: none;
+    }
+
+    .floating-pulse-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent-green);
+      box-shadow: 0 0 8px var(--accent-green);
+      display: inline-block;
+    }
+
+    .floating-label {
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .floating-name {
+      color: var(--text-main);
+      font-weight: 600;
+      max-width: 130px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .floating-actions {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .floating-btn {
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.2s ease;
+      border: 1px solid transparent;
+      user-select: none;
+    }
+
+    .floating-copy-btn {
+      background: var(--bg-tertiary);
+      border-color: var(--border-color);
+      color: var(--text-main);
+    }
+
+    .floating-copy-btn:hover {
+      border-color: var(--accent-green);
+      color: var(--accent-green);
+      background: var(--bg-card-hover);
+    }
+
+    .floating-copy-btn.copied {
+      background: rgba(16, 185, 129, 0.2);
+      border-color: var(--accent-green);
+      color: var(--accent-green);
+    }
+
+    .floating-export-btn {
+      background: var(--accent-primary);
+      color: #ffffff;
+      box-shadow: 0 0 10px var(--border-glow);
+    }
+
+    .floating-export-btn:hover {
+      background: var(--accent-primary-hover);
+      transform: translateY(-1px);
+    }
+
+    @media (max-width: 640px) {
+      .floating-quick-bar {
+        left: 12px;
+        right: 12px;
+        bottom: 12px;
+        border-radius: var(--radius-md);
+        justify-content: space-between;
+      }
+      .floating-name {
+        max-width: 85px;
+      }
+    }
+
+    /* Modal Backdrop & Dialog */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(8, 10, 15, 0.78);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .modal-backdrop.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-container {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      width: 100%;
+      max-width: 700px;
+      box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.6), 0 0 35px var(--border-glow);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      transform: scale(0.94) translateY(12px);
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .modal-backdrop.active .modal-container {
+      transform: scale(1) translateY(0);
+    }
+
+    .modal-header {
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border-color);
+      background: var(--bg-secondary);
+    }
+
+    .modal-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .modal-icon-badge {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-sm);
+      background: rgba(99, 102, 241, 0.15);
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      color: var(--accent-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .modal-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-main);
+      margin: 0;
+      line-height: 1.2;
+    }
+
+    .modal-subtitle {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 3px;
+    }
+
+    .modal-dot {
+      margin: 0 4px;
+      opacity: 0.5;
+    }
+
+    .modal-close-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      padding: 6px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+    }
+
+    .modal-close-btn:hover {
+      background: var(--bg-tertiary);
+      color: var(--text-main);
+    }
+
+    .modal-action-bar {
+      padding: 12px 20px;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      background: var(--bg-tertiary);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .modal-primary-btn {
+      flex: 1;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 13px;
+      padding: 9px 16px;
+    }
+
+    .modal-primary-btn.btn-success {
+      background: #10b981 !important;
+      border-color: #10b981 !important;
+      color: #ffffff !important;
+      box-shadow: 0 0 15px rgba(16, 185, 129, 0.4) !important;
+    }
+
+    .modal-tabs {
+      display: flex;
+      padding: 0 20px;
+      border-bottom: 1px solid var(--border-color);
+      background: var(--bg-card);
+      gap: 16px;
+    }
+
+    .modal-tab-btn {
+      background: transparent;
+      border: none;
+      border-bottom: 2px solid transparent;
+      color: var(--text-muted);
+      font-size: 13px;
+      font-weight: 500;
+      padding: 10px 4px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .modal-tab-btn:hover {
+      color: var(--text-main);
+    }
+
+    .modal-tab-btn.active {
+      color: var(--accent-primary);
+      border-bottom-color: var(--accent-primary);
+      font-weight: 600;
+    }
+
+    .modal-tab-panel {
+      padding: 16px 20px;
+      background: var(--bg-card);
+    }
+
+    .modal-code-wrapper {
+      position: relative;
+      background: var(--code-bg);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+    }
+
+    .modal-code-editor {
+      width: 100%;
+      height: 280px;
+      font-family: var(--font-code);
+      font-size: 12px;
+      line-height: 1.6;
+      color: var(--text-main);
+      background: transparent;
+      border: none;
+      padding: 12px 16px;
+      resize: vertical;
+      outline: none;
+      display: block;
+    }
+
+    .modal-install-guide {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .install-step {
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 10px 14px;
+    }
+
+    .install-step-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      font-size: 12px;
+      color: var(--text-main);
+    }
+
+    .step-num {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--accent-primary);
+      color: #ffffff;
+      font-size: 11px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 6px;
+    }
+
+    .step-copy-btn {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      border-radius: 4px;
+      padding: 2px 8px;
+      font-size: 11px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .step-copy-btn:hover {
+      color: var(--accent-cyan);
+      border-color: var(--accent-cyan);
+    }
+
+    .step-code {
+      margin: 0;
+      background: var(--code-bg);
+      padding: 8px 10px;
+      border-radius: 4px;
+      font-family: var(--font-code);
+      font-size: 11.5px;
+      color: var(--accent-cyan);
+      overflow-x: auto;
+    }
+
+    .modal-footer {
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--border-color);
+      background: var(--bg-secondary);
+    }
+
+    .modal-footer-note {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .modal-footer-note a {
+      color: var(--accent-cyan);
+      text-decoration: none;
+    }
+
+    .modal-footer-note a:hover {
+      text-decoration: underline;
     }
 
     /* Interactive Playground Scenario Bar */
@@ -1456,14 +1893,32 @@
             <div class="dot dot-green"></div>
           </div>
           <div class="terminal-title">zsh — starship prompt preview</div>
-          <button class="terminal-action-btn" onclick="exportTerminalPng()" title="Download live terminal prompt as a PNG image">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-              <polyline points="7 10 12 15 17 10"></polyline>
-              <line x1="12" y1="15" x2="12" y2="3"></line>
-            </svg>
-            <span>Export PNG</span>
-          </button>
+          <div class="terminal-actions-group">
+            <button class="terminal-action-btn terminal-btn-copy" id="terminalCopyBtn" onclick="quickCopyToml(this)" title="Directly copy current starship.toml to clipboard">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+              <span class="btn-copy-label">Copy TOML</span>
+            </button>
+            <button class="terminal-action-btn terminal-btn-export" onclick="openExportModal()" title="Open modal dialog with full starship.toml configuration and install steps">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="16" y1="13" x2="8" y2="13"></line>
+                <line x1="16" y1="17" x2="8" y2="17"></line>
+              </svg>
+              <span>Export Config</span>
+            </button>
+            <button class="terminal-action-btn" onclick="exportTerminalPng()" title="Download live terminal prompt as a PNG image">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              <span>Export PNG</span>
+            </button>
+          </div>
         </div>
         <!-- Interactive Terminal Scenario Playground -->
         <div class="scenario-toolbar">
@@ -1490,7 +1945,18 @@
       <!-- Presets Gallery -->
       <div class="card" style="margin-bottom: 24px;">
         <div class="card-title" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
-          <span>🎨 Presets Gallery</span>
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span>🎨 Presets Gallery</span>
+            <button type="button" class="btn btn-sm btn-primary export-header-btn" onclick="openExportModal()" title="View and copy active starship.toml configuration">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="16" y1="13" x2="8" y2="13"></line>
+                <line x1="16" y1="17" x2="8" y2="17"></line>
+              </svg>
+              <span>Export TOML</span>
+            </button>
+          </div>
           <div class="preset-filter-group" id="presetFilterGroup">
             <button type="button" class="preset-filter-btn active" data-filter="all" onclick="setPresetFilter('all')">All (<span id="count-all">0</span>)</button>
             <button type="button" class="preset-filter-btn" data-filter="awesome" onclick="setPresetFilter('awesome')">🌟 Awesome Prompts (<span id="count-awesome">0</span>)</button>
@@ -3909,6 +4375,12 @@
     const previewIcon = document.getElementById("colorPreviewIcon");
     if (previewIcon) previewIcon.textContent = currentConfig.iconSymbol;
 
+    const floatingPresetName = document.getElementById("floatingPresetName");
+    if (floatingPresetName) {
+      const p = presets.find(item => item.id === currentConfig.activePreset);
+      floatingPresetName.textContent = p ? p.name : "Custom Prompt";
+    }
+
     syncColorPickers();
     renderPromptPreview();
     if (!skipTomlSync) {
@@ -4625,7 +5097,233 @@ error_symbol = "[❯](bold red)"
 
     // Start
     window.onload = init;
-  </script>
+  
+  // ── State-of-the-Art Export Modal & Quick Actions ─────────────────────────
+  function openExportModal() {
+    const backdrop = document.getElementById("exportModalBackdrop");
+    if (!backdrop) return;
+
+    // Sync TOML text
+    const modalTextarea = document.getElementById("modalTomlTextarea");
+    if (modalTextarea) modalTextarea.value = tomlOutput.value;
+
+    // Sync Preset Name & Style
+    const modalPresetName = document.getElementById("modalPresetName");
+    const modalPresetStyle = document.getElementById("modalPresetStyle");
+    const currentP = presets.find(p => p.id === currentConfig.activePreset);
+    if (modalPresetName) modalPresetName.textContent = currentP ? currentP.name : "Custom Prompt";
+    if (modalPresetStyle) {
+      const s = currentConfig.promptStyle;
+      modalPresetStyle.textContent = s === "transparent" ? "Minimal" : (s === "bracketed" ? "Bracketed" : "Powerline");
+    }
+
+    switchModalTab("config");
+    backdrop.style.display = "flex";
+    requestAnimationFrame(() => {
+      backdrop.classList.add("active");
+    });
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeExportModal() {
+    const backdrop = document.getElementById("exportModalBackdrop");
+    if (!backdrop) return;
+    backdrop.classList.remove("active");
+    setTimeout(() => {
+      backdrop.style.display = "none";
+      document.body.style.overflow = "";
+    }, 250);
+  }
+
+  function closeExportModalOnBackdrop(e) {
+    if (e.target && e.target.id === "exportModalBackdrop") {
+      closeExportModal();
+    }
+  }
+
+  function switchModalTab(tab) {
+    const configBtn = document.getElementById("tabBtn-config");
+    const installBtn = document.getElementById("tabBtn-install");
+    const configPanel = document.getElementById("tabPanel-config");
+    const installPanel = document.getElementById("tabPanel-install");
+
+    if (configBtn) configBtn.classList.toggle("active", tab === "config");
+    if (installBtn) installBtn.classList.toggle("active", tab === "install");
+    if (configPanel) configPanel.style.display = tab === "config" ? "block" : "none";
+    if (installPanel) installPanel.style.display = tab === "install" ? "block" : "none";
+  }
+
+  function quickCopyToml(triggerBtn) {
+    copyToml();
+    const btn = triggerBtn || document.getElementById("floatingCopyBtn");
+    if (btn) {
+      const label = btn.querySelector(".btn-copy-label") || btn.querySelector("span");
+      const originalText = label ? label.textContent : "Copy Config";
+      btn.classList.add("copied");
+      if (label) label.textContent = "Copied!";
+      setTimeout(() => {
+        btn.classList.remove("copied");
+        if (label) label.textContent = originalText;
+      }, 2000);
+    }
+  }
+
+  function copyTomlModal() {
+    copyToml();
+    const btn = document.getElementById("modalCopyBtn");
+    const text = document.getElementById("modalCopyBtnText");
+    if (btn && text) {
+      btn.classList.add("btn-success");
+      text.textContent = "✓ Copied to Clipboard!";
+      setTimeout(() => {
+        btn.classList.remove("btn-success");
+        text.textContent = "Copy starship.toml";
+      }, 2000);
+    }
+  }
+
+  function copyShellCommand(cmd) {
+    navigator.clipboard.writeText(cmd).then(() => {
+      showToast("Shell command copied to clipboard!");
+    });
+  }
+
+  // Escape key closes modal
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      closeExportModal();
+    }
+  });
+
+</script>
+
+  <!-- Floating Quick Actions Bar (Instant One-Tap Access Without Scrolling) -->
+  <div class="floating-quick-bar" id="floatingQuickBar" aria-label="Quick Actions Bar">
+    <div class="floating-preset-info">
+      <span class="floating-pulse-dot"></span>
+      <span class="floating-label">Active:</span>
+      <strong id="floatingPresetName" class="floating-name">Powerline Pill</strong>
+    </div>
+    <div class="floating-actions">
+      <button type="button" class="floating-btn floating-copy-btn" id="floatingCopyBtn" onclick="quickCopyToml(this)" title="Copy active starship.toml directly">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+        </svg>
+        <span class="btn-copy-label">Copy Config</span>
+      </button>
+      <button type="button" class="floating-btn floating-export-btn" onclick="openExportModal()" title="Open export dialog with starship.toml and installation guide">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+          <polyline points="15 3 21 3 21 9"></polyline>
+          <line x1="10" y1="14" x2="21" y2="3"></line>
+        </svg>
+        <span>View & Export</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- State-of-the-Art Export Modal Dialog -->
+  <div class="modal-backdrop" id="exportModalBackdrop" onclick="closeExportModalOnBackdrop(event)" role="dialog" aria-modal="true" aria-labelledby="modalTitle" style="display: none;">
+    <div class="modal-container" onclick="event.stopPropagation()">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <div class="modal-icon-badge">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+              <line x1="16" y1="13" x2="8" y2="13"></line>
+              <line x1="16" y1="17" x2="8" y2="17"></line>
+            </svg>
+          </div>
+          <div>
+            <h2 id="modalTitle" class="modal-title">Export starship.toml</h2>
+            <div class="modal-subtitle">
+              Preset: <strong id="modalPresetName">Powerline Pill</strong>
+              <span class="modal-dot">•</span>
+              <span id="modalPresetStyle">Powerline</span>
+            </div>
+          </div>
+        </div>
+        <button type="button" class="modal-close-btn" onclick="closeExportModal()" aria-label="Close dialog">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Modal Action Bar -->
+      <div class="modal-action-bar">
+        <button type="button" class="btn btn-primary modal-primary-btn" id="modalCopyBtn" onclick="copyTomlModal()">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+          </svg>
+          <span id="modalCopyBtnText">Copy starship.toml</span>
+        </button>
+        <button type="button" class="btn btn-secondary" onclick="downloadToml()">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          <span>Download .toml</span>
+        </button>
+      </div>
+
+      <!-- Modal Tabs -->
+      <div class="modal-tabs">
+        <button type="button" class="modal-tab-btn active" id="tabBtn-config" onclick="switchModalTab('config')">
+          <span>📄 Configuration</span>
+        </button>
+        <button type="button" class="modal-tab-btn" id="tabBtn-install" onclick="switchModalTab('install')">
+          <span>💻 Installation Guide</span>
+        </button>
+      </div>
+
+      <!-- Tab 1: Config Content -->
+      <div class="modal-tab-panel" id="tabPanel-config">
+        <div class="modal-code-wrapper">
+          <textarea id="modalTomlTextarea" class="modal-code-editor" readonly spellcheck="false"></textarea>
+        </div>
+      </div>
+
+      <!-- Tab 2: Installation Guide -->
+      <div class="modal-tab-panel" id="tabPanel-install" style="display: none;">
+        <div class="modal-install-guide">
+          <div class="install-step">
+            <div class="install-step-header">
+              <span><span class="step-num">1</span><strong>Linux & macOS (Bash / Zsh)</strong></span>
+              <button type="button" class="step-copy-btn" onclick="copyShellCommand('mkdir -p ~/.config && cp starship.toml ~/.config/starship.toml')">Copy</button>
+            </div>
+            <pre class="step-code">mkdir -p ~/.config &amp;&amp; cp starship.toml ~/.config/starship.toml</pre>
+          </div>
+          <div class="install-step">
+            <div class="install-step-header">
+              <span><span class="step-num">2</span><strong>Windows (PowerShell)</strong></span>
+              <button type="button" class="step-copy-btn" onclick="copyShellCommand('New-Item -ItemType Directory -Force -Path $HOME\\.config; cp starship.toml $HOME\\.config\\starship.toml')">Copy</button>
+            </div>
+            <pre class="step-code">New-Item -ItemType Directory -Force -Path $HOME\.config; cp starship.toml $HOME\.config\starship.toml</pre>
+          </div>
+          <div class="install-step">
+            <div class="install-step-header">
+              <span><span class="step-num">3</span><strong>Reload Shell</strong></span>
+              <button type="button" class="step-copy-btn" onclick="copyShellCommand('source ~/.zshrc # or source ~/.bashrc')">Copy</button>
+            </div>
+            <pre class="step-code">source ~/.zshrc  # or source ~/.bashrc</pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="modal-footer">
+        <span class="modal-footer-note">⚡ Schema valid: <a href="https://starship.rs/config-schema.json" target="_blank" rel="noopener noreferrer">starship.rs</a></span>
+        <button type="button" class="btn btn-secondary btn-sm" onclick="closeExportModal()">Close</button>
+      </div>
+    </div>
+  </div>
 
 </body>
 
