@@ -8,8 +8,8 @@
   <!-- Primary SEO Meta Tags -->
   <title>Starship Studio — Interactive Starship Prompt Generator & Preset Customizer</title>
   <meta name="title" content="Starship Studio — Interactive Starship Prompt Generator & Preset Customizer">
-  <meta name="description" content="Starship Studio is an interactive visual editor and preset generator for the Starship prompt. Customize themes and export your starship.toml easily.">
-  <meta name="keywords" content="starship prompt, starship preset generator, starship studio, starship toml generator, powerline prompt generator, terminal prompt customizer, nerd fonts separators, zsh starship prompt, starship themes, bash prompt designer, cross-shell prompt">
+  <meta name="description" content="Starship Studio is an interactive visual editor and preset generator for the Starship prompt with 35+ curated presets (including awesome-starship-prompts, Powerline, and Minimalist themes). Customize themes and export your starship.toml easily.">
+  <meta name="keywords" content="starship prompt, awesome starship prompts, starship preset generator, starship studio, starship toml generator, powerline prompt generator, terminal prompt customizer, tokyo night starship, catppuccin starship, hyde starship, omarchy starship, nerd fonts separators, cross-shell prompt">
   <meta name="author" content="Felipe Miranda">
   <meta name="theme-color" id="metaThemeColor" content="#0f111a">
   <script>
@@ -27,7 +27,7 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://felipecm-br.github.io/starship-studio/">
   <meta property="og:title" content="Starship Studio — Interactive Starship Prompt Generator & Preset Customizer">
-  <meta property="og:description" content="Starship Studio is an interactive visual editor and preset generator for the Starship prompt. Customize themes and export your starship.toml easily.">
+  <meta property="og:description" content="Starship Studio is an interactive visual editor and preset generator for the Starship prompt with 35+ curated presets (including awesome-starship-prompts, Powerline, and Minimalist themes). Customize themes and export your starship.toml easily.">
   <meta property="og:image" content="https://raw.githubusercontent.com/felipecm-br/starship-studio/main/preview.png">
   <meta property="og:site_name" content="Starship Studio">
   <meta property="og:locale" content="en_US">
@@ -36,7 +36,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:url" content="https://felipecm-br.github.io/starship-studio/">
   <meta name="twitter:title" content="Starship Studio — Interactive Starship Prompt Generator & Preset Customizer">
-  <meta name="twitter:description" content="Starship Studio is an interactive visual editor and preset generator for the Starship prompt. Customize themes and export your starship.toml easily.">
+  <meta name="twitter:description" content="Starship Studio is an interactive visual editor and preset generator for the Starship prompt with 35+ curated presets (including awesome-starship-prompts, Powerline, and Minimalist themes). Customize themes and export your starship.toml easily.">
   <meta name="twitter:image" content="https://raw.githubusercontent.com/felipecm-br/starship-studio/main/preview.png">
 
   <!-- Favicon -->
@@ -53,7 +53,7 @@
         "@id": "https://felipecm-br.github.io/starship-studio/#webapp",
         "name": "Starship Studio",
         "url": "https://felipecm-br.github.io/starship-studio/",
-        "description": "Starship Studio is an interactive visual editor and preset generator for the Starship prompt. Customize themes and export your starship.toml easily.",
+        "description": "Starship Studio is an interactive visual editor and preset generator for the Starship prompt with 35+ curated presets (including awesome-starship-prompts, Powerline, and Minimalist themes). Customize themes and export your starship.toml easily.",
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "All (Linux, macOS, Windows)",
         "offers": {
@@ -86,7 +86,7 @@
             "name": "What is Starship Studio?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Starship Studio is an interactive visual editor and preset generator for the Starship prompt. Customize themes and export your starship.toml easily."
+              "text": "Starship Studio is an interactive visual editor and preset generator for the Starship prompt with 35+ curated presets (including awesome-starship-prompts, Powerline, and Minimalist themes). Customize themes and export your starship.toml easily."
             }
           },
           {
@@ -803,10 +803,44 @@
       box-shadow: 0 0 0 2px var(--border-glow);
     }
 
+    /* Preset Filter Group & Buttons */
+    .preset-filter-group {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .preset-filter-btn {
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      user-select: none;
+    }
+
+    .preset-filter-btn:hover {
+      color: var(--text-main);
+      border-color: var(--accent-primary);
+      background: var(--bg-card-hover);
+    }
+
+    .preset-filter-btn.active {
+      background: var(--accent-primary);
+      color: #ffffff;
+      border-color: var(--accent-primary);
+      box-shadow: 0 0 10px var(--border-glow);
+    }
+
     /* Preset Buttons Grid */
     .preset-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
       gap: 10px;
       margin-bottom: 24px;
     }
@@ -815,7 +849,7 @@
       background: var(--bg-tertiary);
       border: 1px solid var(--border-color);
       color: var(--text-main);
-      padding: 10px;
+      padding: 10px 12px;
       border-radius: var(--radius-sm);
       cursor: pointer;
       font-size: 13px;
@@ -824,7 +858,7 @@
       transition: all 0.2s ease;
       display: flex;
       flex-direction: column;
-      gap: 4px;
+      gap: 6px;
     }
 
     .preset-btn:hover {
@@ -839,14 +873,31 @@
       box-shadow: 0 0 12px rgba(99, 102, 241, 0.2);
     }
 
+    .preset-header {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
     .preset-btn .preset-name {
       font-weight: 600;
+      line-height: 1.25;
+    }
+
+    .preset-author {
+      font-size: 10px;
+      color: var(--text-muted);
+      font-weight: 400;
+      letter-spacing: 0.02em;
     }
 
     .preset-btn .preset-preview {
       font-family: var(--font-code);
       font-size: 12px;
       color: var(--accent-cyan);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     /* Glyphs Explorer Grid */
@@ -1438,8 +1489,15 @@
 
       <!-- Presets Gallery -->
       <div class="card" style="margin-bottom: 24px;">
-        <div class="card-title">
-          <span>🎨 Creative Separator Presets</span>
+        <div class="card-title" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+          <span>🎨 Presets Gallery</span>
+          <div class="preset-filter-group" id="presetFilterGroup">
+            <button type="button" class="preset-filter-btn active" data-filter="all" onclick="setPresetFilter('all')">All (<span id="count-all">0</span>)</button>
+            <button type="button" class="preset-filter-btn" data-filter="awesome" onclick="setPresetFilter('awesome')">🌟 Awesome Prompts (<span id="count-awesome">0</span>)</button>
+            <button type="button" class="preset-filter-btn" data-filter="powerline" onclick="setPresetFilter('powerline')">⚡ Powerline</button>
+            <button type="button" class="preset-filter-btn" data-filter="minimal" onclick="setPresetFilter('minimal')">✨ Minimal</button>
+            <button type="button" class="preset-filter-btn" data-filter="light" onclick="setPresetFilter('light')">☀️ Light</button>
+          </div>
         </div>
         <div class="preset-grid" id="presetsGrid">
           <!-- Preset buttons rendered by JS -->
@@ -2230,224 +2288,942 @@
         lang: { bg: "#c18401", fg: "#ffffff" },
         ai: { bg: "#50a14f", fg: "#ffffff" },
         time: { bg: "#e5e5e6", fg: "#383a42" }
+      },
+      gruvbox_rainbow: {
+        name: "Gruvbox Rainbow",
+        bg: "#282828",
+        fg: "#ebdbb2",
+        os: { bg: "#fe8019", fg: "#282828" },
+        dir: { bg: "#fabd2f", fg: "#282828" },
+        git: { bg: "#8ec07c", fg: "#282828" },
+        lang: { bg: "#83a598", fg: "#282828" },
+        ai: { bg: "#d3869b", fg: "#282828" },
+        time: { bg: "#3c3836", fg: "#ebdbb2" }
+      },
+      catppuccin_powerline: {
+        name: "Catppuccin Powerline",
+        bg: "#1e1e2e",
+        fg: "#cdd6f4",
+        os: { bg: "#f38ba8", fg: "#11111b" },
+        dir: { bg: "#fab387", fg: "#11111b" },
+        git: { bg: "#f9e2af", fg: "#11111b" },
+        lang: { bg: "#a6e3a1", fg: "#11111b" },
+        ai: { bg: "#89dceb", fg: "#11111b" },
+        time: { bg: "#313244", fg: "#cdd6f4" }
+      },
+      hyde: {
+        name: "HyDE Cyber Neon",
+        bg: "#1a1b26",
+        fg: "#f8f8f2",
+        os: { bg: "#bd93f9", fg: "#1a1b26" },
+        dir: { bg: "#8be9fd", fg: "#1a1b26" },
+        git: { bg: "#769ff0", fg: "#1a1b26" },
+        lang: { bg: "#50fa7b", fg: "#1a1b26" },
+        ai: { bg: "#ff79c6", fg: "#1a1b26" },
+        time: { bg: "#282a36", fg: "#f8f8f2" }
+      },
+      omarchy: {
+        name: "Omarchy Cyan Glow",
+        bg: "#121212",
+        fg: "#e0e0e0",
+        os: { bg: "#00d7d7", fg: "#121212" },
+        dir: { bg: "#00d7d7", fg: "#121212" },
+        git: { bg: "#5fffd7", fg: "#121212" },
+        lang: { bg: "#87d7ff", fg: "#121212" },
+        ai: { bg: "#5fd7ff", fg: "#121212" },
+        time: { bg: "#262626", fg: "#e0e0e0" }
+      },
+      end_4: {
+        name: "End-4 Hyprland Slate",
+        bg: "#18181b",
+        fg: "#f4f4f5",
+        os: { bg: "#e4e4e7", fg: "#18181b" },
+        dir: { bg: "#f4f4f5", fg: "#27272a" },
+        git: { bg: "#e4e4e7", fg: "#18181b" },
+        lang: { bg: "#d4d4d8", fg: "#18181b" },
+        ai: { bg: "#a1a1aa", fg: "#18181b" },
+        time: { bg: "#3f3f46", fg: "#f4f4f5" }
+      },
+      zephyr: {
+        name: "Zephyr Blue Matrix",
+        bg: "#101116",
+        fg: "#00a2ff",
+        os: { bg: "#ff5680", fg: "#101116" },
+        dir: { bg: "#00b0ff", fg: "#101116" },
+        git: { bg: "#00ff9c", fg: "#101116" },
+        lang: { bg: "#d57bff", fg: "#101116" },
+        ai: { bg: "#76c1ff", fg: "#101116" },
+        time: { bg: "#1f2335", fg: "#686868" }
+      },
+      prezto: {
+        name: "Prezto Tri-Color",
+        bg: "#1e1e24",
+        fg: "#f8f8f2",
+        os: { bg: "#e06c75", fg: "#ffffff" },
+        dir: { bg: "#61afef", fg: "#1e1e24" },
+        git: { bg: "#98c379", fg: "#1e1e24" },
+        lang: { bg: "#e5c07b", fg: "#1e1e24" },
+        ai: { bg: "#c678dd", fg: "#ffffff" },
+        time: { bg: "#2c313a", fg: "#f8f8f2" }
+      },
+      hydro: {
+        name: "Hydro Minimal Wave",
+        bg: "#181a1f",
+        fg: "#abb2bf",
+        os: { bg: "#61afef", fg: "#181a1f" },
+        dir: { bg: "#61afef", fg: "#181a1f" },
+        git: { bg: "#98c379", fg: "#181a1f" },
+        lang: { bg: "#c678dd", fg: "#181a1f" },
+        ai: { bg: "#56b6c2", fg: "#181a1f" },
+        time: { bg: "#282c34", fg: "#abb2bf" }
+      },
+      p3rception: {
+        name: "P3rception Terminal",
+        bg: "#14161b",
+        fg: "#cdd6f4",
+        os: { bg: "#2883ff", fg: "#ffffff" },
+        dir: { bg: "#7ed1fb", fg: "#14161b" },
+        git: { bg: "#22c55e", fg: "#14161b" },
+        lang: { bg: "#f59e0b", fg: "#14161b" },
+        ai: { bg: "#a855f7", fg: "#ffffff" },
+        time: { bg: "#1e2430", fg: "#94a3b8" }
+      },
+      christian_lempa: {
+        name: "Christian Lempa Crimson",
+        bg: "#16161e",
+        fg: "#f8fafc",
+        os: { bg: "#ff0055", fg: "#ffffff" },
+        dir: { bg: "#ff0055", fg: "#ffffff" },
+        git: { bg: "#10b981", fg: "#ffffff" },
+        lang: { bg: "#fbbf24", fg: "#16161e" },
+        ai: { bg: "#8b5cf6", fg: "#ffffff" },
+        time: { bg: "#232635", fg: "#94a3b8" }
+      },
+      "1_am_simp1e": {
+        name: "1AmSimp1e Oceanic Slate",
+        bg: "#1a1b22",
+        fg: "#e8e3e3",
+        os: { bg: "#252525", fg: "#e8e3e3" },
+        dir: { bg: "#6791c9", fg: "#252525" },
+        git: { bg: "#81c19b", fg: "#252525" },
+        lang: { bg: "#c397d8", fg: "#252525" },
+        ai: { bg: "#e8e3e3", fg: "#252525" },
+        time: { bg: "#252525", fg: "#e8e3e3" }
+      },
+      linux_mobile: {
+        name: "LinuxMobile Sakura",
+        bg: "#181825",
+        fg: "#cdd6f4",
+        os: { bg: "#f5c2e7", fg: "#1e1e2e" },
+        dir: { bg: "#b4befe", fg: "#1e1e2e" },
+        git: { bg: "#a6e3a1", fg: "#1e1e2e" },
+        lang: { bg: "#f9e2af", fg: "#1e1e2e" },
+        ai: { bg: "#f5c2e7", fg: "#1e1e2e" },
+        time: { bg: "#313244", fg: "#cdd6f4" }
+      },
+      meowrch: {
+        name: "Meowrch Pastel Purple",
+        bg: "#1e1e2e",
+        fg: "#cdd6f4",
+        os: { bg: "#cba6f7", fg: "#11111b" },
+        dir: { bg: "#89b4fa", fg: "#11111b" },
+        git: { bg: "#f5c2e7", fg: "#11111b" },
+        lang: { bg: "#f9e2af", fg: "#11111b" },
+        ai: { bg: "#94e2d5", fg: "#11111b" },
+        time: { bg: "#313244", fg: "#cdd6f4" }
+      },
+      lukewhrit: {
+        name: "Lukewhrit Dracula Avit",
+        bg: "#282a36",
+        fg: "#f8f8f2",
+        os: { bg: "#bd93f9", fg: "#282a36" },
+        dir: { bg: "#ff79c6", fg: "#282a36" },
+        git: { bg: "#8be9fd", fg: "#282a36" },
+        lang: { bg: "#f1fa8c", fg: "#282a36" },
+        ai: { bg: "#50fa7b", fg: "#282a36" },
+        time: { bg: "#44475a", fg: "#f8f8f2" }
+      },
+      cappyzawa: {
+        name: "Cappyzawa Forest Mint",
+        bg: "#1b2028",
+        fg: "#e2e8f0",
+        os: { bg: "#50fa7b", fg: "#1b2028" },
+        dir: { bg: "#8be9fd", fg: "#1b2028" },
+        git: { bg: "#50fa7b", fg: "#1b2028" },
+        lang: { bg: "#f1fa8c", fg: "#1b2028" },
+        ai: { bg: "#bd93f9", fg: "#1b2028" },
+        time: { bg: "#2d3748", fg: "#e2e8f0" }
+      },
+      jmreicha: {
+        name: "Jmreicha Azure Gold",
+        bg: "#151820",
+        fg: "#e2e8f0",
+        os: { bg: "#00afff", fg: "#151820" },
+        dir: { bg: "#0087af", fg: "#ffffff" },
+        git: { bg: "#10b981", fg: "#151820" },
+        lang: { bg: "#d3b987", fg: "#151820" },
+        ai: { bg: "#73cef4", fg: "#151820" },
+        time: { bg: "#222734", fg: "#e2e8f0" }
       }
     };
 
     // ── Presets ───────────────────────────────────────────────────────────────
     const presets = [
-      // ── Preserved Presets ──────────────────────────────────────────────────
       {
-        id: "classic_pill",
-        name: "Powerline Pill",
-        preview: " █  █ ",
-        leftCap: "",
-        sep: "",
-        rightCap: "",
-        theme: "firewatch",
-        icon: "󰣇",
-        modules: { os: true, dir: true, git: true, lang: true, time: true }
+            "id": "tokyo_night",
+            "name": "Tokyo Night",
+            "author": "Official Preset",
+            "category": "awesome",
+            "preview": "░▒▓ █  █  █ ",
+            "promptStyle": "powerline",
+            "theme": "tokyoshadow",
+            "leftCap": "░▒▓",
+            "sep": "",
+            "rightCap": "",
+            "icon": "󰣇",
+            "modules": {
+                  "os": true,
+                  "dir": true,
+                  "git": true,
+                  "lang": true,
+                  "time": true
+            },
+            "rawToml": "\"$schema\" = 'https://starship.rs/config-schema.json'\n\nformat = \"\"\"\n[░▒▓](#a3aed2)\\\n$os\\\n[](bg:#769ff0 fg:#a3aed2)\\\n$directory\\\n[](fg:#769ff0 bg:#394260)\\\n$git_branch\\\n$git_status\\\n[](fg:#394260 bg:#212736)\\\n$nodejs\\\n$bun\\\n$rust\\\n$golang\\\n$php\\\n[](fg:#212736 bg:#1d2230)\\\n$time\\\n[ ](fg:#1d2230)\\\n\\n$character\"\"\"\n\n[directory]\nstyle = \"fg:#e3e5e5 bg:#769ff0\"\nformat = \"[ $path ]($style)\"\ntruncation_length = 3\ntruncation_symbol = \"…/\"\n\n[directory.substitutions]\n\"Documents\" = \"󰈙 \"\n\"Downloads\" = \" \"\n\"Music\" = \" \"\n\"Pictures\" = \" \"\n\n[git_branch]\nsymbol = \"\"\nstyle = \"bg:#394260\"\nformat = '[[ $symbol $branch ](fg:#769ff0 bg:#394260)]($style)'\n\n[git_status]\nstyle = \"bg:#394260\"\nformat = '[[($all_status$ahead_behind )](fg:#769ff0 bg:#394260)]($style)'\n\n[jj_bookmark]\nsymbol = \"\"\nstyle = \"bg:#394260\"\nformat = '[[ $symbol $bookmark(@$remote)$diverged( \\\\(+$overflow_count others\\\\)) ](fg:#769ff0 bg:#394260)]($style)'\n\n[jj_status]\nstyle = \"bg:#394260\"\nformat = '[[($all )](fg:#769ff0 bg:#394260)]($style)'\n\n[nodejs]\nsymbol = \"\"\nstyle = \"bg:#212736\"\nformat = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'\n\n[bun]\nsymbol = \"\"\nstyle = \"bg:#212736\"\nformat = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'\n\n[rust]\nsymbol = \"\"\nstyle = \"bg:#212736\"\nformat = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'\n\n[golang]\nsymbol = \"\"\nstyle = \"bg:#212736\"\nformat = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'\n\n[php]\nsymbol = \"\"\nstyle = \"bg:#212736\"\nformat = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'\n\n[time]\ndisabled = false\ntime_format = \"%R\" # Hour:Minute Format\nstyle = \"bg:#1d2230\"\nformat = '[[  $time ](fg:#a0a9cb bg:#1d2230)]($style)'\n\n[os]\nstyle = \"bg:#a3aed2 fg:#090c0c\"\nformat = \"[ $symbol ]($style)\"\ndisabled = false\n\n[os.symbols]\nWindows = \"󰍲\"\nUbuntu = \"󰕈\"\nSUSE = \"\"\nRaspbian = \"󰐿\"\nMint = \"󰣭\"\nMacos = \"󰀵\"\nManjaro = \"\"\nLinux = \"󰌽\"\nGentoo = \"󰣨\"\nFedora = \"󰣛\"\nAlpine = \"\"\nAmazon = \"\"\nAndroid = \"\"\nAOSC = \"\"\nArch = \"󰣇\"\nArtix = \"󰣇\"\nEndeavourOS = \"\"\nCentOS = \"\"\nDebian = \"󰣚\"\nRedhat = \"󱄛\"\nRedHatEnterprise = \"󱄛\"\nPop = \"\""
       },
       {
-        id: "tokyo_shading",
-        name: "Tokyo Night Shading",
-        preview: "░▒▓ █  █  █ ",
-        leftCap: "░▒▓",
-        sep: "",
-        rightCap: "",
-        theme: "tokyoshadow",
-        icon: "",
-        modules: { os: true, dir: true, git: true, lang: true, time: true }
+            "id": "pastel_powerline",
+            "name": "Pastel Powerline",
+            "author": "Official Preset",
+            "category": "awesome",
+            "preview": " █  █ ",
+            "promptStyle": "powerline",
+            "theme": "pastel",
+            "leftCap": "",
+            "sep": "",
+            "rightCap": "",
+            "icon": "󰣇",
+            "modules": {
+                  "os": true,
+                  "dir": true,
+                  "git": true,
+                  "lang": true,
+                  "time": true
+            },
+            "rawToml": "\"$schema\" = 'https://starship.rs/config-schema.json'\n\nformat = \"\"\"\n[](#9A348E)\\\n$os\\\n$username\\\n[](bg:#DA627D fg:#9A348E)\\\n$directory\\\n[](fg:#DA627D bg:#FCA17D)\\\n$git_branch\\\n$git_status\\\n[](fg:#FCA17D bg:#86BBD8)\\\n$c\\\n$elixir\\\n$elm\\\n$golang\\\n$gradle\\\n$haskell\\\n$java\\\n$julia\\\n$maven\\\n$nodejs\\\n$bun\\\n$nim\\\n$rust\\\n$scala\\\n[](fg:#86BBD8 bg:#06969A)\\\n$docker_context\\\n[](fg:#06969A bg:#33658A)\\\n$time\\\n[ ](fg:#33658A)\\\n\"\"\"\n\n# Disable the blank line at the start of the prompt\n# add_newline = false\n\n# You can also replace your username with a neat symbol like   or disable this\n# and use the os module below\n[username]\nshow_always = true\nstyle_user = \"bg:#9A348E\"\nstyle_root = \"bg:#9A348E\"\nformat = '[$user ]($style)'\ndisabled = false\n\n# An alternative to the username module which displays a symbol that\n# represents the current operating system\n[os]\nstyle = \"bg:#9A348E\"\ndisabled = true # Disabled by default\n\n[directory]\nstyle = \"bg:#DA627D\"\nformat = \"[ $path ]($style)\"\ntruncation_length = 3\ntruncation_symbol = \"…/\"\n\n# Here is how you can shorten some long paths by text replacement\n# similar to mapped_locations in Oh My Posh:\n[directory.substitutions]\n\"Documents\" = \"󰈙 \"\n\"Downloads\" = \" \"\n\"Music\" = \" \"\n\"Pictures\" = \" \"\n# Keep in mind that the order matters. For example:\n# \"Important Documents\" = \" 󰈙 \"\n# will not be replaced, because \"Documents\" was already substituted before.\n# So either put \"Important Documents\" before \"Documents\" or use the substituted version:\n# \"Important 󰈙 \" = \" 󰈙 \"\n\n[c]\nsymbol = \" \"\nstyle = \"bg:#86BBD8\"\nformat = '[ $symbol ($version) ]($style)'\n\n[cpp]\nsymbol = \" \"\nstyle = \"bg:#86BBD8\"\nformat = '[ $symbol ($version) ]($style)'\n\n[docker_context]\nsymbol = \" \"\nstyle = \"bg:#06969A\"\nformat = '[ $symbol $context ]($style)'\n\n[elixir]\nsymbol = \" \"\nstyle = \"bg:#86BBD8\"\nformat = '[ $symbol ($version) ]($style)'\n\n[elm]\nsymbol = \" \"\nstyle = \"bg:#86BBD8\"\nformat = '[ $symbol ($version) ]($style)'\n\n[git_branch]\nsymbol = \"\"\nstyle = \"bg:#FCA17D\"\nformat = '[ $symbol $branch ]($style)'\n\n[git_status]\nstyle = \"bg:#FCA17D\"\nformat = '[$all_status$ahead_behind ]($style)'\n\n[golang]\nsymbol = \" \"\nstyle = \"bg:#86BBD8\"\nformat = '[ $symbol ($version) ]($style)'\n\n[gradle]\nstyle = \"bg:#86BBD8\"\nformat = '[ $symbol ($version) ]($style)'\n\n[haskell]\nsymbol = \" \"\nstyle = \"bg:#86BBD8\"\nformat = '[ $symbol ($version) ]($style)'\n\n[java]\nsymbol = \" \"\nstyle = \"bg:#86BBD8\"\nformat = '[ $symbol ($version) ]($style)'\n\n[jj_bookmark]\nsymbol = \"\"\nstyle = \"bg:#FCA17D\"\nformat = '[ $symbol $bookmark(@$remote)$diverged( \\\\(+$overflow_count others\\\\)) ]($style)'\n\n[jj_status]\nstyle = \"bg:#FCA17D\"\nformat = '[$all ]($style)'\n\n[julia]\nsymbol = \" \"\nstyle = \"bg:#86BBD8\"\nformat = '[ $symbol ($version) ]($style)'\n\n[maven]\nstyle = \"bg:#86BBD8\"\nformat = '[ $symbol ($version) ]($style)'\n\n[nodejs]\nsymbol = \"\"\nstyle = \"bg:#86BBD8\"\nformat = '[ $symbol ($version) ]($style)'\n\n[bun]\nsymbol = \"\"\nstyle = \"bg:#86BBD8\"\nformat = '[ $symbol ($version) ]($style)'\n\n[nim]\nsymbol = \"󰆥 \"\nstyle = \"bg:#86BBD8\"\nformat = '[ $symbol ($version) ]($style)'\n\n[rust]\nsymbol = \"\"\nstyle = \"bg:#86BBD8\"\nformat = '[ $symbol ($version) ]($style)'\n\n[scala]\nsymbol = \" \"\nstyle = \"bg:#86BBD8\"\nformat = '[ $symbol ($version) ]($style)'\n\n[time]\ndisabled = false\ntime_format = \"%R\" # Hour:Minute Format\nstyle = \"bg:#33658A\"\nformat = '[ ♥ $time ]($style)'"
       },
       {
-        id: "pixel_steps",
-        name: "8-Bit Retro Pixel Steps",
-        preview: " █  █  █ ",
-        leftCap: "",
-        sep: ["", "", ""],
-        rightCap: "",
-        theme: "matrix",
-        icon: "󱑻",
-        modules: { os: true, dir: true, git: true, lang: true, time: true }
+            "id": "pure_prompt",
+            "name": "Pure Prompt",
+            "author": "Official Preset",
+            "category": "awesome",
+            "preview": "~  main ❯",
+            "promptStyle": "transparent",
+            "theme": "nord",
+            "charSymbol": "❯",
+            "charColor": "#cba6f7",
+            "leftCap": "",
+            "sep": " ",
+            "rightCap": "",
+            "icon": "❯",
+            "modules": {
+                  "os": false,
+                  "dir": true,
+                  "git": true,
+                  "lang": true,
+                  "time": false
+            },
+            "rawToml": "\"$schema\" = 'https://starship.rs/config-schema.json'\n\nformat = \"\"\"\n$username\\\n$hostname\\\n$directory\\\n$git_branch\\\n$git_state\\\n$git_status\\\n$cmd_duration\\\n$line_break\\\n$python\\\n$character\"\"\"\n\n[directory]\nstyle = \"blue\"\n\n[character]\nsuccess_symbol = \"[❯](purple)\"\nerror_symbol = \"[❯](red)\"\nvimcmd_symbol = \"[❮](green)\"\n\n[git_branch]\nformat = \"[$branch]($style)\"\nstyle = \"bright-black\"\n\n[git_status]\nformat = \"[[(*$conflicted$untracked$modified$staged$renamed$deleted)](218) ($ahead_behind$stashed)]($style)\"\nstyle = \"cyan\"\nconflicted = \"​\"\nuntracked = \"​\"\nmodified = \"​\"\nstaged = \"​\"\nrenamed = \"​\"\ndeleted = \"​\"\nstashed = \"≡\"\n\n[git_state]\nformat = '\\([$state( $progress_current/$progress_total)]($style)\\) '\nstyle = \"bright-black\"\n\n[cmd_duration]\nformat = \"[$duration]($style) \"\nstyle = \"yellow\"\n\n[jj_bookmark]\nformat = \"[$bookmark(@$remote)$diverged( \\\\(+$overflow_count others\\\\))]($style)\"\nstyle = \"bright-black\"\n\n[jj_status]\nformat = \"[[(*$all)](218)]($style)\"\nstyle = \"cyan\"\nconflicted = \"​\"\ndescription_empty = \"\"\ndescription_present = \"\"\nhidden = \"​\"\nimmutable = \"​\"\nadded = \"​\"\ncopied = \"\"\ndeleted = \"​\"\nmodified = \"​\"\nrenamed = \"​\"\n\n[python]\nformat = \"[$virtualenv]($style) \"\nstyle = \"bright-black\"\ndetect_extensions = []\ndetect_files = []"
       },
       {
-        id: "rose_pine_horizon",
-        name: "Rosé Pine Horizon",
-        preview: "░▒▓ █ ▓▒░ █ ▓▒░",
-        leftCap: "░▒▓",
-        sep: "▓▒░",
-        rightCap: "▓▒░",
-        theme: "rosepine",
-        icon: "",
-        modules: { os: true, dir: true, git: true, lang: true, time: true }
+            "id": "jetpack",
+            "name": "Jetpack Spaceship",
+            "author": "Official Preset",
+            "category": "awesome",
+            "preview": "▲ ~  main ◎",
+            "promptStyle": "transparent",
+            "theme": "cyber_platinum",
+            "charSymbol": "◎",
+            "charColor": "#f9e2af",
+            "leftCap": "",
+            "sep": " ",
+            "rightCap": "",
+            "icon": "▲",
+            "modules": {
+                  "os": false,
+                  "dir": true,
+                  "git": true,
+                  "lang": true,
+                  "time": false
+            },
+            "rawToml": "# version: 1.0.0\n\"$schema\" = 'https://starship.rs/config-schema.json'\n\nadd_newline = true\ncontinuation_prompt = \"[▸▹ ](dimmed white)\"\n\nformat = \"\"\"($nix_shell$container$fill$git_metrics\\n)$cmd_duration\\\n$hostname\\\n$localip\\\n$shlvl\\\n$shell\\\n$env_var\\\n$jobs\\\n$sudo\\\n$username\\\n$character\"\"\"\n\nright_format = \"\"\"\n$singularity\\\n$kubernetes\\\n$directory\\\n$vcsh\\\n$fossil_branch\\\n$git_branch\\\n$git_commit\\\n$git_state\\\n$git_status\\\n$hg_branch\\\n$pijul_channel\\\n$docker_context\\\n$package\\\n$c\\\n$cpp\\\n$cmake\\\n$cobol\\\n$daml\\\n$dart\\\n$deno\\\n$dotnet\\\n$elixir\\\n$elm\\\n$erlang\\\n$fennel\\\n$fortran\\\n$golang\\\n$guix_shell\\\n$haskell\\\n$haxe\\\n$helm\\\n$java\\\n$julia\\\n$kotlin\\\n$gradle\\\n$lua\\\n$maven\\\n$nim\\\n$nodejs\\\n$bun\\\n$ocaml\\\n$opa\\\n$perl\\\n$php\\\n$pulumi\\\n$purescript\\\n$python\\\n$raku\\\n$rlang\\\n$red\\\n$ruby\\\n$rust\\\n$scala\\\n$solidity\\\n$swift\\\n$terraform\\\n$vlang\\\n$vagrant\\\n$xmake\\\n$zig\\\n$buf\\\n$conda\\\n$pixi\\\n$meson\\\n$spack\\\n$memory_usage\\\n$aws\\\n$gcloud\\\n$openstack\\\n$azure\\\n$crystal\\\n$custom\\\n$status\\\n$os\\\n$battery\\\n$time\"\"\"\n\n[fill]\nsymbol = ' '\n\n[character]\nformat = \"$symbol \"\nsuccess_symbol = \"[◎](bold italic bright-yellow)\"\nerror_symbol = \"[○](italic purple)\"\nvimcmd_symbol = \"[■](italic dimmed green)\"\n# not supported in zsh\nvimcmd_replace_one_symbol = \"◌\"\nvimcmd_replace_symbol = \"□\"\nvimcmd_visual_symbol = \"▼\"\n\n[env_var.VIMSHELL]\nformat = \"[$env_value]($style)\"\nstyle = 'green italic'\n\n[sudo]\nformat = \"[$symbol]($style)\"\nstyle = \"bold italic bright-purple\"\nsymbol = \"⋈┈\"\ndisabled = false\n\n[username]\nstyle_user = \"bright-yellow bold italic\"\nstyle_root = \"purple bold italic\"\nformat = \"[⭘ $user]($style) \"\ndisabled = false\nshow_always = false\n\n[directory]\nhome_symbol = \"⌂\"\ntruncation_length = 2\ntruncation_symbol = \"□ \"\nread_only = \" ◈\"\nuse_os_path_sep = true\nstyle = \"italic blue\"\nformat = '[$path]($style)[$read_only]($read_only_style)'\nrepo_root_style = 'bold blue'\nrepo_root_format = '[$before_root_path]($before_repo_root_style)[$repo_root]($repo_root_style)[$path]($style)[$read_only]($read_only_style) [△](bold bright-blue)'\n\n[cmd_duration]\nformat = \"[◄ $duration ](italic white)\"\n\n[jobs]\nformat = \"[$symbol$number]($style) \"\nstyle = \"white\"\nsymbol = \"[▶](blue italic)\"\n\n[localip]\nssh_only = true\nformat = \" ◯[$localipv4](bold magenta)\"\ndisabled = false\n\n[time]\ndisabled = false\nformat = \"[ $time]($style)\"\ntime_format = \"%R\"\nutc_time_offset = \"local\"\nstyle = \"italic dimmed white\"\n\n[battery]\nformat = \"[ $percentage $symbol]($style)\"\nfull_symbol = \"█\"\ncharging_symbol = \"[↑](italic bold green)\"\ndischarging_symbol = \"↓\"\nunknown_symbol = \"░\"\nempty_symbol = \"▃\"\n\n[[battery.display]]\nthreshold = 20\nstyle = \"italic bold red\"\n\n[[battery.display]]\nthreshold = 60\nstyle = \"italic dimmed bright-purple\"\n\n[[battery.display]]\nthreshold = 70\nstyle = \"italic dimmed yellow\"\n\n[git_branch]\nformat = \" [$branch(:$remote_branch)]($style)\"\nsymbol = \"[△](bold italic bright-blue)\"\nstyle = \"italic bright-blue\"\ntruncation_symbol = \"⋯\"\ntruncation_length = 11\nignore_branches = [\"main\", \"master\"]\nonly_attached = true\n\n[git_metrics]\nformat = '([▴$added]($added_style))([▿$deleted]($deleted_style))'\nadded_style = 'italic dimmed green'\ndeleted_style = 'italic dimmed red'\nignore_submodules = true\ndisabled = false\n\n[git_status]\nstyle = \"bold italic bright-blue\"\nformat = \"([⎪$ahead_behind$staged$modified$untracked$renamed$deleted$conflicted$stashed⎥]($style))\"\nconflicted = \"[◪◦](italic bright-magenta)\"\nahead = \"[▴│[${count}](bold white)│](italic green)\"\nbehind = \"[▿│[${count}](bold white)│](italic red)\"\ndiverged = \"[◇ ▴┤[${ahead_count}](regular white)│▿┤[${behind_count}](regular white)│](italic bright-magenta)\"\nuntracked = \"[◌◦](italic bright-yellow)\"\nstashed = \"[◃◈](italic white)\"\nmodified = \"[●◦](italic yellow)\"\nstaged = \"[▪┤[$count](bold white)│](italic bright-cyan)\"\nrenamed = \"[◎◦](italic bright-blue)\"\ndeleted = \"[✕](italic red)\"\n\n[deno]\nformat = \" [deno](italic) [∫ $version](green bold)\"\nversion_format = \"${raw}\"\n\n[lua]\nformat = \" [lua](italic) [${symbol}${version}]($style)\"\nversion_format = \"${raw}\"\nsymbol = \"⨀ \"\nstyle = \"bold bright-yellow\"\n\n[nodejs]\nformat = \" [node](italic) [◫ ($version)](bold bright-green)\"\nversion_format = \"${raw}\"\ndetect_files = [\"package-lock.json\", \"yarn.lock\"]\ndetect_folders = [\"node_modules\"]\ndetect_extensions = []\n\n[bun]\nformat = \" [bun](italic) [◫ ($version)](bold bright-green)\"\nversion_format = \"${raw}\"\n\n[python]\nformat = \" [py](italic) [${symbol}${version}]($style)\"\nsymbol = \"[⌉](bold bright-blue)⌊ \"\nversion_format = \"${raw}\"\nstyle = \"bold bright-yellow\"\n\n[ruby]\nformat = \" [rb](italic) [${symbol}${version}]($style)\"\nsymbol = \"◆ \"\nversion_format = \"${raw}\"\nstyle = \"bold red\"\n\n[rust]\nformat = \" [rs](italic) [$symbol$version]($style)\"\nsymbol = \"⊃ \"\nversion_format = \"${raw}\"\nstyle = \"bold red\"\n\n[package]\nformat = \" [pkg](italic dimmed) [$symbol$version]($style)\"\nversion_format = \"${raw}\"\nsymbol = \"◨ \"\nstyle = \"dimmed yellow italic bold\"\n\n[swift]\nformat = \" [sw](italic) [${symbol}${version}]($style)\"\nsymbol = \"◁ \"\nstyle = \"bold bright-red\"\nversion_format = \"${raw}\"\n\n[aws]\ndisabled = true\nformat = \" [aws](italic) [$symbol $profile $region]($style)\"\nstyle = \"bold blue\"\nsymbol = \"▲ \"\n\n[buf]\nsymbol = \"■ \"\nformat = \" [buf](italic) [$symbol $version $buf_version]($style)\"\n\n[c]\nsymbol = \"ℂ \"\nformat = \" [$symbol($version(-$name))]($style)\"\n\n[cpp]\nsymbol = \"ℂ \"\nformat = \" [$symbol($version(-$name))]($style)\"\n\n[conda]\nsymbol = \"◯ \"\nformat = \" conda [$symbol$environment]($style)\"\n\n[pixi]\nsymbol = \"■ \"\nformat = \" pixi [$symbol$version ($environment )]($style)\"\n\n[dart]\nsymbol = \"◁◅ \"\nformat = \" dart [$symbol($version )]($style)\"\n\n[docker_context]\nsymbol = \"◧ \"\nformat = \" docker [$symbol$context]($style)\"\n\n[elixir]\nsymbol = \"△ \"\nformat = \" exs [$symbol $version OTP $otp_version ]($style)\"\n\n[elm]\nsymbol = \"◩ \"\nformat = \" elm [$symbol($version )]($style)\"\n\n[golang]\nsymbol = \"∩ \"\nformat = \" go [$symbol($version )]($style)\"\n\n[haskell]\nsymbol = \"❯λ \"\nformat = \" hs [$symbol($version )]($style)\"\n\n[java]\nsymbol = \"∪ \"\nformat = \" java [${symbol}(${version} )]($style)\"\n\n[jj_bookmark]\nformat = \" [$symbol$bookmark(@$remote)$diverged( \\\\(+$overflow_count others\\\\))]($style)\"\nsymbol = \"[△](bold italic bright-blue)\"\nstyle = \"italic bright-blue\"\ntruncation_symbol = \"⋯\"\ntruncation_length = 11\nignore_names = [\"main\", \"master\"]\n\n[jj_metrics]\nformat = '([▴$added]($added_style))([▿$deleted]($deleted_style))'\nadded_style = 'italic dimmed green'\ndeleted_style = 'italic dimmed red'\n\n[jj_status]\nformat = \"([⎪$all⎥]($style))\"\nstyle = \"bold italic bright-blue\"\nconflicted = \"[◪◦](italic bright-magenta)\"\ndescription_empty = \"[◌◦](italic bright-magenta)\"\ndescription_present = \"[◦](italic bright-magenta)\"\nhidden = \"[󰘓◦](italic bright-magenta)\"\nimmutable = \"[◦](italic bright-magenta)\"\nadded = \"[▪](italic bright-cyan)\"\ncopied = \"[◃◈](italic white)\"\ndeleted = \"[✕](italic red)\"\nmodified = \"[●◦](italic yellow)\"\nrenamed = \"[◎◦](italic bright-blue)\"\n\n[julia]\nsymbol = \"◎ \"\nformat = \" jl [$symbol($version )]($style)\"\n\n[memory_usage]\nsymbol = \"▪▫▪ \"\nformat = \" mem [${ram}( ${swap})]($style)\"\n\n[nim]\nsymbol = \"▴▲▴ \"\nformat = \" nim [$symbol($version )]($style)\"\n\n[nix_shell]\nstyle = 'bold italic dimmed blue'\nsymbol = '✶'\nformat = '[$symbol nix⎪$state⎪]($style) [$name](italic dimmed white)'\nimpure_msg = '[⌽](bold dimmed red)'\npure_msg = '[⌾](bold dimmed green)'\nunknown_msg = '[◌](bold dimmed yellow)'\n\n[spack]\nsymbol = \"◇ \"\nformat = \" spack [$symbol$environment]($style)\""
       },
       {
-        id: "slanted_triangles",
-        name: "Slanted Triangles",
-        preview: " █  █  █ ",
-        leftCap: "",
-        sep: ["", "", ""],
-        rightCap: "",
-        theme: "gruvbox",
-        icon: "󱃏",
-        modules: { os: false, dir: true, git: true, lang: true, time: true }
-      },
-
-      // ── New Creative Alternating Presets ────────────────────────────────────
-      {
-        id: "cyber_honeycomb",
-        name: "Cyber Honeycomb Hex",
-        preview: " █  █ ",
-        leftCap: "",
-        sep: "",
-        rightCap: "",
-        theme: "matrix",
-        icon: "󰷗",
-        modules: { os: true, dir: true, git: true, lang: true, time: true }
-      },
-      {
-        id: "gradient_wave",
-        name: "Shading Gradient Wave",
-        preview: "░▒▓ █ ▓▒░ █ ░▒▓ █ ▓▒░",
-        leftCap: "░▒▓",
-        sep: ["▓▒░", "░▒▓", "▓▒░"],
-        rightCap: "▓▒░",
-        theme: "tokyoshadow",
-        icon: "",
-        modules: { os: false, dir: true, git: true, lang: true, time: true }
+            "id": "gruvbox_rainbow",
+            "name": "Gruvbox Rainbow",
+            "author": "Official Preset",
+            "category": "awesome",
+            "preview": " █  █ ",
+            "promptStyle": "powerline",
+            "theme": "gruvbox_rainbow",
+            "leftCap": "",
+            "sep": "",
+            "rightCap": "",
+            "icon": "󰣇",
+            "charSymbol": "",
+            "charColor": "#b8bb26",
+            "modules": {
+                  "os": true,
+                  "dir": true,
+                  "git": true,
+                  "lang": true,
+                  "time": true
+            },
+            "rawToml": "\"$schema\" = 'https://starship.rs/config-schema.json'\n\nformat = \"\"\"\n[](color_orange)\\\n$os\\\n$username\\\n[](bg:color_yellow fg:color_orange)\\\n$directory\\\n[](fg:color_yellow bg:color_aqua)\\\n$git_branch\\\n$git_status\\\n[](fg:color_aqua bg:color_blue)\\\n$c\\\n$cpp\\\n$rust\\\n$golang\\\n$nodejs\\\n$bun\\\n$php\\\n$java\\\n$kotlin\\\n$haskell\\\n$python\\\n[](fg:color_blue bg:color_bg3)\\\n$docker_context\\\n$conda\\\n$pixi\\\n[](fg:color_bg3 bg:color_bg1)\\\n$time\\\n[ ](fg:color_bg1)\\\n$line_break$character\"\"\"\n\npalette = 'gruvbox_dark'\n\n[palettes.gruvbox_dark]\ncolor_fg0 = '#fbf1c7'\ncolor_bg1 = '#3c3836'\ncolor_bg3 = '#665c54'\ncolor_blue = '#458588'\ncolor_aqua = '#689d6a'\ncolor_green = '#98971a'\ncolor_orange = '#d65d0e'\ncolor_purple = '#b16286'\ncolor_red = '#cc241d'\ncolor_yellow = '#d79921'\n\n[os]\ndisabled = false\nstyle = \"bg:color_orange fg:color_fg0\"\n\n[os.symbols]\nWindows = \"󰍲\"\nUbuntu = \"󰕈\"\nSUSE = \"\"\nRaspbian = \"󰐿\"\nMint = \"󰣭\"\nMacos = \"󰀵\"\nManjaro = \"\"\nLinux = \"󰌽\"\nGentoo = \"󰣨\"\nFedora = \"󰣛\"\nAlpine = \"\"\nAmazon = \"\"\nAndroid = \"\"\nAOSC = \"\"\nArch = \"󰣇\"\nArtix = \"󰣇\"\nEndeavourOS = \"\"\nCentOS = \"\"\nDebian = \"󰣚\"\nRedhat = \"󱄛\"\nRedHatEnterprise = \"󱄛\"\nPop = \"\"\n\n[username]\nshow_always = true\nstyle_user = \"bg:color_orange fg:color_fg0\"\nstyle_root = \"bg:color_orange fg:color_fg0\"\nformat = '[ $user ]($style)'\n\n[directory]\nstyle = \"fg:color_fg0 bg:color_yellow\"\nformat = \"[ $path ]($style)\"\ntruncation_length = 3\ntruncation_symbol = \"…/\"\n\n[directory.substitutions]\n\"Documents\" = \"󰈙 \"\n\"Downloads\" = \" \"\n\"Music\" = \"󰝚 \"\n\"Pictures\" = \" \"\n\"Developer\" = \"󰲋 \"\n\n[git_branch]\nsymbol = \"\"\nstyle = \"bg:color_aqua\"\nformat = '[[ $symbol $branch ](fg:color_fg0 bg:color_aqua)]($style)'\n\n[git_status]\nstyle = \"bg:color_aqua\"\nformat = '[[($all_status$ahead_behind )](fg:color_fg0 bg:color_aqua)]($style)'\n\n[nodejs]\nsymbol = \"\"\nstyle = \"bg:color_blue\"\nformat = '[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)'\n\n[bun]\nsymbol = \"\"\nstyle = \"bg:color_blue\"\nformat = '[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)'\n\n[c]\nsymbol = \" \"\nstyle = \"bg:color_blue\"\nformat = '[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)'\n\n[cpp]\nsymbol = \" \"\nstyle = \"bg:color_blue\"\nformat = '[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)'\n\n[rust]\nsymbol = \"\"\nstyle = \"bg:color_blue\"\nformat = '[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)'\n\n[golang]\nsymbol = \"\"\nstyle = \"bg:color_blue\"\nformat = '[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)'\n\n[php]\nsymbol = \"\"\nstyle = \"bg:color_blue\"\nformat = '[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)'\n\n[java]\nsymbol = \"\"\nstyle = \"bg:color_blue\"\nformat = '[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)'\n\n[jj_bookmark]\nsymbol = \"\"\nstyle = \"bg:color_aqua\"\nformat = '[[ $symbol $bookmark(@$remote)$diverged( \\\\(+$overflow_count others\\\\)) ](fg:color_fg0 bg:color_aqua)]($style)'\n\n[jj_status]\nstyle = \"bg:color_aqua\"\nformat = '[[($all )](fg:color_fg0 bg:color_aqua)]($style)'\n\n[kotlin]\nsymbol = \"\"\nstyle = \"bg:color_blue\"\nformat = '[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)'\n\n[haskell]\nsymbol = \"\"\nstyle = \"bg:color_blue\"\nformat = '[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)'\n\n[python]\nsymbol = \"\"\nstyle = \"bg:color_blue\"\nformat = '[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)'\n\n[docker_context]\nsymbol = \"\"\nstyle = \"bg:color_bg3\"\nformat = '[[ $symbol( $context) ](fg:#83a598 bg:color_bg3)]($style)'\n\n[conda]\nstyle = \"bg:color_bg3\"\nformat = '[[ $symbol( $environment) ](fg:#83a598 bg:color_bg3)]($style)'\n\n[pixi]\nstyle = \"bg:color_bg3\"\nformat = '[[ $symbol( $version)( $environment) ](fg:color_fg0 bg:color_bg3)]($style)'\n\n[time]\ndisabled = false\ntime_format = \"%R\"\nstyle = \"bg:color_bg1\"\nformat = '[[  $time ](fg:color_fg0 bg:color_bg1)]($style)'\n\n[line_break]\ndisabled = false\n\n[character]\ndisabled = false\nsuccess_symbol = '[](bold fg:color_green)'\nerror_symbol = '[](bold fg:color_red)'\nvimcmd_symbol = '[](bold fg:color_green)'\nvimcmd_replace_one_symbol = '[](bold fg:color_purple)'\nvimcmd_replace_symbol = '[](bold fg:color_purple)'\nvimcmd_visual_symbol = '[](bold fg:color_yellow)'"
       },
       {
-        id: "nordic_aurora",
-        name: "Nordic Floating Pill",
-        preview: " █   █ ",
-        leftCap: "",
-        sep: "",
-        rightCap: "",
-        theme: "lumon",
-        icon: "",
-        modules: { os: true, dir: true, git: true, lang: true, time: true }
+            "id": "catppuccin_powerline",
+            "name": "Catppuccin Powerline",
+            "author": "Official Preset",
+            "category": "awesome",
+            "preview": " █  █ ",
+            "promptStyle": "powerline",
+            "theme": "catppuccin_powerline",
+            "leftCap": "",
+            "sep": "",
+            "rightCap": "",
+            "icon": "󰣇",
+            "charSymbol": "❯",
+            "charColor": "#a6e3a1",
+            "modules": {
+                  "os": true,
+                  "dir": true,
+                  "git": true,
+                  "lang": true,
+                  "time": true
+            },
+            "rawToml": "\"$schema\" = 'https://starship.rs/config-schema.json'\n\nformat = \"\"\"\n[](red)\\\n$os\\\n$username\\\n[](bg:peach fg:red)\\\n$directory\\\n[](bg:yellow fg:peach)\\\n$git_branch\\\n$git_status\\\n[](fg:yellow bg:green)\\\n$c\\\n$rust\\\n$golang\\\n$nodejs\\\n$bun\\\n$php\\\n$java\\\n$kotlin\\\n$haskell\\\n$python\\\n[](fg:green bg:sapphire)\\\n$conda\\\n[](fg:sapphire bg:lavender)\\\n$time\\\n[ ](fg:lavender)\\\n$cmd_duration\\\n$line_break\\\n$character\"\"\"\n\npalette = 'catppuccin_mocha'\n\n[os]\ndisabled = false\nstyle = \"bg:red fg:crust\"\n\n[os.symbols]\nWindows = \"\"\nUbuntu = \"󰕈\"\nSUSE = \"\"\nRaspbian = \"󰐿\"\nMint = \"󰣭\"\nMacos = \"󰀵\"\nManjaro = \"\"\nLinux = \"󰌽\"\nGentoo = \"󰣨\"\nFedora = \"󰣛\"\nAlpine = \"\"\nAmazon = \"\"\nAndroid = \"\"\nAOSC = \"\"\nArch = \"󰣇\"\nArtix = \"󰣇\"\nCentOS = \"\"\nDebian = \"󰣚\"\nRedhat = \"󱄛\"\nRedHatEnterprise = \"󱄛\"\n\n[username]\nshow_always = true\nstyle_user = \"bg:red fg:crust\"\nstyle_root = \"bg:red fg:crust\"\nformat = '[ $user]($style)'\n\n[directory]\nstyle = \"bg:peach fg:crust\"\nformat = \"[ $path ]($style)\"\ntruncation_length = 3\ntruncation_symbol = \"…/\"\n\n[directory.substitutions]\n\"Documents\" = \"󰈙 \"\n\"Downloads\" = \" \"\n\"Music\" = \"󰝚 \"\n\"Pictures\" = \" \"\n\"Developer\" = \"󰲋 \"\n\n[git_branch]\nsymbol = \"\"\nstyle = \"bg:yellow\"\nformat = '[[ $symbol $branch ](fg:crust bg:yellow)]($style)'\n\n[git_status]\nstyle = \"bg:yellow\"\nformat = '[[($all_status$ahead_behind )](fg:crust bg:yellow)]($style)'\n\n[nodejs]\nsymbol = \"\"\nstyle = \"bg:green\"\nformat = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'\n\n[bun]\nsymbol = \"\"\nstyle = \"bg:green\"\nformat = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'\n\n[c]\nsymbol = \" \"\nstyle = \"bg:green\"\nformat = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'\n\n[rust]\nsymbol = \"\"\nstyle = \"bg:green\"\nformat = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'\n\n[golang]\nsymbol = \"\"\nstyle = \"bg:green\"\nformat = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'\n\n[php]\nsymbol = \"\"\nstyle = \"bg:green\"\nformat = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'\n\n[java]\nsymbol = \" \"\nstyle = \"bg:green\"\nformat = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'\n\n[jj_bookmark]\nsymbol = \"\"\nstyle = \"bg:yellow\"\nformat = '[[ $symbol $bookmark(@$remote)$diverged( \\\\(+$overflow_count others\\\\)) ](fg:crust bg:yellow)]($style)'\n\n[jj_status]\nstyle = \"bg:yellow\"\nformat = '[[($all )](fg:crust bg:yellow)]($style)'\n\n[kotlin]\nsymbol = \"\"\nstyle = \"bg:green\"\nformat = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'\n\n[haskell]\nsymbol = \"\"\nstyle = \"bg:green\"\nformat = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'\n\n[python]\nsymbol = \"\"\nstyle = \"bg:green\"\nformat = '[[ $symbol( $version)(\\(#$virtualenv\\)) ](fg:crust bg:green)]($style)'\n\n[docker_context]\nsymbol = \"\"\nstyle = \"bg:sapphire\"\nformat = '[[ $symbol( $context) ](fg:crust bg:sapphire)]($style)'\n\n[conda]\nsymbol = \"  \"\nstyle = \"fg:crust bg:sapphire\"\nformat = '[$symbol$environment ]($style)'\nignore_base = false\n\n[time]\ndisabled = false\ntime_format = \"%R\"\nstyle = \"bg:lavender\"\nformat = '[[  $time ](fg:crust bg:lavender)]($style)'\n\n[line_break]\ndisabled = true\n\n[character]\ndisabled = false\nsuccess_symbol = '[❯](bold fg:green)'\nerror_symbol = '[❯](bold fg:red)'\nvimcmd_symbol = '[❮](bold fg:green)'\nvimcmd_replace_one_symbol = '[❮](bold fg:lavender)'\nvimcmd_replace_symbol = '[❮](bold fg:lavender)'\nvimcmd_visual_symbol = '[❮](bold fg:yellow)'\n\n[cmd_duration]\nshow_milliseconds = true\nformat = \" in $duration \"\nstyle = \"bg:lavender\"\ndisabled = false\nshow_notifications = true\nmin_time_to_notify = 45000\n\n[palettes.catppuccin_mocha]\nrosewater = \"#f5e0dc\"\nflamingo = \"#f2cdcd\"\npink = \"#f5c2e7\"\nmauve = \"#cba6f7\"\nred = \"#f38ba8\"\nmaroon = \"#eba0ac\"\npeach = \"#fab387\"\nyellow = \"#f9e2af\"\ngreen = \"#a6e3a1\"\nteal = \"#94e2d5\"\nsky = \"#89dceb\"\nsapphire = \"#74c7ec\"\nblue = \"#89b4fa\"\nlavender = \"#b4befe\"\ntext = \"#cdd6f4\"\nsubtext1 = \"#bac2de\"\nsubtext0 = \"#a6adc8\"\noverlay2 = \"#9399b2\"\noverlay1 = \"#7f849c\"\noverlay0 = \"#6c7086\"\nsurface2 = \"#585b70\"\nsurface1 = \"#45475a\"\nsurface0 = \"#313244\"\nbase = \"#1e1e2e\"\nmantle = \"#181825\"\ncrust = \"#11111b\"\n\n[palettes.catppuccin_frappe]\nrosewater = \"#f2d5cf\"\nflamingo = \"#eebebe\"\npink = \"#f4b8e4\"\nmauve = \"#ca9ee6\"\nred = \"#e78284\"\nmaroon = \"#ea999c\"\npeach = \"#ef9f76\"\nyellow = \"#e5c890\"\ngreen = \"#a6d189\"\nteal = \"#81c8be\"\nsky = \"#99d1db\"\nsapphire = \"#85c1dc\"\nblue = \"#8caaee\"\nlavender = \"#babbf1\"\ntext = \"#c6d0f5\"\nsubtext1 = \"#b5bfe2\"\nsubtext0 = \"#a5adce\"\noverlay2 = \"#949cbb\"\noverlay1 = \"#838ba7\"\noverlay0 = \"#737994\"\nsurface2 = \"#626880\"\nsurface1 = \"#51576d\"\nsurface0 = \"#414559\"\nbase = \"#303446\"\nmantle = \"#292c3c\"\ncrust = \"#232634\"\n\n[palettes.catppuccin_latte]\nrosewater = \"#dc8a78\"\nflamingo = \"#dd7878\"\npink = \"#ea76cb\"\nmauve = \"#8839ef\"\nred = \"#d20f39\"\nmaroon = \"#e64553\"\npeach = \"#fe640b\"\nyellow = \"#df8e1d\"\ngreen = \"#40a02b\"\nteal = \"#179299\"\nsky = \"#04a5e5\"\nsapphire = \"#209fb5\"\nblue = \"#1e66f5\"\nlavender = \"#7287fd\"\ntext = \"#4c4f69\"\nsubtext1 = \"#5c5f77\"\nsubtext0 = \"#6c6f85\"\noverlay2 = \"#7c7f93\"\noverlay1 = \"#8c8fa1\"\noverlay0 = \"#9ca0b0\"\nsurface2 = \"#acb0be\"\nsurface1 = \"#bcc0cc\"\nsurface0 = \"#ccd0da\"\nbase = \"#eff1f5\"\nmantle = \"#e6e9ef\"\ncrust = \"#dce0e8\"\n\n[palettes.catppuccin_macchiato]\nrosewater = \"#f4dbd6\"\nflamingo = \"#f0c6c6\"\npink = \"#f5bde6\"\nmauve = \"#c6a0f6\"\nred = \"#ed8796\"\nmaroon = \"#ee99a0\"\npeach = \"#f5a97f\"\nyellow = \"#eed49f\"\ngreen = \"#a6da95\"\nteal = \"#8bd5ca\"\nsky = \"#91d7e3\"\nsapphire = \"#7dc4e4\"\nblue = \"#8aadf4\"\nlavender = \"#b7bdf8\"\ntext = \"#cad3f5\"\nsubtext1 = \"#b8c0e0\"\nsubtext0 = \"#a5adcb\"\noverlay2 = \"#939ab7\"\noverlay1 = \"#8087a2\"\noverlay0 = \"#6e738d\"\nsurface2 = \"#5b6078\"\nsurface1 = \"#494d64\"\nsurface0 = \"#363a4f\"\nbase = \"#24273a\"\nmantle = \"#1e2030\"\ncrust = \"#181926\""
       },
       {
-        id: "trapezoid_geo",
-        name: "Trapezoid Geo",
-        preview: " █  █ ",
-        leftCap: "",
-        sep: "",
-        rightCap: "",
-        theme: "firewatch",
-        icon: "󱃏",
-        modules: { os: true, dir: true, git: true, lang: true, time: true }
+            "id": "hyde",
+            "name": "HyDE Arch Neon",
+            "author": "HyDE Project",
+            "category": "awesome",
+            "preview": "󰣇 ~  main ",
+            "promptStyle": "transparent",
+            "theme": "hyde",
+            "charSymbol": "",
+            "charColor": "#8be9fd",
+            "leftCap": "",
+            "sep": " ",
+            "rightCap": "",
+            "icon": "󰣇",
+            "modules": {
+                  "os": true,
+                  "dir": true,
+                  "git": true,
+                  "lang": false,
+                  "time": false
+            },
+            "rawToml": "# \"$schema\" = 'https://starship.rs/config-schema.json'\nadd_newline = false\nformat = \"\"\"\\\n  󰣇 \\\n  $directory\\\n  $git_branch$git_commit$git_state $git_status\\\n  $character\\n\n\"\"\"\nright_format = \"\"\"\n$singularity\\\n$kubernetes\\\n$vcsh\\\n$hg_branch\\\n$pijul_channel\\\n$c\\\n$cmake\\\n$cobol\\\n$daml\\\n$dart\\\n$deno\\\n$dotnet\\\n$elixir\\\n$elm\\\n$erlang\\\n$fennel\\\n$golang\\\n$guix_shell\\\n$haskell\\\n$haxe\\\n$helm\\\n$java\\\n$julia\\\n$kotlin\\\n$gradle\\\n$lua\\\n$nim\\\n$nodejs\\\n$ocaml\\\n$opa\\\n$perl\\\n$pulumi\\\n$purescript\\\n$python\\\n$raku\\\n$rlang\\\n$red\\\n$ruby\\\n$rust\\\n$scala\\\n$solidity\\\n$swift\\\n$terraform\\\n$vlang\\\n$vagrant\\\n$zig\\\n$buf\\\n$conda\\\n$meson\\\n$spack\\\n$memory_usage\\\n$aws\\\n$gcloud\\\n$openstack\\\n$azure\\\n$cpp\\\n$kotlin\\\n$ocaml\\\n$pixi\\\n$rlang\\\n$php\\\n$crystal\\\n$custom\\\n$status\\\n$os\\\n$time\"\"\"\n\ncontinuation_prompt = '▶▶ '\n\n\n# style_choices:\n# bold\n# italic\n# underline\n# dimmed\n# inverted\n# blink\n# hidden\n# strikethrough\n# bg:<color>\n# fg:<color>\n# <color>\n# none\n\n#NOTE: you can customize the symbols, e.g:\n# [character]\n# success_symbol = \"[  ]($bold fg:#f8f8f2)\"\n# error_symbol = \"[ ➤ ]($bold fg:#fb4934)\"\n\n[directory]\ndisabled = false\nformat = \"[$path](bold fg:#8be9fd)\"\ntruncate_to_repo = false\n# home_symbol = \"\" \n\n[git_branch]\nformat = \" [  $branch](fg:#9198a1)\"\n\n[git_status]\nahead = '⇡${count}'\nbehind = '⇣${count}'\ndiverged = '⇕⇡${ahead_count}⇣${behind_count}'\nformat = '[[( $all_status$ahead_behind )](fg:#769ff0)]($style)'\nstyle = \"bg:#394260\"\n\n\n[time]\ndisabled = false\nformat = '[[  $time ](fg:#a0a9cb )]($style)'\ntime_format = \"%R\"                            # Hour:Minute Format\n\n[deno]\nformat = \" [deno](italic) [ ](green bold)\"\nversion_format = \"${raw}\"\n\n[lua]\nformat = \" [lua](italic) [${symbol}]($style)\"\nstyle = \"bold bright-yellow\"\nsymbol = \"⨀ \"\nversion_format = \"${raw}\"\n\n[nodejs]\ndetect_extensions = []\ndetect_files = [\"package-lock.json\", \"yarn.lock\"]\ndetect_folders = [\"node_modules\"]\nformat = \"[󰎙 ](bold bright-green)\"\nversion_format = \"${raw}\"\n\n[python]\nformat = \"[${symbol}(${virtualenv}) ${version}]($style)\"\nstyle = \"bold bright-yellow\"\nsymbol = \"[ ](bold bright-blue)\"\nversion_format = \"${raw}\"\n\n[ruby]\nformat = \" [rb](italic) [${symbol}]($style)\"\nstyle = \"bold red\"\nsymbol = \" \"\nversion_format = \"${raw}\"\n\n[rust]\nstyle = \"bold bright-red\"\nformat = \" rs(italic) $symbol($style)\"\nsymbol = \" \"\n\n[swift]\nformat = \" [sw](italic) [${symbol}]($style)\"\nstyle = \"bold bright-red\"\nsymbol = \" \"\nversion_format = \"${raw}\"\n\n[aws]\ndisabled = true\nformat = \" [aws](italic) [$symbol $profile $region]($style)\"\nstyle = \"bold blue\"\nsymbol = \" \"\n\n[buf]\nstyle = \"bold bright-red\"\nformat = \" [buf](italic) [$symbol $buf_version]($style)\"\nsymbol = \"■ \"\n\n[c]\nstyle = \"bold bright-cyan\"\nformat = \" [$symbol(-$name)]($style)\"\nsymbol = \"ℂ \"\n\n[cpp]\nstyle = \"bold bright-cyan\"\nformat = \" [cpp](italic) [$symbol]($style)\"\nsymbol = \" \"\n\n[kotlin]\nformat = \" [kotlin](italic) [$symbol]($style)\"\nstyle = \"bold bright-red\"\nsymbol = \" \"\n\n[ocaml]\nformat = \" [ocaml](italic) [$symbol]($style)\"\nstyle = \"bold bright-yellow\"\nsymbol = \" \"\n\n[perl]\nformat = \" [perl](italic) [$symbol]($style)\"\nstyle = \"bold bright-cyan\"\nsymbol = \" \"\n\n[php]\nformat = \" [php](italic) [$symbol]($style)\"\nstyle = \"bold bright-red\"\nsymbol = \" \"\n\n[pixi]\nformat = \" [pixi](italic) [$symbol]($style)\"\nstyle = \"bold bright-yellow\"\nsymbol = \"pixi \"\n\n[rlang]\nformat = \" [rlang](italic) [$symbol]($style)\"\nstyle = \"bold bright-cyan\"\nsymbol = \" \"\n\n[meson]\nformat = \" [meson](italic) [$symbol]($style)\"\nstyle = \"bold bright-red\"\nsymbol = \"meson \"\n\n[conda]\nstyle = \"bold bright-red\"\nformat = \" conda [$symbol$environment]($style)\"\nsymbol = \"◯ \"\n\n[dart]\nstyle = \"bold bright-cyan\"\nformat = \" dart [$symbol]($style)\"\nsymbol = \" \"\n\n\n[elixir]\nstyle = \"bold bright-yellow\"\nformat = \" exs [$symbol OTP $otp_version ]($style)\"\nsymbol = \" \"\n\n[elm]\nstyle = \"bold bright-red\"\nformat = \" elm [$symbol]($style)\"\nsymbol = \"◩ \"\n\n[golang]\nstyle = \"bold bright-blue\"\nformat = \" go [$symbol]($style)\"\nsymbol = \"∩ \"\n\n[haskell]\nstyle = \"bold bright-yellow\"\nformat = \" hs [$symbol]($style)\"\nsymbol = \"❯λ \"\n\n[java]\nstyle = \"bold bright-red\"\nformat = \" java [${symbol}]($style)\"\nsymbol = \" \"\n\n[julia]\nstyle = \"bold bright-cyan\"\nformat = \" jl [$symbol]($style)\"\nsymbol = \"◎ \"\n\n[memory_usage]\nstyle = \"bold bright-cyan\"\nformat = \" mem [${ram}( ${swap})]($style)\"\nsymbol = \"▪▫▪ \"\n\n[nim]\nstyle = \"bold bright-yellow\"\nformat = \" nim [$symbol]($style)\"\nsymbol = \"▴▲▴ \"\n\n[nix_shell]\nformat = '[$symbol nix⎪$state⎪]($style) [$name](italic dimmed white)'\nimpure_msg = '[⌽](bold dimmed red)'\npure_msg = '[⌾](bold dimmed green)'\nstyle = 'bold italic dimmed blue'\nsymbol = ' '\nunknown_msg = '[◌](bold dimmed ellow)'\n\n[spack]\nstyle = \"bold bright-yellow\"\nformat = \" spack [$symbol$environment]($style)\"\nsymbol = \"◇ \"\n\n\n[zig]\nstyle = \"bold bright-yellow\"\nformat = \" zig [$symbol]($style)\"\nsymbol = \" \"\n\n\n[scala]\nformat = \" scala [$symbol]($style)\"\nsymbol = \" \"\n\n[singularity]\nstyle = \"bold bright-yellow\"\nformat = \" [singularity](italic) [$symbol]($style)\"\nsymbol = \"singularity \"\n\n[kubernetes]\nstyle = \"bold bright-cyan\"\nformat = \" [kubernetes](italic) [$symbol]($style)\"\nsymbol = \" \"\n\n[vcsh]\nstyle = \"bold bright-red\"\nformat = \" [vcsh](italic) [$symbol]($style)\"\nsymbol = \"vcsh \"\n\n[cobol]\nstyle = \"bold bright-yellow\"\nformat = \" [cobol](italic) [$symbol]($style)\"\nsymbol = \"cobol \"\n\n[daml]\nstyle = \"bold bright-cyan\"\nformat = \" [daml](italic) [$symbol]($style)\"\nsymbol = \"daml \"\n\n[dotnet]\nstyle = \"bold bright-red\"\nformat = \" [dotnet](italic) [$symbol]($style)\"\nsymbol = \".NET \"\n\n[erlang]\nstyle = \"bold bright-yellow\"\nformat = \" [erlang](italic) [$symbol]($style)\"\nsymbol = \" \"\n\n[fennel]\nstyle = \"bold bright-cyan\"\nformat = \" [fennel](italic) [$symbol]($style)\"\nsymbol = \" \"\n\n[haxe]\nstyle = \"bold bright-red\"\nformat = \" [haxe](italic) [$symbol]($style)\"\nsymbol = \" \"\n\n[helm]\nstyle = \"bold bright-yellow\"\nformat = \" [helm](italic) [$symbol]($style)\"\nsymbol = \"helm \"\n\n[opa]\nstyle = \"bold bright-cyan\"\nformat = \" [opa](italic) [$symbol]($style)\"\nsymbol = \"opa \"\n\n[pulumi]\nformat = \" [pulumi](italic) [$symbol]($style)\"\nstyle = \"bold bright-red\"\nsymbol = \"pulumi \"\n\n[purescript]\nstyle = \"bold bright-yellow\"\nformat = \" [purescript](italic) [$symbol]($style)\"\nsymbol = \" \"\n\n[raku]\nstyle = \"bold bright-cyan\"\nformat = \" [raku](italic) [$symbol]($style)\"\nsymbol = \"raku \"\n\n[red]\nstyle = \"bold bright-red\"\nformat = \" [red](italic) [$symbol]($style)\"\nsymbol = \"red \"\n\n[solidity]\nstyle = \"bold bright-yellow\"\nformat = \" [solidity](italic) [$symbol]($style)\"\nsymbol = \" \"\n\n[terraform]\nstyle = \"bold bright-cyan\"\nformat = \" [terraform](italic) [$symbol]($style)\"\nsymbol = \"terraform \"\n\n[vlang]\nformat = \" [vlang](italic) [$symbol]($style)\"\nstyle = \"bold bright-red\"\nsymbol = \"vlang \"\n\n[vagrant]\nformat = \" [vagrant](italic) [$symbol]($style)\"\nstyle = \"bold bright-yellow\"\nsymbol = \"vagrant \"\n\n[gcloud]\nformat = \" [gcloud](italic) [$symbol]($style)\"\nstyle = \"bold bright-cyan\"\nsymbol = \"gcloud \"\n\n[openstack]\nformat = \" [openstack](italic) [$symbol]($style)\"\nstyle = \"bold bright-red\"\nsymbol = \"openstack \"\n\n[azure]\nformat = \" [azure](italic) [$symbol]($style)\"\nstyle = \"bold bright-yellow\"\nsymbol = \" \"\n\n[crystal]\nformat = \" [crystal](italic) [$symbol]($style)\"\nstyle = \"bold bright-cyan\"\nsymbol = \" \""
       },
       {
-        id: "flame_pirate",
-        name: "Flame Pirate",
-        preview: " █  █ ",
-        leftCap: "",
-        sep: "",
-        rightCap: "",
-        theme: "nord",
-        icon: "",
-        modules: { os: true, dir: true, git: true, lang: true, time: true }
+            "id": "omarchy",
+            "name": "Omarchy Clean",
+            "author": "Basecamp",
+            "category": "awesome",
+            "preview": "~/dir  main ❯",
+            "promptStyle": "transparent",
+            "theme": "omarchy",
+            "charSymbol": "❯",
+            "charColor": "#00d7d7",
+            "leftCap": "",
+            "sep": " ",
+            "rightCap": "",
+            "icon": "❯",
+            "modules": {
+                  "os": false,
+                  "dir": true,
+                  "git": true,
+                  "lang": false,
+                  "time": false
+            },
+            "rawToml": "add_newline = true\ncommand_timeout = 200\nformat = \"[$directory$git_branch$git_status]($style)$character\"\n\n[character]\nerror_symbol = \"[✗](bold cyan)\"\nsuccess_symbol = \"[❯](bold cyan)\"\n\n[directory]\ntruncation_length = 2\ntruncation_symbol = \"…/\"\nrepo_root_style = \"bold cyan\"\nrepo_root_format = \"[$repo_root]($repo_root_style)[$path]($style)[$read_only]($read_only_style) \"\n\n[git_branch]\nformat = \"[$branch]($style) \"\nstyle = \"italic cyan\"\n\n[git_status]\nformat     = '[$all_status]($style)'\nstyle      = \"cyan\"\nahead      = \"⇡${count} \"\ndiverged   = \"⇕⇡${ahead_count}⇣${behind_count} \"\nbehind     = \"⇣${count} \"\nconflicted = \" \"\nup_to_date = \" \"\nuntracked  = \"? \"\nmodified   = \" \"\nstashed    = \"\"\nstaged     = \"\"\nrenamed    = \"\"\ndeleted    = \"\""
       },
       {
-        id: "nordic_speedline",
-        name: "Nordic Speedline Fade",
-        preview: "░▒▓ █  █ ▓▒░",
-        leftCap: "░▒▓",
-        sep: "",
-        rightCap: "▓▒░",
-        theme: "nord",
-        icon: "",
-        modules: { os: true, dir: true, git: true, lang: true, time: true }
-      },
-
-      // ── Transparent & Bracketed Presets ────────────────────────────────────
-      {
-        id: "pure_minimal",
-        name: "Pure Prompt (Minimal)",
-        promptStyle: "transparent",
-        preview: "󰲋 ~  main ❯",
-        leftCap: "",
-        sep: " ",
-        rightCap: "",
-        theme: "nord",
-        icon: "󰣇",
-        modules: { os: false, dir: true, git: true, lang: true, time: false }
-      },
-      {
-        id: "bracketed_segments",
-        name: "Bracketed Segments",
-        promptStyle: "bracketed",
-        preview: "[ ~ ] [  main ]",
-        leftCap: "[",
-        sep: " ",
-        rightCap: "]",
-        theme: "catppuccin",
-        icon: "󰣇",
-        modules: { os: false, dir: true, git: true, lang: true, time: true }
+            "id": "end_4",
+            "name": "End-4 Hyprland",
+            "author": "end-4",
+            "category": "awesome",
+            "preview": " 󰉋 ~   󰘬 main ",
+            "promptStyle": "powerline",
+            "theme": "end_4",
+            "leftCap": "",
+            "sep": [
+                  " ",
+                  " ",
+                  " "
+            ],
+            "rightCap": "",
+            "icon": "󰉋",
+            "charSymbol": " ",
+            "charColor": "#a1a1aa",
+            "modules": {
+                  "os": false,
+                  "dir": true,
+                  "git": true,
+                  "lang": false,
+                  "time": true
+            },
+            "rawToml": "# Don't print a new line at the start of the prompt\nadd_newline = false\n# Pipes ╰─ ╭─\n# Powerline symbols                                     \n# Wedges 🭧🭒 🭣🭧🭓\n# Random noise 🬖🬥🬔🬗\n# Cool stuff 󰜥   \n\n# format = \"\"\"\n# $directory $fill $git_branch $cmd_duration\n#  $character\"\"\"\nformat = \"\"\"\n$cmd_duration $directory$git_branch\n  $character\"\"\"\n\n[fill]\nsymbol = '-'\nstyle = 'fg:245'\n\n# Replace the \"❯\" symbol in the prompt with \"➜\"\n[character]                            # The name of the module we are configuring is \"character\"\nsuccess_symbol = \"[ ](bold fg:243)\"\nerror_symbol = \"[ ](bold fg:244)\"\n\n# Disable the package module, hiding it from the prompt completely\n[package]\ndisabled = true\n\n[git_branch]\nstyle = \"bg: 252\"\nsymbol = \"󰘬\"\ntruncation_length = 12\ntruncation_symbol = \"\"\nformat = \" 󰜥 [](bold fg:252)[$symbol $branch(:$remote_branch)](fg:235 bg:252)[ ](bold fg:252)\"\n\n[git_commit]\ncommit_hash_length = 4\ntag_symbol = \" \"\n\n[git_state]\nformat = '[\\($state( $progress_current of $progress_total)\\)]($style) '\ncherry_pick = \"[🍒 PICKING](bold red)\"\n\n[git_status]\nconflicted = \" 🏳 \"\nahead = \" 🏎💨 \"\nbehind = \" 😰 \"\ndiverged = \" 😵 \"\nuntracked = \" 🤷 ‍\"\nstashed = \" 📦 \"\nmodified = \" 📝 \"\nstaged = '[++\\($count\\)](green)'\nrenamed = \" ✍️ \"\ndeleted = \" 🗑 \"\n\n[hostname]\nssh_only = false\nformat =  \"[•$hostname](bg:252 bold fg:235)[](bold fg:252)\"\ntrim_at = \".companyname.com\"\ndisabled = false\n\n[line_break]\ndisabled = false\n\n[memory_usage]\ndisabled = true\nthreshold = -1\nsymbol = \" \"\nstyle = \"bold dimmed green\"\n\n[time]\ndisabled = true\nformat = '🕙[\\[ $time \\]]($style) '\ntime_format = \"%T\"\n\n[username]\nstyle_user = \"bold bg:252 fg:235\"\nstyle_root = \"red bold\"\nformat = \"[](bold fg:252)[$user]($style)\"\ndisabled = false\nshow_always = true\n\n[directory]\nhome_symbol = \" \"\nread_only = \"  \"\nstyle = \"bg:255 fg:240\"\ntruncation_length = 2\ntruncation_symbol = \".../\"\nformat = '[](bold fg:255)[󰉋 → $path]($style)[](bold fg:255)'\n\n\n[directory.substitutions]\n\"Desktop\" = \"  \"\n\"Documents\" = \"  \"\n\"Downloads\" = \"  \"\n\"Music\" = \" 󰎈 \"\n\"Pictures\" = \"  \"\n\"Videos\" = \"  \"\n\"GitHub\" = \" 󰊤 \"\n\n[cmd_duration]\nmin_time = 0\nformat = '[](bold fg:252)[󰪢 $duration](bold bg:252 fg:235)[](bold fg:252)'"
       },
       {
-        id: "nerd_font_minimal",
-        name: "Nerd Font Rainbow",
-        promptStyle: "transparent",
-        preview: " 󰲋 ~  main 󱑺",
-        leftCap: "",
-        sep: " ",
-        rightCap: "",
-        theme: "tokyonight",
-        icon: "",
-        modules: { os: true, dir: true, git: true, lang: true, time: true }
+            "id": "zephyr",
+            "name": "Zephyr Blue Matrix",
+            "author": "mattmc3",
+            "category": "awesome",
+            "preview": "~ ❯❯  main",
+            "promptStyle": "transparent",
+            "theme": "zephyr",
+            "charSymbol": "❯❯",
+            "charColor": "#00b0ff",
+            "leftCap": "",
+            "sep": " ",
+            "rightCap": "",
+            "icon": "❯",
+            "modules": {
+                  "os": false,
+                  "dir": true,
+                  "git": true,
+                  "lang": true,
+                  "time": true
+            },
+            "rawToml": "#\n# zephyr.toml - Zephyr default prompt theme\n#\n\nadd_newline = false\n\n# A minimal left prompt\nformat = \"\"\"$python$directory$character\"\"\"\n\n# move the rest of the prompt to the right\nright_format = \"\"\"$git_branch$git_status$cmd_duration$status\"\"\"\n\n# Timeout for commands executed by starship (in milliseconds)\ncommand_timeout = 2000\n\n# Set the palette.\npalette = \"blue_matrix\"\n\n[profiles]\n# Drawn by starship-ftl before the real prompt is ready. Same shape as `format`\n# and `right_format`, minus anything that has to shell out (git especially), so\n# the cost stays flat no matter how big the repo is.\nftl-prompt = \"\"\"$python$directory$character\"\"\"\nftl-rprompt = \"\"\ntransient = '$time[❯](bold cyan) '\ntransient_success = '$time[❯](bold green) '\ntransient_error = '$status'\n\n[palettes.blue_matrix]\nblack = '#101116'\nred = '#ff5680'\ngreen = '#00ff9c'\nyellow = '#fffc58'\nblue = '#00b0ff'\npurple = '#d57bff'\ncyan = '#76c1ff'\nwhite = '#c7c7c7'\nbrblack = '#686868'\nbrred = '#ff6e67'\nbrgreen = '#5ffa68'\nbryellow = '#fffc67'\nbrblue = '#6871ff'\nbrpurple = '#d682ec'\nbrcyan = '#60fdff'\nbrwhite = '#ffffff'\nbackground = '#101116'\nforeground = '#00a2ff'\ncursor-color = '#76ff9f'\ncursor-text = '#a6a6a6'\nselection-background = '#c1deff'\nselection-foreground = '#000000'\n\n[character]\nsuccess_symbol = \"[❯](purple)[❯](cyan)\"\nerror_symbol = \"[❯](yellow)[❯](red)\"\nvicmd_symbol = \"[❮](purple)[❮](cyan)\"\n\n[python]\nformat = '[(\\($virtualenv\\) )]($style)'\nstyle = 'white'\n\n[directory]\nstyle = \"blue\"\ntruncation_length = 1\ntruncation_symbol = \"\"\nfish_style_pwd_dir_length = 1\n\n# right prompt uses left space padding\n[git_branch]\nformat = '[$branch]($style)'\nstyle = 'green'\n\n# Dirty flag rides on git_status: the group only renders when a state fires, so\n# `*` shows for any dirt. Symbols are U+034F combining grapheme joiners, which\n# attach to the `*` and are the invisible char zsh's RPROMPT math counts as\n# zero-width (it counts U+200B as one, which walks the cursor left).\n[git_status]\nformat = '([•$conflicted$deleted$renamed$modified$typechanged$staged$untracked](white))([\\[$ahead_behind$stashed\\]]($style))'\nstyle = \"cyan\"\nstashed = \"≡\"\nconflicted = \"͏\"\ndeleted = \"͏\"\nrenamed = \"͏\"\nmodified = \"͏\"\ntypechanged = \"͏\"\nstaged = \"͏\"\nuntracked = \"͏\"\nahead = \"⇡${count}\"\nbehind = \"⇣${count}\"\ndiverged = \"⇕⇡${ahead_count}⇣${behind_count}\"\n\n[cmd_duration]\nformat = ' [$duration]($style)'\n\n[line_break]\ndisabled = true\n\n[status]\ndisabled = false\npipestatus = true\nformat = ' [($symbol$int)]($style)'\nsymbol = '✘'\npipestatus_format = '\\[$pipestatus\\]($style)'\n\n[time]\ndisabled = false\nformat = '[$time]($style) '\ntime_format = '%H:%M:%S'\nstyle = 'brblack'"
       },
       {
-        id: "jetpack_minimal",
-        name: "Jetpack Spaceship",
-        promptStyle: "transparent",
-        preview: "🚀 󰲋 ~  main ⚡",
-        leftCap: "",
-        sep: " ",
-        rightCap: "",
-        theme: "cyber_sunset",
-        icon: "🚀",
-        modules: { os: true, dir: true, git: true, lang: true, time: false }
-      },
-
-      // ── Curated Light Theme Presets ────────────────────────────────────────
-      {
-        id: "catppuccin_latte_pill",
-        name: "Catppuccin Latte Light",
-        preview: " █  █ ",
-        leftCap: "",
-        sep: "",
-        rightCap: "",
-        theme: "catppuccin_latte",
-        icon: "󰣇",
-        modules: { os: true, dir: true, git: true, lang: true, time: true }
+            "id": "prezto",
+            "name": "Prezto Tri-Chevron",
+            "author": "mattmc3",
+            "category": "awesome",
+            "preview": "~ ❯❯❯  main",
+            "promptStyle": "transparent",
+            "theme": "prezto",
+            "charSymbol": "❯❯❯",
+            "charColor": "#98c379",
+            "leftCap": "",
+            "sep": " ",
+            "rightCap": "",
+            "icon": "❯",
+            "modules": {
+                  "os": false,
+                  "dir": true,
+                  "git": true,
+                  "lang": true,
+                  "time": false
+            },
+            "rawToml": "#\n# prezto - mimic the default prezto prompt (sorin)\n#\n\nadd_newline = false\n\n# A minimal left prompt\nformat = \"\"\"$python$directory$character\"\"\"\n\n# move the rest of the prompt to the right\nright_format = \"\"\"$status$git_branch$git_status\"\"\"\n\n[character]\nsuccess_symbol = \"[❯](red)[❯](yellow)[❯](green)\"\nerror_symbol = \"[❯](red)[❯](yellow)[❯](green)\"\nvicmd_symbol = \"[❮](green)[❮](yellow)[❮](red)\"\n\n[git_branch]\nformat = '[$branch]($style) '\nstyle = 'bold green'\n\n[python]\nformat = '[(\\($virtualenv\\) )]($style)'\nstyle = 'white'\n\n[git_status]\nformat = '$all_status$ahead_behind '\nahead = '[⬆](bold purple) '\nbehind = '[⬇](bold purple) '\nstaged = '[✚](green) '\ndeleted = '[✖](red) '\nrenamed = '[➜](purple) '\nstashed = '[✭](cyan) '\nuntracked = '[◼](white) '\nmodified = '[✱](blue) '\nconflicted = '[═](yellow) '\ndiverged = '⇕ '\nup_to_date = ''\n\n[directory]\nstyle = \"blue\"\ntruncation_length = 1\ntruncation_symbol = \"\"\nfish_style_pwd_dir_length = 1\n\n[cmd_duration]\nformat = '[$duration]($style) '\n\n[line_break]\ndisabled = true\n\n[status]\ndisabled = false\nsymbol = '✘ '"
       },
       {
-        id: "solarized_light_arrows",
-        name: "Solarized Light Precision",
-        preview: " █  █ ",
-        leftCap: "",
-        sep: "",
-        rightCap: "",
-        theme: "solarized_light",
-        icon: "󱃏",
-        modules: { os: true, dir: true, git: true, lang: true, time: true }
+            "id": "hydro",
+            "name": "Hydro Fish Minimal",
+            "author": "mattmc3",
+            "category": "awesome",
+            "preview": "~  main ❱",
+            "promptStyle": "transparent",
+            "theme": "hydro",
+            "charSymbol": "❱",
+            "charColor": "#c678dd",
+            "leftCap": "",
+            "sep": " ",
+            "rightCap": "",
+            "icon": "❱",
+            "modules": {
+                  "os": false,
+                  "dir": true,
+                  "git": true,
+                  "lang": false,
+                  "time": false
+            },
+            "rawToml": "#\n# hydro - mimic Fish's hydro prompt\n#\n\nadd_newline = false\n\n# A minimal left prompt\nformat = \"\"\"$all$directory$git_branch${custom.git_status_dirty}$git_status$cmd_duration$status$character\"\"\"\n\n# no right prompt\nright_format = \"\"\n\n# Timeout for commands executed by starship (in milliseconds)\ncommand_timeout=2000\n\n[character]\nsuccess_symbol = \"[❱](purple)\"\nerror_symbol = \"[❱](red)\"\nvicmd_symbol = \"[❰](cyan)\"\n\n[python]\nformat = '[(\\($virtualenv\\) )]($style)'\nstyle = 'white'\n\n[directory]\nstyle = \"blue\"\ntruncation_length = 1\ntruncation_symbol = \"\"\nfish_style_pwd_dir_length = 1\n\n# right prompt uses left space padding\n[git_branch]\nformat = '[$branch]($style)'\nstyle = 'bold green'\n\n[git_status]\nformat = \"[($ahead_behind$stashed)]($style) \"\nstyle = \"cyan\"\nstashed = \"≡\"\nahead = \"⇡${count}\"\nbehind = \"⇣${count}\"\ndiverged = \"⇕⇡${ahead_count}⇣${behind_count}\"\n\n[custom.git_status_dirty]\nwhen = 'test -n \"$(git status --porcelain 2>/dev/null)\"'\nsymbol = \"•\"\nstyle = \"white\"\nformat=\"[$symbol]($style)\"\nshell = [\"zsh\", \"--no-rcs\", \"--no-globalrcs\"]\n\n[cmd_duration]\nformat = '[$duration]($style) '\n\n[line_break]\ndisabled = true\n\n[status]\ndisabled = false\npipestatus = true\nformat = '[$symbol$int]($style)'\nsymbol = '✘'\npipestatus_format = '\\[$pipestatus\\]($style)'"
       },
       {
-        id: "github_light_minimal",
-        name: "GitHub Light Minimal",
-        promptStyle: "transparent",
-        preview: "󰣇 ~  main 󱑺",
-        leftCap: "",
-        sep: " ",
-        rightCap: "",
-        theme: "github_light",
-        icon: "󰣇",
-        modules: { os: true, dir: true, git: true, lang: true, time: true }
+            "id": "p3rception",
+            "name": "P3rception Multi-Line",
+            "author": "Dimitris Pergelidis",
+            "category": "awesome",
+            "preview": "╭╴// ~ //  [main] ╰⎯",
+            "promptStyle": "transparent",
+            "theme": "p3rception",
+            "charSymbol": "╰⎯",
+            "charColor": "#7ed1fb",
+            "leftCap": "",
+            "sep": "//",
+            "rightCap": "",
+            "icon": "󰣇",
+            "modules": {
+                  "os": true,
+                  "dir": true,
+                  "git": true,
+                  "lang": true,
+                  "time": false
+            },
+            "rawToml": "#Location: ~/.config/starship.toml\n#What_is_starship: https://starship.rs/\n\nadd_newline = true\ncommand_timeout = 2000\n\nformat = \"\"\"$env_var$os$username$hostname$kubernetes$directory$git_branch$git_status$python\n$character\n\"\"\"\n\n[character]\nsuccess_symbol = \"╰⎯\"\nerror_symbol = \"╰⎯\"\n# ╭╴ ╰─\n\n[env_var]\nsymbol = \"╭╴\"\nvariable = 'SHELL'\nformat = \"$symbol\"\ndisabled = false\n\n\n#warp-Drop ugly default prompt characters\n#success_symbol = \"\"\n#error_symbol = \"\"\n\n# ---\n\n[os]\nformat = '[$symbol](bold white) '   \ndisabled = false\n\n[os.symbols]\nWindows = ' '\nArch = '󰣇'\nUbuntu = ''\nMacos = '󰀵'\nUnknown = '󰠥'\n\n# ---y\n\n# Shows the username\n[username]\nstyle_user = 'yellow bold'\nstyle_root = 'black bold'\nformat = '[//](black bold) [$user](#2883ff) ' # 2883ff\ndisabled = false\nshow_always = true\n\n# Shows the hostname\n[hostname]\nssh_only = false\nformat = '[//](black bold) [$hostname](bold blue) '\ndisabled = false\n\n# Shows current directory\n[directory]\ntruncation_length = 0\ntruncation_symbol = '…/'\nhome_symbol = '~'\n# read_only_style = '197'\nread_only = '  '\nformat = '[//](black bold) [$path]($style)[$read_only]($read_only_style) '\nstyle = '#7ed1fb' # yellow bold\n\n\n# Shows current git branch\n[git_branch]\n# symbol = ' '\nsymbol = ' '\nformat = '[//](black bold) [$symbol\\[$branch\\]]($style) '\n# truncation_length = 0\n# truncation_symbol = '…/'\nstyle = 'bold green'\n\n# Shows current git status\n[git_status]\ndisabled = true\nformat = '[ $all_status $ahead_behind]($style) '\nstyle = 'bold green'\nconflicted = '🏳'\nup_to_date = ''\nuntracked = ' '\nahead = '⇡${count}'\ndiverged = '⇕⇡${ahead_count}⇣${behind_count}'\nbehind = '⇣${count}'\nstashed = ' '\nmodified = ' '\nstaged = '[++\\($count\\)](green)'\nrenamed = '襁 '\ndeleted = ' '\n\n# Shows kubernetes context and namespace\n[kubernetes]\nformat = 'via [󱃾 $context\\($namespace\\)](bold purple) '\ndisabled = false\n\n# ---\n\n[vagrant]\ndisabled = true\n\n[docker_context]\ndisabled = true\n\n[helm]\ndisabled = true\n\n[python]\nsymbol = '󰌠'\npython_binary = ['./venv/bin/python', 'python', 'python3', 'python2']\nformat = '[//](black bold) [${symbol} ${pyenv_prefix}(${version} )(\\($virtualenv\\) )]($style) '\n\n\n[nodejs]\ndisabled = true\n\n[ruby]\ndisabled = true\n\n[terraform]\ndisabled = true"
+      },
+      {
+            "id": "christian_lempa",
+            "name": "Christian Lempa",
+            "author": "Christian Lempa",
+            "category": "awesome",
+            "preview": "󰋜 ~ via  main ",
+            "promptStyle": "transparent",
+            "theme": "christian_lempa",
+            "charSymbol": "",
+            "charColor": "#10b981",
+            "leftCap": "",
+            "sep": " ",
+            "rightCap": "",
+            "icon": "󰣇",
+            "modules": {
+                  "os": true,
+                  "dir": true,
+                  "git": true,
+                  "lang": true,
+                  "time": false
+            },
+            "rawToml": "# ~/.config/starship.toml\n\nadd_newline = false\ncommand_timeout = 100\nformat = \"\"\"\n$os$username$hostname$kubernetes$directory$git_branch$git_status\n \n\"\"\"\n\n# Drop ugly default prompt characters\n[character]\nsuccess_symbol = ''\nerror_symbol = ''\n\n# ---\n\n[os]\nformat = '[$symbol](bold white) '\ndisabled = false\n\n[os.symbols]\nWindows = ' '\nArch = '󰣇'\nUbuntu = ''\nMacos = '󰀵'\n\n# ---\n\n# Shows the username\n[username]\nstyle_user = 'white bold'\nstyle_root = 'black bold'\nformat = '[$user]($style) '\ndisabled = false\nshow_always = true\n\n# Shows the hostname\n[hostname]\nssh_only = false\nformat = 'on [$hostname](bold yellow) '\ndisabled = true\n\n# Shows current directory\n[directory]\ntruncation_length = 1\ntruncation_symbol = '…/'\nhome_symbol = '󰋜 ~'\nread_only_style = '197'\nread_only = '  '\nformat = 'at [$path]($style)[$read_only]($read_only_style) '\n\n# Shows current git branch\n[git_branch]\nsymbol = ' '\nformat = 'via [$symbol$branch]($style)'\n#truncation_length = 3\ntruncation_symbol = '…/'\nstyle = 'bold green'\n\n# Shows current git status\n[git_status]\nformat = '([ \\( $all_status$ahead_behind\\)]($style) )'\nstyle = 'bold green'\nconflicted = '[ confliced=${count}](red) '\nup_to_date = '[󰘽 up-to-date](green) '\nuntracked = '[󰋗 untracked=${count}](red) '\nahead = ' ahead=${count}'\ndiverged = ' ahead=${ahead_count}  behind=${behind_count}'\nbehind = ' behind=${count}'\nstashed = '[ stashed=${count}](green) '\nmodified = '[󰛿 modified=${count}](yellow) '\nstaged = '[󰐗 staged=${count}](green) '\nrenamed = '[󱍸 renamed=${count}](yellow) '\ndeleted = '[󰍶 deleted=${count}](red) '\ndisabled = true\n\n# Shows kubernetes context and namespace\n[kubernetes]\nformat = 'via [󱃾 $context\\($namespace\\)](bold purple) '\ndisabled = true\n\n# ---\n\n[vagrant]\ndisabled = true\n\n[docker_context]\ndisabled = true\n\n[helm]\ndisabled = true\n\n[python]\ndisabled = false\n\n[nodejs]\ndisabled = true\n\n[ruby]\ndisabled = true\n\n[terraform]\ndisabled = true"
+      },
+      {
+            "id": "1_am_simp1e",
+            "name": "1AmSimp1e Dual Badge",
+            "author": "Nhan",
+            "category": "awesome",
+            "preview": " ~ █    ",
+            "promptStyle": "powerline",
+            "theme": "1_am_simp1e",
+            "leftCap": "",
+            "sep": [
+                  " ",
+                  " ",
+                  " "
+            ],
+            "rightCap": "",
+            "icon": "",
+            "charSymbol": "",
+            "charColor": "#6791c9",
+            "modules": {
+                  "os": false,
+                  "dir": true,
+                  "git": true,
+                  "lang": false,
+                  "time": true
+            },
+            "rawToml": "## ░█▀▀░▀█▀░█▀█░█▀▄░█▀▀░█░█░▀█▀░█▀█\n## ░▀▀█░░█░░█▀█░█▀▄░▀▀█░█▀█░░█░░█▀▀\n## ░▀▀▀░░▀░░▀░▀░▀░▀░▀▀▀░▀░▀░▀▀▀░▀░░\n## CROSS-SHELL PROMPT\n## The minimal, blazing-fast, and infinitely customizable prompt for any shell!\n\nformat = \"\"\"\n$hostname\\\n$directory\\\n\n$localip\\\n$shlvl\\\n$singularity\\\n$kubernetes\\\n$vcsh\\\n$hg_branch\\\n$docker_context\\\n$package\\\n$custom\\\n\n$sudo\\\n\n$fill\\\n$git_branch\\\n$git_status\\\n$git_commit\\\n$cmd_duration\\\n$jobs\\\n$battery\\\n$time\\\n$status\\\n$os\\\n$container\\\n$shell\\\n$line_break\\\n$character\"\"\"\n\n\n# Disable the blank line at the start of the prompt\nadd_newline = true\n\n\n# Second param\n[hostname]\nssh_only = true \nformat = \"[](fg:#252525 bg:none)[█](fg:#E8E3E3 bg:#252525)[$ssh_symbol$hostname](bold bg:#E8E3E3)[](fg:#E8E3E3 bg:none) \"\ndisabled = false\n\n# Third param\n[directory]\nformat = \"[](fg:#252525 bg:none)[$path]($style)[█](fg:#232526 bg:#232526)[](fg:#6791C9 bg:#252525)[ ](fg:#252525 bg:#6791C9)[](fg:#6791C9 bg:none)\"\nstyle = \"fg:#E8E3E3 bg:#252525 bold\"\ntruncation_length = 3\ntruncate_to_repo=false\nread_only = \" \"\n\n## SECOND LINE/ROW: Prompt\n# Prompt: param 2 └─\n[character]\nsuccess_symbol = \"[ ](#6791C9 bold)\"\nerror_symbol = \"[ ](#B66467 bold)\"\n\n[line_break]\ndisabled = false\n\n[fill]\nsymbol = ' '\nstyle = 'bold green'\n\n[cmd_duration]\nmin_time = 1\nformat = \"[](fg:#252525 bg:none)[$duration]($style)[](fg:#252525 bg:#252525)[](fg:#C397D8 bg:#252525)[󱑂 ](fg:#252525 bg:#C397D8)[](fg:#C397D8 bg:none)\"\ndisabled = false\nstyle = \"fg:#E8E3E3 bg:#252525 bold\"\n\n\n[git_branch]\nformat = \"[](fg:#252525 bg:none)[$branch]($style)[](fg:#252525 bg:#252525)[](fg:#81C19B bg:#252525)[](fg:#252525 bg:#81C19B)[](fg:#81C19B bg:none) \"\nstyle = \"fg:#E8E3E3 bg:#252525\"\nsymbol = \" \"\n\n[git_status]\nformat=\"[](fg:#252525 bg:none)[$all_status$ahead_behind]($style)[](fg:#252525 bg:#252525)[](fg:#6791C9 bg:#252525)[ ](fg:#252525 bg:#6791C9)[](fg:#6791C9 bg:none) \"\nstyle = \"fg:#E8E3E3 bg:#252525\"\nconflicted = \"=\"\nahead =\t\"⇡${count}\"\nbehind = \"⇣${count}\"\ndiverged = \"⇕⇡${ahead_count}⇣${behind_count}\"\nup_to_date = \" 󰄸 \"\nuntracked = \"?${count}\"\nstashed = \"\"\nmodified = \"!${count}\"\nstaged = \"+${count}\"\nrenamed = \"»${count}\"\ndeleted = \" ${count}\"\n\n[git_commit]\nformat = \"[\\\\($hash\\\\)]($style) [\\\\($tag\\\\)]($style)\"\nstyle = \"green\"\n\n[git_state]\nrebase = \"REBASING\"\nmerge =\t\"MERGING\"\nrevert = \"REVERTING\"\ncherry_pick = \"CHERRY-PICKING\"\nbisect = \"BISECTING\"\nam = \"AM\"\nam_or_rebase = \"AM/REBASE\"\nstyle =\t\"yellow\"\nformat = '\\([$state( $progress_current/$progress_total)]($style)\\) '\n\n# # SYMBOLS\n\n[aws]\nsymbol = \"  \"\n\n[conda]\nsymbol = \" \"\n\n[dart]\nsymbol = \" \"\n\n# [directory]\n\n[docker_context]\nsymbol = \" \"\nformat = \"via [$symbol$context]($style) \"\nstyle = \"blue bold\"\nonly_with_files = true\ndetect_files = [\"docker-compose.yml\", \"docker-compose.yaml\", \"Dockerfile\"]\ndetect_folders = []\ndisabled = false\n\n[elixir]\nsymbol = \" \"\n\n[elm]\nsymbol = \" \"\n\n[golang]\nsymbol = \" \"\n\n[hg_branch]\nsymbol = \" \"\n\n[java]\nsymbol = \" \"\n\n[julia]\nsymbol = \" \"\n\n[haskell]\nsymbol = \"λ \"\n\n[memory_usage]\nsymbol = \" \"\n\n[nim]\nsymbol = \" \"\n\n[nix_shell]\nsymbol = \" \"\n\n[package]\nsymbol = \" \"\n\n[perl]\nsymbol = \" \"\n\n[php]\nsymbol = \" \"\n\n[python]\nsymbol = \" \"\n#pyenv_version_name = true\nformat = 'via [${symbol}python (${version} )(\\($virtualenv\\) )]($style)'\nstyle = \"bold yellow\"\npyenv_prefix = \"venv \"\npython_binary = [\"./venv/bin/python\", \"python\", \"python3\", \"python2\"]\ndetect_extensions = [\"py\"]\nversion_format = \"v${raw}\"\n\n[ruby]\nsymbol = \" \"\n\n[rust]\nsymbol = \" \"\n\n[scala]\nsymbol = \" \"\n\n[shlvl]\nsymbol = \" \"\n\n[swift]\nsymbol = \"ﯣ \"\n\n[nodejs]\nformat = \"via [ Node.js $version](bold green) \"\ndetect_files = [\"package.json\", \".node-version\"]\ndetect_folders = [\"node_modules\"]\n\n# Other languages configurations:\nc.disabled = true\ncmake.disabled = true\nhaskell.disabled = true\npython.disabled = true\nruby.disabled = true\nrust.disabled = true\nperl.disabled = true\npackage.disabled = true\nlua.disabled = true\nnodejs.disabled = true\njava.disabled = true\ngolang.disabled = true"
+      },
+      {
+            "id": "linux_mobile",
+            "name": "LinuxMobile Sakura",
+            "author": "linuxmobile",
+            "category": "awesome",
+            "preview": "  ~    main  ",
+            "promptStyle": "powerline",
+            "theme": "linux_mobile",
+            "leftCap": "",
+            "sep": [
+                  " ",
+                  " ",
+                  " "
+            ],
+            "rightCap": "",
+            "icon": "",
+            "charSymbol": "",
+            "charColor": "#a6e3a1",
+            "modules": {
+                  "os": false,
+                  "dir": true,
+                  "git": true,
+                  "lang": false,
+                  "time": true
+            },
+            "rawToml": "## ░█▀▀░▀█▀░█▀█░█▀▄░█▀▀░█░█░▀█▀░█▀█\n## ░▀▀█░░█░░█▀█░█▀▄░▀▀█░█▀█░░█░░█▀▀\n## ░▀▀▀░░▀░░▀░▀░▀░▀░▀▀▀░▀░▀░▀▀▀░▀░░\n\n# Sets user-defined palette\npalette = \"catppuccin_mocha\"\n\n# Setups\nformat=\"$directory$git_branch$character\"\nright_format = \"\"\"$git_status$cmd_duration\"\"\"\nadd_newline = false \n\n# Other languages configurations:\nc.disabled = true\ncmake.disabled = true\nhaskell.disabled = true\npython.disabled = true\nruby.disabled = true\nrust.disabled = true\nperl.disabled = true\npackage.disabled = true\nlua.disabled = true\nnodejs.disabled = true\njava.disabled = true\ngolang.disabled = true\n\n[conda]\nformat = ' [$symbol$environment](dimmed green) '\n\n# Prompt symbols \n[character]\nsuccess_symbol = \"[](green bold)\"\nerror_symbol = \"[](pink)\"\nvicmd_symbol = \"[](peach)\"\n\n[directory]\nformat = \"[]($style)[ ](bg:base fg:pink)[$path](bg:base fg:lavender bold)[ ]($style)\"\nstyle = \"bg:none fg:base\"\ntruncation_length = 3\ntruncate_to_repo=false\n\n[git_branch]\nformat = \"[]($style)[[ ](bg:base fg:green bold)$branch](bg:base fg:lavender)[ ]($style)\"\nstyle = \"bg:none fg:base\"\n\n[git_status]\n# $all status$ahead_behind\nformat = \"[]($style)[$all_status$ahead_behind](bg:base fg:yellow)[ ]($style)\"\nstyle = \"bg:none fg:base\"\nconflicted = \"=\"\nahead =\t\"⇡${count}\"\nbehind = \"⇣${count}\"\ndiverged = \"⇕⇡${ahead_count}⇣${behind_count}\"\nup_to_date = \"\"\nuntracked = \"?${count}\"\nstashed = \"\"\nmodified = \"!${count}\"\nstaged = \"+${count}\"\nrenamed = \"»${count}\"\ndeleted = \"${count}\"\n\n[cmd_duration]\nmin_time = 1\n# duration & style \nformat = \"[]($style)[[神](bg:base fg:flamingo bold)$duration](bg:base fg:text)[ ]($style)\"\ndisabled = false\nstyle = \"bg:none fg:base\"\n\n[palettes.catppuccin_mocha]\nrosewater = \"#f5e0dc\"\nflamingo = \"#f2cdcd\"\npink = \"#f5c2e7\"\nmauve = \"#cba6f7\"\nred = \"#f38ba8\"\nmaroon = \"#eba0ac\"\npeach = \"#fab387\"\nyellow = \"#f9e2af\"\ngreen = \"#a6e3a1\"\nteal = \"#94e2d5\"\nsky = \"#89dceb\"\nsapphire = \"#74c7ec\"\nblue = \"#89b4fa\"\nlavender = \"#b4befe\"\ntext = \"#cdd6f4\"\nsubtext1 = \"#bac2de\"\nsubtext0 = \"#a6adc8\"\noverlay2 = \"#9399b2\"\noverlay1 = \"#7f849c\"\noverlay0 = \"#6c7086\"\nsurface2 = \"#585b70\"\nsurface1 = \"#45475a\"\nsurface0 = \"#313244\"\nbase = \"#1e1e2e\"\nmantle = \"#181825\"\ncrust = \"#11111b\""
+      },
+      {
+            "id": "meowrch",
+            "name": "Meowrch Pawlette",
+            "author": "meowrch",
+            "category": "awesome",
+            "preview": "╭╴~  main at ╰─󰍟",
+            "promptStyle": "transparent",
+            "theme": "meowrch",
+            "charSymbol": "╰─󰍟",
+            "charColor": "#cba6f7",
+            "leftCap": "",
+            "sep": " ",
+            "rightCap": "",
+            "icon": "󰣇",
+            "modules": {
+                  "os": true,
+                  "dir": true,
+                  "git": true,
+                  "lang": true,
+                  "time": true
+            },
+            "rawToml": "# Generated by Pawlette\n# Configuration changes will only take effect \n# if you edit the file ~/.config/starship.toml.pawlette\n\nformat = \"\"\"\\\n[╭╴](fg:arrow)\\\n$username\\\n$os\\\n$git_branch\\\n(\\\n    at \\\n    $directory\\\n)\\\n$fill $cmd_duration $time\\\n(\\\n    $python\\\n    $conda\\\n    $nodejs\\\n    $c\\\n    $rust\\\n    $java\\\n)\n[╰─](fg:arrow)$character\\\n\"\"\"\n\n# Disable the blank line at the start of the prompt\nadd_newline = true\n\npalette = \"normal\"\n\n[palettes.normal]\narrow = \"#cba6f7\"\nos = \"#cba6f7\"\nos_admin = \"#f38ba8\"\ndirectory = \"#cba6f7\"\ntime = \"#6c7086\"\n\n# Git\ngit = \"#89b4fa\"\ngit_status = \"#6c7086\"\n\n# Languages and tools\nnode = \"#a6e3a1\"\npython = \"#f9e2af\"\nconda = \"#94e2d5\"\njava = \"#f38ba8\"\nrust = \"#f5c2e7\"\nclang = \"#89dceb\"\n\n# Statuses and text\nduration = \"#f38ba8\"\ntext_color = \"#cdd6f4\"\ntext_light = \"#1e1e2e\"\n\n[username]\nstyle_user = 'bold os'\nstyle_root = 'bold os_admin'\nformat = '[  $user](fg:$style) '\ndisabled = false\nshow_always = true\n\n[os]\nformat = \"on [($name)]($style) \"\nstyle = \"bold blue\"\ndisabled = true\n\n[os.symbols]\nAlpine = \" \"\nArch = \" \"\nDebian = \" \"\nEndeavourOS = \" \"\nFedora = \" \"\nLinux = \" \"\nMacos = \" \"\nManjaro = \" \"\nMint = \" \"\nNixOS = \" \"\nopenSUSE = \" \"\nPop = \" \"\nSUSE = \" \"\nUbuntu = \" \"\nWindows = \" \"\n\n[character]\nsuccess_symbol = \"[󰍟](fg:arrow)\"\nerror_symbol = \"[󰍟](fg:red)\"\n\n[directory]\nformat = \"[$path](bold $style)[$read_only]($read_only_style) \"\ntruncation_length = 2\nstyle = \"fg:directory\"\nread_only_style = \"fg:directory\"\nbefore_repo_root_style = \"fg:directory\"\ntruncation_symbol = \"…/\"\ntruncate_to_repo = true\nread_only =\"  \"\n\n[time]\ndisabled = false\nformat = \"[󱑈 $time]($style) \"\ntime_format = \"%H:%M\"\nstyle = \"bold fg:time\"\n\n[cmd_duration]\ndisabled = false\nformat = \"took [ $duration]($style) \"\nstyle = \"bold fg:duration\"\nmin_time = 500\n\n[git_branch]\nformat = \"via [$symbol$branch]($style) \"\nstyle = \"bold fg:git\"\nsymbol = \" \"\n\n[git_status]\nformat = '[ $all_status$ahead_behind ]($style)'\nstyle = \"fg:text_color bg:git\"\ndisabled = true\n\n[docker_context]\ndisabled=false\nsymbol = \" \"\n\n[package]\ndisabled=false\n\n[fill]\nsymbol = \" \"\n\n[nodejs]\nformat = \"[ $symbol$version ]($style)\"\nstyle = \"bg:node fg:text_light\"\nsymbol = \" \"\nversion_format = \"${raw}\"\ndisabled=false\n\n[python]\ndisabled=false\nformat = '[ ${symbol}${pyenv_prefix}(${version})( \\($virtualenv\\)) ]($style)'\nsymbol = \" \"\nversion_format = \"${raw}\"\nstyle = \"bg:python fg:text_light\"\n\n[conda]\nformat = \"[ $symbol$environment ]($style)\"\nstyle = \"bg:conda fg:text_light\"\nignore_base = false\ndisabled = false\nsymbol = \" \"\n\n[java]\nformat = \"[ $symbol$version ]($style)\"\nstyle = \"bg:java fg:text_light\"\nversion_format = \"${raw}\"\nsymbol = \" \"\ndisabled = false\n\n[c]\nformat = \"[ $symbol($version(-$name)) ]($style)\"\nstyle = \"bg:clang fg:text_light\"\nsymbol = \" \"\nversion_format = \"${raw}\"\ndisabled=false\n\n[rust]\nformat =\"[ $symbol$version ]($style)\"\nstyle = \"bg:rust fg:text_light\"\nsymbol = \" \"\nversion_format = \"${raw}\"\ndisabled=false"
+      },
+      {
+            "id": "lukewhrit",
+            "name": "Lukewhrit Avit",
+            "author": "Luke",
+            "category": "awesome",
+            "preview": "~  main ➤",
+            "promptStyle": "transparent",
+            "theme": "lukewhrit",
+            "charSymbol": "➤",
+            "charColor": "#ff79c6",
+            "leftCap": "",
+            "sep": " ",
+            "rightCap": "",
+            "icon": "➤",
+            "modules": {
+                  "os": false,
+                  "dir": true,
+                  "git": true,
+                  "lang": true,
+                  "time": false
+            },
+            "rawToml": "# Port of Oh My Zsh theme \"avit\" to Starship.\n# ======\n# \n# Supports: Java, Node.JS, PHP, Go, Crystal, Python, Ruby, and Rust modules\n# Other modules include: Directory, and Git Branch/Commit/State/Status\n\nadd_newline = false\nformat = \"\"\"\\\n  $crystal$golang$java$nodejs$php$python$rust\\\n  $directory\\\n  $git_branch$git_commit$git_state$git_status\\\n  $character\\\n\"\"\"\n\n[character]\nsuccess_symbol = \"[ ➤]($bold fg:#f8f8f2)\"\nerror_symbol = \"[ ➤]($bold fg:#fb4934)\"\n\n[directory]\ndisabled = false\nformat = \"[ $path](bold fg:#ff79c6)\"\ntruncate_to_repo = false\n\n[git_status]\nformat = \" ([$all_status$ahead_behind](bold fg:#8be9fd))\"\nstaged = \"• \"\nmodified = \"~ \"\nuntracked = \"+ \"\ndeleted = \"x \"\n\n[git_branch]\nformat = \" [ $branch](bold fg:#8be9fd)\"\n\n# Language Support\n[crystal]\nformat = \"🔮 \"\n\n[golang]\nformat = \"🐭 \"\n\n[java]\nformat = \"🍵 \"\n\n[nodejs]\nformat = \"🍏 \"\ndetect_folders = [\"\"]\n\n[php]\nformat = \"🐘 \"\n\n[python]\nformat = '🐍 [${pyenv_prefix}(${version})(\\($virtualenv\\))](bold fg:yellow)'\n\n[rust]\nformat = \"🦀 \""
+      },
+      {
+            "id": "cappyzawa",
+            "name": "Cappyzawa Nerd Icons",
+            "author": "Shu Kutsuzawa",
+            "category": "awesome",
+            "preview": "~  main ",
+            "promptStyle": "transparent",
+            "theme": "cappyzawa",
+            "charSymbol": "",
+            "charColor": "#50fa7b",
+            "leftCap": "",
+            "sep": " ",
+            "rightCap": "",
+            "icon": "",
+            "modules": {
+                  "os": false,
+                  "dir": true,
+                  "git": true,
+                  "lang": false,
+                  "time": false
+            },
+            "rawToml": "add_newline = true\n\n[aws]\ndisabled = true\n\n[battery]\ndisabled = true\n\n[character]\nsuccess_symbol = \"[](bold green)\"\nerror_symbol = \"[](bold red)\"\nvicmd_symbol = \"[](bold green)\"\n\n[cmd_duration]\n\n[conda]\n\n[directory]\ntruncation_length = 3\n\n[dotnet]\ndisabled = true\n\n[env_var]\ndisabled = true\n\n[elixir]\nsymbol = \" \"\n\n[elm]\nsymbol = \" \"\n\n[git_branch]\nsymbol = \" \"\n\n[git_commit]\ndisabled = false\ncommit_hash_length = 4\n\n[git_state]\ndisabled = true\n\n[git_status]\nconflicted = \"=${count}\"\nahead = \"⇡${count}\"\nbehind = \"⇣${count}\"\ndiverged = \"⇕⇡${ahead_count}⇣${behind_count}\"\nuntracked = \"?${count}\"\nstashed = \"\\\\$${count}\"\nmodified = \"!${count}\"\nstaged = \"+${count}\"\nrenamed = \"»${count}\"\ndeleted = \"✘${count}\"\n\n[gcloud]\ndisabled = true\n\n[golang]\nsymbol = \" \"\n\n[hostname]\n\n[jobs]\n\n[kubernetes]\nsymbol = \" \"\ndisabled = false\n\n[line_break]\ndisabled = false\n\n[lua]\nsymbol = \" \"\nlua_binary = \"luajit\"\n\n[nix_shell]\ndisabled = true\n\n[memory_usage]\ndisabled = true\n\n[java]\nsymbol = \" \"\n\n[julia]\n\n[nim]\n\n[nodejs]\nsymbol = \" \"\n\n[package]\nsymbol = \" \"\n\n[php]\nsymbol = \" \"\n\n[python]\nsymbol = \" \"\n\n[ruby]\nsymbol = \" \"\n\n[rust]\nsymbol = \" \"\n\n[scala]\nsymbol = \" \"\n\n[terraform]\nsymbol = \" \"\nformat = \"via [$symbol$version]($style)\"\n\n[time]\ndisabled = true\n\n[username]\ndisabled = false"
+      },
+      {
+            "id": "jmreicha",
+            "name": "Jmreicha DevOps",
+            "author": "Josh Reichardt",
+            "category": "awesome",
+            "preview": "🧙 ~  main ❯",
+            "promptStyle": "transparent",
+            "theme": "jmreicha",
+            "charSymbol": "❯",
+            "charColor": "#10b981",
+            "leftCap": "",
+            "sep": " ",
+            "rightCap": "",
+            "icon": "🧙",
+            "modules": {
+                  "os": false,
+                  "dir": true,
+                  "git": true,
+                  "lang": false,
+                  "time": true
+            },
+            "rawToml": "### Prompt\n\n# The format layout for the prompt is as follows:\n\n# left side\n# fill (expands to fill the remaining space between left and right prompts)\n# right side info\n# right side additional tools and versions\n# prompt character\n\n# Commands may be slower in restricted environments, e.g. containers\ncommand_timeout = 10000\n\nformat = \"\"\"$sudo$username$hostname$directory$git_branch$git_commit$git_state$git_status\\\n$fill\\\n$jobs$status$cmd_duration\\\n$nix_shell$terraform${custom.terraform}${custom.terragrunt}$kubernetes$python$aws$nodejs$docker_context$golang${custom.loadavg-linux}${custom.loadavg-mac}${custom.disk-linux}${custom.disk-mac}$memory_usage$time$os\n$character\"\"\"\n\n# TODO: transient prompt released in v1.10.1\n\n# Additional padding between newlines\nadd_newline = true\n\n[fill]\nsymbol = \" \"\n\n[character]\nvimcmd_symbol = \"[NORMAL ❯](#73cef4)\"\nsuccess_symbol = \"[❯](green)\"\nformat = \"\\n$symbol \"\n\n### Left prompt\n\n[sudo]\ndisabled = false\nsymbol = \"🧙\"\nformat = \"[$symbol]($style)\"\n\n[username]\n# Don't display for normal logged in user\ndisabled = true\nstyle_user = \"#d3b987\"\nformat = \"[$user]($style)\"\n\n[hostname]\ndisabled = true\nssh_only = true\nstyle = \"#d3b987\"\nformat = \"[@$hostname]($style)[ ❯](#767676)\"\n\n[directory]\nread_only = \" \"\ntruncation_length = 2\ntruncate_to_repo = false\nrepo_root_style = \"#0087af\"\nfish_style_pwd_dir_length = 2\nstyle = \"#00afff\"\n# Repo format\nrepo_root_format = \"[ $before_root_path]($style)[$repo_root]($repo_root_style)[$path]($style)[$read_only]($read_only_style) \"\n# Non repo format\nformat = \"[ $path]($style)[$read_only]($read_only_style) \"\n\n[git_branch]\nsymbol = \"  \"\nstyle = \"green\"\nformat = \"[❯ ](#767676)[$symbol$branch]($style)\"\n\n[git_status]\nstashed = \"[*${count}](blue) \"\nmodified = \"[!${count}](yellow) \"\nstaged = \"[+${count}](green) \"\nuntracked = \"[?${count}](blue) \"\ndeleted = \"[-${count}](red) \"\nformat = \" ([$stashed$modified$staged$untracked $ahead_behind]($style))\"\n#format = \" ([$all_status $ahead_behind]($style))\"\n\n### Right prompt info\n\n[jobs]\ndisabled = false\nformat = \"[$number]($style)\"\n\n[status]\ndisabled = false\nmap_symbol = false\nformat = \"[$symbol$status]($style)\"\n\n[cmd_duration]\nstyle = \"#a8a8a8\"\nformat = \"([ ❮ ](#767676)[ $duration]($style))\"\n\n### Right prompt tools and versions\n\n[terraform]\n# We disable the native tf plugin because it is much slower than tfenv\ndisabled = true\nformat = \"[ ❮ ](#767676)[tf $version]($style)\"\ndetect_extensions = [\"tf\"]\ndetect_files = [\"terragrunt.hcl\"]\n\n[kubernetes]\ndisabled = false\nstyle = \"blue\"\nformat = '([ ❮ ](#767676)[$symbol$context (\\[$namespace\\])]($style))'\ndetect_extensions = []\ndetect_files = ['Chart.yaml']\ndetect_folders = ['*helm*']\n\n[golang]\nsymbol = \" \"\nformat = \"([ ❮ ](#767676)[$symbol($version)]($style))\"\n\n[nodejs]\nsymbol = \" \"\nformat = \"([ ❮ ](#767676)[$symbol($version)]($style))\"\n\n[python]\nsymbol = \" \"\nformat = '([ ❮ ](#767676)[${symbol}${pyenv_prefix}(${version}) ([\\($virtualenv\\)](#306998))]($style))'\n\n[aws]\ndisabled = false\nsymbol = \" \"\nformat = '([ ❮ ](#767676)[$symbol$profile(\\[$duration\\])]($style))'\n\n[conda]\nsymbol = \" \"\n\n[docker_context]\nsymbol = \" \"\nformat = \"([ ❮ ](#767676)[$symbol$context]($style))\"\n\n[nix_shell]\nsymbol = \" \"\nformat = \"([ ❮ ](#767676)[${symbol}nix ${state}]($style))\"\n\n[memory_usage]\ndisabled = false\nthreshold = -1\nsymbol = \"\"\nstyle = \"#5f8787\"\nformat = \"([ ❮ ](#767676)[󰍛 $ram_pct]($style))\"\n\n[time]\ndisabled = true\nformat = \"([ ❮ ](#767676)[$time]($style))\"\n\n[shlvl]\ndisabled = true\n\n[os]\ndisabled = false\nformat = \"[ ❮ ](#767676)[$symbol]($style)\"\n\n[os.symbols]\n\"Alpine\" = \"\"\n\"Arch\" = \"\"\n\"CentOS\" = \"\"\n\"Debian\" = \"\"\n\"Fedora\" = \"\"\n\"Gentoo\" = \"\"\n\"Linux\" = \"\"\n\"Macos\" = \"\"\n\"Manjaro\" = \"\"\n\"Mint\" = \"\"\n\"NixOS\" = \"\"\n\"Raspbian\" = \"\"\n\"Ubuntu\" = \"\"\n\"Windows\" = \"\"\n\n### Custom plugins\n\n[custom.terragrunt]\ndescription = \"Shows the currently active tgenv Terragrunt version\"\ncommand = \"cat $(pwd)/.terragrunt-version || cat $(git rev-parse --show-toplevel)/.terragrunt-version || cat ~/.tgenv/version\"\nfiles = [\"terragrunt.hcl\"]\nstyle = \"#0bb9f2\"\nformat = \"([ ❮ ](#767676)[tg $output]($style))\"\n\n[custom.terraform]\ndescription = \"Shows the currently active tfenv Terraform version\"\ncommand = \"cat $(pwd)/.terraform-version || cat $(git rev-parse --show-toplevel)/.terraform-version || cat ~/.tfenv/version\"\nextensions = [\"tf\"]\nfiles = [\"terragrunt.hcl\"]\nstyle = \"#7b42bc\"\nformat = \"([ ❮ ](#767676)[tf $output]($style))\"\n\n[custom.disk-linux]\ndescription = \"Show disk used\"\ncommand = 'df -h --output=avail \"$PWD\" | tail -n 1'\nstyle = \"#00af5f\"\nformat = \"[ ❮ ](#767676)[ $output]($style)\"\nwhen = \"true\"\nos = \"linux\"\n\n[custom.disk-mac]\ndescription = \"Show % of disk used\"\ncommand = \"df -k | grep -E '/dev/disk(1|3)s(3|4)' | awk '{ print $5 }' | head -n 1 | sed 's/%//'\"\nstyle = \"#00af5f\"\nformat = \"[ ❮ ](#767676)[ $output%]($style)\"\nwhen = \"true\"\nos = \"macos\"\n\n[custom.loadavg-linux]\ndescription = \"Show load average\"\ncommand = \"cat /proc/loadavg | cut -d' ' -f 2\"\nstyle = \"#5f8787\"\nformat = \"([ ❮ ](#767676)[ $output]($style))\"\nwhen = \"true\"\nos = \"linux\"\n\n[custom.loadavg-mac]\ndescription = \"Show load average\"\ncommand = \"sysctl -n vm.loadavg | cut -d' ' -f 2\"\nstyle = \"#5f8787\"\nformat = \"([ ❮ ](#767676)[ $output]($style))\"\nwhen = \"true\"\nos = \"macos\""
+      },
+      {
+            "id": "classic_pill",
+            "name": "Powerline Pill",
+            "preview": " █  █ ",
+            "leftCap": "",
+            "sep": "",
+            "rightCap": "",
+            "theme": "firewatch",
+            "icon": "󰣇",
+            "category": "powerline",
+            "modules": {
+                  "os": true,
+                  "dir": true,
+                  "git": true,
+                  "lang": true,
+                  "time": true
+            }
+      },
+      {
+            "id": "pixel_steps",
+            "name": "8-Bit Retro Pixel Steps",
+            "preview": " █  █  █ ",
+            "leftCap": "",
+            "sep": [
+                  "",
+                  "",
+                  ""
+            ],
+            "rightCap": "",
+            "theme": "matrix",
+            "icon": "󱑻",
+            "category": "powerline",
+            "modules": {
+                  "os": true,
+                  "dir": true,
+                  "git": true,
+                  "lang": true,
+                  "time": true
+            }
+      },
+      {
+            "id": "rose_pine_horizon",
+            "name": "Rosé Pine Horizon",
+            "preview": "░▒▓ █ ▓▒░ █ ▓▒░",
+            "leftCap": "░▒▓",
+            "sep": "▓▒░",
+            "rightCap": "▓▒░",
+            "theme": "rosepine",
+            "icon": "",
+            "category": "powerline",
+            "modules": {
+                  "os": true,
+                  "dir": true,
+                  "git": true,
+                  "lang": true,
+                  "time": true
+            }
+      },
+      {
+            "id": "slanted_triangles",
+            "name": "Slanted Triangles",
+            "preview": " █  █  █ ",
+            "leftCap": "",
+            "sep": [
+                  "",
+                  "",
+                  ""
+            ],
+            "rightCap": "",
+            "theme": "gruvbox",
+            "icon": "󱃏",
+            "category": "powerline",
+            "modules": {
+                  "os": false,
+                  "dir": true,
+                  "git": true,
+                  "lang": true,
+                  "time": true
+            }
+      },
+      {
+            "id": "cyber_honeycomb",
+            "name": "Cyber Honeycomb Hex",
+            "preview": " █  █ ",
+            "leftCap": "",
+            "sep": "",
+            "rightCap": "",
+            "theme": "matrix",
+            "icon": "󰷗",
+            "category": "powerline",
+            "modules": {
+                  "os": true,
+                  "dir": true,
+                  "git": true,
+                  "lang": true,
+                  "time": true
+            }
+      },
+      {
+            "id": "gradient_wave",
+            "name": "Shading Gradient Wave",
+            "preview": "░▒▓ █ ▓▒░ █ ░▒▓ █ ▓▒░",
+            "leftCap": "░▒▓",
+            "sep": [
+                  "▓▒░",
+                  "░▒▓",
+                  "▓▒░"
+            ],
+            "rightCap": "▓▒░",
+            "theme": "tokyoshadow",
+            "icon": "",
+            "category": "powerline",
+            "modules": {
+                  "os": false,
+                  "dir": true,
+                  "git": true,
+                  "lang": true,
+                  "time": true
+            }
+      },
+      {
+            "id": "nordic_aurora",
+            "name": "Nordic Floating Pill",
+            "preview": " █   █ ",
+            "leftCap": "",
+            "sep": "",
+            "rightCap": "",
+            "theme": "lumon",
+            "icon": "",
+            "category": "powerline",
+            "modules": {
+                  "os": true,
+                  "dir": true,
+                  "git": true,
+                  "lang": true,
+                  "time": true
+            }
+      },
+      {
+            "id": "trapezoid_geo",
+            "name": "Trapezoid Geo",
+            "preview": " █  █ ",
+            "leftCap": "",
+            "sep": "",
+            "rightCap": "",
+            "theme": "firewatch",
+            "icon": "󱃏",
+            "category": "powerline",
+            "modules": {
+                  "os": true,
+                  "dir": true,
+                  "git": true,
+                  "lang": true,
+                  "time": true
+            }
+      },
+      {
+            "id": "flame_pirate",
+            "name": "Flame Pirate",
+            "preview": " █  █ ",
+            "leftCap": "",
+            "sep": "",
+            "rightCap": "",
+            "theme": "nord",
+            "icon": "",
+            "category": "powerline",
+            "modules": {
+                  "os": true,
+                  "dir": true,
+                  "git": true,
+                  "lang": true,
+                  "time": true
+            }
+      },
+      {
+            "id": "nordic_speedline",
+            "name": "Nordic Speedline Fade",
+            "preview": "░▒▓ █  █ ▓▒░",
+            "leftCap": "░▒▓",
+            "sep": "",
+            "rightCap": "▓▒░",
+            "theme": "nord",
+            "icon": "",
+            "category": "powerline",
+            "modules": {
+                  "os": true,
+                  "dir": true,
+                  "git": true,
+                  "lang": true,
+                  "time": true
+            }
+      },
+      {
+            "id": "bracketed_segments",
+            "name": "Bracketed Segments",
+            "promptStyle": "bracketed",
+            "preview": "[ ~ ] [  main ]",
+            "leftCap": "[",
+            "sep": " ",
+            "rightCap": "]",
+            "theme": "catppuccin",
+            "icon": "󰣇",
+            "category": "minimal",
+            "modules": {
+                  "os": false,
+                  "dir": true,
+                  "git": true,
+                  "lang": true,
+                  "time": true
+            }
+      },
+      {
+            "id": "nerd_font_minimal",
+            "name": "Nerd Font Rainbow",
+            "promptStyle": "transparent",
+            "preview": " 󰲋 ~  main 󱑺",
+            "leftCap": "",
+            "sep": " ",
+            "rightCap": "",
+            "theme": "tokyonight",
+            "icon": "",
+            "category": "minimal",
+            "modules": {
+                  "os": true,
+                  "dir": true,
+                  "git": true,
+                  "lang": true,
+                  "time": true
+            }
+      },
+      {
+            "id": "catppuccin_latte_pill",
+            "name": "Catppuccin Latte Light",
+            "preview": " █  █ ",
+            "leftCap": "",
+            "sep": "",
+            "rightCap": "",
+            "theme": "catppuccin_latte",
+            "icon": "󰣇",
+            "category": "light",
+            "modules": {
+                  "os": true,
+                  "dir": true,
+                  "git": true,
+                  "lang": true,
+                  "time": true
+            }
+      },
+      {
+            "id": "solarized_light_arrows",
+            "name": "Solarized Light Precision",
+            "preview": " █  █ ",
+            "leftCap": "",
+            "sep": "",
+            "rightCap": "",
+            "theme": "solarized_light",
+            "icon": "󱃏",
+            "category": "light",
+            "modules": {
+                  "os": true,
+                  "dir": true,
+                  "git": true,
+                  "lang": true,
+                  "time": true
+            }
+      },
+      {
+            "id": "github_light_minimal",
+            "name": "GitHub Light Minimal",
+            "promptStyle": "transparent",
+            "preview": "󰣇 ~  main 󱑺",
+            "leftCap": "",
+            "sep": " ",
+            "rightCap": "",
+            "theme": "github_light",
+            "icon": "󰣇",
+            "category": "light",
+            "modules": {
+                  "os": true,
+                  "dir": true,
+                  "git": true,
+                  "lang": true,
+                  "time": true
+            }
       }
-    ];
-
-    // ── State ─────────────────────────────────────────────────────────────────
+];
+// ── State ─────────────────────────────────────────────────────────────────
     let currentConfig = {
       promptStyle: "powerline",
       leftCap: "",
@@ -2480,7 +3256,8 @@
     "", "", "", "", "", "󱓟", "󰺹", "󰅏", "", "",
     "", "󱃏", "", "", "", "󰷗", "󰀻", "󰔌", "󰂵", "󰢶",
     "󱝊", "󱪶", "󱪷", "", "󱑻", "󰕤", "󰹪",
-    "󱑺", "󱑼", "󰊠", "🚀", ""
+    "󱑺", "󱑼", "󰊠", "🚀", "",
+    "▲", "🧙", "", "", "", "➤", "❱", "󰉋", "󰘬", ""
   ];
 
   // ── DOM Elements ──────────────────────────────────────────────────────────
@@ -2786,7 +3563,7 @@
       if (Array.isArray(p.sep)) pGlyphs.push(...p.sep);
       else if (p.sep) pGlyphs.push(p.sep);
       pGlyphs.forEach(g => {
-        if (g && !allGlyphs.some(item => item.glyph === g)) {
+        if (g && g.trim() && !allGlyphs.some(item => item.glyph === g)) {
           allGlyphs.push({ glyph: g, name: g, desc: "Preset Glyph" });
         }
       });
@@ -2827,15 +3604,46 @@
     });
   }
 
+  // ── Preset Filters & Render ───────────────────────────────────────────────
+  let currentPresetFilter = "all";
+
+  function setPresetFilter(filter) {
+    currentPresetFilter = filter;
+    document.querySelectorAll(".preset-filter-btn").forEach(btn => {
+      btn.classList.toggle("active", btn.getAttribute("data-filter") === filter);
+    });
+    renderPresetButtons();
+  }
+
   // Render Presets Grid
   function renderPresetButtons() {
+    if (!presetsGrid) return;
     presetsGrid.innerHTML = "";
-    presets.forEach(p => {
+
+    const countAll = document.getElementById("count-all");
+    const countAwesome = document.getElementById("count-awesome");
+    if (countAll) countAll.textContent = presets.length;
+    if (countAwesome) countAwesome.textContent = presets.filter(p => p.category === "awesome").length;
+
+    const filtered = presets.filter(p => {
+      if (currentPresetFilter === "all") return true;
+      if (currentPresetFilter === "awesome") return p.category === "awesome";
+      if (currentPresetFilter === "powerline") return p.promptStyle === "powerline" || (!p.promptStyle && p.category !== "minimal" && p.category !== "light");
+      if (currentPresetFilter === "minimal") return p.promptStyle === "transparent" || p.promptStyle === "bracketed" || p.category === "minimal";
+      if (currentPresetFilter === "light") return p.category === "light" || (p.theme && (p.theme.includes("light") || p.theme.includes("latte")));
+      return true;
+    });
+
+    filtered.forEach(p => {
       const btn = document.createElement("div");
       btn.className = `preset-btn ${currentConfig.activePreset === p.id ? 'active' : ''}`;
+      btn.setAttribute("data-preset-id", p.id);
       btn.onclick = () => applyPreset(p);
       btn.innerHTML = `
-        <span class="preset-name">${p.name}</span>
+        <div class="preset-header">
+          <span class="preset-name">${p.name}</span>
+          ${p.author ? `<span class="preset-author">${p.author}</span>` : ''}
+        </div>
         <span class="preset-preview">${p.preview}</span>
       `;
       presetsGrid.appendChild(btn);
@@ -2906,8 +3714,14 @@
     currentConfig.themeKey = p.theme;
     if (p.icon) {
       currentConfig.iconSymbol = p.icon;
+      if (!startIcons.includes(p.icon)) {
+        startIcons.unshift(p.icon);
+        renderIconSelect();
+      }
       if (iconSelect) iconSelect.value = p.icon;
     }
+    currentConfig.charSymbol = p.charSymbol || null;
+    currentConfig.charColor = p.charColor || null;
 
     if (p.modules) {
       currentConfig.modules = {
@@ -2933,7 +3747,14 @@
     syncColorPickers();
     syncSeparatorUI();
     renderPresetButtons();
-    updateCustomizer();
+
+    if (p.rawToml) {
+      tomlOutput.value = p.rawToml.trim() + "\n";
+      updateCustomizer(true);
+    } else {
+      updateCustomizer(false);
+    }
+    showToast(`Loaded preset "${p.name}"`);
   }
 
   // ── Interactive Playground Scenarios ──────────────────────────────────────
@@ -3037,42 +3858,52 @@
     document.documentElement.style.setProperty('--sep-scale', currentConfig.sepScale);
 
     // Sync active state on preset buttons
-    const matched = presets.find(p => {
-      if (currentConfig.customColors) return false;
-      const pStyle = p.promptStyle || "powerline";
-      if (pStyle !== currentConfig.promptStyle) return false;
-
-      const modulesMatch = !p.modules || (
-        (p.modules.os === undefined || p.modules.os === currentConfig.modules.os) &&
-        (p.modules.dir === undefined || p.modules.dir === currentConfig.modules.dir) &&
-        (p.modules.git === undefined || p.modules.git === currentConfig.modules.git) &&
-        (p.modules.lang === undefined || p.modules.lang === currentConfig.modules.lang) &&
-        (p.modules.time === undefined || p.modules.time === currentConfig.modules.time)
-      );
-
-      if (pStyle !== "powerline") {
-        return p.theme === currentConfig.themeKey && modulesMatch;
+    let matched = presets.find(p => p.id === currentConfig.activePreset);
+    if (matched) {
+      const pStyle = matched.promptStyle || "powerline";
+      const styleMatch = pStyle === currentConfig.promptStyle;
+      const themeMatch = matched.theme === currentConfig.themeKey;
+      if (!styleMatch || !themeMatch || currentConfig.customColors) {
+        matched = null;
       }
+    }
+    if (!matched) {
+      matched = presets.find(p => {
+        if (currentConfig.customColors) return false;
+        const pStyle = p.promptStyle || "powerline";
+        if (pStyle !== currentConfig.promptStyle) return false;
 
-      let sepMatch = false;
-      if (Array.isArray(p.sep)) {
-        sepMatch = p.sep.every((s, i) => s === currentConfig.separators[i % currentConfig.separators.length]);
-      } else {
-        sepMatch = currentConfig.separators.every(s => s === p.sep);
-      }
-      return (
-        p.leftCap === currentConfig.leftCap &&
-        sepMatch &&
-        p.rightCap === currentConfig.rightCap &&
-        p.theme === currentConfig.themeKey &&
-        modulesMatch
-      );
-    });
+        const modulesMatch = !p.modules || (
+          (p.modules.os === undefined || p.modules.os === currentConfig.modules.os) &&
+          (p.modules.dir === undefined || p.modules.dir === currentConfig.modules.dir) &&
+          (p.modules.git === undefined || p.modules.git === currentConfig.modules.git) &&
+          (p.modules.lang === undefined || p.modules.lang === currentConfig.modules.lang) &&
+          (p.modules.time === undefined || p.modules.time === currentConfig.modules.time)
+        );
+
+        if (pStyle !== "powerline") {
+          return p.theme === currentConfig.themeKey && modulesMatch;
+        }
+
+        let sepMatch = false;
+        if (Array.isArray(p.sep)) {
+          sepMatch = p.sep.every((s, i) => s === currentConfig.separators[i % currentConfig.separators.length]);
+        } else {
+          sepMatch = currentConfig.separators.every(s => s === p.sep);
+        }
+        return (
+          p.leftCap === currentConfig.leftCap &&
+          sepMatch &&
+          p.rightCap === currentConfig.rightCap &&
+          p.theme === currentConfig.themeKey &&
+          modulesMatch
+        );
+      });
+    }
     currentConfig.activePreset = matched ? matched.id : null;
-    document.querySelectorAll(".preset-btn").forEach((btn, index) => {
-      if (presets[index]) {
-        btn.classList.toggle("active", presets[index].id === currentConfig.activePreset);
-      }
+    document.querySelectorAll(".preset-btn").forEach((btn) => {
+      const pId = btn.getAttribute("data-preset-id");
+      btn.classList.toggle("active", pId === currentConfig.activePreset);
     });
 
     const previewIcon = document.getElementById("colorPreviewIcon");
@@ -3095,8 +3926,8 @@
     const charSymbol = document.getElementById("charSymbol");
     const demoCommand = document.getElementById("demoCommand");
     if (charSymbol) {
-      charSymbol.textContent = scen.charSymbol;
-      charSymbol.style.color = scen.charColor;
+      charSymbol.textContent = currentConfig.charSymbol || scen.charSymbol;
+      charSymbol.style.color = currentConfig.charColor || scen.charColor;
     }
     if (demoCommand) {
       demoCommand.textContent = scen.command;

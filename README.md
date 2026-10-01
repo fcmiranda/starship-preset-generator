@@ -10,7 +10,7 @@
 
 ## ✨ Features
 
-- **🎨 Creative Separator Presets**: Explore and experiment with various Powerline glyphs, smooth shades, angled chevrons, rounded bubbles, flame accents, waves, and hex blocks.
+- **🎨 35+ Curated & Awesome Presets**: Explore official and community favorites (Tokyo Night, Catppuccin Powerline, Gruvbox Rainbow, HyDE, Omarchy, End-4, Zephyr, Pure, Hydro, and more from awesome-starship-prompts), plus creative Powerline, minimal, and light themes.
 - **🌈 Curated Color Palettes**: Seamlessly switch between popular terminal aesthetics (Firewatch Sunset, Catppuccin Mocha, Tokyo Night, Lumon Oceanic, Cyberpunk Matrix, and more).
 - **⚡ Live Interactive Prompt Studio**: Real-time prompt preview reflecting your chosen directory path, git branch, execution status, and separator style.
 - **📏 Fine-Tuned Typography**: Adjust prompt line height (px) and vertical separator scaling for pixel-perfect Powerline alignment.
