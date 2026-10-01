@@ -8,10 +8,16 @@
   <!-- Primary SEO Meta Tags -->
   <title>Starship Studio — Interactive Starship Prompt Generator & Preset Customizer</title>
   <meta name="title" content="Starship Studio — Interactive Starship Prompt Generator & Preset Customizer">
-  <meta name="description" content="Starship Studio is an interactive visual editor and preset generator for the Starship prompt with 35+ curated presets (including awesome-starship-prompts, Powerline, and Minimalist themes). Customize themes and export your starship.toml easily.">
-  <meta name="keywords" content="starship prompt, awesome starship prompts, starship preset generator, starship studio, starship toml generator, powerline prompt generator, terminal prompt customizer, tokyo night starship, catppuccin starship, hyde starship, omarchy starship, nerd fonts separators, cross-shell prompt">
+  <meta name="description" content="Starship Studio is an interactive visual editor and preset generator for the Starship prompt with 35+ curated presets (including awesome-starship-prompts, Powerline, and Minimalist themes). Customize themes, separators, and export your starship.toml easily.">
+  <meta name="keywords" content="starship prompt, awesome starship prompts, starship preset generator, starship studio, starship toml generator, powerline prompt generator, terminal prompt customizer, tokyo night starship, catppuccin starship, hyde starship, omarchy starship, nerd fonts separators, cross-shell prompt, starship zsh, starship bash, starship fish">
   <meta name="author" content="Felipe Miranda">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
   <meta name="theme-color" id="metaThemeColor" content="#0f111a">
+  <meta name="application-name" content="Starship Studio">
+  <meta name="apple-mobile-web-app-title" content="Starship Studio">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <script>
     (function () {
       try {
@@ -22,13 +28,19 @@
     })();
   </script>
   <link rel="canonical" href="https://felipecm-br.github.io/starship-studio/">
+  <link rel="manifest" href="manifest.webmanifest">
 
   <!-- Open Graph / Facebook / LinkedIn / Discord -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://felipecm-br.github.io/starship-studio/">
   <meta property="og:title" content="Starship Studio — Interactive Starship Prompt Generator & Preset Customizer">
-  <meta property="og:description" content="Starship Studio is an interactive visual editor and preset generator for the Starship prompt with 35+ curated presets (including awesome-starship-prompts, Powerline, and Minimalist themes). Customize themes and export your starship.toml easily.">
-  <meta property="og:image" content="https://raw.githubusercontent.com/felipecm-br/starship-studio/main/preview.png">
+  <meta property="og:description" content="Starship Studio is an interactive visual editor and preset generator for the Starship prompt with 35+ curated presets (including awesome-starship-prompts, Powerline, and Minimalist themes). Customize themes, separators, and export your starship.toml easily.">
+  <meta property="og:image" content="https://felipecm-br.github.io/starship-studio/preview.png">
+  <meta property="og:image:secure_url" content="https://felipecm-br.github.io/starship-studio/preview.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Starship Studio — Interactive Starship Prompt Generator and Preset Customizer">
   <meta property="og:site_name" content="Starship Studio">
   <meta property="og:locale" content="en_US">
 
@@ -36,18 +48,34 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:url" content="https://felipecm-br.github.io/starship-studio/">
   <meta name="twitter:title" content="Starship Studio — Interactive Starship Prompt Generator & Preset Customizer">
-  <meta name="twitter:description" content="Starship Studio is an interactive visual editor and preset generator for the Starship prompt with 35+ curated presets (including awesome-starship-prompts, Powerline, and Minimalist themes). Customize themes and export your starship.toml easily.">
-  <meta name="twitter:image" content="https://raw.githubusercontent.com/felipecm-br/starship-studio/main/preview.png">
+  <meta name="twitter:description" content="Starship Studio is an interactive visual editor and preset generator for the Starship prompt with 35+ curated presets (including awesome-starship-prompts, Powerline, and Minimalist themes). Customize themes, separators, and export your starship.toml easily.">
+  <meta name="twitter:image" content="https://felipecm-br.github.io/starship-studio/preview.png">
+  <meta name="twitter:image:alt" content="Starship Studio live prompt preview and visual editor">
+  <meta name="twitter:creator" content="@felipecm-br">
+  <meta name="twitter:site" content="@felipecm-br">
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="icon.png">
   <link rel="apple-touch-icon" href="icon.png">
 
-  <!-- JSON-LD Structured Data for Google Search -->
+  <!-- JSON-LD Structured Data for Google Search (Rich Results) -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://felipecm-br.github.io/starship-studio/#website",
+        "url": "https://felipecm-br.github.io/starship-studio/",
+        "name": "Starship Studio",
+        "description": "Interactive visual editor and preset generator for the Starship cross-shell prompt.",
+        "publisher": {
+          "@type": "Person",
+          "name": "Felipe Miranda",
+          "url": "https://felipecm.com/"
+        },
+        "inLanguage": "en-US"
+      },
       {
         "@type": "WebApplication",
         "@id": "https://felipecm-br.github.io/starship-studio/#webapp",
@@ -56,17 +84,23 @@
         "description": "Starship Studio is an interactive visual editor and preset generator for the Starship prompt with 35+ curated presets (including awesome-starship-prompts, Powerline, and Minimalist themes). Customize themes and export your starship.toml easily.",
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "All (Linux, macOS, Windows)",
+        "browserRequirements": "Requires modern JavaScript and HTML5 Canvas.",
+        "softwareVersion": "1.0.0",
         "offers": {
           "@type": "Offer",
           "price": "0",
           "priceCurrency": "USD"
         },
+        "screenshot": "https://felipecm-br.github.io/starship-studio/preview.png",
         "featureList": [
-          "Live interactive terminal prompt preview",
-          "Powerline and Nerd Font separator explorer",
-          "Curated color palettes (Firewatch Sunset, Catppuccin, Tokyo Night, Matrix, Lumon)",
-          "One-click starship.toml generation and export",
-          "Prompt line height customizer with Powerline vertical scaling"
+          "Live interactive terminal prompt preview with real-time editing",
+          "35+ curated Starship presets including community favorites (Tokyo Night, Catppuccin, Gruvbox, HyDE, Omarchy)",
+          "Powerline and Nerd Font separator explorer with customizable start and end caps",
+          "Two-way live starship.toml editor and config parser",
+          "Prompt line height customizer with Powerline vertical scaling",
+          "One-click starship.toml export and clipboard copy",
+          "High-resolution PNG prompt export",
+          "Zero build step, zero dependencies, client-side execution"
         ],
         "author": {
           "@type": "Person",
@@ -76,6 +110,38 @@
             "https://github.com/felipecm-br"
           ]
         }
+      },
+      {
+        "@type": "HowTo",
+        "@id": "https://felipecm-br.github.io/starship-studio/#howto-install",
+        "name": "How to Install Your Generated Prompt",
+        "description": "Step-by-step instructions to configure, export, and install your custom starship.toml prompt on Linux, macOS, and Windows.",
+        "step": [
+          {
+            "@type": "HowToStep",
+            "position": 1,
+            "name": "Customize Prompt",
+            "text": "Configure your start cap, middle separator, end cap, line height, and color palette."
+          },
+          {
+            "@type": "HowToStep",
+            "position": 2,
+            "name": "Export Config",
+            "text": "Click 'Copy Config', 'Copy TOML', or 'Download .toml'."
+          },
+          {
+            "@type": "HowToStep",
+            "position": 3,
+            "name": "Save Configuration",
+            "text": "Save the configuration file to ~/.config/starship.toml on Linux/macOS or $HOME\\.config\\starship.toml on Windows PowerShell."
+          },
+          {
+            "@type": "HowToStep",
+            "position": 4,
+            "name": "Reload Shell",
+            "text": "Restart your terminal session or run source ~/.zshrc. Ensure your terminal font is set to a Nerd Font (e.g., JetBrains Mono Nerd Font)."
+          }
+        ]
       },
       {
         "@type": "FAQPage",
@@ -99,10 +165,10 @@
           },
           {
             "@type": "Question",
-            "name": "Do I need a Nerd Font for Starship separators?",
+            "name": "Do I need a Nerd Font installed?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Yes, to properly render Powerline glyphs (such as Left Circle, Right Arrow, Right Circle, triangles, and waveforms), your terminal must use a patched Nerd Font (like JetBrains Mono Nerd Font or Fira Code Nerd Font)."
+              "text": "Yes! To display Powerline glyphs, caps, arrows, and icon symbols properly, you need a patched font from Nerd Fonts installed in your terminal emulator (e.g. Alacritty, Kitty, WezTerm, iTerm2, Windows Terminal)."
             }
           },
           {
@@ -111,6 +177,22 @@
             "acceptedAnswer": {
               "@type": "Answer",
               "text": "Starship is a cross-shell prompt that works with Zsh, Bash, Fish, PowerShell, NuShell, Ion, and Tcsh on Linux, macOS, and Windows."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I adjust separator vertical height?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Use the Prompt Line Height input and Separator Vertical Scale slider in the Customizer to fine-tune glyph vertical alignment so separators fill the segment height seamlessly without cutoff."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is Starship Studio free and open source?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, 100% free and open-source under the MIT license! Check out the source code, star the project, or contribute presets on GitHub."
             }
           }
         ]
@@ -121,6 +203,8 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
   <link
     href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap"
     rel="stylesheet">
@@ -323,18 +407,23 @@
       transition: background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
     }
 
-    .card-title {
+    .card-title,
+    h2.card-title {
+      margin-top: 0;
+      margin-bottom: 16px;
       font-size: 15px;
       font-weight: 600;
       color: var(--text-main);
-      margin-bottom: 16px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 8px;
+      line-height: 1.4;
+      letter-spacing: normal;
     }
 
-    .card-title span {
+    .card-title span,
+    h2.card-title span {
       display: flex;
       align-items: center;
       gap: 8px;
@@ -1648,6 +1737,41 @@
       height: 15px;
     }
 
+    /* Header Navigation & Sitelinks */
+    .header-nav {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .header-nav-link {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 6px 10px;
+      border-radius: var(--radius-sm);
+      transition: color 0.2s ease, background-color 0.2s ease;
+    }
+
+    .header-nav-link:hover {
+      color: var(--text-main);
+      background-color: var(--bg-tertiary);
+    }
+
+    @media (max-width: 900px) {
+      .header-nav {
+        order: 3;
+        width: 100%;
+        overflow-x: auto;
+        padding-top: 8px;
+        gap: 4px;
+      }
+    }
+
     /* Header Actions, Theme Toggle & GitHub Button */
     .header-actions {
       display: flex;
@@ -1978,12 +2102,20 @@
 
   <header>
     <div class="title-group">
-      <img src="icon.png" alt="Starship Studio" class="logo-icon" width="44" height="44">
+      <img src="icon.png" alt="Starship Studio — Interactive Starship Prompt Generator Logo" class="logo-icon" width="44" height="44">
       <div>
         <h1>Starship Studio</h1>
         <div class="subtitle">Interactive visual editor and preset generator for Starship prompt · Made by <a href="https://github.com/felipecm-br" target="_blank" rel="noopener noreferrer" class="header-author-link">felipecm-br</a></div>
       </div>
     </div>
+    <nav class="header-nav" aria-label="Main Navigation">
+      <a href="#preview" class="header-nav-link">Preview</a>
+      <a href="#presets" class="header-nav-link">Presets</a>
+      <a href="#glyphs" class="header-nav-link">Separators</a>
+      <a href="#customizer" class="header-nav-link">Customizer</a>
+      <a href="#install" class="header-nav-link">Install</a>
+      <a href="#faq" class="header-nav-link">FAQ</a>
+    </nav>
     <div class="header-actions">
       <button id="themeToggleBtn" class="theme-toggle-btn" onclick="toggleAppTheme()" aria-label="Switch to Light Mode" title="Toggle Light/Dark Theme">
         <svg class="theme-icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -2022,7 +2154,7 @@
     <main>
 
       <!-- Terminal Live Preview -->
-      <div class="terminal-window">
+      <div class="terminal-window" id="preview">
         <div class="terminal-header">
           <div class="window-dots">
             <div class="dot dot-red"></div>
@@ -2086,8 +2218,8 @@
       </div>
 
       <!-- Presets Gallery -->
-      <div class="card" style="margin-bottom: 24px;">
-        <div class="card-title" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+      <div class="card" id="presets" style="margin-bottom: 24px;">
+        <h2 class="card-title" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
           <div style="display: flex; align-items: center; gap: 10px;">
             <span>🎨 Presets Gallery</span>
             <span class="presets-count-badge" id="presetsTotalBadge" style="font-size: 11px; font-weight: normal; color: var(--text-muted); background: var(--bg-tertiary); padding: 2px 8px; border-radius: 999px; border: 1px solid var(--border-color);">35 presets</span>
@@ -2101,7 +2233,7 @@
             </svg>
             <span>Export TOML</span>
           </button>
-        </div>
+        </h2>
 
         <!-- Dedicated Filter Bar with spacious, unsquished pill buttons -->
         <div class="preset-filter-bar">
@@ -2131,12 +2263,12 @@
       </div>
 
       <!-- Separator Glyphs Explorer -->
-      <div class="card">
-        <div class="card-title">
+      <div class="card" id="glyphs">
+        <h2 class="card-title">
           <span>❖ Separator Glyphs Library</span>
           <span style="font-size: 12px; font-weight: normal; color: var(--text-muted);">Click any glyph to insert as
             separator</span>
-        </div>
+        </h2>
         <div id="glyphsContainer">
           <!-- Glyph categories rendered by JS -->
         </div>
@@ -2148,10 +2280,10 @@
     <aside>
 
       <!-- Customizer Controls -->
-      <div class="card" style="margin-bottom: 24px;">
-        <div class="card-title">
+      <div class="card" id="customizer" style="margin-bottom: 24px;">
+        <h2 class="card-title">
           <span>⚙️ Customizer</span>
-        </div>
+        </h2>
 
         <div class="controls-grid" style="grid-template-columns: 1fr;">
           <div class="control-group">
@@ -2357,11 +2489,11 @@
       </div>
 
       <!-- Generated TOML Output & Two-Way Editor -->
-      <div class="card">
-        <div class="card-title">
+      <div class="card" id="config">
+        <h2 class="card-title">
           <span>📄 starship.toml Config</span>
           <span style="font-size: 11px; font-weight: normal; color: var(--accent-cyan); background: rgba(56, 189, 248, 0.1); padding: 2px 8px; border-radius: 999px;">Two-Way Live Editor</span>
-        </div>
+        </h2>
         <div class="toml-box">
           <textarea id="tomlOutput" class="toml-editor" placeholder="Edit or paste your starship.toml here to update the live preview..." oninput="onTomlInput()"></textarea>
           <span id="tomlSyncBadge" class="toml-sync-badge">Live Synced</span>
@@ -2378,10 +2510,10 @@
   </div>
 
   <!-- SEO & Documentation Section -->
-  <section class="seo-section" aria-label="About Starship Studio & Documentation">
+  <section class="seo-section" id="docs" aria-label="About Starship Studio & Documentation">
     <div class="seo-card">
       <div class="seo-grid">
-        <article class="seo-article">
+        <article class="seo-article" id="about">
           <h2>🚀 What is Starship Studio?</h2>
           <p>
             <strong>Starship Studio</strong> is an interactive visual editor and preset generator for the 
@@ -2393,18 +2525,18 @@
           </p>
         </article>
 
-        <article class="seo-article">
+        <article class="seo-article" id="install">
           <h2>⚡ How to Install Your Generated Prompt</h2>
           <ol class="seo-steps">
             <li>
               <strong>Customize Prompt:</strong> Configure your start cap, middle separator, end cap, line height, and color palette.
             </li>
             <li>
-              <strong>Export Config:</strong> Click <em>"Copy Config"</em> or <em>"Download .toml"</em>.
+              <strong>Export Config:</strong> Click <em>"Copy Config"</em>, <em>"Copy TOML"</em>, or <em>"Download .toml"</em>.
             </li>
             <li>
               <strong>Save Configuration:</strong>
-              <div class="seo-code"># Linux & macOS<br>cp starship.toml ~/.config/starship.toml<br><br># Windows (PowerShell)<br>cp starship.toml $HOME\.config\starship.toml</div>
+              <div class="seo-code"># Linux &amp; macOS<br>cp starship.toml ~/.config/starship.toml<br><br># Windows (PowerShell)<br>cp starship.toml $HOME\.config\starship.toml</div>
             </li>
             <li>
               <strong>Reload Shell:</strong> Restart your terminal session or run <code>source ~/.zshrc</code>. Ensure your terminal font is set to a <a href="https://www.nerdfonts.com" target="_blank" rel="noopener noreferrer">Nerd Font</a> (e.g., JetBrains Mono Nerd Font).
@@ -2414,13 +2546,31 @@
       </div>
 
       <!-- FAQ Section -->
-      <div class="seo-faq">
+      <div class="seo-faq" id="faq">
         <h2>💡 Frequently Asked Questions (FAQ)</h2>
         <div class="faq-grid">
+          <div class="faq-item">
+            <h3>What is Starship Studio?</h3>
+            <p>
+              Starship Studio is an interactive visual editor and preset generator for the Starship prompt with 35+ curated presets (including awesome-starship-prompts, Powerline, and Minimalist themes). Customize themes and export your <code>starship.toml</code> easily.
+            </p>
+          </div>
+          <div class="faq-item">
+            <h3>How do I install the generated starship.toml?</h3>
+            <p>
+              Download or copy the generated starship.toml configuration file and move it to <code>~/.config/starship.toml</code> on Linux/macOS or <code>%USERPROFILE%\.config\starship.toml</code> on Windows.
+            </p>
+          </div>
           <div class="faq-item">
             <h3>Do I need a Nerd Font installed?</h3>
             <p>
               Yes! To display Powerline glyphs, caps, arrows, and icon symbols properly, you need a patched font from <a href="https://www.nerdfonts.com" target="_blank" rel="noopener noreferrer">Nerd Fonts</a> installed in your terminal emulator (e.g. Alacritty, Kitty, WezTerm, iTerm2, Windows Terminal).
+            </p>
+          </div>
+          <div class="faq-item">
+            <h3>Which shells are supported by Starship?</h3>
+            <p>
+              Starship is a cross-shell prompt that works with Zsh, Bash, Fish, PowerShell, NuShell, Ion, and Tcsh on Linux, macOS, and Windows.
             </p>
           </div>
           <div class="faq-item">
@@ -2445,7 +2595,7 @@
     <div class="footer-content">
       <div class="footer-left">
         <div class="footer-brand">
-          <img src="icon.png" alt="Starship Studio" class="footer-logo" width="24" height="24">
+          <img src="icon.png" alt="Starship Studio Logo" class="footer-logo" width="24" height="24" loading="lazy">
           <strong>Starship Studio</strong>
         </div>
         <div class="footer-desc">

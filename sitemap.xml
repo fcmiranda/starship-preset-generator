@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://felipecm-br.github.io/starship-studio/</loc>
     <lastmod>2026-10-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://felipecm-br.github.io/starship-studio/preview.png</image:loc>
+      <image:title>Starship Studio — Interactive Starship Prompt Generator Preview</image:title>
+      <image:caption>Interactive visual editor and preset generator for Starship prompt with 35+ presets and Powerline separators</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://felipecm-br.github.io/starship-studio/icon.png</image:loc>
+      <image:title>Starship Studio Logo</image:title>
+    </image:image>
   </url>
 </urlset>

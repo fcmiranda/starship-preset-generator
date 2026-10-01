@@ -1,0 +1,29 @@
+{
+  "name": "Starship Studio — Interactive Starship Prompt Generator",
+  "short_name": "Starship Studio",
+  "description": "Interactive visual editor and preset generator for Starship prompt with 35+ presets, Powerline & Nerd Font separators, and starship.toml export.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0f111a",
+  "theme_color": "#0f111a",
+  "orientation": "any",
+  "categories": [
+    "developer",
+    "utilities",
+    "productivity"
+  ],
+  "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "preview.png",
+      "sizes": "1200x630",
+      "type": "image/png"
+    }
+  ]
+}
